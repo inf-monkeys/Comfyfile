@@ -1,0 +1,61 @@
+{
+  "8": {
+    "inputs": {
+      "images": [
+        "23",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "9": {
+    "inputs": {
+      "image": "MagicClothing_images_c0.jpg",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "16": {
+    "inputs": {
+      "images": [
+        "23",
+        1
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "23": {
+    "inputs": {
+      "prompt": "a photography of a model",
+      "model_path": "magic_clothing_768_vitonhd_joint.safetensors",
+      "pipe_path": "SG161222/Realistic_Vision_V4.0_noVAE",
+      "enable_cloth_guidance": true,
+      "num_samples": 1,
+      "n_prompt": "bare, monochrome, lowres, bad anatomy, worst quality, low quality",
+      "seed": 206,
+      "scale": 3,
+      "cloth_guidance_scale": 3,
+      "sample_steps": 20,
+      "height": 768,
+      "width": 576,
+      "faceid_version": "FaceID",
+      "cloth_image": [
+        "9",
+        0
+      ]
+    },
+    "class_type": "MagicClothing_Generate",
+    "_meta": {
+      "title": "Human Garment Generation"
+    }
+  }
+}

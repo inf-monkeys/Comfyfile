@@ -1,0 +1,6 @@
+{
+  "appName": "MagicClothing_Main",
+  "homepage": "https://github.com/frankchieng/ComfyUI_MagicClothing",
+  "displayName": "根据衣服生成模特穿衣图(ComfyUI_MagicClothing)",
+  "description": "Given a clothes image and promot, generate a new image with model wearing the clothes"
+}

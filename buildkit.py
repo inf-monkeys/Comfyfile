@@ -91,7 +91,7 @@ class Executor:
             for data in response.iter_content(chunk_size=8192):
                 if data:
                     f.write(data)
-            progress_bar.update(len(data))
+                progress_bar.update(len(data))
 
     def execute_command(self, command):
         subprocess.run(command, shell=True, check=True, cwd=self.working_directory)

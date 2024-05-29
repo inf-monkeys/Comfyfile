@@ -1,0 +1,45 @@
+{
+  "parameters": [
+    {
+      "displayName": "衣服图片",
+      "name": "clothes_image",
+      "type": "file",
+      "default": "",
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "accept": ".jpg,.jpeg,.png,.webp",
+        "comfyOptions": {
+          "node": 9,
+          "key": "image"
+        }
+      }
+    },
+    {
+      "displayName": "prompt",
+      "name": "positive_prompt",
+      "type": "string",
+      "default": "a photography of a model",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 23,
+          "key": "prompt"
+        }
+      }
+    },
+    {
+      "displayName": "negative prompt",
+      "name": "n_prompt",
+      "type": "string",
+      "default": "bare, monochrome, lowres, bad anatomy, worst quality, low quality",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 23,
+          "key": "n_prompt"
+        }
+      }
+    }
+  ]
+}

@@ -410,4 +410,6 @@ pyrightconfig.json
 
 config/
 
-apps/
+./apps
+
+ComfyUI/

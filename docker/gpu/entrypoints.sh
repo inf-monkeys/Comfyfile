@@ -21,8 +21,8 @@ fi
 
 if [ ! -d "/app/ComfyUI/custom_nodes/ComfyUI-Manager" ]; then
     mkdir -p /app/ComfyUI/custom_nodes
-    cp -r /tmp/ComfyUI-Manager /app/ComfyUI/custom_nodes/
-    cp -r /tmp/Comfyfile /app/ComfyUI/custom_nodes/
+    cp -r /tmp/custom_nodes/ComfyUI-Manager /app/ComfyUI/custom_nodes/
+    cp -r /tmp/custom_nodes/Comfyfile /app/ComfyUI/custom_nodes/
 fi
 
 if [ ! -d "/app/ComfyUI/venv/bin" ]; then

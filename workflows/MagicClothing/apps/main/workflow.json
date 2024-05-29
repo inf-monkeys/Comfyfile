@@ -1,0 +1,215 @@
+{
+  "last_node_id": 23,
+  "last_link_id": 41,
+  "nodes": [
+    {
+      "id": 16,
+      "type": "PreviewImage",
+      "pos": [
+        726,
+        784
+      ],
+      "size": {
+        "0": 210,
+        "1": 246
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 41,
+          "label": "images",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 8,
+      "type": "PreviewImage",
+      "pos": [
+        705,
+        274
+      ],
+      "size": {
+        "0": 543.2338256835938,
+        "1": 423.5530090332031
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 40,
+          "label": "images",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 9,
+      "type": "LoadImage",
+      "pos": [
+        -371,
+        322
+      ],
+      "size": {
+        "0": 315,
+        "1": 314
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            39
+          ],
+          "shape": 3,
+          "label": "IMAGE",
+          "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "MASK"
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "LoadImage"
+      },
+      "widgets_values": [
+        "MagicClothing_images_c0.jpg",
+        "image"
+      ]
+    },
+    {
+      "id": 23,
+      "type": "MagicClothing_Generate",
+      "pos": [
+        132,
+        175
+      ],
+      "size": {
+        "0": 418.1999816894531,
+        "1": 430
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "cloth_image",
+          "type": "IMAGE",
+          "link": 39
+        },
+        {
+          "name": "face_image",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "pose_image",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "cloth_mask_image",
+          "type": "IMAGE",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": [
+            40
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "cloth_mask_image",
+          "type": "IMAGE",
+          "links": [
+            41
+          ],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "MagicClothing_Generate"
+      },
+      "widgets_values": [
+        "a photography of a model",
+        "magic_clothing_768_vitonhd_joint.safetensors",
+        "SG161222/Realistic_Vision_V4.0_noVAE",
+        true,
+        1,
+        "bare, monochrome, lowres, bad anatomy, worst quality, low quality",
+        206,
+        "randomize",
+        3,
+        3,
+        20,
+        768,
+        576,
+        "FaceID"
+      ]
+    }
+  ],
+  "links": [
+    [
+      39,
+      9,
+      0,
+      23,
+      0,
+      "IMAGE"
+    ],
+    [
+      40,
+      23,
+      0,
+      8,
+      0,
+      "IMAGE"
+    ],
+    [
+      41,
+      23,
+      1,
+      16,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.9849732675807705,
+      "offset": {
+        "0": 365.1818973246486,
+        "1": -73.3007303094214
+      }
+    }
+  },
+  "version": 0.4
+}
