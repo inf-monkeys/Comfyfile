@@ -3,7 +3,6 @@ from copy import deepcopy
 import os.path
 import shutil
 import traceback
-
 import requests
 import server
 import sys
@@ -17,6 +16,42 @@ from .buildkit import Executor, Comfyfile
 from .runner import ComfyRunner
 from loguru import logger
 from .constants import comfy_path, comfyfile_path, js_path, s3_config_file
+import os
+
+S3_ENABLED = os.environ.get("S3_ENABLED")
+S3_ENDPOINT_URL = os.environ.get("S3_ENDPOINT_URL")
+S3_ACCESS_KEY_ID = os.environ.get("S3_ACCESS_KEY_ID")
+S3_SECRET_ACCESS_KEY = os.environ.get("S3_SECRET_ACCESS_KEY")
+S3_REGION = os.environ.get("S3_REGION")
+S3_BUCKET = os.environ.get("S3_BUCKET")
+S3_PUBLIC_ACCESS_URL = os.environ.get("S3_PUBLIC_ACCESS_URL")
+S3_ADDRESSING_STYLE = os.environ.get("S3_ADDRESSING_STYLE", "auto")
+
+if (
+    S3_ENABLED
+    and S3_ENDPOINT_URL
+    and S3_ACCESS_KEY_ID
+    and S3_SECRET_ACCESS_KEY
+    and S3_REGION
+    and S3_BUCKET
+    and S3_PUBLIC_ACCESS_URL
+    and S3_ADDRESSING_STYLE
+):
+    with open(s3_config_file, "w") as f:
+        f.write(
+            json.dumps(
+                {
+                    "enabled": True,
+                    "endpoint_url": S3_ENDPOINT_URL,
+                    "aws_access_key_id": S3_ACCESS_KEY_ID,
+                    "aws_secret_access_key": S3_SECRET_ACCESS_KEY,
+                    "region_name": S3_REGION,
+                    "addressing_style": S3_ADDRESSING_STYLE,
+                    "bucket": S3_BUCKET,
+                    "public_access_url": S3_PUBLIC_ACCESS_URL,
+                }
+            )
+        )
 
 
 def ensure_directory_exists(dir_path):
