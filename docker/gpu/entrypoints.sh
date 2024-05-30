@@ -2,23 +2,6 @@
 
 set -e
 
-# Function to extract host and port from a proxy URL
-extract_host_port() {
-    local url=$1
-    local proto="$(echo $url | grep '://' | sed -e's,^\(.*://\).*,\1,g')"
-    local hostport="$(echo ${url/$proto/} | cut -d/ -f1)"
-    local host="$(echo $hostport | cut -d: -f1)"
-    local port="$(echo $hostport | cut -d: -f2)"
-    echo $host $port
-}
-
-# Check for http_proxy or https_proxy environment variables
-if [ -n "$http_proxy" ]; then
-    read PROXY_HOST PROXY_PORT <<< $(extract_host_port $http_proxy)
-elif [ -n "$https_proxy" ]; then
-    read PROXY_HOST PROXY_PORT <<< $(extract_host_port $https_proxy)
-fi
-
 if [ ! -d "/app/ComfyUI/custom_nodes/ComfyUI-Manager" ]; then
     mkdir -p /app/ComfyUI/custom_nodes
     cp -r /tmp/custom_nodes/ComfyUI-Manager /app/ComfyUI/custom_nodes/
@@ -35,10 +18,23 @@ cd /app/ComfyUI
 
 source venv/bin/activate
 
+# Proxychains configuration file
+proxychains_config_file="/etc/proxychains.conf"
+
+# Check if the PROXYCHAINS_PROXY_SERVER environment variable is set
+if [ -z "$PROXYCHAINS_PROXY_SERVER" ]; then
+    echo "NO PROXYCHAINS_PROXY_SERVER ENVIRONMENT VARIABLE FOUND, WILL NOT USE PROXYCHAINS."
+else
+    # If the PROXYCHAINS_PROXY_SERVER environment variable is set, check if it is in the proxychains configuration file
+    if ! grep -Fxq "$PROXYCHAINS_PROXY_SERVER" "$proxychains_config_file"; then
+        # Add the proxy server to the end of the proxychains configuration file
+        echo "$PROXYCHAINS_PROXY_SERVER" | sudo tee -a "$proxychains_config_file" > /dev/null
+        echo "Added $PROXYCHAINS_PROXY_SERVER to $proxychains_config_file."
+    fi
+fi
+
 # If a proxy is found, set the necessary environment variables and use proxychains
-if [ -n "$PROXY_HOST" ] && [ -n "$PROXY_PORT" ]; then
-    export PROXYCHAINS_SOCKS5_HOST=$PROXY_HOST
-    export PROXYCHAINS_SOCKS5_PORT=$PROXY_PORT
+if [ -n "$PROXYCHAINS_PROXY" ] && [ -n "$PROXY_PORT" ]; then
     exec proxychains python3 main.py --listen 0.0.0.0
 else
     # Run the python script directly if no proxy is set
