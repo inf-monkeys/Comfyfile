@@ -16,21 +16,39 @@ fi
 # Change to the /app/ComfyUI directory
 cd /app/ComfyUI
 
-source venv/bin/activate
+if [ -n "$CLASH_SUBSCRIPTION_URL" ]; then
 
-TCP_READ_TIMEOUT=${PROXY_TCP_READ_TIMEOUT:-15000}
-TCP_CONNECT_TIMEOUT=${PROXY_TCP_CONNECT_TIMEOUT:-8000}
+echo "CLASH_SUBSCRIPTION_URL is configured, auto setup clash..."
 
-cat <<EOL > /etc/proxychains.conf
-strict_chain
-
-# Some timeouts in milliseconds
-tcp_read_time_out $TCP_READ_TIMEOUT
-tcp_connect_time_out $TCP_CONNECT_TIMEOUT
-
-[ProxyList]
-http $PROXY_HOST $PROXY_PORT
+cat <<EOL > /app/clash-for-linux/.env
+export CLASH_URL='$CLASH_SUBSCRIPTION_URL'
+export CLASH_SECRET='$CLASH_SECRET'
 EOL
+
+bash /app/clash-for-linux/start.sh
+source /etc/profile.d/clash.sh
+proxy_on
+
+wait_for_proxy() {
+  local host="127.0.0.1"
+  local port="7890"
+
+  echo "Waiting for $host:$port to be accessible..."
+
+  while ! (echo > /dev/tcp/$host/$port) &> /dev/null; do
+    sleep 1
+  done
+
+  echo "$host:$port is now accessible!"
+}
+
+wait_for_proxy
+
+else
+    echo "Clash is not enabled"
+fi
+
+source venv/bin/activate
 
 if [ -n "$AUTO_UPGRADE_COMFYFILE" ]; then
     echo "Auto upgrading https://github.com/inf-monkeys/Comfyfile"
@@ -41,11 +59,4 @@ else
     echo "AUTO_UPGRADE_COMFYFILE is disabled"
 fi
 
-if [ -z "$PROXY_HOST" ] || [ -z "$PROXY_PORT" ]; then
-    echo "Proxy not configured"
-    # Run the python script directly if no proxy is set
-    exec python3 main.py --listen 0.0.0.0
-else
-    echo "Use proxy http://$PROXY_HOST:$PROXY_PORT"
-    exec proxychains python3 main.py --listen 0.0.0.0
-fi
+exec python3 main.py --listen 0.0.0.0

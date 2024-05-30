@@ -22,6 +22,9 @@ RUN git clone --depth=1 --no-tags --recurse-submodules --shallow-submodules http
     /tmp/venv/bin/pip install --no-cache-dir -r ./ComfyUI/requirements.txt && \
     /tmp/venv/bin/pip install --no-cache-dir -r /tmp/custom_nodes/ComfyUI-Manager/requirements.txt
 
+# Install Clash
+RUN git clone https://github.com/wnlen/clash-for-linux/
+
 COPY ./requirements.txt /tmp/custom_nodes/Comfyfile/requirements.txt
 
 RUN /tmp/venv/bin/pip install -r /tmp/custom_nodes/Comfyfile/requirements.txt
