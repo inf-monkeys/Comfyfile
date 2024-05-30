@@ -18,25 +18,34 @@ cd /app/ComfyUI
 
 source venv/bin/activate
 
-# Proxychains configuration file
-proxychains_config_file="/etc/proxychains.conf"
+TCP_READ_TIMEOUT=${PROXY_TCP_READ_TIMEOUT:-15000}
+TCP_CONNECT_TIMEOUT=${PROXY_TCP_CONNECT_TIMEOUT:-8000}
 
-# Check if the PROXYCHAINS_PROXY_SERVER environment variable is set
-if [ -z "$PROXYCHAINS_PROXY_SERVER" ]; then
-    echo "NO PROXYCHAINS_PROXY_SERVER ENVIRONMENT VARIABLE FOUND, WILL NOT USE PROXYCHAINS."
+cat <<EOL > /etc/proxychains.conf
+strict_chain
+
+# Some timeouts in milliseconds
+tcp_read_time_out $TCP_READ_TIMEOUT
+tcp_connect_time_out $TCP_CONNECT_TIMEOUT
+
+[ProxyList]
+http $PROXY_HOST $PROXY_PORT
+EOL
+
+if [ -n "$AUTO_UPGRADE_COMFYFILE" ]; then
+    echo "Auto upgrading https://github.com/inf-monkeys/Comfyfile"
+    rm -rf /app/ComfyUI/custom_nodes/Comfyfile
+    git clone --depth=1 --no-tags --recurse-submodules --shallow-submodules https://github.com/inf-monkeys/Comfyfile /app/ComfyUI/custom_nodes/Comfyfile
+    pip install --no-cache-dir -r /app/ComfyUI/custom_nodes/Comfyfile/requirements.txt
 else
-    # If the PROXYCHAINS_PROXY_SERVER environment variable is set, check if it is in the proxychains configuration file
-    if ! grep -Fxq "$PROXYCHAINS_PROXY_SERVER" "$proxychains_config_file"; then
-        # Add the proxy server to the end of the proxychains configuration file
-        echo "$PROXYCHAINS_PROXY_SERVER" | sudo tee -a "$proxychains_config_file" > /dev/null
-        echo "Added $PROXYCHAINS_PROXY_SERVER to $proxychains_config_file."
-    fi
+    echo "AUTO_UPGRADE_COMFYFILE is disabled"
 fi
 
-# If a proxy is found, set the necessary environment variables and use proxychains
-if [ -n "$PROXYCHAINS_PROXY" ] && [ -n "$PROXY_PORT" ]; then
-    exec proxychains python3 main.py --listen 0.0.0.0
-else
+if [ -z "$PROXY_HOST" ] || [ -z "$PROXY_PORT" ]; then
+    echo "Proxy not configured"
     # Run the python script directly if no proxy is set
     exec python3 main.py --listen 0.0.0.0
+else
+    echo "Use proxy http://$PROXY_HOST:$PROXY_PORT"
+    exec proxychains python3 main.py --listen 0.0.0.0
 fi
