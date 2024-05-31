@@ -9,7 +9,7 @@ import tarfile
 
 import requests
 from tqdm import tqdm
-from common import search_model
+from .common import search_model
 import folder_paths
 from torchvision.datasets.utils import download_url as torchvision_download_url
 

@@ -43,15 +43,51 @@ fi
 # Change to the /app/ComfyUI directory
 cd /app/ComfyUI
 
-source /venv/bin/activate
+# Copy /venv to /app/ComfyUI/venv
+if [ ! -d "/app/ComfyUI/venv/bin/python" ]; then
 
-if [ -n "$AUTO_UPGRADE_COMFYFILE" ]; then
-    echo "Auto upgrading https://github.com/inf-monkeys/Comfyfile"
-    rm -rf /app/ComfyUI/custom_nodes/Comfyfile
-    git clone --depth=1 --no-tags --recurse-submodules --shallow-submodules https://github.com/inf-monkeys/Comfyfile /app/ComfyUI/custom_nodes/Comfyfile
-    pip install --no-cache-dir -r /app/ComfyUI/custom_nodes/Comfyfile/requirements.txt
-else
-    echo "AUTO_UPGRADE_COMFYFILE is disabled"
+echo "Copying python libraries from /venv to /app/ComfyUI/venv ..."
+
+virtualenv-clone /venv /app/ComfyUI/venv
+
 fi
+
+source /app/ComfyUI/venv/bin/activate
+
+
+upgrade_comfyfile() {
+    local max_retries=3
+    local attempt=1
+
+    while (( attempt <= max_retries )); do
+        if [ -n "$AUTO_UPGRADE_COMFYFILE" ]; then
+            echo "Attempt $attempt: Auto upgrading https://github.com/inf-monkeys/Comfyfile"
+            rm -rf /app/ComfyUI/custom_nodes/Comfyfile
+
+            if git clone --depth=1 --no-tags --recurse-submodules --shallow-submodules https://github.com/inf-monkeys/Comfyfile /app/ComfyUI/custom_nodes/Comfyfile; then
+                if pip install --no-cache-dir -r /app/ComfyUI/custom_nodes/Comfyfile/requirements.txt; then
+                    echo "Upgrade successful"
+                    return 0
+                else
+                    echo "pip install failed on attempt $attempt. Retrying..."
+                fi
+            else
+                echo "git clone failed on attempt $attempt. Retrying..."
+            fi
+        else
+            echo "AUTO_UPGRADE_COMFYFILE is disabled"
+            return 1
+        fi
+
+        ((attempt++))
+    done
+
+    echo "Upgrade failed after $max_retries attempts"
+    return 1
+}
+
+
+upgrade_comfyfile
+
 
 exec python3 main.py --listen 0.0.0.0

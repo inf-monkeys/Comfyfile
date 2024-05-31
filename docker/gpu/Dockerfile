@@ -29,6 +29,8 @@ COPY ./requirements.txt /tmp/custom_nodes/Comfyfile/requirements.txt
 
 RUN /venv/bin/pip install -r /tmp/custom_nodes/Comfyfile/requirements.txt
 
+RUN pip install virtualenv-clone
+
 COPY . /tmp/custom_nodes/Comfyfile
 
 EXPOSE 8188
