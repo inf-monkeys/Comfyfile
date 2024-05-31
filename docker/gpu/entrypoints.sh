@@ -8,14 +8,6 @@ if [ ! -d "/app/ComfyUI/custom_nodes/ComfyUI-Manager" ]; then
     cp -r /tmp/custom_nodes/Comfyfile /app/ComfyUI/custom_nodes/
 fi
 
-if [ ! -d "/app/ComfyUI/venv/bin" ]; then
-    mkdir -p /app/ComfyUI/venv/
-    cp -r /tmp/venv /app/ComfyUI/
-fi
-
-# Change to the /app/ComfyUI directory
-cd /app/ComfyUI
-
 if [ -n "$CLASH_SUBSCRIPTION_URL" ]; then
 
 echo "CLASH_SUBSCRIPTION_URL is configured, auto setup clash..."
@@ -48,7 +40,10 @@ else
     echo "Clash is not enabled"
 fi
 
-source venv/bin/activate
+# Change to the /app/ComfyUI directory
+cd /app/ComfyUI
+
+source /venv/bin/activate
 
 if [ -n "$AUTO_UPGRADE_COMFYFILE" ]; then
     echo "Auto upgrading https://github.com/inf-monkeys/Comfyfile"
