@@ -114,7 +114,7 @@ class ComfyRunner:
 
         return output_list
 
-    async def filter_missing_node(self, workflow):
+    async def determine_installed_and_missing_nodes(self, workflow_json):
         mappings = await self.comfy_api.get_node_mapping_list()
         custom_node_list = await self.comfy_api.get_all_custom_node_list()
         data = custom_node_list["custom_nodes"]
@@ -134,10 +134,11 @@ class ComfyRunner:
         registered_nodes = await self.comfy_api.get_registered_nodes()
 
         missing_nodes = set()
-        nodes = [node for _, node in workflow.items()]
+        installed_nodes = set()
+        nodes = workflow_json.get("nodes", [])
 
         for node in nodes:
-            node_type = node.get("class_type", "")
+            node_type = node.get("type", "")
             if node_type.startswith("workflow/"):
                 continue
 
@@ -149,6 +150,8 @@ class ComfyRunner:
                     for regex_item in regex_to_url:
                         if regex_item["regex"].search(node_type):
                             missing_nodes.add(regex_item["url"])
+            else:
+                installed_nodes.add(node_type)
 
         unresolved_nodes = []  # not yet implemented in comfy
 
@@ -157,13 +160,17 @@ class ComfyRunner:
             if url:
                 missing_nodes.add(url)
 
-        ans = [
-            node
-            for node in data
-            if any(file in missing_nodes for file in node.get("files", []))
-        ]
-        # print("********* missing nodes found: ", ans)
-        return ans
+        def get_node_info(node_type):
+            pass
+
+        return {
+            "uninstalled_nodes": [
+                node
+                for node in data
+                if any(file in missing_nodes for file in node.get("files", []))
+            ],
+            "installed_nodes": [node_type for node_type in installed_nodes],
+        }
 
     async def download_models(
         self, workflow, extra_models_list, ignore_model_list=[]
@@ -245,13 +252,15 @@ class ComfyRunner:
             "status": False if len(models_not_found) else True,
         }
 
-    async def download_custom_nodes(self, workflow, extra_node_urls) -> dict:
+    async def download_custom_nodes(self, workflow_json, extra_node_urls) -> dict:
         nodes_installed = False
         # installing missing nodes
-        missing_nodes = await self.filter_missing_node(workflow)
-        if len(missing_nodes):
-            logger.info(f"Installing {len(missing_nodes)} custom nodes")
-        for node in missing_nodes:
+        nodes_status = await self.determine_installed_and_missing_nodes(workflow_json)
+        if len(nodes_status["uninstalled_nodes"]):
+            logger.info(
+                f"Installing {len(nodes_status['uninstalled_nodes'])} custom nodes"
+            )
+        for node in nodes_status["uninstalled_nodes"]:
             logger.info(f"Installing {node['title']}")
             if node["installed"] in ["False", False]:
                 nodes_installed = True
@@ -299,20 +308,6 @@ class ComfyRunner:
             "status": True,
         }
 
-    def load_workflow(self, workflow_input):
-        if os.path.exists(workflow_input):
-            try:
-                with open(workflow_input, "r", encoding="utf-8") as file:
-                    workflow_input = json.load(file)
-
-            except Exception as e:
-                logger.info("Exception: ", str(e))
-                return None
-        else:
-            workflow_input = json.loads(workflow_input)
-
-        return workflow_input if ComfyMethod.is_api_json(workflow_input) else None
-
     async def get_output_item_url(self, file):
         s3_enabled = False
         if os.path.exists(s3_config_file):
@@ -357,12 +352,14 @@ class ComfyRunner:
         else:
             return f"http://127.0.0.1:{APP_PORT}/view?filename={filename}&subfolder={subfolder}&type=temp"
 
-    async def infer_dependencies(self, workflow_input):
-        pass
+    async def infer_dependencies(self, workflow):
+        missing_nodes = await self.determine_installed_and_missing_nodes(workflow)
+        return missing_nodes
 
     async def predict(
         self,
-        workflow_input,
+        workflow_json,
+        workflow_api_json,
         input_data={},
         file_path_list=[],
         extra_models_list=[],
@@ -370,32 +367,17 @@ class ComfyRunner:
         output_node_ids=None,
         ignore_model_list=[],
     ):
-        """
-        workflow_input:                 API json of the workflow. Can be a filepath or str
-        file_path_list:                 files to copy inside the '/input' folder which are being used in the workflow
-        extra_models_list:              extra models to be downloaded
-        extra_node_urls:                extra nodes to be downloaded
-        stop_server_after_completion:   stop server as soon as inference completes (or fails)
-        clear_comfy_logs:               clears the temp comfy logs after every inference
-        output_folder:                  for storing inference output
-        output_node_ids:                nodes to look in for the output
-        ignore_model_list:                  these models won't be downloaded (in cases where these are manually placed)
-        """
-        # TODO: add support for image and normal json files
-        workflow = self.load_workflow(workflow_input)
-        if not workflow:
-            logger.error("Invalid workflow file")
-            raise Exception("Invalid workflow")
-
         # download custom nodes
-        res_custom_nodes = await self.download_custom_nodes(workflow, extra_node_urls)
+        res_custom_nodes = await self.download_custom_nodes(
+            workflow_json, extra_node_urls
+        )
         if not res_custom_nodes["status"]:
             logger.info(res_custom_nodes["message"])
             return
 
         # download models if not already present
         res_models = await self.download_models(
-            workflow, extra_models_list, ignore_model_list
+            workflow_api_json, extra_models_list, ignore_model_list
         )
         if not res_models["status"]:
             logger.info(res_models["message"])
@@ -441,9 +423,9 @@ class ComfyRunner:
             if os.path.isdir(os.path.join(comfy_directory, folder))
         ]
         # update model paths e.g. 'v3_sd15_sparsectrl_rgb.ckpt' --> 'SD1.5/animatediff/v3_sd15_sparsectrl_rgb.ckpt'
-        for node in workflow:
-            if "inputs" in workflow[node]:
-                for key, input in workflow[node]["inputs"].items():
+        for node in workflow_api_json:
+            if "inputs" in workflow_api_json[node]:
+                for key, input in workflow_api_json[node]["inputs"].items():
                     if (
                         isinstance(input, str)
                         and any(input.endswith(ft) for ft in MODEL_FILETYPES)
@@ -475,14 +457,14 @@ class ComfyRunner:
                             ):
                                 model_path = model_path.split(os.path.sep, 1)[-1]
                             logger.info(f"Updating {input} to {model_path}")
-                            workflow[node]["inputs"][key] = model_path
+                            workflow_api_json[node]["inputs"][key] = model_path
                     elif input_data and input_data.get(node, {}).get(key):
-                        workflow[node]["inputs"][key] = input_data.get(node, {}).get(
+                        workflow_api_json[node]["inputs"][key] = input_data.get(node, {}).get(
                             key
                         )
         # get the result
         logger.info("Generating output please wait ...")
-        output = await self.run_prompt(workflow, output_node_ids)
+        output = await self.run_prompt(workflow_api_json, output_node_ids)
         logger.info(f"Raw Output: {output}")
         file_list = []
         for file in output["file_list"]:

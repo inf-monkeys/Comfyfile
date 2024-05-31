@@ -167,10 +167,13 @@ async def list_apps(request):
 @server.PromptServer.instance.routes.post("/comfyfile/run")
 async def run_comfyui_workflow(request):
     body = await request.json()
-    workflow = body.get("workflow")
+    workflow_json = body.get("workflow_json")
+    workflow_api_json = body.get("workflow_api_json")
     input_data = body.get("input_data")
-    if not workflow:
-        raise Exception("workflow is empty")
+    if not workflow_json:
+        raise Exception("workflow_json is empty")
+    if not workflow_api_json:
+        raise Exception("workflow_api_json is empty")
     comfyfile_repo = body.get("comfyfile_repo")
     if comfyfile_repo:
         import_from_comfyfile_repo(comfyfile_repo)
@@ -178,9 +181,12 @@ async def run_comfyui_workflow(request):
         input_data, file_path_list = download_and_replace_remote_files(input_data)
     file_path_list = []
     runner = ComfyRunner()
-    logger.info(f"Received a request: workflow={workflow}, input_data={input_data}")
+    logger.info(
+        f"Received a request: workflow_json={workflow_json}, workflow_api_json={workflow_api_json} input_data={input_data}"
+    )
     output = await runner.predict(
-        workflow_input=json.dumps(workflow),
+        workflow_json=workflow_json,
+        workflow_api_json=workflow_api_json,
         input_data=input_data,
         file_path_list=file_path_list,
     )
@@ -191,6 +197,10 @@ async def run_comfyui_workflow(request):
 async def check_dependencies(request):
     body = await request.json()
     comfyfile_repo = body.get("comfyfile_repo")
+    workflow = body.get("workflow")
+    runner = ComfyRunner()
+    data = await runner.infer_dependencies(workflow)
+    return web.json_response(data)
 
 
 @server.PromptServer.instance.routes.get("/comfyfile/healthz")

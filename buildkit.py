@@ -188,12 +188,21 @@ class Executor:
         return search_model(model_name)
 
     def check_dependencies(self, comfyfile: Comfyfile):
+        dependencies = []
         build_stage = comfyfile.stages["build"]
         if build_stage:
             for command in build_stage.commands:
                 if command.startswith("PLUGIN"):
                     _, url = command.split(maxsplit=1)
-                    self.check_plugin(url)
+                    installed = self.check_plugin(url)
+                    dependencies.append(
+                        {
+                            "type": "node",
+                            "name": url.split("/")[-1].replace(".git", ""),
+                            "url": url,
+                            "installed": installed
+                        }
+                    )
                 elif command.startswith("MODEL"):
                     _, model_info = command.split(maxsplit=1)
                     model_path, _ = model_info.split()
