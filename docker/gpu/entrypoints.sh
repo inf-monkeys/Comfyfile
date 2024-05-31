@@ -5,7 +5,16 @@ set -e
 if [ ! -d "/app/ComfyUI/custom_nodes/ComfyUI-Manager" ]; then
     mkdir -p /app/ComfyUI/custom_nodes
     cp -r /tmp/custom_nodes/ComfyUI-Manager /app/ComfyUI/custom_nodes/
+fi
+
+if [ ! -d "/app/ComfyUI/custom_nodes/Comfyfile" ]; then
+    mkdir -p /app/ComfyUI/custom_nodes
     cp -r /tmp/custom_nodes/Comfyfile /app/ComfyUI/custom_nodes/
+fi
+
+if [ ! -d "/app/ComfyUI/custom_nodes/ComfyUI-KJNodes" ]; then
+    mkdir -p /app/ComfyUI/custom_nodes
+    cp -r /tmp/custom_nodes/ComfyUI-KJNodes /app/ComfyUI/custom_nodes/
 fi
 
 if [ -n "$CLASH_SUBSCRIPTION_URL" ]; then

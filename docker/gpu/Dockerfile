@@ -19,8 +19,10 @@ RUN /venv/bin/pip install --upgrade pip && \
 # Note that we clone ComfyUI-Manager to /tmp and mv it from /tmp to /app/ComfyUI/custom_nodes in entrypoint-gpu.sh
 RUN git clone --depth=1 --no-tags --recurse-submodules --shallow-submodules https://github.com/comfyanonymous/ComfyUI && \
     git clone --depth=1 --no-tags --recurse-submodules --shallow-submodules https://github.com/ltdrdata/ComfyUI-Manager /tmp/custom_nodes/ComfyUI-Manager && \
+    git clone --depth=1 --no-tags --recurse-submodules --shallow-submodules https://github.com/kijai/ComfyUI-KJNodes /tmp/custom_nodes/ComfyUI-KJNodes && \
     /venv/bin/pip install --no-cache-dir -r ./ComfyUI/requirements.txt && \
     /venv/bin/pip install --no-cache-dir -r /tmp/custom_nodes/ComfyUI-Manager/requirements.txt
+    /venv/bin/pip install --no-cache-dir -r /tmp/custom_nodes/ComfyUI-KJNodes/requirements.txt
 
 # Install Clash
 RUN git clone https://github.com/wnlen/clash-for-linux/
