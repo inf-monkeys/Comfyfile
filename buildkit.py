@@ -9,6 +9,7 @@ import tarfile
 
 import requests
 from tqdm import tqdm
+from common import search_model
 import folder_paths
 from torchvision.datasets.utils import download_url as torchvision_download_url
 
@@ -177,6 +178,27 @@ class Executor:
             os.path.join("custom_nodes/Comfyfile/apps", app_name, "manifest.json"),
         )
 
+    def check_plugin(self, url: str):
+        repo_name = url.split("/")[-1].replace(".git", "")
+        repo_path = os.path.join(custom_nodes_path, repo_name)
+        return os.path.exists(repo_path)
+
+    def check_model(self, model_path: str):
+        model_name = model_path.split("/")[-1]
+        return search_model(model_name)
+
+    def check_dependencies(self, comfyfile: Comfyfile):
+        build_stage = comfyfile.stages["build"]
+        if build_stage:
+            for command in build_stage.commands:
+                if command.startswith("PLUGIN"):
+                    _, url = command.split(maxsplit=1)
+                    self.check_plugin(url)
+                elif command.startswith("MODEL"):
+                    _, model_info = command.split(maxsplit=1)
+                    model_path, _ = model_info.split()
+                    self.check_model(model_path)
+
     def process_comfyfile(self, comfyfile: Comfyfile):
         build_stage = comfyfile.stages["build"]
         if build_stage:
@@ -230,4 +252,3 @@ class Executor:
                 elif command.startswith("MANIFEST"):
                     _, src = command.split(maxsplit=1)
                     self.handle_manifest(app_name, src)
-

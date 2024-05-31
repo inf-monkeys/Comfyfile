@@ -187,6 +187,12 @@ async def run_comfyui_workflow(request):
     return web.json_response(output)
 
 
+@server.PromptServer.instance.routes.post("/comfyfile/check-dependencies")
+async def check_dependencies(request):
+    body = await request.json()
+    comfyfile_repo = body.get("comfyfile_repo")
+
+
 @server.PromptServer.instance.routes.get("/comfyfile/healthz")
 async def get_manifest_json(request):
     return web.json_response({"success": True})

@@ -357,6 +357,9 @@ class ComfyRunner:
         else:
             return f"http://127.0.0.1:{APP_PORT}/view?filename={filename}&subfolder={subfolder}&type=temp"
 
+    async def infer_dependencies(self, workflow_input):
+        pass
+
     async def predict(
         self,
         workflow_input,
