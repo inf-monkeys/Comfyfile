@@ -29,13 +29,12 @@ COPY ./requirements.txt /tmp/custom_nodes/Comfyfile/requirements.txt
 
 RUN /venv/bin/pip install -r /tmp/custom_nodes/Comfyfile/requirements.txt
 
-RUN pip install virtualenv-clone
-
 COPY . /tmp/custom_nodes/Comfyfile
 
 EXPOSE 8188
 
 COPY ./docker/gpu/entrypoints.sh /app/entrypoints.sh
+COPY ./docker/gpu/clonevirtualenv.py /app/clonevirtualenv.py
 
 # Run the app
 CMD ["./entrypoints.sh"]

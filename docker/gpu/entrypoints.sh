@@ -40,17 +40,17 @@ else
     echo "Clash is not enabled"
 fi
 
-# Change to the /app/ComfyUI directory
-cd /app/ComfyUI
-
 # Copy /venv to /app/ComfyUI/venv
-if [ ! -d "/app/ComfyUI/venv/bin/python" ]; then
+if [ ! -d "/app/ComfyUI/venv/bin" ]; then
 
 echo "Copying python libraries from /venv to /app/ComfyUI/venv ..."
 
-virtualenv-clone /venv /app/ComfyUI/venv
+python3 /app/clonevirtualenv.py /venv /app/ComfyUI/venv
 
 fi
+
+# Change to the /app/ComfyUI directory
+cd /app/ComfyUI
 
 source /app/ComfyUI/venv/bin/activate
 
