@@ -78,7 +78,6 @@ def download_and_replace_remote_files(input_data, workflow_api_json):
     input_data = deepcopy(input_data)
     file_paths = []
     for node_id in input_data:
-        node_detail = workflow_api_json[node_id]
         node_input = input_data[node_id]
         for key in node_input:
             value = node_input[key]
@@ -91,6 +90,7 @@ def download_and_replace_remote_files(input_data, workflow_api_json):
                     file_path = os.path.join("./input/", file_filename)
                     download_file_to(value, file_path)
                     file_paths.append(file_path)
+                    node_detail = workflow_api_json.get(node_id, {})
                     if node_detail.get("class_type") == "VHS_LoadAudio":
                         node_input[key] = file_path
                     else:
