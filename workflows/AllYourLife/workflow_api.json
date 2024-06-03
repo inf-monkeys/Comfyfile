@@ -111,7 +111,7 @@
   },
   "213": {
     "inputs": {
-      "image": "AllYourLife_face.png",
+      "image": "AllYourLife_face.jpeg",
       "upload": "image"
     },
     "class_type": "LoadImage",
@@ -428,7 +428,7 @@
   },
   "290": {
     "inputs": {
-      "image": "AllYourLife_Pose.png",
+      "image": "AllYourLife_pose.png",
       "upload": "image"
     },
     "class_type": "LoadImage",
@@ -710,7 +710,7 @@
   },
   "364": {
     "inputs": {
-      "side_length": 1,
+      "side_length": 1024,
       "side": "Longest",
       "upscale_method": "nearest-exact",
       "crop": "disabled",
@@ -726,7 +726,7 @@
   },
   "365": {
     "inputs": {
-      "side_length": 1,
+      "side_length": 1024,
       "side": "Longest",
       "upscale_method": "nearest-exact",
       "crop": "disabled",

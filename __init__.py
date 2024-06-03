@@ -74,10 +74,11 @@ def download_file_to(file_url, to):
     return to
 
 
-def download_and_replace_remote_files(input_data):
+def download_and_replace_remote_files(input_data, workflow_api_json):
     input_data = deepcopy(input_data)
     file_paths = []
     for node_id in input_data:
+        node_detail = workflow_api_json[node_id]
         node_input = input_data[node_id]
         for key in node_input:
             value = node_input[key]
@@ -90,7 +91,10 @@ def download_and_replace_remote_files(input_data):
                     file_path = os.path.join("./input/", file_filename)
                     download_file_to(value, file_path)
                     file_paths.append(file_path)
-                    node_input[key] = file_filename
+                    if node_detail.get("class_type") == "VHS_LoadAudio":
+                        node_input[key] = file_path
+                    else:
+                        node_input[key] = file_filename
     return input_data, file_paths
 
 
@@ -178,7 +182,9 @@ async def run_comfyui_workflow(request):
     if comfyfile_repo:
         await import_from_comfyfile_repo(comfyfile_repo)
     if input_data:
-        input_data, file_path_list = download_and_replace_remote_files(input_data)
+        input_data, file_path_list = download_and_replace_remote_files(
+            input_data, workflow_api_json
+        )
     file_path_list = []
     runner = ComfyRunner()
     logger.info(

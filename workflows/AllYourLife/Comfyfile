@@ -11,6 +11,8 @@ MODEL models/controlnet/thibaud_xl_openpose_256lora.safetensors https://huggingf
 MODEL models/instantid/ip-adapter.bin https://huggingface.co/InstantX/InstantID/resolve/main/ip-adapter.
 MODEL models/controlnet/InstantID/diffusion_pytorch_model.safetensors https://huggingface.co/InstantX/InstantID/resolve/main/ControlNetModel/diffusion_pytorch_model.safetensors
 
+MODEL models/insightface/models/antelopev2/ https://static.infmonkeys.com/comfyui/models/insightface/antelopev2.zip
+
 COPY images/ input/
 COPY ForeverYoung.MP3 input/
 

@@ -4,7 +4,7 @@
       "displayName": "脸部图片",
       "name": "face_image",
       "type": "file",
-      "default": "",
+      "default": "https://static.infmonkeys.com/comfyui/workflows/AllYourLife/images/AllYourLife_face.jpeg",
       "required": true,
       "typeOptions": {
         "multipleValues": false,
@@ -19,7 +19,7 @@
       "displayName": "Pose 图片",
       "name": "pose_image",
       "type": "file",
-      "default": "",
+      "default": "https://static.infmonkeys.com/comfyui/workflows/AllYourLife/images/AllYourLife_pose.png",
       "required": true,
       "typeOptions": {
         "multipleValues": false,
@@ -34,7 +34,7 @@
       "displayName": "Mask 图片",
       "name": "mask_image",
       "type": "file",
-      "default": "",
+      "default": "https://static.infmonkeys.com/comfyui/workflows/AllYourLife/images/AllYourLife_mask.png",
       "required": true,
       "typeOptions": {
         "multipleValues": false,
@@ -49,7 +49,7 @@
       "displayName": "Logo 图片",
       "name": "logo_image",
       "type": "file",
-      "default": "",
+      "default": "https://static.infmonkeys.com/comfyui/workflows/AllYourLife/images/AllYourLife_logo.png",
       "required": true,
       "typeOptions": {
         "multipleValues": false,
