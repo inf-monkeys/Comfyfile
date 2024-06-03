@@ -14,7 +14,7 @@ MODEL models/controlnet/InstantID/diffusion_pytorch_model.safetensors https://hu
 COPY images/ input/
 COPY ForeverYoung.MP3 input/
 
-STATE serve
+STAGE serve
 
 APP_NAME AllYourLife
 MANIFEST ./manifest.json
