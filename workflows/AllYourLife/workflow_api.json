@@ -1,0 +1,743 @@
+{
+  "205": {
+    "inputs": {
+      "seed": 1,
+      "steps": 8,
+      "cfg": 2,
+      "sampler_name": "dpmpp_sde",
+      "scheduler": "karras",
+      "denoise": 1,
+      "preview_method": "auto",
+      "vae_decode": "true",
+      "model": [
+        "212",
+        0
+      ],
+      "positive": [
+        "212",
+        1
+      ],
+      "negative": [
+        "212",
+        2
+      ]
+    },
+    "class_type": "KSampler (Efficient)",
+    "_meta": {
+      "title": "KSampler (Efficient)"
+    }
+  },
+  "206": {
+    "inputs": {
+      "ckpt_name": "juggernautXL_v9Rdphoto2Lightning.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "207": {
+    "inputs": {},
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "209": {
+    "inputs": {
+      "instantid_file": "ip-adapter.bin"
+    },
+    "class_type": "InstantIDModelLoader",
+    "_meta": {
+      "title": "Load InstantID Model"
+    }
+  },
+  "210": {
+    "inputs": {
+      "control_net_name": "InstantID/diffusion_pytorch_model.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "211": {
+    "inputs": {
+      "provider": "CUDA"
+    },
+    "class_type": "InstantIDFaceAnalysis",
+    "_meta": {
+      "title": "InstantID Face Analysis"
+    }
+  },
+  "212": {
+    "inputs": {
+      "weight": 0.8,
+      "start_at": 0.2,
+      "end_at": 0.9,
+      "instantid": [
+        "209",
+        0
+      ],
+      "insightface": [
+        "211",
+        0
+      ],
+      "control_net": [
+        "210",
+        0
+      ],
+      "image": [
+        "365",
+        0
+      ],
+      "positive": [
+        "215",
+        0
+      ],
+      "negative": [
+        "215",
+        1
+      ],
+      "image_kps": [
+        "364",
+        0
+      ]
+    },
+    "class_type": "ApplyInstantID",
+    "_meta": {
+      "title": "Apply InstantID"
+    }
+  },
+  "213": {
+    "inputs": {
+      "image": "AllYourLife_face.png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "215": {
+    "inputs": {
+      "strength": 1,
+      "start_percent": 0,
+      "end_percent": 1,
+      "positive": [
+        "224",
+        0
+      ],
+      "negative": [
+        "224",
+        1
+      ],
+      "control_net": [
+        "216",
+        0
+      ],
+      "image": [
+        "364",
+        0
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced",
+    "_meta": {
+      "title": "Apply ControlNet (Advanced)"
+    }
+  },
+  "216": {
+    "inputs": {
+      "control_net_name": "thibaud_xl_openpose_256lora.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "221": {
+    "inputs": {
+      "image": [
+        "364",
+        0
+      ]
+    },
+    "class_type": "ImageGenResolutionFromImage",
+    "_meta": {
+      "title": "Generation Resolution From Image"
+    }
+  },
+  "223": {
+    "inputs": {
+      "share_norm": "both",
+      "share_attn": "q+k",
+      "scale": 1,
+      "model": [
+        "206",
+        0
+      ]
+    },
+    "class_type": "StyleAlignedBatchAlign",
+    "_meta": {
+      "title": "StyleAligned Batch Align"
+    }
+  },
+  "224": {
+    "inputs": {
+      "text": [
+        "247",
+        0
+      ],
+      "max_frames": 8,
+      "print_output": false,
+      "pre_text": "Black and white pencil drawing of a portrait, monochrome, pencil sketch",
+      "app_text": [
+        "322",
+        0
+      ],
+      "start_frame": 0,
+      "end_frame": 0,
+      "pw_a": 0,
+      "pw_b": 0,
+      "pw_c": 0,
+      "pw_d": 0
+    },
+    "class_type": "BatchPromptSchedule",
+    "_meta": {
+      "title": "Batch Prompt Schedule 📅🅕🅝"
+    }
+  },
+  "225": {
+    "inputs": {
+      "frame_rate": 12,
+      "loop_count": 0,
+      "filename_prefix": "Age/Age",
+      "format": "video/h264-mp4",
+      "pix_fmt": "yuv420p",
+      "crf": 19,
+      "save_metadata": true,
+      "pingpong": false,
+      "save_output": true,
+      "images": [
+        "227",
+        0
+      ],
+      "audio": [
+        "229",
+        0
+      ]
+    },
+    "class_type": "VHS_VideoCombine",
+    "_meta": {
+      "title": "Video Combine 🎥🅥🅗🅢"
+    }
+  },
+  "226": {
+    "inputs": {
+      "width": [
+        "221",
+        0
+      ],
+      "height": [
+        "221",
+        1
+      ],
+      "batch_size": 8
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "227": {
+    "inputs": {
+      "ckpt_name": "rife47.pth",
+      "clear_cache_after_n_frames": 10,
+      "multiplier": 24,
+      "fast_mode": true,
+      "ensemble": true,
+      "scale_factor": 1
+    },
+    "class_type": "RIFE VFI",
+    "_meta": {
+      "title": "RIFE VFI (recommend rife47 and rife49)"
+    }
+  },
+  "229": {
+    "inputs": {
+      "audio_file": "ForeverYoung.MP3",
+      "seek_seconds": 0
+    },
+    "class_type": "VHS_LoadAudio",
+    "_meta": {
+      "title": "Load Audio (Path)🎥🅥🅗🅢"
+    }
+  },
+  "232": {
+    "inputs": {
+      "lora_name": "xl_sliders/professional.pt",
+      "strength_model": 1,
+      "model": [
+        "223",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "LoraLoaderModelOnly"
+    }
+  },
+  "238": {
+    "inputs": {
+      "text": "\"0\" :\"4-year-old,litte boy，baby:2,kawaii,short hair\",\n\"1\" :\"14-year-old,cute boy,short hair\",\n\"2\" :\"24-year-old,handsome man\",\n\"3\" :\"34-year-old,handsome man\",\n\"4\" :\"44-year-old,old man\",\n\"5\" :\"64-year-old,old man,gray hair\",\n\"6\" :\"84-year-old,old man,wrinkles,white hair\",\n\"7\" :\"104-year-old,old man,wrinkles:2,bald,white hair\","
+    },
+    "class_type": "Text _O",
+    "_meta": {
+      "title": "Male"
+    }
+  },
+  "239": {
+    "inputs": {
+      "text": "\"0\" :\"4-year-old,litte girl，baby:2，kawaii,short hair \",\n\"1\" :\"14-year-old,cute kid,girl \",\n\"2\" :\"24-year-old,young girl,long hair \",\n\"3\" :\"34-year-old,woman,long hair \",\n\"4\" :\"44-year-old,old woman\",\n\"5\" :\"64-year-old,old woman,gray hair\",\n\"6\" :\"84-year-old,old woman,wrinkles,white hair\",\n\"7\" :\"104-year-old,old woman,wrinkles:2,white hair\","
+    },
+    "class_type": "Text _O",
+    "_meta": {
+      "title": "Female"
+    }
+  },
+  "245": {
+    "inputs": {
+      "comparison": "a <= b",
+      "a": [
+        "318",
+        0
+      ],
+      "b": [
+        "246",
+        0
+      ]
+    },
+    "class_type": "easy compare",
+    "_meta": {
+      "title": "Compare"
+    }
+  },
+  "246": {
+    "inputs": {
+      "text": "Female"
+    },
+    "class_type": "Text _O",
+    "_meta": {
+      "title": "Female"
+    }
+  },
+  "247": {
+    "inputs": {
+      "text": [
+        "354",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "Show Text 🐍"
+    }
+  },
+  "261": {
+    "inputs": {
+      "MODEL": [
+        "360",
+        0
+      ],
+      "CLIP": [
+        "206",
+        1
+      ],
+      "VAE": [
+        "206",
+        2
+      ]
+    },
+    "class_type": "Anything Everywhere3",
+    "_meta": {
+      "title": "Anything Everywhere3"
+    }
+  },
+  "262": {
+    "inputs": {
+      "LATENT": [
+        "226",
+        0
+      ]
+    },
+    "class_type": "Anything Everywhere",
+    "_meta": {
+      "title": "Anything Everywhere"
+    }
+  },
+  "263": {
+    "inputs": {
+      "IMAGE": [
+        "361",
+        0
+      ]
+    },
+    "class_type": "Anything Everywhere",
+    "_meta": {
+      "title": "Anything Everywhere"
+    }
+  },
+  "277": {
+    "inputs": {
+      "output": "",
+      "source": [
+        "245",
+        0
+      ]
+    },
+    "class_type": "Display Any (rgthree)",
+    "_meta": {
+      "title": "Display Any (rgthree)"
+    }
+  },
+  "286": {
+    "inputs": {
+      "text": "Smiling character in a White Shirt，Smile，looking at viewer"
+    },
+    "class_type": "Text _O",
+    "_meta": {
+      "title": "Prompt"
+    }
+  },
+  "287": {
+    "inputs": {
+      "text1": [
+        "286",
+        0
+      ],
+      "text2": [
+        "321",
+        0
+      ],
+      "separator": ","
+    },
+    "class_type": "Concat Text _O",
+    "_meta": {
+      "title": "Concat Text _O"
+    }
+  },
+  "290": {
+    "inputs": {
+      "image": "AllYourLife_Pose.png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "304": {
+    "inputs": {
+      "prompt": [
+        "307",
+        0
+      ],
+      "temperature": 0.1,
+      "image": [
+        "365",
+        0
+      ],
+      "model": [
+        "305",
+        0
+      ]
+    },
+    "class_type": "LLavaSamplerSimple",
+    "_meta": {
+      "title": "LLava Sampler Simple"
+    }
+  },
+  "305": {
+    "inputs": {
+      "ckpt_name": "ggml-model-q4_k.gguf",
+      "max_ctx": 2048,
+      "gpu_layers": 27,
+      "n_threads": 8,
+      "clip": [
+        "306",
+        0
+      ]
+    },
+    "class_type": "LLava Loader Simple",
+    "_meta": {
+      "title": "LLava Loader Simple"
+    }
+  },
+  "306": {
+    "inputs": {
+      "clip_name": "mmproj-model-f16.gguf"
+    },
+    "class_type": "LlavaClipLoader",
+    "_meta": {
+      "title": "Llava Clip Loader"
+    }
+  },
+  "307": {
+    "inputs": {
+      "input_text": "what Race?"
+    },
+    "class_type": "SimpleText",
+    "_meta": {
+      "title": "SimpleText"
+    }
+  },
+  "308": {
+    "inputs": {
+      "text": [
+        "304",
+        0
+      ]
+    },
+    "class_type": "ViewText",
+    "_meta": {
+      "title": "ViewText"
+    }
+  },
+  "314": {
+    "inputs": {
+      "prompt": [
+        "315",
+        0
+      ],
+      "temperature": 0.1,
+      "image": [
+        "365",
+        0
+      ],
+      "model": [
+        "305",
+        0
+      ]
+    },
+    "class_type": "LLavaSamplerSimple",
+    "_meta": {
+      "title": "LLava Sampler Simple"
+    }
+  },
+  "315": {
+    "inputs": {
+      "input_text": "Male or Female?"
+    },
+    "class_type": "SimpleText",
+    "_meta": {
+      "title": "SimpleText"
+    }
+  },
+  "318": {
+    "inputs": {
+      "text": [
+        "319",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "Show Text 🐍"
+    }
+  },
+  "319": {
+    "inputs": {
+      "text": [
+        "314",
+        0
+      ],
+      "old": " ",
+      "new": ""
+    },
+    "class_type": "Replace Text _O",
+    "_meta": {
+      "title": "Replace Text _O"
+    }
+  },
+  "321": {
+    "inputs": {
+      "text1": [
+        "308",
+        0
+      ],
+      "text2": [
+        "319",
+        0
+      ],
+      "separator": " "
+    },
+    "class_type": "Concat Text _O",
+    "_meta": {
+      "title": "Concat Text _O"
+    }
+  },
+  "322": {
+    "inputs": {
+      "text": [
+        "287",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "Show Text 🐍"
+    }
+  },
+  "327": {
+    "inputs": {
+      "image": "AllYourLife_mask.png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "331": {
+    "inputs": {
+      "invert_mask": true,
+      "blend_mode": "multply",
+      "opacity": 100,
+      "background_image": [
+        "205",
+        5
+      ],
+      "layer_image": [
+        "327",
+        0
+      ],
+      "layer_mask": [
+        "327",
+        1
+      ]
+    },
+    "class_type": "LayerUtility: ImageBlend",
+    "_meta": {
+      "title": "LayerUtility: ImageBlend"
+    }
+  },
+  "335": {
+    "inputs": {
+      "invert_mask": true,
+      "blend_mode": "normal",
+      "opacity": 100,
+      "background_image": [
+        "331",
+        0
+      ],
+      "layer_image": [
+        "336",
+        0
+      ],
+      "layer_mask": [
+        "336",
+        1
+      ]
+    },
+    "class_type": "LayerUtility: ImageBlend",
+    "_meta": {
+      "title": "LayerUtility: ImageBlend"
+    }
+  },
+  "336": {
+    "inputs": {
+      "image": "AllYourLife_logo.png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "354": {
+    "inputs": {
+      "text_a": [
+        "239",
+        0
+      ],
+      "text_b": [
+        "238",
+        0
+      ],
+      "boolean": [
+        "245",
+        0
+      ]
+    },
+    "class_type": "Text Input Switch",
+    "_meta": {
+      "title": "Text Input Switch"
+    }
+  },
+  "360": {
+    "inputs": {
+      "lora_name": "PE_PencilDrawing.safetensors",
+      "strength_model": 0.5,
+      "model": [
+        "232",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "LoraLoaderModelOnly"
+    }
+  },
+  "361": {
+    "inputs": {
+      "brightness": -0.05,
+      "contrast": 1.1,
+      "saturation": 0.5,
+      "sharpness": 1.2,
+      "blur": 0,
+      "gaussian_blur": 0,
+      "edge_enhance": 0.3,
+      "detail_enhance": "false",
+      "image": [
+        "335",
+        0
+      ]
+    },
+    "class_type": "Image Filter Adjustments",
+    "_meta": {
+      "title": "Image Filter Adjustments"
+    }
+  },
+  "364": {
+    "inputs": {
+      "side_length": 1,
+      "side": "Longest",
+      "upscale_method": "nearest-exact",
+      "crop": "disabled",
+      "image": [
+        "290",
+        0
+      ]
+    },
+    "class_type": "DF_Image_scale_to_side",
+    "_meta": {
+      "title": "Image scale to side"
+    }
+  },
+  "365": {
+    "inputs": {
+      "side_length": 1,
+      "side": "Longest",
+      "upscale_method": "nearest-exact",
+      "crop": "disabled",
+      "image": [
+        "213",
+        0
+      ]
+    },
+    "class_type": "DF_Image_scale_to_side",
+    "_meta": {
+      "title": "Image scale to side"
+    }
+  }
+}

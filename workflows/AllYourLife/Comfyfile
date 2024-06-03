@@ -1,0 +1,23 @@
+STAGE build
+
+PLUGIN AUTO_INFER_FROM_WORKFLOW_JSON
+
+MODEL models/LLavacheckpoints/mmproj-model-f16.gguf https://huggingface.co/mys/ggml_llava-v1.5-7b/resolve/main/mmproj-model-f16.gguf
+MODEL models/LLavacheckpoints/ggml-model-q4_k.gguf  https://huggingface.co/NousResearch/Nous-Capybara-7B-V1-GGUF/resolve/e6263e5fabbdcd2d682364c66ecf54b65f25aa39/ggml-model-Q4_K.gguf
+MODEL models/checkpoints/juggernautXL_v9Rdphoto2Lightning.safetensors https://huggingface.co/erohinem/SDXL/resolve/main/juggernautXL_v9Rdphoto2Lightning.safetensors?download=true
+MODEL models/loras/xl_sliders/professional.pt https://sliders.baulab.info/weights/xl_sliders/professional.pt
+MODEL models/loras/PE_PencilDrawing.safetensors https://civitai.com/api/download/models/145610
+MODEL models/controlnet/thibaud_xl_openpose_256lora.safetensors https://huggingface.co/lllyasviel/sd_control_collection/resolve/7cf256327b341fedc82e00b0d7fb5481ad693210/thibaud_xl_openpose_256lora.safetensors
+MODEL models/instantid/ip-adapter.bin https://huggingface.co/InstantX/InstantID/resolve/main/ip-adapter.
+MODEL models/controlnet/InstantID/diffusion_pytorch_model.safetensors https://huggingface.co/InstantX/InstantID/resolve/main/ControlNetModel/diffusion_pytorch_model.safetensors
+
+COPY images/ input/
+COPY ForeverYoung.MP3 input/
+
+STATE serve
+
+APP_NAME AllYourLife
+MANIFEST ./manifest.json
+WORKFLOW ./workflow.json
+WORKFLOW_API ./workflow_api.json
+REST_ENDPOINT ./rest_endpoint.json

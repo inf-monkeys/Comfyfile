@@ -1,0 +1,118 @@
+{
+  "parameters": [
+    {
+      "displayName": "脸部图片",
+      "name": "face_image",
+      "type": "file",
+      "default": "",
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "accept": ".jpg,.jpeg,.png,.webp",
+        "comfyOptions": {
+          "node": 213,
+          "key": "image"
+        }
+      }
+    },
+    {
+      "displayName": "Pose 图片",
+      "name": "pose_image",
+      "type": "file",
+      "default": "",
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "accept": ".jpg,.jpeg,.png,.webp",
+        "comfyOptions": {
+          "node": 290,
+          "key": "image"
+        }
+      }
+    },
+    {
+      "displayName": "Mask 图片",
+      "name": "mask_image",
+      "type": "file",
+      "default": "",
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "accept": ".jpg,.jpeg,.png,.webp",
+        "comfyOptions": {
+          "node": 327,
+          "key": "image"
+        }
+      }
+    },
+    {
+      "displayName": "Logo 图片",
+      "name": "logo_image",
+      "type": "file",
+      "default": "",
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "accept": ".jpg,.jpeg,.png,.webp",
+        "comfyOptions": {
+          "node": 336,
+          "key": "image"
+        }
+      }
+    },
+    {
+      "displayName": "背景音乐",
+      "name": "background_music",
+      "type": "file",
+      "default": "",
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "accept": ".mp3",
+        "comfyOptions": {
+          "node": 229,
+          "key": "audio_file"
+        }
+      }
+    },
+    {
+      "displayName": "prompt",
+      "name": "positive_prompt",
+      "type": "string",
+      "default": "Smiling character in a White Shirt，Smile，looking at viewer",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 23,
+          "key": "prompt"
+        }
+      }
+    },
+    {
+      "displayName": "Female Prompt",
+      "name": "female_prompt",
+      "type": "string",
+      "default": "\"0\" :\"4-year-old,litte girl，baby:2，kawaii,short hair \",\n\"1\" :\"14-year-old,cute kid,girl \",\n\"2\" :\"24-year-old,young girl,long hair \",\n\"3\" :\"34-year-old,woman,long hair \",\n\"4\" :\"44-year-old,old woman\",\n\"5\" :\"64-year-old,old woman,gray hair\",\n\"6\" :\"84-year-old,old woman,wrinkles,white hair\",\n\"7\" :\"104-year-old,old woman,wrinkles:2,white hair\",",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 239,
+          "key": "prompt"
+        }
+      }
+    },
+    {
+      "displayName": "Male Prompt",
+      "name": "male_prompt",
+      "type": "string",
+      "default": "\"0\" :\"4-year-old,litte boy，baby:2,kawaii,short hair\",\n\"1\" :\"14-year-old,cute boy,short hair\",\n\"2\" :\"24-year-old,handsome man\",\n\"3\" :\"34-year-old,handsome man\",\n\"4\" :\"44-year-old,old man\",\n\"5\" :\"64-year-old,old man,gray hair\",\n\"6\" :\"84-year-old,old man,wrinkles,white hair\",\n\"7\" :\"104-year-old,old man,wrinkles:2,bald,white hair\",",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 238,
+          "key": "prompt"
+        }
+      }
+    }
+  ]
+}
