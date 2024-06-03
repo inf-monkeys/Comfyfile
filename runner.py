@@ -396,19 +396,18 @@ class ComfyRunner:
         if not res_models["status"]:
             logger.info(res_models["message"])
             if len(res_models["data"]["models_not_found"]):
-                logger.info(
+                logger.warn(
                     "Please provide custom model urls for the models listed below or modify the workflow json to one of the alternative models listed"
                 )
                 for model in res_models["data"]["models_not_found"]:
-                    print("Model: ", model["model"])
-                    print("Alternatives: ")
+                    logger.warn("Model: ", model["model"])
+                    logger.warn("Alternatives: ")
                     if len(model["similar_models"]):
                         for alternative in model["similar_models"]:
-                            print(" - ", alternative)
+                            logger.warn(" - ", alternative)
                     else:
                         print(" - None")
-                    print("---------------------------")
-            return
+                    logger.warn("---------------------------")
 
         # restart the server if custom nodes or models are installed
         if (
