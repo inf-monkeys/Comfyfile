@@ -114,7 +114,7 @@ except ImportError:
     sys.exit()
 
 
-def import_from_comfyfile_repo(comfyfile_repo):
+async def import_from_comfyfile_repo(comfyfile_repo):
     random_id = uuid.uuid4().hex
     comfyfile_tmp_folder = os.path.join(comfyfile_home_dir, random_id)
     download_github_directory(comfyfile_repo, comfyfile_tmp_folder)
@@ -124,7 +124,7 @@ def import_from_comfyfile_repo(comfyfile_repo):
     context_directory = comfyfile_tmp_folder
     comfyfile = Comfyfile().parse_comfyfile(comfyfile_path)
     executor = Executor(context_directory, comfy_path)
-    executor.process_comfyfile(comfyfile)
+    await executor.process_comfyfile(comfyfile)
 
 
 @server.PromptServer.instance.routes.post("/comfyfile/apps")
@@ -136,7 +136,7 @@ async def import_app(request):
             {"success": False, "errMsg": "Comfyfile repo is required"}
         )
     try:
-        import_from_comfyfile_repo(comfyfile_repo)
+        await import_from_comfyfile_repo(comfyfile_repo)
         return web.json_response({"success": True, "errMsg": "Install success"})
     except Exception as e:
         traceback.print_exc()
@@ -176,7 +176,7 @@ async def run_comfyui_workflow(request):
         raise Exception("workflow_api_json is empty")
     comfyfile_repo = body.get("comfyfile_repo")
     if comfyfile_repo:
-        import_from_comfyfile_repo(comfyfile_repo)
+        await import_from_comfyfile_repo(comfyfile_repo)
     if input_data:
         input_data, file_path_list = download_and_replace_remote_files(input_data)
     file_path_list = []

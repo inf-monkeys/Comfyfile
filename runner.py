@@ -356,6 +356,20 @@ class ComfyRunner:
         missing_nodes = await self.determine_installed_and_missing_nodes(workflow)
         return missing_nodes
 
+    async def auto_install_missing_nodes(self, workflow_json):
+        res = await self.determine_installed_and_missing_nodes(workflow_json)
+        uninstalled_nodes = res["uninstalled_nodes"]
+        installed_new_node = False
+        for node in uninstalled_nodes:
+            try:
+                await self.comfy_api.install_custom_node(node)
+                installed_new_node = True
+            except Exception as e:
+                logger.error(f"Installed comfyui node {node} failed: {str(e)}")
+
+        if installed_new_node:
+            await self.comfy_api.reboot()
+
     async def predict(
         self,
         workflow_json,
@@ -459,9 +473,9 @@ class ComfyRunner:
                             logger.info(f"Updating {input} to {model_path}")
                             workflow_api_json[node]["inputs"][key] = model_path
                     elif input_data and input_data.get(node, {}).get(key):
-                        workflow_api_json[node]["inputs"][key] = input_data.get(node, {}).get(
-                            key
-                        )
+                        workflow_api_json[node]["inputs"][key] = input_data.get(
+                            node, {}
+                        ).get(key)
         # get the result
         logger.info("Generating output please wait ...")
         output = await self.run_prompt(workflow_api_json, output_node_ids)

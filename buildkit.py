@@ -1,11 +1,11 @@
-import argparse
 import os
 import subprocess
 import shutil
-import uuid
 import zipfile
 from loguru import logger
 import tarfile
+import json
+from .runner import ComfyRunner
 
 import requests
 from tqdm import tqdm
@@ -187,34 +187,17 @@ class Executor:
         model_name = model_path.split("/")[-1]
         return search_model(model_name)
 
-    def check_dependencies(self, comfyfile: Comfyfile):
-        dependencies = []
+    async def process_comfyfile(self, comfyfile: Comfyfile):
         build_stage = comfyfile.stages["build"]
+        AUTO_INFER_FROM_WORKFLOW_JSON = False
         if build_stage:
             for command in build_stage.commands:
                 if command.startswith("PLUGIN"):
                     _, url = command.split(maxsplit=1)
-                    installed = self.check_plugin(url)
-                    dependencies.append(
-                        {
-                            "type": "node",
-                            "name": url.split("/")[-1].replace(".git", ""),
-                            "url": url,
-                            "installed": installed
-                        }
-                    )
-                elif command.startswith("MODEL"):
-                    _, model_info = command.split(maxsplit=1)
-                    model_path, _ = model_info.split()
-                    self.check_model(model_path)
-
-    def process_comfyfile(self, comfyfile: Comfyfile):
-        build_stage = comfyfile.stages["build"]
-        if build_stage:
-            for command in build_stage.commands:
-                if command.startswith("PLUGIN"):
-                    _, url = command.split(maxsplit=1)
-                    self.handle_plugin(url)
+                    if url == "AUTO_INFER_FROM_WORKFLOW_JSON":
+                        AUTO_INFER_FROM_WORKFLOW_JSON = True
+                    else:
+                        self.handle_plugin(url)
                 elif command.startswith("MODEL"):
                     _, model_info = command.split(maxsplit=1)
                     model_path, model_url = model_info.split()
@@ -254,6 +237,12 @@ class Executor:
                     self.handle_workflow_api(app_name, src)
                 elif command.startswith("WORKFLOW"):
                     _, src = command.split(maxsplit=1)
+                    if AUTO_INFER_FROM_WORKFLOW_JSON:
+                        full_src = os.path.join(self.context_directory, src)
+                        with open(full_src, 'r', encoding='utf-8') as f:
+                            workflow_json = json.loads(f.read())
+                            runner = ComfyRunner()
+                            await runner.auto_install_missing_nodes(workflow_json)
                     self.handle_workflow(app_name, src)
                 elif command.startswith("REST_ENDPOINT"):
                     _, src = command.split(maxsplit=1)
