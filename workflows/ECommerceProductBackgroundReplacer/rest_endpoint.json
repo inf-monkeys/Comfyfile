@@ -1,0 +1,32 @@
+{
+  "parameters": [
+    {
+      "displayName": "商品图片",
+      "name": "image",
+      "type": "file",
+      "default": "https://static.infmonkeys.com/comfyui/workflows/ECommerceProductBackgroundReplacer/images/ECommerceProductBackgroundReplacer_product.webp",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 24,
+          "key": "image"
+        },
+        "multipleValues": false,
+        "accept": ".jpg,.jpeg,.png,.webp"
+      }
+    },
+    {
+      "displayName": "提示词",
+      "name": "prompt",
+      "type": "string",
+      "default": "Lovely sunny day",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 48,
+          "key": "text"
+        }
+      }
+    }
+  ]
+}

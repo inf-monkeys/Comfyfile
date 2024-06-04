@@ -1,0 +1,320 @@
+{
+    "13": {
+        "inputs": {
+            "ckpt_name": "epicphotogasm_ultimateFidelity.safetensors"
+        },
+        "class_type": "CheckpointLoaderSimple"
+    },
+    "21": {
+        "inputs": {
+            "mask": [
+                "50",
+                0
+            ]
+        },
+        "class_type": "InvertMask"
+    },
+    "22": {
+        "inputs": {
+            "mask": [
+                "21",
+                0
+            ]
+        },
+        "class_type": "MaskPreview+"
+    },
+    "23": {
+        "inputs": {
+            "mask": [
+                "21",
+                0
+            ]
+        },
+        "class_type": "MaskPreview+"
+    },
+    "24": {
+        "inputs": {
+            "image": "ECommerceProductBackgroundReplacer_product.webp",
+            "upload": "image"
+        },
+        "class_type": "LoadImage"
+    },
+    "25": {
+        "inputs": {
+            "max_width": 1024,
+            "max_height": 1024,
+            "min_width": 0,
+            "min_height": 0,
+            "crop_if_required": "no",
+            "images": [
+                "24",
+                0
+            ]
+        },
+        "class_type": "ConstrainImage|pysssss"
+    },
+    "27": {
+        "inputs": {
+            "model_name": "sam_vit_h (2.56GB)"
+        },
+        "class_type": "SAMModelLoader (segment anything)"
+    },
+    "28": {
+        "inputs": {
+            "prompt": "shoes",
+            "threshold": 0.3,
+            "sam_model": [
+                "27",
+                0
+            ],
+            "grounding_dino_model": [
+                "29",
+                0
+            ],
+            "image": [
+                "25",
+                0
+            ]
+        },
+        "class_type": "GroundingDinoSAMSegment (segment anything)"
+    },
+    "29": {
+        "inputs": {
+            "model_name": "GroundingDINO_SwinT_OGC (694MB)"
+        },
+        "class_type": "GroundingDinoModelLoader (segment anything)"
+    },
+    "30": {
+        "inputs": {
+            "images": [
+                "28",
+                0
+            ]
+        },
+        "class_type": "PreviewImage"
+    },
+    "31": {
+        "inputs": {
+            "brushnet": "random_mask_brushnet_ckpt/diffusion_pytorch_model.safetensors",
+            "dtype": "float16"
+        },
+        "class_type": "BrushNetLoader"
+    },
+    "32": {
+        "inputs": {
+            "scale": 1,
+            "start_at": 0,
+            "end_at": 10000,
+            "model": [
+                "13",
+                0
+            ],
+            "vae": [
+                "13",
+                2
+            ],
+            "image": [
+                "25",
+                0
+            ],
+            "mask": [
+                "21",
+                0
+            ],
+            "brushnet": [
+                "31",
+                0
+            ],
+            "positive": [
+                "51",
+                0
+            ],
+            "negative": [
+                "51",
+                1
+            ]
+        },
+        "class_type": "BrushNet"
+    },
+    "35": {
+        "inputs": {
+            "text": [
+                "48",
+                0
+            ],
+            "clip": [
+                "13",
+                1
+            ]
+        },
+        "class_type": "CLIPTextEncode"
+    },
+    "36": {
+        "inputs": {
+            "text": "nsfw,(embedding:bad_prompt_version2:0.6),(embedding:ng_deepnegative_v1_75t:1),blur,low quality,deforum,low buget",
+            "clip": [
+                "13",
+                1
+            ]
+        },
+        "class_type": "CLIPTextEncode"
+    },
+    "38": {
+        "inputs": {
+            "control_net_name": "control_v11p_sd15_softedge.pth"
+        },
+        "class_type": "ControlNetLoader"
+    },
+    "39": {
+        "inputs": {
+            "preprocessor": "HEDPreprocessor",
+            "resolution": 512,
+            "image": [
+                "25",
+                0
+            ]
+        },
+        "class_type": "AIO_Preprocessor"
+    },
+    "42": {
+        "inputs": {
+            "images": [
+                "39",
+                0
+            ]
+        },
+        "class_type": "PreviewImage"
+    },
+    "43": {
+        "inputs": {
+            "images": [
+                "25",
+                0
+            ]
+        },
+        "class_type": "PreviewImage"
+    },
+    "44": {
+        "inputs": {
+            "seed": 794013540739164,
+            "steps": 30,
+            "cfg": 8,
+            "sampler_name": "dpmpp_2m_sde_gpu",
+            "scheduler": "karras",
+            "denoise": 1,
+            "model": [
+                "32",
+                0
+            ],
+            "positive": [
+                "32",
+                1
+            ],
+            "negative": [
+                "32",
+                2
+            ],
+            "latent_image": [
+                "32",
+                3
+            ]
+        },
+        "class_type": "KSampler"
+    },
+    "45": {
+        "inputs": {
+            "samples": [
+                "44",
+                0
+            ],
+            "vae": [
+                "13",
+                2
+            ]
+        },
+        "class_type": "VAEDecode"
+    },
+    "46": {
+        "inputs": {
+            "images": [
+                "45",
+                0
+            ]
+        },
+        "class_type": "PreviewImage"
+    },
+    "48": {
+        "inputs": {
+            "text": "Lovely sunset"
+        },
+        "class_type": "TextInput_"
+    },
+    "50": {
+        "inputs": {
+            "expand": 1,
+            "tapered_corners": true,
+            "mask": [
+                "28",
+                1
+            ]
+        },
+        "class_type": "GrowMask"
+    },
+    "51": {
+        "inputs": {
+            "strength": 0.5700000000000001,
+            "start_percent": 0,
+            "end_percent": 1,
+            "positive": [
+                "35",
+                0
+            ],
+            "negative": [
+                "36",
+                0
+            ],
+            "control_net": [
+                "38",
+                0
+            ],
+            "image": [
+                "39",
+                0
+            ],
+            "mask_optional": [
+                "50",
+                0
+            ]
+        },
+        "class_type": "ACN_AdvancedControlNetApply"
+    },
+    "70": {
+        "inputs": {
+            "x": 0,
+            "y": 0,
+            "resize_source": true,
+            "destination": [
+                "45",
+                0
+            ],
+            "source": [
+                "24",
+                0
+            ],
+            "mask": [
+                "28",
+                1
+            ]
+        },
+        "class_type": "ImageCompositeMasked"
+    },
+    "71": {
+        "inputs": {
+            "images": [
+                "70",
+                0
+            ]
+        },
+        "class_type": "PreviewImage"
+    }
+}

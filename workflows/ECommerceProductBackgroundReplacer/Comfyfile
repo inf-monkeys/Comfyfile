@@ -1,0 +1,18 @@
+STAGE build
+
+PLUGIN AUTO_INFER_FROM_WORKFLOW_JSON
+
+MODEL models/controlnet/control_v11p_sd15_softedge.pth https://weights.replicate.delivery/default/comfy-ui/controlnet/control_v11p_sd15_softedge.pth.tar
+MODEL models/inpaint/random_mask_brushnet_ckpt/diffusion_pytorch_model.safetensors https://static.infmonkeys.com/comfyui/models/inpaint/random_mask_brushnet_ckpt/diffusion_pytorch_model.safetensors
+MODEL models/checkpoints/epicphotogasm_ultimateFidelity.safetensors  https://civitai.com/api/download/models/429454
+MODEL models/sams/sam_vit_h_4b8939.pth https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth
+
+ADD ECommerceProductBackgroundReplacer_product.webp input/
+
+STAGE serve
+
+APP_NAME ECommerceProductBackgroundReplacer
+MANIFEST ./manifest.json
+WORKFLOW ./workflow.json
+WORKFLOW_API ./workflow_api.json
+REST_ENDPOINT ./rest_endpoint.json
