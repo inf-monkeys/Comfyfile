@@ -12,6 +12,8 @@ MODEL models/checkpoints/disneyrealcartoonmix_v10.safetensors https://civitai.co
 MODEL models/loras/DD-made-of-clay-XL-v2.safetensors https://huggingface.co/DoctorDiffusion/doctor-diffusion-s-claymation-style-lora/resolve/main/DD-made-of-clay-XL-v2.safetensors
 MODEL models/loras/CLAYMATE_V2.03_.safetensors https://huggingface.co/nerualdreming/Best_LoRas_Mar24/resolve/main/CLAYMATE_V2.03_.safetensors
 
+COPY images/ input/
+
 STAGE serve
 
 APP_NAME CharactersConsistentClayStyleWithoutFace
