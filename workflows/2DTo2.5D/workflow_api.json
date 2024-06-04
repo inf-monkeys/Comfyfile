@@ -1,0 +1,202 @@
+{
+    "2": {
+        "inputs": {
+            "ckpt_name": "revAnimated_v2Rebirth.safetensors",
+            "vae_name": "Baked VAE",
+            "clip_skip": -2,
+            "lora_name": "lcm-lora-sdv1-5.safetensors",
+            "lora_model_strength": 1,
+            "lora_clip_strength": 1,
+            "positive": "3DMM",
+            "negative": "",
+            "token_normalization": "none",
+            "weight_interpretation": "comfy",
+            "empty_latent_width": [
+                "9",
+                0
+            ],
+            "empty_latent_height": [
+                "9",
+                1
+            ],
+            "batch_size": 1,
+            "lora_stack": [
+                "14",
+                0
+            ],
+            "cnet_stack": [
+                "6",
+                0
+            ]
+        },
+        "class_type": "Efficient Loader"
+    },
+    "3": {
+        "inputs": {
+            "add_noise": "enable",
+            "noise_seed": 1031831119255020,
+            "steps": 7,
+            "cfg": 1.5,
+            "sampler_name": "lcm",
+            "scheduler": "normal",
+            "start_at_step": 0,
+            "end_at_step": 10000,
+            "return_with_leftover_noise": "disable",
+            "preview_method": "none",
+            "vae_decode": "true",
+            "model": [
+                "2",
+                0
+            ],
+            "positive": [
+                "2",
+                1
+            ],
+            "negative": [
+                "2",
+                2
+            ],
+            "latent_image": [
+                "2",
+                3
+            ],
+            "optional_vae": [
+                "2",
+                4
+            ]
+        },
+        "class_type": "KSampler Adv. (Efficient)"
+    },
+    "6": {
+        "inputs": {
+            "switch_1": "On",
+            "controlnet_1": "control_v11p_sd15_scribble_fp16.safetensors",
+            "controlnet_strength_1": 0.5,
+            "start_percent_1": 0,
+            "end_percent_1": 1,
+            "switch_2": "On",
+            "controlnet_2": "control_v11f1e_sd15_tile_fp16.safetensors",
+            "controlnet_strength_2": 0.5,
+            "start_percent_2": 0,
+            "end_percent_2": 1,
+            "switch_3": "On",
+            "controlnet_3": "control_v11p_sd15s2_lineart_anime_fp16.safetensors",
+            "controlnet_strength_3": 0.2,
+            "start_percent_3": 0,
+            "end_percent_3": 1,
+            "image_1": [
+                "12",
+                0
+            ],
+            "image_2": [
+                "7",
+                0
+            ],
+            "image_3": [
+                "7",
+                0
+            ]
+        },
+        "class_type": "CR Multi-ControlNet Stack"
+    },
+    "7": {
+        "inputs": {
+            "image": "2d_charactor.jpg",
+            "upload": "image"
+        },
+        "class_type": "LoadImage"
+    },
+    "9": {
+        "inputs": {
+            "image": [
+                "7",
+                0
+            ]
+        },
+        "class_type": "easy imageSize"
+    },
+    "10": {
+        "inputs": {
+            "method": "wavelet",
+            "image_output": "Hide",
+            "save_prefix": "ComfyUI",
+            "image_ref": [
+                "7",
+                0
+            ],
+            "image_target": [
+                "3",
+                5
+            ]
+        },
+        "class_type": "easy imageColorMatch"
+    },
+    "12": {
+        "inputs": {
+            "threshold": 52,
+            "resolution": 1024,
+            "image": [
+                "7",
+                0
+            ]
+        },
+        "class_type": "Scribble_XDoG_Preprocessor"
+    },
+    "14": {
+        "inputs": {
+            "toggle": true,
+            "mode": "simple",
+            "num_loras": 1,
+            "lora_1_name": "3DMM_V12.safetensors",
+            "lora_1_strength": 1,
+            "lora_1_model_strength": 1,
+            "lora_1_clip_strength": 1,
+            "lora_2_name": "None",
+            "lora_2_strength": 1,
+            "lora_2_model_strength": 1,
+            "lora_2_clip_strength": 1,
+            "lora_3_name": "None",
+            "lora_3_strength": 1,
+            "lora_3_model_strength": 1,
+            "lora_3_clip_strength": 1,
+            "lora_4_name": "None",
+            "lora_4_strength": 1,
+            "lora_4_model_strength": 1,
+            "lora_4_clip_strength": 1,
+            "lora_5_name": "None",
+            "lora_5_strength": 1,
+            "lora_5_model_strength": 1,
+            "lora_5_clip_strength": 1,
+            "lora_6_name": "None",
+            "lora_6_strength": 1,
+            "lora_6_model_strength": 1,
+            "lora_6_clip_strength": 1,
+            "lora_7_name": "None",
+            "lora_7_strength": 1,
+            "lora_7_model_strength": 1,
+            "lora_7_clip_strength": 1,
+            "lora_8_name": "None",
+            "lora_8_strength": 1,
+            "lora_8_model_strength": 1,
+            "lora_8_clip_strength": 1,
+            "lora_9_name": "None",
+            "lora_9_strength": 1,
+            "lora_9_model_strength": 1,
+            "lora_9_clip_strength": 1,
+            "lora_10_name": "None",
+            "lora_10_strength": 1,
+            "lora_10_model_strength": 1,
+            "lora_10_clip_strength": 1
+        },
+        "class_type": "easy loraStack"
+    },
+    "15": {
+        "inputs": {
+            "images": [
+                "10",
+                0
+            ]
+        },
+        "class_type": "PreviewImage"
+    }
+}

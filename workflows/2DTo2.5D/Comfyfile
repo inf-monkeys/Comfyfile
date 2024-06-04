@@ -1,0 +1,20 @@
+STAGE build
+
+PLUGIN AUTO_INFER_FROM_WORKFLOW_JSON
+
+MODEL models/checkpoints/revAnimated_v2Rebirth.safetensors https://static.infmonkeys.com/comfyui/models/checkpoints/revAnimated_v2Rebirth.safetensors
+MODEL models/loras/lcm-lora-sdv1-5.safetensors https://weights.replicate.delivery/default/comfy-ui/loras/lcm-lora-sdv1-5.safetensors.tar
+MODEL models/controlnet/control_v11p_sd15_scribble_fp16.safetensors https://weights.replicate.delivery/default/comfy-ui/controlnet/control_v11p_sd15_scribble_fp16.safetensors.tar
+MODEL models/controlnet/control_v11f1e_sd15_tile_fp16.safetensors https://weights.replicate.delivery/default/comfy-ui/controlnet/control_v11f1e_sd15_tile_fp16.safetensors.tar
+MODEL models/controlnet/control_v11p_sd15s2_lineart_anime_fp16.safetensors https://weights.replicate.delivery/default/comfy-ui/controlnet/control_v11p_sd15s2_lineart_anime_fp16.safetensors.tar
+MODEL models/loras/3DMM_V12.safetensors https://static.infmonkeys.com/comfyui/models/loras/3DMM_V12.safetensors
+
+COPY 2d_charactor.jpeg input/
+
+STAGE serve
+
+APP_NAME 2DTo2.5D
+MANIFEST ./manifest.json
+WORKFLOW ./workflow.json
+WORKFLOW_API ./workflow_api.json
+REST_ENDPOINT ./rest_endpoint.json
