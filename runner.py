@@ -72,7 +72,7 @@ class ComfyRunner:
                     out = await websocket.recv()
                     if isinstance(out, str):
                         message = json.loads(out)
-                        logger.info(f"Ws received: {message[0:100]}...")
+                        logger.info(f"Ws received: {out[0:100]}...")
                         if message["type"] == "executing":
                             data = message["data"]
                             if data["node"] is None and data["prompt_id"] == prompt_id:

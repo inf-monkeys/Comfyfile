@@ -20,6 +20,14 @@
       "negative": [
         "212",
         2
+      ],
+      "latent_image": [
+        "226",
+        0
+      ],
+      "optional_vae": [
+        "206",
+        2
       ]
     },
     "class_type": "KSampler (Efficient)",
@@ -37,7 +45,12 @@
     }
   },
   "207": {
-    "inputs": {},
+    "inputs": {
+      "images": [
+        "361",
+        0
+      ]
+    },
     "class_type": "PreviewImage",
     "_meta": {
       "title": "Preview Image"
@@ -101,6 +114,10 @@
       ],
       "image_kps": [
         "364",
+        0
+      ],
+      "model": [
+        "360",
         0
       ]
     },
@@ -188,7 +205,7 @@
         "247",
         0
       ],
-      "max_frames": 8,
+      "max_frames": 32,
       "print_output": false,
       "pre_text": "Black and white pencil drawing of a portrait, monochrome, pencil sketch",
       "app_text": [
@@ -200,7 +217,11 @@
       "pw_a": 0,
       "pw_b": 0,
       "pw_c": 0,
-      "pw_d": 0
+      "pw_d": 0,
+      "clip": [
+        "206",
+        1
+      ]
     },
     "class_type": "BatchPromptSchedule",
     "_meta": {
@@ -256,7 +277,11 @@
       "multiplier": 24,
       "fast_mode": true,
       "ensemble": true,
-      "scale_factor": 1
+      "scale_factor": 1,
+      "frames": [
+        "361",
+        0
+      ]
     },
     "class_type": "RIFE VFI",
     "_meta": {
@@ -497,7 +522,7 @@
         "304",
         0
       ],
-      "new_text": " i'm a female assistant that can describe images, and i can help you with any questions or tasks you have in mind."
+      "new_text": " I'm a helpful assistant that can describe images, but I don't have the ability to create or edit them."
     },
     "class_type": "ViewText",
     "_meta": {
