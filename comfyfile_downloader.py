@@ -2,9 +2,14 @@ import requests
 import os
 from loguru import logger
 
+github_token = os.getenv("GITHUB_TOKEN")
+
 
 def download_file(url, output_path):
-    response = requests.get(url)
+    response = requests.get(
+        url,
+        headers={"Authorization": f"Bearer {github_token}" if github_token else None},
+    )
     with open(output_path, "wb") as file:
         file.write(response.content)
     logger.info(f"Downloaded {url} to {output_path}")
@@ -24,7 +29,10 @@ def download_github_directory(repo_url, output_dir):
     )
 
     # 发送请求
-    response = requests.get(api_url)
+    response = requests.get(
+        api_url,
+        headers={"Authorization": f"Bearer {github_token}" if github_token else None},
+    )
     if response.status_code == 200:
         contents = response.json()
         if not os.path.exists(output_dir):
