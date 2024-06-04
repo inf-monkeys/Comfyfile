@@ -1,0 +1,34 @@
+{
+  "parameters": [
+    {
+      "displayName": "输入图片",
+      "name": " input_image",
+      "type": "file",
+      "default": "https://static.infmonkeys.com/comfyui/workflows/CharactersConsistentClayStyleWithoutFace/images/CharactersConsistentClayStyleWithoutFace_Input.jpg",
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "accept": ".jpg,.jpeg,.png,.webp",
+        "comfyOptions": {
+          "node": 11,
+          "key": "image"
+        }
+      }
+    },
+    {
+      "displayName": "ControlNet 权重",
+      "description": "介于 0 - 1 之间，ControlNet权重越高，与原图越像，黏土风格的效果就越不明显",
+      "name": " controlnet_strength",
+      "type": "number",
+      "default": 0.8,
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 17,
+          "key": "strength"
+        }
+      }
+    }
+  ]
+}

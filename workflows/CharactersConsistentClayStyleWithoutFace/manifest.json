@@ -1,0 +1,6 @@
+{
+    "appName": "CharactersConsistentClayStyleWithoutFace",
+    "homepage": "https://openart.ai/workflows/sweetvalberry/characters-consistent-clay-style/fN6lYlSr5SawKZiBWlDs",
+    "displayName": "Characters Consistent Clay Style 黏土风格图像（不含人脸）",
+    "description": "根据图像的具体内容，您可能希望通过调整模型权重来启用 ControlNet 功能。ControlNet 权重越高，与原始图像的相似度就越高，黏土效果就越不明显。"
+}

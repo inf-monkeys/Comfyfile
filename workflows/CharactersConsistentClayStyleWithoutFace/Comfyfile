@@ -1,0 +1,21 @@
+STAGE build
+
+PLUGIN AUTO_INFER_FROM_WORKFLOW_JSON
+
+MODEL models/instantid/ip-adapter.bin https://huggingface.co/InstantX/InstantID/resolve/main/ip-adapter.bin
+MODEL models/insightface/models/antelopev2/ https://static.infmonkeys.com/comfyui/models/insightface/antelopev2.zip
+MODEL models/controlnet/ControlNet_For_InstantID.safetensors https://huggingface.co/InstantX/InstantID/resolve/main/ControlNetModel/diffusion_pytorch_model.safetensors
+MODEL models/controlnet/ https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/thibaud_xl_openpose.safetensors
+MODEL models/controlnet/TencentARCt2i-adapter-depth-zoe-sdxl.safetensors https://huggingface.co/TencentARC/t2i-adapter-depth-zoe-sdxl-1.0/resolve/main/diffusion_pytorch_model.safetensors
+
+MODEL models/checkpoints/ https://civitai.com/api/download/models/239306
+MODEL models/loras/ https://huggingface.co/DoctorDiffusion/doctor-diffusion-s-claymation-style-lora/resolve/main/DD-made-of-clay-XL-v2.safetensors
+MODEL models/loras/ https://huggingface.co/nerualdreming/Best_LoRas_Mar24/resolve/main/CLAYMATE_V2.03_.safetensors
+
+STAGE serve
+
+APP_NAME CharactersConsistentClayStyleWithoutFace
+MANIFEST ./manifest.json
+WORKFLOW ./workflow.json
+WORKFLOW_API ./workflow_api.json
+REST_ENDPOINT ./rest_endpoint.json
