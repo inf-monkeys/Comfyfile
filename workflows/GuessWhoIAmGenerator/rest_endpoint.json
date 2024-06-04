@@ -1,0 +1,30 @@
+{
+  "parameters": [
+    {
+      "displayName": "生成什么形状",
+      "name": "shape_positive_prompt",
+      "type": "string",
+      "default": "cat",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 141,
+          "key": "positive"
+        }
+      }
+    },
+    {
+      "displayName": "在形状中生成什么",
+      "name": "inpaint_positive_prompt",
+      "type": "string",
+      "default": "dog",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 129,
+          "key": "text"
+        }
+      }
+    }
+  ]
+}

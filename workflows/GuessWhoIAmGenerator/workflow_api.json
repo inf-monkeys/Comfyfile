@@ -1,0 +1,335 @@
+{
+    "112": {
+        "inputs": {
+            "ckpt_name": "dreamshaper_8.safetensors"
+        },
+        "class_type": "CheckpointLoaderSimple"
+    },
+    "114": {
+        "inputs": {
+            "seed": 1120647905143138,
+            "steps": 25,
+            "cfg": 8,
+            "sampler_name": "euler",
+            "scheduler": "normal",
+            "denoise": 1,
+            "model": [
+                "112",
+                0
+            ],
+            "positive": [
+                "116",
+                0
+            ],
+            "negative": [
+                "117",
+                0
+            ],
+            "latent_image": [
+                "119",
+                0
+            ]
+        },
+        "class_type": "KSampler"
+    },
+    "115": {
+        "inputs": {
+            "images": [
+                "118",
+                0
+            ]
+        },
+        "class_type": "PreviewImage"
+    },
+    "116": {
+        "inputs": {
+            "text": [
+                "141",
+                0
+            ],
+            "clip": [
+                "112",
+                1
+            ]
+        },
+        "class_type": "CLIPTextEncode"
+    },
+    "117": {
+        "inputs": {
+            "text": "embedding:BadNegAnatomyV1-neg, embedding:bad-image-v2-39000, embedding:bad-hands-5, embedding:badhandv4, embedding:bad-artist, ",
+            "clip": [
+                "112",
+                1
+            ]
+        },
+        "class_type": "CLIPTextEncode"
+    },
+    "118": {
+        "inputs": {
+            "samples": [
+                "114",
+                0
+            ],
+            "vae": [
+                "112",
+                2
+            ]
+        },
+        "class_type": "VAEDecode"
+    },
+    "119": {
+        "inputs": {
+            "width": 512,
+            "height": 512,
+            "batch_size": 1
+        },
+        "class_type": "EmptyLatentImage"
+    },
+    "120": {
+        "inputs": {
+            "model_name": "sam_hq_vit_h (2.57GB)"
+        },
+        "class_type": "SAMModelLoader (segment anything)"
+    },
+    "121": {
+        "inputs": {
+            "prompt": [
+                "141",
+                0
+            ],
+            "threshold": 0.3,
+            "sam_model": [
+                "120",
+                0
+            ],
+            "grounding_dino_model": [
+                "122",
+                0
+            ],
+            "image": [
+                "118",
+                0
+            ]
+        },
+        "class_type": "GroundingDinoSAMSegment (segment anything)"
+    },
+    "122": {
+        "inputs": {
+            "model_name": "GroundingDINO_SwinT_OGC (694MB)"
+        },
+        "class_type": "GroundingDinoModelLoader (segment anything)"
+    },
+    "123": {
+        "inputs": {
+            "mask": [
+                "121",
+                1
+            ]
+        },
+        "class_type": "MaskToImage"
+    },
+    "124": {
+        "inputs": {
+            "images": [
+                "123",
+                0
+            ]
+        },
+        "class_type": "PreviewImage"
+    },
+    "126": {
+        "inputs": {
+            "scale": 1,
+            "start_at": 0,
+            "end_at": 10000,
+            "model": [
+                "112",
+                0
+            ],
+            "vae": [
+                "112",
+                2
+            ],
+            "image": [
+                "118",
+                0
+            ],
+            "mask": [
+                "121",
+                1
+            ],
+            "brushnet": [
+                "132",
+                0
+            ],
+            "positive": [
+                "129",
+                0
+            ],
+            "negative": [
+                "130",
+                0
+            ]
+        },
+        "class_type": "BrushNet"
+    },
+    "127": {
+        "inputs": {
+            "seed": 217445725091097,
+            "steps": 20,
+            "cfg": 8,
+            "sampler_name": "euler",
+            "scheduler": "normal",
+            "denoise": 1,
+            "model": [
+                "126",
+                0
+            ],
+            "positive": [
+                "137",
+                0
+            ],
+            "negative": [
+                "126",
+                2
+            ],
+            "latent_image": [
+                "126",
+                3
+            ]
+        },
+        "class_type": "KSampler"
+    },
+    "128": {
+        "inputs": {
+            "samples": [
+                "127",
+                0
+            ],
+            "vae": [
+                "112",
+                2
+            ]
+        },
+        "class_type": "VAEDecode"
+    },
+    "129": {
+        "inputs": {
+            "text": "dog",
+            "clip": [
+                "112",
+                1
+            ]
+        },
+        "class_type": "CLIPTextEncode"
+    },
+    "130": {
+        "inputs": {
+            "text": "embedding:BadNegAnatomyV1-neg, embedding:bad-image-v2-39000, embedding:bad-hands-5, embedding:badhandv4, embedding:bad-artist, ",
+            "clip": [
+                "112",
+                1
+            ]
+        },
+        "class_type": "CLIPTextEncode"
+    },
+    "132": {
+        "inputs": {
+            "brushnet": "random_mask_brushnet_ckpt/diffusion_pytorch_model.safetensors",
+            "dtype": "float16"
+        },
+        "class_type": "BrushNetLoader"
+    },
+    "135": {
+        "inputs": {
+            "image_a": [
+                "118",
+                0
+            ],
+            "image_b": [
+                "128",
+                0
+            ]
+        },
+        "class_type": "Image Comparer (rgthree)"
+    },
+    "137": {
+        "inputs": {
+            "strength": 0.45,
+            "conditioning": [
+                "126",
+                1
+            ],
+            "control_net": [
+                "139",
+                0
+            ],
+            "image": [
+                "171",
+                0
+            ]
+        },
+        "class_type": "ControlNetApply"
+    },
+    "139": {
+        "inputs": {
+            "control_net_name": "control_v11p_sd15_canny.pth"
+        },
+        "class_type": "ControlNetLoader"
+    },
+    "140": {
+        "inputs": {
+            "images": [
+                "171",
+                0
+            ]
+        },
+        "class_type": "PreviewImage"
+    },
+    "141": {
+        "inputs": {
+            "positive": "cat"
+        },
+        "class_type": "easy positive"
+    },
+    "145": {
+        "inputs": {
+            "images": [
+                "128",
+                0
+            ]
+        },
+        "class_type": "PreviewImage"
+    },
+    "157": {
+        "inputs": {
+            "birefnetmodel": [
+                "158",
+                0
+            ],
+            "image": [
+                "118",
+                0
+            ]
+        },
+        "class_type": "BiRefNet_Zho"
+    },
+    "158": {
+        "inputs": {
+            "birefnet_model": "BiRefNet-DIS_ep580.pth"
+        },
+        "class_type": "BiRefNet_ModelLoader_Zho"
+    },
+    "171": {
+        "inputs": {
+            "low_threshold": 255,
+            "high_threshold": 255,
+            "resolution": 512,
+            "image": [
+                "157",
+                0
+            ]
+        },
+        "class_type": "CannyEdgePreprocessor"
+    }
+}

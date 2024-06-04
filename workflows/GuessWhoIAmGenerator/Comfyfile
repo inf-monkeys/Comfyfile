@@ -1,0 +1,17 @@
+STAGE build
+
+PLUGIN AUTO_INFER_FROM_WORKFLOW_JSON
+
+MODEL models/checkpoints/dreamshaper_8.safetensors https://huggingface.co/autismanon/modeldump/resolve/main/dreamshaper_8.safetensors
+MODEL models/inpaint/random_mask_brushnet_ckpt/diffusion_pytorch_model.safetensors https://static.infmonkeys.com/comfyui/models/inpaint/random_mask_brushnet_ckpt/diffusion_pytorch_model.safetensors
+MODEL models/BiRefNet/BiRefNet-DIS_ep580.pth https://huggingface.co/ViperYX/BiRefNet/resolve/main/BiRefNet-DIS_ep580.pth
+MODEL models/BiRefNet/swin_large_patch4_window12_384_22kto1k.pth  https://huggingface.co/ViperYX/BiRefNet/resolve/main/swin_large_patch4_window12_384_22kto1k.pth
+MODEL models/controlnet/control_v11p_sd15_canny.pth https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11p_sd15_canny.pth
+
+STAGE serve
+
+APP_NAME GuessWhoIAmGenerator
+MANIFEST ./manifest.json
+WORKFLOW ./workflow.json
+WORKFLOW_API ./workflow_api.json
+REST_ENDPOINT ./rest_endpoint.json
