@@ -1,0 +1,16 @@
+STAGE build
+
+PLUGIN AUTO_INFER_FROM_WORKFLOW_JSON
+
+MODEL custom_nodes/ComfyUI-YoloWorld-EfficientSAM/efficient_sam_s_cpu.jit https://huggingface.co/camenduru/YoloWorld-EfficientSAM/resolve/main/efficient_sam_s_cpu.jit
+MDOEL custom_nodes/ComfyUI-YoloWorld-EfficientSAM/efficient_sam_s_gpu.jit https://huggingface.co/camenduru/YoloWorld-EfficientSAM/resolve/main/efficient_sam_s_gpu.jit
+
+COPY 新垣结衣.jpeg input/
+
+STAGE serve
+
+APP_NAME BoobBoom
+MANIFEST ./manifest.json
+WORKFLOW ./workflow.json
+WORKFLOW_API ./workflow_api.json
+REST_ENDPOINT ./rest_endpoint.json

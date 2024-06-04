@@ -1,0 +1,17 @@
+{
+  "parameters": [
+    {
+      "displayName": "原始图片",
+      "name": "image",
+      "type": "string",
+      "default": "https://static.infmonkeys.com/comfyui/workflows/BoobBoom/images/新垣结衣.jpeg",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 141,
+          "key": "positive"
+        }
+      }
+    }
+  ]
+}

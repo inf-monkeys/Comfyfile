@@ -1,0 +1,266 @@
+{
+    "1": {
+        "inputs": {
+            "image": "新垣结衣.jpeg",
+            "upload": "image"
+        },
+        "class_type": "LoadImage"
+    },
+    "3": {
+        "inputs": {
+            "positive": [
+                "10",
+                0
+            ],
+            "negative": [
+                "11",
+                0
+            ],
+            "vae": [
+                "9",
+                2
+            ],
+            "pixels": [
+                "22",
+                0
+            ],
+            "mask": [
+                "15",
+                0
+            ]
+        },
+        "class_type": "InpaintModelConditioning"
+    },
+    "4": {
+        "inputs": {
+            "categories": "person",
+            "confidence_threshold": 0.09,
+            "iou_threshold": 0.2,
+            "box_thickness": 2,
+            "text_thickness": 2,
+            "text_scale": 1,
+            "with_confidence": true,
+            "with_class_agnostic_nms": false,
+            "with_segmentation": true,
+            "mask_combined": true,
+            "mask_extracted": true,
+            "mask_extracted_index": 0,
+            "yolo_world_model": [
+                "5",
+                0
+            ],
+            "esam_model": [
+                "6",
+                0
+            ],
+            "image": [
+                "22",
+                0
+            ]
+        },
+        "class_type": "Yoloworld_ESAM_Zho"
+    },
+    "5": {
+        "inputs": {
+            "yolo_world_model": "yolo_world/l"
+        },
+        "class_type": "Yoloworld_ModelLoader_Zho"
+    },
+    "6": {
+        "inputs": {
+            "device": "CUDA"
+        },
+        "class_type": "ESAM_ModelLoader_Zho"
+    },
+    "9": {
+        "inputs": {
+            "ckpt_name": "juggernautXL_v9Rdphoto2Lightning.safetensors"
+        },
+        "class_type": "CheckpointLoaderSimple"
+    },
+    "10": {
+        "inputs": {
+            "text": "1 girl, ((huge breasts))",
+            "clip": [
+                "9",
+                1
+            ]
+        },
+        "class_type": "CLIPTextEncode"
+    },
+    "11": {
+        "inputs": {
+            "text": "nsfw, nipple",
+            "clip": [
+                "9",
+                1
+            ]
+        },
+        "class_type": "CLIPTextEncode"
+    },
+    "12": {
+        "inputs": {
+            "seed": 662392185790254,
+            "steps": 4,
+            "cfg": 3,
+            "sampler_name": "dpmpp_sde",
+            "scheduler": "karras",
+            "denoise": 0.5,
+            "model": [
+                "9",
+                0
+            ],
+            "positive": [
+                "3",
+                0
+            ],
+            "negative": [
+                "3",
+                1
+            ],
+            "latent_image": [
+                "3",
+                2
+            ]
+        },
+        "class_type": "KSampler"
+    },
+    "13": {
+        "inputs": {
+            "samples": [
+                "12",
+                0
+            ],
+            "vae": [
+                "9",
+                2
+            ]
+        },
+        "class_type": "VAEDecode"
+    },
+    "15": {
+        "inputs": {
+            "expand": 20,
+            "tapered_corners": false,
+            "mask": [
+                "29",
+                0
+            ]
+        },
+        "class_type": "GrowMask"
+    },
+    "19": {
+        "inputs": {
+            "filename_prefix": "ComfyUI",
+            "images": [
+                "13",
+                0
+            ]
+        },
+        "class_type": "SaveImage"
+    },
+    "22": {
+        "inputs": {
+            "upscale_method": "lanczos",
+            "megapixels": 1,
+            "image": [
+                "1",
+                0
+            ]
+        },
+        "class_type": "ImageScaleToTotalPixels"
+    },
+    "23": {
+        "inputs": {
+            "image_a": [
+                "13",
+                0
+            ],
+            "image_b": [
+                "22",
+                0
+            ]
+        },
+        "class_type": "Image Comparer (rgthree)"
+    },
+    "24": {
+        "inputs": {
+            "categories": "head, hair, face, hands, arms, abdomen, legs, pants, socks, ",
+            "confidence_threshold": 0.15,
+            "iou_threshold": 0.2,
+            "box_thickness": 2,
+            "text_thickness": 2,
+            "text_scale": 1,
+            "with_confidence": true,
+            "with_class_agnostic_nms": false,
+            "with_segmentation": true,
+            "mask_combined": true,
+            "mask_extracted": true,
+            "mask_extracted_index": 0,
+            "yolo_world_model": [
+                "5",
+                0
+            ],
+            "esam_model": [
+                "6",
+                0
+            ],
+            "image": [
+                "22",
+                0
+            ]
+        },
+        "class_type": "Yoloworld_ESAM_Zho"
+    },
+    "29": {
+        "inputs": {
+            "mask1": [
+                "4",
+                1
+            ],
+            "mask2": [
+                "31",
+                0
+            ]
+        },
+        "class_type": "SubtractMask"
+    },
+    "30": {
+        "inputs": {
+            "mask": [
+                "15",
+                0
+            ]
+        },
+        "class_type": "MaskPreview+"
+    },
+    "31": {
+        "inputs": {
+            "expand": 20,
+            "tapered_corners": true,
+            "mask": [
+                "24",
+                1
+            ]
+        },
+        "class_type": "GrowMask"
+    },
+    "32": {
+        "inputs": {
+            "images": [
+                "4",
+                0
+            ]
+        },
+        "class_type": "PreviewImage"
+    },
+    "33": {
+        "inputs": {
+            "images": [
+                "24",
+                0
+            ]
+        },
+        "class_type": "PreviewImage"
+    }
+}
