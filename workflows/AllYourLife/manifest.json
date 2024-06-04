@@ -1,6 +1,6 @@
 {
     "appName": "AllYourLife",
     "homepage": "https://openart.ai/workflows/rui400/all-your-life/xfWnQSBIKK5B46IOez2Q",
-    "displayName": "All Your Life 你一生的故事",
+    "displayName": "All Your Life 你一生的故事（像素版）",
     "description": "你一生的故事，上传一张照片获得从童年到老年的渐变肖像视频。仅适用RIFE-VFI的补帧实现动画，并没有AnimateDiff。提供 写实照片 和 铅笔素描 的两个版本。"
 }

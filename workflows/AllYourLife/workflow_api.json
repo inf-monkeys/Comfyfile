@@ -209,7 +209,7 @@
   },
   "225": {
     "inputs": {
-      "frame_rate": 12,
+      "frame_rate": 4,
       "loop_count": 0,
       "filename_prefix": "Age/Age",
       "format": "video/h264-mp4",
@@ -265,7 +265,7 @@
   },
   "229": {
     "inputs": {
-      "audio_file": "ForeverYoung.MP3",
+      "audio_file": "/app/ComfyUI/input/ForeverYoung.MP3",
       "seek_seconds": 0
     },
     "class_type": "VHS_LoadAudio",
@@ -496,7 +496,8 @@
       "text": [
         "304",
         0
-      ]
+      ],
+      "new_text": " i'm a female assistant that can describe images, and i can help you with any questions or tasks you have in mind."
     },
     "class_type": "ViewText",
     "_meta": {
@@ -602,7 +603,7 @@
     "inputs": {
       "invert_mask": true,
       "blend_mode": "multply",
-      "opacity": 100,
+      "opacity": 0,
       "background_image": [
         "205",
         5
@@ -625,7 +626,7 @@
     "inputs": {
       "invert_mask": true,
       "blend_mode": "normal",
-      "opacity": 100,
+      "opacity": 10,
       "background_image": [
         "331",
         0

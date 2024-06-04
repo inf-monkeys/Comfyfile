@@ -31,40 +31,10 @@
       }
     },
     {
-      "displayName": "Mask 图片",
-      "name": "mask_image",
-      "type": "file",
-      "default": "https://static.infmonkeys.com/comfyui/workflows/AllYourLife/images/AllYourLife_mask.png",
-      "required": true,
-      "typeOptions": {
-        "multipleValues": false,
-        "accept": ".jpg,.jpeg,.png,.webp",
-        "comfyOptions": {
-          "node": 327,
-          "key": "image"
-        }
-      }
-    },
-    {
-      "displayName": "Logo 图片",
-      "name": "logo_image",
-      "type": "file",
-      "default": "https://static.infmonkeys.com/comfyui/workflows/AllYourLife/images/AllYourLife_logo.png",
-      "required": true,
-      "typeOptions": {
-        "multipleValues": false,
-        "accept": ".jpg,.jpeg,.png,.webp",
-        "comfyOptions": {
-          "node": 336,
-          "key": "image"
-        }
-      }
-    },
-    {
       "displayName": "背景音乐",
       "name": "background_music",
       "type": "file",
-      "default": "",
+      "default": "https://static.infmonkeys.com/comfyui/workflows/AllYourLife/audios/ForeverYoung.MP3",
       "required": true,
       "typeOptions": {
         "multipleValues": false,
@@ -76,20 +46,51 @@
       }
     },
     {
-      "displayName": "prompt",
-      "name": "positive_prompt",
+      "displayName": "提示词",
+      "name": "image_prompt",
       "type": "string",
       "default": "Smiling character in a White Shirt，Smile，looking at viewer",
       "required": true,
       "typeOptions": {
         "comfyOptions": {
-          "node": 23,
+          "node": 286,
           "key": "prompt"
         }
       }
     },
     {
-      "displayName": "Female Prompt",
+      "displayName": "生成图片帧数",
+      "name": "max_frames",
+      "type": "number",
+      "default": 16,
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 224,
+          "key": "max_frames"
+        },
+        "min": 8,
+        "max": 32
+      }
+    },
+    {
+      "displayName": "Frame Rate",
+      "name": "frame_rate",
+      "type": "number",
+      "description": "越小生成的视频越长，越大生成的视频越短。",
+      "default": 4,
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 225,
+          "key": "frame_rate"
+        },
+        "min": 1,
+        "max": 32
+      }
+    },
+    {
+      "displayName": "Female Character Prompt",
       "name": "female_prompt",
       "type": "string",
       "default": "\"0\" :\"4-year-old,litte girl，baby:2，kawaii,short hair \",\n\"1\" :\"14-year-old,cute kid,girl \",\n\"2\" :\"24-year-old,young girl,long hair \",\n\"3\" :\"34-year-old,woman,long hair \",\n\"4\" :\"44-year-old,old woman\",\n\"5\" :\"64-year-old,old woman,gray hair\",\n\"6\" :\"84-year-old,old woman,wrinkles,white hair\",\n\"7\" :\"104-year-old,old woman,wrinkles:2,white hair\",",
@@ -102,7 +103,7 @@
       }
     },
     {
-      "displayName": "Male Prompt",
+      "displayName": "Male Character Prompt",
       "name": "male_prompt",
       "type": "string",
       "default": "\"0\" :\"4-year-old,litte boy，baby:2,kawaii,short hair\",\n\"1\" :\"14-year-old,cute boy,short hair\",\n\"2\" :\"24-year-old,handsome man\",\n\"3\" :\"34-year-old,handsome man\",\n\"4\" :\"44-year-old,old man\",\n\"5\" :\"64-year-old,old man,gray hair\",\n\"6\" :\"84-year-old,old man,wrinkles,white hair\",\n\"7\" :\"104-year-old,old man,wrinkles:2,bald,white hair\",",
