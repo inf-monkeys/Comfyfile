@@ -426,6 +426,14 @@ class ComfyRunner:
                     )
                 copy_files(filepath, dest_path, overwrite=True)
 
+        for node in workflow_api_json:
+            if "inputs" in workflow_api_json[node]:
+                for key, input in workflow_api_json[node]["inputs"].items():
+                    if input_data and input_data.get(node, {}).get(key):
+                        workflow_api_json[node]["inputs"][key] = input_data.get(
+                            node, {}
+                        ).get(key)
+
         # get the result
         logger.info("Generating output please wait ...")
         output = await self.run_prompt(workflow_api_json, output_node_ids)
