@@ -15,10 +15,8 @@ from .constants import (
     output_path,
 )
 from .api import BaseAPI, ComfyAPI
-from .methods import ComfyMethod
 from .common import (
     copy_files,
-    find_file_in_directory,
     search_model,
 )
 from .model_downloader import FileStatus, ModelDownloader
@@ -428,53 +426,6 @@ class ComfyRunner:
                     )
                 copy_files(filepath, dest_path, overwrite=True)
 
-        # checkpoints, lora, default etc..
-        comfy_directory = "./models/"
-        comfy_model_folders = [
-            folder
-            for folder in os.listdir(comfy_directory)
-            if os.path.isdir(os.path.join(comfy_directory, folder))
-        ]
-        # update model paths e.g. 'v3_sd15_sparsectrl_rgb.ckpt' --> 'SD1.5/animatediff/v3_sd15_sparsectrl_rgb.ckpt'
-        for node in workflow_api_json:
-            if "inputs" in workflow_api_json[node]:
-                for key, input in workflow_api_json[node]["inputs"].items():
-                    if (
-                        isinstance(input, str)
-                        and any(input.endswith(ft) for ft in MODEL_FILETYPES)
-                        and not any(input.endswith(m) for m in OPTIONAL_MODELS)
-                    ):
-                        base = None
-                        # if os.path.sep in input:
-                        base, input = os.path.split(input)
-                        model_path_list = find_file_in_directory(comfy_directory, input)
-                        if len(model_path_list):
-                            # selecting the model_path which has the base, if neither has the base then selecting the first one
-                            model_path = model_path_list[0]
-                            if base:
-                                matching_text_seq = (
-                                    ["SD1.5"]
-                                    if base in ["SD1.5", "SD1.x"]
-                                    else ["SDXL"]
-                                )
-                                for txt in matching_text_seq:
-                                    for p in model_path_list:
-                                        if txt in p:
-                                            model_path = p
-                                            break
-
-                            model_path = model_path.replace(comfy_directory, "")
-                            if any(
-                                model_path.startswith(folder)
-                                for folder in comfy_model_folders
-                            ):
-                                model_path = model_path.split(os.path.sep, 1)[-1]
-                            logger.info(f"Updating {input} to {model_path}")
-                            workflow_api_json[node]["inputs"][key] = model_path
-                    elif input_data and input_data.get(node, {}).get(key):
-                        workflow_api_json[node]["inputs"][key] = input_data.get(
-                            node, {}
-                        ).get(key)
         # get the result
         logger.info("Generating output please wait ...")
         output = await self.run_prompt(workflow_api_json, output_node_ids)
