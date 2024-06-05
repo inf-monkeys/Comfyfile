@@ -11,6 +11,7 @@ MODEL models/controlnet/TencentARCt2i-adapter-depth-zoe-sdxl.safetensors https:/
 MODEL models/checkpoints/disneyrealcartoonmix_v10.safetensors https://civitai.com/api/download/models/239306
 MODEL models/loras/DD-made-of-clay-XL-v2.safetensors https://huggingface.co/DoctorDiffusion/doctor-diffusion-s-claymation-style-lora/resolve/main/DD-made-of-clay-XL-v2.safetensors
 MODEL models/loras/CLAYMATE_V2.03_.safetensors https://huggingface.co/nerualdreming/Best_LoRas_Mar24/resolve/main/CLAYMATE_V2.03_.safetensors
+MODEL custom_nodes/comfyui_controlnet_aux/ckpts/hr16/yolox-onnx/yolox_l.torchscript.pt https://weights.replicate.delivery/default/comfy-ui/custom_nodes/comfyui_controlnet_aux/yolox_l.torchscript.pt.tar
 
 COPY images/ input/
 
