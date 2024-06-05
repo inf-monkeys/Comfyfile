@@ -1,0 +1,22 @@
+STAGE build
+
+PLUGIN AUTO_INFER_FROM_WORKFLOW_JSON
+
+MODEL models/checkpoints/LEOSAM_HellowWorld_Lightning_6.0.safetensors https://static.infmonkeys.com/comfyui/models/checkpoints/LEOSAM%20HelloWorld%20%E6%9E%81%E9%80%9F%E7%89%88_6.0%20Lightning.safetensors
+MODEL models/controlnet/thibaud_xl_openpose.safetensors https://huggingface.co/lllyasviel/sd_control_collection/resolve/main/thibaud_xl_openpose.safetensors
+MODEL models/instantid/ip-adapter.bin https://huggingface.co/InstantX/InstantID/resolve/main/ip-adapter.bin
+MODEL models/controlnet/InstantID/diffusion_pytorch_model.safetensors https://huggingface.co/InstantX/InstantID/resolve/main/ControlNetModel/diffusion_pytorch_model.safetensors
+MODEL models/rmbg/RMBG-1.4/model.pth https://huggingface.co/briaai/RMBG-1.4/resolve/main/model.pth
+
+# TODO: Add support for HUGGINGFACE_MODEL
+HUGGINGFACE_MODEL deepseek-ai/deepseek-vl-7b-chat models/image2text/deepseek-vl-7b-chat
+
+COPY 新垣结衣.jpeg input/
+
+STAGE serve
+
+APP_NAME Portrait2ID-Photo
+MANIFEST ./manifest.json
+WORKFLOW ./workflow.json
+WORKFLOW_API ./workflow_api.json
+REST_ENDPOINT ./rest_endpoint.json

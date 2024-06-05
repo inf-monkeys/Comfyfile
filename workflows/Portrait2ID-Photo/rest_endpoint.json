@@ -1,0 +1,34 @@
+{
+  "parameters": [
+    {
+      "displayName": "原始图片",
+      "name": "original_image",
+      "type": "file",
+      "default": "https://static.infmonkeys.com/comfyui/workflows/BoobBoom/images/新垣结衣.jpeg",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 1,
+          "key": "image"
+        },
+        "multipleValues": false,
+        "accept": ".jpg,.jpeg,.png,.webp"
+      }
+    },
+    {
+      "displayName": "姿势照片",
+      "name": "pose_image",
+      "type": "file",
+      "default": "https://static.infmonkeys.com/comfyui/workflows/AllYourLife/images/AllYourLife_pose.png",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 2,
+          "key": "image"
+        },
+        "multipleValues": false,
+        "accept": ".jpg,.jpeg,.png,.webp"
+      }
+    }
+  ]
+}
