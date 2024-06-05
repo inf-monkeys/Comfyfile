@@ -37,5 +37,26 @@
         }
       }
     }
+  ],
+  "output": [
+    {
+      "displayName": "video",
+      "type": "string",
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 102
+        }
+      }
+    },
+    {
+      "displayName": "images",
+      "type": "string",
+      "typeOptions": {
+        "multipleValues": true,
+        "comfyOptions": {
+          "node": 102
+        }
+      }
+    }
   ]
 }
