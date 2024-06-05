@@ -1,0 +1,41 @@
+{
+  "parameters": [
+    {
+      "displayName": "提示词",
+      "name": "txt2video_prompt",
+      "type": "string",
+      "default": "\"0\" :\"spring day, floral skirt, wind, hair accessories, smile\",\n\"10\" :\"spring day, floral skirt, wind, hair accessories, smile\",\n\"20\" :\"spring day, floral skirt, wind, hair accessories, smile\",\n\"30\" :\"summer day, short-sleeved dress, straw hat\",\n\"40\" :\"summer day, short-sleeved dress, straw hat\",\n\"50\" :\"summer day, short-sleeved dress, straw hat\",\n\"60\" :\"fall day, sweater, slim jeans, wind, fallen leaves\",\n\"70\" :\"fall day, sweater, slim jeans, wind, fallen leaves\",\n\"80\" :\"fall day, sweater, slim jeans, wind, fallen leaves\",\n\"90\" :\"winter, down jacket, woolen hat, ear protection gloves, snowflakes\",\n\"100\" :\"winter, down jacket, woolen hat, ear protection gloves, snowflakes\",\n\"110\" :\"winter, down jacket, woolen hat, ear protection gloves, snowflakes\"",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 102,
+          "key": "text"
+        }
+      }
+    },
+    {
+      "displayName": "Pre 提示词",
+      "name": "txt2video_pre_prompt",
+      "type": "string",
+      "default": "masterpiece,best quality,1girl,",
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 102,
+          "key": "pre_text"
+        }
+      }
+    },
+    {
+      "displayName": "采样数",
+      "name": "steps",
+      "type": "number",
+      "default": 8,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 108,
+          "key": "steps"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,180 @@
+{
+    "2": {
+        "inputs": {
+            "vae_name": "vae-ft-mse-840000-ema-pruned.safetensors"
+        },
+        "class_type": "VAELoader"
+    },
+    "6": {
+        "inputs": {
+            "text": "(bad quality, worst quality:1.2)",
+            "clip": [
+                "104",
+                1
+            ]
+        },
+        "class_type": "CLIPTextEncode"
+    },
+    "10": {
+        "inputs": {
+            "samples": [
+                "108",
+                0
+            ],
+            "vae": [
+                "2",
+                0
+            ]
+        },
+        "class_type": "VAEDecode"
+    },
+    "93": {
+        "inputs": {
+            "model_name": "motionModel_v01.ckpt",
+            "beta_schedule": "sqrt_linear (AnimateDiff)",
+            "motion_scale": 1,
+            "apply_v2_models_properly": false,
+            "model": [
+                "104",
+                0
+            ],
+            "context_options": [
+                "94",
+                0
+            ]
+        },
+        "class_type": "ADE_AnimateDiffLoaderWithContext"
+    },
+    "94": {
+        "inputs": {
+            "context_length": 16,
+            "context_stride": 1,
+            "context_overlap": 4,
+            "context_schedule": "uniform",
+            "closed_loop": false,
+            "fuse_method": "flat",
+            "use_on_equal_length": false,
+            "start_percent": 0,
+            "guarantee_steps": 1
+        },
+        "class_type": "ADE_AnimateDiffUniformContextOptions"
+    },
+    "101": {
+        "inputs": {
+            "width": 512,
+            "height": 768,
+            "batch_size": 120
+        },
+        "class_type": "ADE_EmptyLatentImageLarge"
+    },
+    "102": {
+        "inputs": {
+            "text": "\"0\" :\"spring day, floral skirt, wind, hair accessories, smile\",\n\"10\" :\"spring day, floral skirt, wind, hair accessories, smile\",\n\"20\" :\"spring day, floral skirt, wind, hair accessories, smile\",\n\"30\" :\"summer day, short-sleeved dress, straw hat\",\n\"40\" :\"summer day, short-sleeved dress, straw hat\",\n\"50\" :\"summer day, short-sleeved dress, straw hat\",\n\"60\" :\"fall day, sweater, slim jeans, wind, fallen leaves\",\n\"70\" :\"fall day, sweater, slim jeans, wind, fallen leaves\",\n\"80\" :\"fall day, sweater, slim jeans, wind, fallen leaves\",\n\"90\" :\"winter, down jacket, woolen hat, ear protection gloves, snowflakes\",\n\"100\" :\"winter, down jacket, woolen hat, ear protection gloves, snowflakes\",\n\"110\" :\"winter, down jacket, woolen hat, ear protection gloves, snowflakes\"",
+            "print_output": false,
+            "pre_text": "masterpiece,best quality,1girl,",
+            "app_text": "",
+            "start_frame": 0,
+            "end_frame": 0,
+            "pw_a": 0,
+            "pw_b": 0,
+            "pw_c": 0,
+            "pw_d": 0,
+            "clip": [
+                "104",
+                1
+            ],
+            "num_latents": [
+                "101",
+                0
+            ]
+        },
+        "class_type": "BatchPromptScheduleLatentInput"
+    },
+    "103": {
+        "inputs": {
+            "frame_rate": 8,
+            "loop_count": 0,
+            "filename_prefix": "AnimateDiff",
+            "format": "video/h264-mp4",
+            "pix_fmt": "yuv420p",
+            "crf": 20,
+            "save_metadata": true,
+            "pingpong": false,
+            "save_output": true,
+            "images": [
+                "10",
+                0
+            ]
+        },
+        "class_type": "VHS_VideoCombine"
+    },
+    "104": {
+        "inputs": {
+            "ckpt_name": "majicmixRealistic_v7.safetensors"
+        },
+        "class_type": "CheckpointLoaderSimple"
+    },
+    "106": {
+        "inputs": {
+            "images": [
+                "10",
+                0
+            ]
+        },
+        "class_type": "PreviewImage"
+    },
+    "108": {
+        "inputs": {
+            "add_noise": "enable",
+            "noise_seed": [
+                "121",
+                0
+            ],
+            "steps": 8,
+            "cfg": 8,
+            "sampler_name": "euler",
+            "scheduler": "karras",
+            "start_at_step": 0,
+            "end_at_step": 10000,
+            "return_with_leftover_noise": "disable",
+            "model": [
+                "93",
+                0
+            ],
+            "positive": [
+                "102",
+                0
+            ],
+            "negative": [
+                "6",
+                0
+            ],
+            "latent_image": [
+                "102",
+                2
+            ]
+        },
+        "class_type": "KSamplerAdvanced"
+    },
+    "121": {
+        "inputs": {
+            "seed": 466417942846227
+        },
+        "class_type": "Seed Generator"
+    },
+    "122": {
+        "inputs": {
+            "frame_rate": 8,
+            "loop_count": 0,
+            "filename_prefix": "GIF",
+            "format": "image/gif",
+            "pingpong": false,
+            "save_output": true,
+            "images": [
+                "10",
+                0
+            ]
+        },
+        "class_type": "VHS_VideoCombine"
+    }
+}

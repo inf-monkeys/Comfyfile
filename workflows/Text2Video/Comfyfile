@@ -1,0 +1,16 @@
+STAGE build
+
+PLUGIN AUTO_INFER_FROM_WORKFLOW_JSON
+
+MODEL models/vae/vae-ft-mse-840000-ema-pruned.safetensors https://weights.replicate.delivery/default/comfy-ui/vae/vae-ft-mse-840000-ema-pruned.safetensors.tar
+MODEL models/checkpoints/majicmixRealistic_v7.safetensors https://civitai.com/api/download/models/176425
+MODEL models/animatediff_models/motionModel_v01.ckpt https://huggingface.co/tomjackson2023/test/resolve/40e635763c2f46f6f770759fa9d6ff66a87d549b/motionModel_v01.ckpt
+
+
+STAGE serve
+
+APP_NAME Text2Video
+MANIFEST ./manifest.json
+WORKFLOW ./workflow.json
+WORKFLOW_API ./workflow_api.json
+REST_ENDPOINT ./rest_endpoint.json
