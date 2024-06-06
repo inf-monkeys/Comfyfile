@@ -158,6 +158,7 @@ async def run_comfyui_workflow(request):
     app_name = body.get("app_name")
 
     input_config = None
+    output_config = body.get("output_config")
     if not app_name:
         if not workflow_json:
             raise Exception("workflow_json is empty")
@@ -177,6 +178,7 @@ async def run_comfyui_workflow(request):
         workflow_json = app.workflow
         workflow_api_json = app.workflowApi
         input_config = app.restEndpoint["parameters"]
+        output_config = app.restEndpoint.get('output')
 
     comfyfile_repo = body.get("comfyfile_repo")
     if comfyfile_repo:
@@ -190,6 +192,7 @@ async def run_comfyui_workflow(request):
         workflow_api_json=workflow_api_json,
         input_data=input_data,
         input_config=input_config,
+        output_config=output_config
     )
     return web.json_response(output)
 

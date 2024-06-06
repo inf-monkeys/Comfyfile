@@ -417,3 +417,5 @@ ComfyUI/
 upload.py
 
 .installed
+
+apps/

@@ -1,0 +1,12 @@
+STAGE build
+
+MODEL models/checkpoints/sd_xl_base_1.0.safetensors https://weights.replicate.delivery/default/comfy-ui/checkpoints/sd_xl_base_1.0.safetensors.tar
+MODEL models/checkpoints/sd_xl_refiner_1.0.safetensors https://weights.replicate.delivery/default/comfy-ui/checkpoints/sd_xl_refiner_1.0.safetensors.tar
+
+STAGE serve
+
+APP_NAME Text2Image
+MANIFEST ./manifest.json
+WORKFLOW ./workflow.json
+WORKFLOW_API ./workflow_api.json
+REST_ENDPOINT ./rest_endpoint.json

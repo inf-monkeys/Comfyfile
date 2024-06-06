@@ -1,0 +1,71 @@
+{
+  "parameters": [
+    {
+      "displayName": "Base Prompt",
+      "name": "base_prompt",
+      "type": "string",
+      "default": "large beautiful black hole in the deep space",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 6,
+          "key": "text"
+        }
+      }
+    },
+    {
+      "displayName": "Base Negative Prompt",
+      "name": "base_negative_prompt",
+      "type": "string",
+      "default": "text, watermark",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 7,
+          "key": "text"
+        }
+      }
+    },
+    {
+      "displayName": "REFINER Prompt",
+      "name": "refiner_base_prompt",
+      "type": "string",
+      "default": "evening sunset scenery blue sky nature, glass bottle with a galaxy in it",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 15,
+          "key": "text"
+        }
+      }
+    },
+    {
+      "displayName": "REFINER Negative Prompt",
+      "name": "refiner_negative_prompt",
+      "type": "string",
+      "default": "text, watermark",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 16,
+          "key": "text"
+        }
+      }
+    }
+  ],
+  "output": [
+    {
+      "name": "image",
+      "type": "file",
+      "displayName": "Image",
+      "typeOptions": {
+        "multipleValues": false,
+        "accept": ".jpg,.jpeg,.png,.webp",
+        "comfyOptions": {
+          "node": 19,
+          "key": "image"
+        }
+      }
+    }
+  ]
+}

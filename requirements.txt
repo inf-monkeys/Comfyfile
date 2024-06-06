@@ -2,3 +2,4 @@ websockets
 boto3
 fuzzywuzzy
 loguru
+streamlit

@@ -44,7 +44,7 @@ class ComfyRunner:
         self.comfy_api = ComfyAPI(APP_HOST, APP_PORT)
         self.model_downloader = ModelDownloader(MODEL_DOWNLOAD_PATH_LIST)
 
-    async def run_prompt(self, prompt, output_node_ids):
+    async def run_prompt(self, prompt, output_config=None):
         client_id = str(uuid.uuid4())
         logger.info(
             f"Start to run comfyui workflow: client_id={client_id}, workflow={prompt}"
@@ -91,26 +91,65 @@ class ComfyRunner:
         # fetching results
         history_result = await self.comfy_api.get_history(prompt_id)
         history = history_result[prompt_id]
-        output_list = {"file_list": [], "text_output": []}
-        output_node_ids = [str(id) for id in output_node_ids] if output_node_ids else []
-        for node_id in history["outputs"]:
-            if (
-                output_node_ids and len(output_node_ids) and node_id in output_node_ids
-            ) or not output_node_ids:
+        if not output_config:
+            result = {"file_list": [], "text_output": []}
+            for node_id in history["outputs"]:
                 node_output = history["outputs"][node_id]
                 if "gifs" in node_output:
                     for gif in node_output["gifs"]:
-                        output_list["file_list"].append(gif)
+                        url = await self.get_output_item_url(gif)
+                        result["file_list"].append(url)
 
                 if "text" in node_output:
                     for txt in node_output["text"]:
-                        output_list["text_output"].append(txt)
+                        result["text_output"].append(txt)
 
                 if "images" in node_output:
                     for img in node_output["images"]:
-                        output_list["file_list"].append(img)
+                        url = await self.get_output_item_url(img)
+                        result["file_list"].append(url)
+            return result
+        else:
+            result = {}
+            for output_item in output_config:
+                name = output_item["name"]
+                type_options = output_item.get("typeOptions")
+                if not type_options:
+                    continue
+                comfyOptions = type_options.get("comfyOptions", {})
+                node = comfyOptions.get("node")
+                if not node:
+                    continue
 
-        return output_list
+                is_array = type_options.get("multipleValues", False)
+                node_output_data = history["outputs"].get(str(node), {})
+                if "gifs" in node_output_data:
+                    for gif in node_output_data["gifs"]:
+                        url = await self.get_output_item_url(gif)
+                        if is_array:
+                            if not result.get(name):
+                                result[name] = []
+                            result[name].append(url)
+                        else:
+                            result[name] = url
+                if "text" in node_output_data:
+                    for txt in node_output_data["text"]:
+                        if is_array:
+                            if not result.get(name):
+                                result[name] = []
+                            result[name].append(txt)
+                        else:
+                            result[name] = txt
+                if "images" in node_output_data:
+                    for img in node_output_data["images"]:
+                        url = await self.get_output_item_url(img)
+                        if is_array:
+                            if not result.get(name):
+                                result[name] = []
+                            result[name].append(url)
+                        else:
+                            result[name] = url
+            return result
 
     async def determine_installed_and_missing_nodes(self, workflow_json):
         mappings = await self.comfy_api.get_node_mapping_list()
@@ -392,9 +431,9 @@ class ComfyRunner:
         workflow_api_json,
         input_data={},
         input_config={},
+        output_config=None,
         extra_models_list=[],
         extra_node_urls=[],
-        output_node_ids=None,
         ignore_model_list=[],
     ):
         # download custom nodes
@@ -457,11 +496,6 @@ class ComfyRunner:
 
         # get the result
         logger.info("Generating output please wait ...")
-        output = await self.run_prompt(workflow_api_json, output_node_ids)
-        logger.info(f"Raw Output: {output}")
-        file_list = []
-        for file in output["file_list"]:
-            url = await self.get_output_item_url(file)
-            file_list.append(url)
-        output["file_list"] = file_list
+        output = await self.run_prompt(workflow_api_json, output_config)
+        logger.info(f"Output: {output}")
         return output

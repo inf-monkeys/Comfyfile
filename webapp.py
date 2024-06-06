@@ -64,14 +64,7 @@ st.title("Comfyfile")
 # 添加自定义CSS样式
 st.markdown(
     """
-    <style>
-    .left-col {
-        padding-left: 20px;
-    }
-    .right-col {
-        padding-right: 20px;
-    }
-    </style>
+    [Comfyfile](https://github.com/inf-monkeys/Comfyfile), ComfyUI dependency management made easy.
     """,
     unsafe_allow_html=True,
 )

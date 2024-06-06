@@ -13,9 +13,12 @@ ComfyUI dependency management made easy.
 
 # Screenshots
 
-![](./images/screenshot1.png)
+![](./images/workflows.png)
 
-![](./images/screenshot2.png)
+![](./images/comfyfile.png)
+
+
+![](./images/s3.png)
 
 # Example Comfyfile
 

@@ -26,5 +26,20 @@
         }
       }
     }
+  ],
+  "output": [
+    {
+      "name": "image",
+      "type": "file",
+      "displayName": "Image",
+      "typeOptions": {
+        "multipleValues": false,
+        "accept": ".jpg,.jpeg,.png,.webp",
+        "comfyOptions": {
+          "node": 12,
+          "key": "image"
+        }
+      }
+    }
   ]
 }
