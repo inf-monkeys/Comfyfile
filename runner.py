@@ -16,7 +16,7 @@ from .constants import (
 )
 from .api import BaseAPI, ComfyAPI
 from .common import (
-    copy_files,
+    download_file_to,
     search_model,
 )
 from .model_downloader import FileStatus, ModelDownloader
@@ -368,12 +368,30 @@ class ComfyRunner:
         if installed_new_node:
             await self.comfy_api.reboot()
 
+    def download_and_replace_value(self, workflow_api_json, node_id, value):
+        if not isinstance(value, str) or not (
+            value.startswith("http://") or value.startswith("https://")
+        ):
+            return value
+
+        file_extension = value.split("?")[0].split(".")[-1]
+        if not file_extension:
+            return value
+        file_filename = str(uuid.uuid4()) + "." + file_extension
+        file_path = os.path.join("./input/", file_filename)
+        download_file_to(value, file_path)
+        node_detail = workflow_api_json.get(node_id, {})
+        if node_detail.get("class_type") == "VHS_LoadAudio":
+            return file_path
+        else:
+            return file_filename
+
     async def predict(
         self,
         workflow_json,
         workflow_api_json,
         input_data={},
-        file_path_list=[],
+        input_config={},
         extra_models_list=[],
         extra_node_urls=[],
         output_node_ids=None,
@@ -415,24 +433,27 @@ class ComfyRunner:
             logger.info("Restarting the server")
             await self.comfy_api.reboot()
 
-        if len(file_path_list):
-            for filepath in file_path_list:
-                if isinstance(filepath, str):
-                    filepath, dest_path = filepath, "./input/"
-                else:
-                    filepath, dest_path = (
-                        filepath["filepath"],
-                        "./input/" + filepath["dest_folder"] + "/",
+        if input_config:
+            for key, value in input_data.items():
+                input_items = [item for item in input_config if item["name"] == key]
+                if len(input_items) == 0:
+                    continue
+                input_item = input_items[0]
+                comfy_options = input_item.get("comfyOptions", {})
+                node_id, key = comfy_options.get("node"), comfy_options.get("key")
+                if node_id and key:
+                    value = self.download_and_replace_value(
+                        workflow_api_json, node_id, value
                     )
-                copy_files(filepath, dest_path, overwrite=True)
-
-        for node in workflow_api_json:
-            if "inputs" in workflow_api_json[node]:
-                for key, input in workflow_api_json[node]["inputs"].items():
-                    if input_data and input_data.get(node, {}).get(key):
-                        workflow_api_json[node]["inputs"][key] = input_data.get(
-                            node, {}
-                        ).get(key)
+                    workflow_api_json[node_id]["inputs"][key] = value
+        else:
+            for node_id, values in input_data.items():
+                if node_id in workflow_api_json:
+                    for key, value in values.items():
+                        value = self.download_and_replace_value(
+                            workflow_api_json, node_id, value
+                        )
+                        workflow_api_json[node_id]["inputs"][key] = value
 
         # get the result
         logger.info("Generating output please wait ...")

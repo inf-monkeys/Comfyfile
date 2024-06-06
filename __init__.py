@@ -23,6 +23,7 @@ from .constants import (
     workflows_folder,
 )
 import os
+import subprocess
 
 S3_ENABLED = os.environ.get("S3_ENABLED")
 S3_ENDPOINT_URL = os.environ.get("S3_ENDPOINT_URL")
@@ -58,50 +59,6 @@ if (
                 }
             )
         )
-
-
-def ensure_directory_exists(dir_path):
-    """
-    如果目录不存在则创建目录
-    """
-    if not os.path.exists(dir_path):
-        os.makedirs(dir_path)
-    return dir_path
-
-
-def download_file_to(file_url, to):
-    logger.info(f"Downloading file from {file_url} to {to}")
-    response = requests.get(file_url, stream=True)
-    response.raise_for_status()
-    ensure_directory_exists(os.path.dirname(to))
-    with open(to, "wb") as f:
-        for chunk in response.iter_content(chunk_size=8192):
-            f.write(chunk)
-    return to
-
-
-def download_and_replace_remote_files(input_data, workflow_api_json):
-    input_data = deepcopy(input_data)
-    file_paths = []
-    for node_id in input_data:
-        node_input = input_data[node_id]
-        for key in node_input:
-            value = node_input[key]
-            if isinstance(value, str) and (
-                value.startswith("http://") or value.startswith("https://")
-            ):
-                file_extension = value.split("?")[0].split(".")[-1]
-                if file_extension:
-                    file_filename = str(uuid.uuid4()) + "." + file_extension
-                    file_path = os.path.join("./input/", file_filename)
-                    download_file_to(value, file_path)
-                    file_paths.append(file_path)
-                    node_detail = workflow_api_json.get(node_id, {})
-                    if node_detail.get("class_type") == "VHS_LoadAudio":
-                        node_input[key] = file_path
-                    else:
-                        node_input[key] = file_filename
-    return input_data, file_paths
 
 
 logging.basicConfig(
@@ -198,18 +155,32 @@ async def run_comfyui_workflow(request):
     workflow_json = body.get("workflow_json")
     workflow_api_json = body.get("workflow_api_json")
     input_data = body.get("input_data")
-    if not workflow_json:
-        raise Exception("workflow_json is empty")
-    if not workflow_api_json:
-        raise Exception("workflow_api_json is empty")
+    app_name = body.get("app_name")
+
+    input_config = None
+    if not app_name:
+        if not workflow_json:
+            raise Exception("workflow_json is empty")
+        if not workflow_api_json:
+            raise Exception("workflow_api_json is empty")
+    else:
+        app_folder = os.path.join(workflows_folder, app_name)
+        comfyfile_path = os.path.join(app_folder, "Comfyfile")
+        dot_installed_file = os.path.join(app_folder, ".installed")
+        if not os.path.exists(dot_installed_file):
+            raise Exception(f"App {app_name} is not installed")
+        comfyfile_parser = ComfyfileParser(
+            comfyfile_path=comfyfile_path,
+            context_directory=app_folder,
+        )
+        app = comfyfile_parser.parse_comfyfile()[0]
+        workflow_json = app.workflow
+        workflow_api_json = app.workflowApi
+        input_config = app.restEndpoint["parameters"]
+
     comfyfile_repo = body.get("comfyfile_repo")
     if comfyfile_repo:
         await import_from_remote_comfyfile_repo(comfyfile_repo)
-    if input_data:
-        input_data, file_path_list = download_and_replace_remote_files(
-            input_data, workflow_api_json
-        )
-    file_path_list = []
     runner = ComfyRunner()
     logger.info(
         f"Received a request: workflow_json={workflow_json}, workflow_api_json={workflow_api_json} input_data={input_data}"
@@ -218,7 +189,7 @@ async def run_comfyui_workflow(request):
         workflow_json=workflow_json,
         workflow_api_json=workflow_api_json,
         input_data=input_data,
-        file_path_list=file_path_list,
+        input_config=input_config,
     )
     return web.json_response(output)
 
@@ -328,7 +299,23 @@ def setup_js():
         shutil.copy(js_src_path, js_dest_path)
 
 
+def setup_webapp():
+    subprocess.Popen(
+        [
+            "streamlit",
+            "run",
+            "custom_nodes/Comfyfile/webapp.py",
+            "--server.headless",
+            "true",
+        ],
+        cwd=comfy_path,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+
+
 WEB_DIRECTORY = "js"
 setup_js()
+setup_webapp()
 
 NODE_CLASS_MAPPINGS = {}

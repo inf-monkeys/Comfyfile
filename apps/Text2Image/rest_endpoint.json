@@ -1,0 +1,30 @@
+{
+  "parameters": [
+    {
+      "displayName": "prompt",
+      "name": "prompt",
+      "type": "string",
+      "default": "masterpiece HDR victorian portrait painting of a silver knight, blonde hair, mountain nature, blue sky",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 6,
+          "key": "text"
+        }
+      }
+    },
+    {
+      "displayName": "negative prompt",
+      "name": "negative_prompt",
+      "type": "string",
+      "default": "bad hands, text, watermark",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 7,
+          "key": "text"
+        }
+      }
+    }
+  ]
+}

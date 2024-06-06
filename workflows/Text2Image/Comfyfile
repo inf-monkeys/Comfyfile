@@ -1,0 +1,11 @@
+STAGE build
+
+MODEL models/checkpoints/v2-1_768-ema-pruned.ckpt https://weights.replicate.delivery/default/comfy-ui/checkpoints/v2-1_768-ema-pruned.ckpt.tar
+
+STAGE serve
+
+APP_NAME Text2Image
+MANIFEST ./manifest.json
+WORKFLOW ./workflow.json
+WORKFLOW_API ./workflow_api.json
+REST_ENDPOINT ./rest_endpoint.json
