@@ -415,3 +415,5 @@ config/
 ComfyUI/
 
 upload.py
+
+.installed

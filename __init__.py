@@ -12,10 +12,16 @@ import logging
 import boto3
 from botocore.client import Config
 from .comfyfile_downloader import download_github_directory
-from .buildkit import Executor, Comfyfile
+from .buildkit import ComfyfileExecutor, Comfyfile, ComfyfileParser
 from .runner import ComfyRunner
 from loguru import logger
-from .constants import comfy_path, comfyfile_path, js_path, s3_config_file
+from .constants import (
+    comfy_path,
+    comfyfile_path,
+    js_path,
+    s3_config_file,
+    workflows_folder,
+)
 import os
 
 S3_ENABLED = os.environ.get("S3_ENABLED")
@@ -118,7 +124,7 @@ except ImportError:
     sys.exit()
 
 
-async def import_from_comfyfile_repo(comfyfile_repo):
+async def import_from_remote_comfyfile_repo(comfyfile_repo):
     random_id = uuid.uuid4().hex
     comfyfile_tmp_folder = os.path.join(comfyfile_home_dir, random_id)
     download_github_directory(comfyfile_repo, comfyfile_tmp_folder)
@@ -127,20 +133,35 @@ async def import_from_comfyfile_repo(comfyfile_repo):
         raise Exception("Invalid comfyfile repo, Comfyfile not found")
     context_directory = comfyfile_tmp_folder
     comfyfile = Comfyfile().parse_comfyfile(comfyfile_path)
-    executor = Executor(context_directory, comfy_path)
+    executor = ComfyfileExecutor(context_directory, comfy_path)
     await executor.process_comfyfile(comfyfile)
+
+
+async def import_from_local_comfyfile_repo(local_comfyfile_repo):
+    local_comfyfile_repo_path = os.path.join(workflows_folder, local_comfyfile_repo)
+    local_comfyfile = os.path.join(local_comfyfile_repo_path, "Comfyfile")
+    comfyfile = Comfyfile().parse_comfyfile(local_comfyfile)
+    executor = ComfyfileExecutor(local_comfyfile_repo_path, comfy_path)
+    await executor.process_comfyfile(comfyfile)
+    dot_installed_file = os.path.join(local_comfyfile_repo_path, ".installed")
+    with open(dot_installed_file, "w") as f:
+        f.write("")
 
 
 @server.PromptServer.instance.routes.post("/comfyfile/apps")
 async def import_app(request):
     json_data = await request.json()
     comfyfile_repo = json_data.get("comfyfile_repo")
-    if not comfyfile_repo:
+    local_comfyfile_repo = json_data.get("local_comfyfile_repo")
+    if not comfyfile_repo and not local_comfyfile_repo:
         return web.json_response(
             {"success": False, "errMsg": "Comfyfile repo is required"}
         )
     try:
-        await import_from_comfyfile_repo(comfyfile_repo)
+        if comfyfile_repo:
+            await import_from_remote_comfyfile_repo(comfyfile_repo)
+        elif local_comfyfile_repo:
+            await import_from_local_comfyfile_repo(local_comfyfile_repo)
         return web.json_response({"success": True, "errMsg": "Install success"})
     except Exception as e:
         traceback.print_exc()
@@ -149,23 +170,26 @@ async def import_app(request):
 
 @server.PromptServer.instance.routes.get("/comfyfile/apps")
 async def list_apps(request):
-    apps_folder = os.path.join(os.path.dirname(__file__), "apps")
-    if not os.path.exists(apps_folder):
+    if not os.path.exists(workflows_folder):
         return web.json_response({"list": []})
-    subfolders = [f.path for f in os.scandir(apps_folder) if f.is_dir()]
-
-    apps = []
+    subfolders = [f.path for f in os.scandir(workflows_folder) if f.is_dir()]
+    all_apps = []
     for subfolder in subfolders:
-        app = {"appName": os.path.basename(os.path.normpath(subfolder))}
-        manifest_json_file = os.path.join(subfolder, "manifest.json")
-        if os.path.exists(manifest_json_file):
-            with open(manifest_json_file, "r", encoding="utf-8") as f:
-                app.update(json.loads(f.read()))
-        workflow_json_file = os.path.join(subfolder, "workflow.json")
-        with open(workflow_json_file, "r", encoding="utf-8") as f:
-            app.update({"workflow": json.loads(f.read())})
-        apps.append(app)
-    return web.json_response({"list": apps})
+        comfyfile_path = os.path.join(subfolder, "Comfyfile")
+        comfyfile_parser = ComfyfileParser(
+            comfyfile_path=comfyfile_path,
+            context_directory=subfolder,
+        )
+        apps = comfyfile_parser.parse_comfyfile()
+        for app in apps:
+            app_info = app.serialize()
+            dot_installed_file = os.path.join(subfolder, ".installed")
+            installed = os.path.exists(dot_installed_file)
+            app_info.update(
+                {"folder": os.path.basename(subfolder), "installed": installed}
+            )
+            all_apps.append(app_info)
+    return web.json_response({"list": all_apps})
 
 
 @server.PromptServer.instance.routes.post("/comfyfile/run")
@@ -180,7 +204,7 @@ async def run_comfyui_workflow(request):
         raise Exception("workflow_api_json is empty")
     comfyfile_repo = body.get("comfyfile_repo")
     if comfyfile_repo:
-        await import_from_comfyfile_repo(comfyfile_repo)
+        await import_from_remote_comfyfile_repo(comfyfile_repo)
     if input_data:
         input_data, file_path_list = download_and_replace_remote_files(
             input_data, workflow_api_json

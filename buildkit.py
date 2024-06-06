@@ -6,7 +6,7 @@ from loguru import logger
 import tarfile
 import json
 from .runner import ComfyRunner
-
+import json
 import requests
 from tqdm import tqdm
 from .common import search_model
@@ -34,6 +34,64 @@ class Stage:
 
     def add_command(self, command):
         self.commands.append(command)
+
+
+class ComfyuiPlugin:
+    def __init__(self, url: str):
+        self.url = url
+
+    def serialize(self):
+        return {"url": self.url}
+
+
+class ComfyuiModel:
+    def __init__(self, name: str, url: str, path: str):
+        self.name = name
+        self.url = url
+        self.path = path
+
+    def serialize(self):
+        return {"name": self.name, "url": self.url, "path": self.path}
+
+
+class ComfyfileApp:
+    def __init__(
+        self,
+        appName: str,
+        displayName: str,
+        description: str,
+        homepage: str,
+        plugins: list,
+        models: list,
+        workflow: dict,
+        workflowApi: dict,
+        tags: list,
+        restEndpoint: dict,
+    ):
+        self.appName = appName
+        self.displayName = displayName
+        self.description = description
+        self.homepage = homepage
+        self.plugins = plugins
+        self.models = models
+        self.workflow = workflow
+        self.workflowApi = workflowApi
+        self.tags = tags
+        self.restEndpoint = restEndpoint
+
+    def serialize(self):
+        return {
+            "appName": self.appName,
+            "displayName": self.displayName,
+            "description": self.description,
+            "homepage": self.homepage,
+            "plugins": [plugin.serialize() for plugin in self.plugins],
+            "models": [model.serialize() for model in self.models],
+            "workflow": self.workflow,
+            "workflowApi": self.workflowApi,
+            "tags": self.tags,
+            "restEndpoint": self.restEndpoint,
+        }
 
 
 class Comfyfile:
@@ -76,7 +134,7 @@ class Comfyfile:
         return self
 
 
-class Executor:
+class ComfyfileExecutor:
     def __init__(self, context_directory, working_directory):
         self.context_directory = context_directory
         self.working_directory = working_directory
@@ -239,7 +297,7 @@ class Executor:
                     _, src = command.split(maxsplit=1)
                     if AUTO_INFER_FROM_WORKFLOW_JSON:
                         full_src = os.path.join(self.context_directory, src)
-                        with open(full_src, 'r', encoding='utf-8') as f:
+                        with open(full_src, "r", encoding="utf-8") as f:
                             workflow_json = json.loads(f.read())
                             runner = ComfyRunner()
                             await runner.auto_install_missing_nodes(workflow_json)
@@ -250,3 +308,122 @@ class Executor:
                 elif command.startswith("MANIFEST"):
                     _, src = command.split(maxsplit=1)
                     self.handle_manifest(app_name, src)
+
+
+class ComfyfileParser:
+
+    def __init__(self, comfyfile_path: str, context_directory: str):
+        self.context_directory = context_directory
+        self.comfyfile_path = comfyfile_path
+        pass
+
+    def parse_comfyfile(self) -> list[ComfyfileApp]:
+        with open(self.comfyfile_path, "r", encoding="utf-8") as file:
+            comfyfile = file.read()
+        lines = comfyfile.split("\n")
+        apps = []
+        build_plugins = []
+        build_models = []
+        current_app = None
+        for line in lines:
+            if line.startswith("STAGE"):
+                if "serve" in line:
+                    if current_app:
+                        apps.append(current_app)
+                    current_app = ComfyfileApp(
+                        appName="",
+                        displayName="",
+                        description="",
+                        homepage="",
+                        plugins=list(build_plugins),
+                        models=list(build_models),
+                        workflow=None,
+                        workflowApi=None,
+                        tags=[],
+                        restEndpoint=None,
+                    )
+            elif line.startswith("PLUGIN"):
+                _, url = line.split(" ")
+                plugin = ComfyuiPlugin(url)
+                if current_app:
+                    current_app.plugins.append(plugin)
+                else:
+                    build_plugins.append(plugin)
+            elif line.startswith("MODEL"):
+                model = self.parse_model_line(line)
+                if current_app:
+                    current_app.models.append(model)
+                else:
+                    build_models.append(model)
+            elif line.startswith("APP_NAME"):
+                _, appName = line.split(" ")
+                if current_app:
+                    current_app.appName = appName
+            elif line.startswith("MANIFEST"):
+                manifest = self.parse_manifest_line(line)
+                if current_app:
+                    if "appName" in manifest:
+                        current_app.appName = manifest["appName"]
+                    current_app.displayName = manifest["displayName"]
+                    current_app.description = manifest["description"]
+                    current_app.homepage = manifest["homepage"]
+            elif line.startswith("WORKFLOW_API"):
+                workflow_api = self.parse_workflow_api_line(line)
+                if current_app:
+                    current_app.workflowApi = workflow_api
+            elif line.startswith("WORKFLOW"):
+                workflow = self.parse_workflow_line(line)
+                if current_app:
+                    current_app.workflow = workflow
+            elif line.startswith("REST_ENDPOINT"):
+                rest_endpoint = self.parse_rest_endpoint_line(line)
+                if current_app:
+                    current_app.restEndpoint = rest_endpoint
+
+        if current_app:
+            apps.append(current_app)
+
+        return apps
+
+    def parse_model_line(self, line: str) -> ComfyuiModel:
+        parts = line.split()
+        path = parts[1]
+        url = parts[2]
+        name = os.path.basename(path)
+        return ComfyuiModel(name, url, path)
+
+    def parse_manifest_line(self, line: str) -> dict:
+        _, manifest_relative_file = line.split(" ")
+        manifest_file = os.path.join(
+            self.context_directory, manifest_relative_file.strip()
+        )
+        with open(manifest_file, "r", encoding="utf-8") as file:
+            manifest = json.load(file)
+        return manifest
+
+    def parse_workflow_line(self, line: str) -> dict:
+        _, workflow_relative_file = line.split(" ")
+        workflow_file = os.path.join(
+            self.context_directory, workflow_relative_file.strip()
+        )
+        with open(workflow_file, "r", encoding="utf-8") as file:
+            workflow = json.load(file)
+        return workflow
+
+    def parse_workflow_api_line(self, line: str) -> dict:
+        _, workflow_api_relative_file = line.split(" ")
+        workflow_api_file = os.path.join(
+            self.context_directory, workflow_api_relative_file.strip()
+        )
+        with open(workflow_api_file, "r", encoding="utf-8") as file:
+            workflow_api = json.load(file)
+        return workflow_api
+
+    def parse_rest_endpoint_line(self, line: str) -> dict:
+        _, rest_endpoint_relative_file = line.split(" ")
+        rest_endpoint_file = os.path.join(
+            self.context_directory, rest_endpoint_relative_file.strip()
+        )
+        with open(rest_endpoint_file, "r", encoding="utf-8") as file:
+            rest_endpoint = json.load(file)
+        return rest_endpoint
