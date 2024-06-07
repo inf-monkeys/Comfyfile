@@ -157,7 +157,7 @@ async def run_comfyui_workflow(request):
     input_data = body.get("input_data")
     app_name = body.get("app_name")
 
-    input_config = None
+    input_config = body.get("input_config")
     output_config = body.get("output_config")
     if not app_name:
         if not workflow_json:
@@ -200,10 +200,10 @@ async def run_comfyui_workflow(request):
 @server.PromptServer.instance.routes.post("/comfyfile/check-dependencies")
 async def check_dependencies(request):
     body = await request.json()
-    comfyfile_repo = body.get("comfyfile_repo")
-    workflow = body.get("workflow")
+    workflow_json = body.get("workflow_json")
+    workflow_api_json = body.get("workflow_api_json")
     runner = ComfyRunner()
-    data = await runner.infer_dependencies(workflow)
+    data = await runner.infer_dependencies(workflow_json, workflow_api_json)
     return web.json_response(data)
 
 
@@ -319,6 +319,6 @@ def setup_webapp():
 
 WEB_DIRECTORY = "js"
 setup_js()
-setup_webapp()
+# setup_webapp()
 
 NODE_CLASS_MAPPINGS = {}

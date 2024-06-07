@@ -151,7 +151,7 @@ class ComfyRunner:
                             result[name] = url
             return result
 
-    async def determine_installed_and_missing_nodes(self, workflow_json):
+    async def get_custom_nodes_status(self, workflow_json):
         mappings = await self.comfy_api.get_node_mapping_list()
         custom_node_list = await self.comfy_api.get_all_custom_node_list()
         data = custom_node_list["custom_nodes"]
@@ -198,152 +198,82 @@ class ComfyRunner:
                 missing_nodes.add(url)
 
         def get_node_info(node_type):
-            pass
+            url = name_to_url.get(node_type)
+            if url:
+                return next(
+                    (node for node in data if url in node.get("files", [])), None
+                )
 
-        return {
-            "uninstalled_nodes": [
-                node
-                for node in data
-                if any(file in missing_nodes for file in node.get("files", []))
-            ],
-            "installed_nodes": [node_type for node_type in installed_nodes],
-        }
+        uninstalled_nodes = [
+            node
+            for node in data
+            if any(file in missing_nodes for file in node.get("files", []))
+        ]
+        installed_nodes = [get_node_info(node_type) for node_type in installed_nodes]
+        installed_nodes = [node for node in installed_nodes if node]
+        return uninstalled_nodes + installed_nodes
 
-    async def download_models(
-        self, workflow, extra_models_list, ignore_model_list=[]
-    ) -> dict:
-        models_downloaded = False
+    async def get_models_status(self, workflow_api_json):
         self.model_downloader.load_comfy_models()
-        models_to_download = []
-
-        for node in workflow:
-            if "inputs" in workflow[node]:
-                for input in workflow[node]["inputs"].values():
+        all_models = []
+        for node in workflow_api_json:
+            if "inputs" in workflow_api_json[node]:
+                for input in workflow_api_json[node]["inputs"].values():
                     if (
                         isinstance(input, str)
                         and any(input.endswith(ft) for ft in MODEL_FILETYPES)
                         and not any(input.endswith(m) for m in OPTIONAL_MODELS)
                     ):
-                        models_to_download.append(input)
-
-        # filtering ignored models
-        m_l = []
-        ignored_models_found = []
-        ignored_model_names_map = {m["filename"]: m for m in ignore_model_list}
-        for m in models_to_download:
-            if m in ignored_model_names_map:
-                ignored_models_found.append(ignored_model_names_map[m])
-            else:
-                m_l.append(m)
-        models_to_download = m_l
-        models_not_found = []
-        for m in ignored_models_found:
-            if "filepath" in m and m["filepath"] and not os.path.exists(m["filepath"]):
-                models_not_found.append({"model": m["filename"], "similar_models": []})
-            else:
-                logger.info(f"Ignoring model {m['filename']}")
-        m_l = []
-        for model in models_to_download:
+                        all_models.append(input)
+        uninstalled_models = []
+        for model in all_models:
             if not search_model(model):
-                m_l.append(model)
-        models_to_download = m_l
+                uninstalled_models.append(model)
+        return [
+            {
+                "name": model,
+                "installed": "True" if model not in uninstalled_models else "False",
+            }
+            for model in all_models
+        ]
 
-        if len(models_to_download) > 0:
-            logger.info(f"Models need to download: {models_downloaded}")
-        for model in models_to_download:
+    async def download_models(self, workflow_api_json) -> dict:
+        models_downloaded = False
+        models = await self.get_models_status(workflow_api_json)
+        uninstalled_models = [
+            model for model in models if model["installed"] == "False"
+        ]
+        if len(uninstalled_models) > 0:
+            logger.info(f"Models need to download: {uninstalled_models}")
+        for model in uninstalled_models:
             status, similar_models, file_status = (
                 await self.model_downloader.download_model(model)
             )
-            if not status:
-                models_not_found.append(
-                    {"model": model, "similar_models": similar_models}
-                )
-            elif file_status == FileStatus.NEW_DOWNLOAD.value:
+            if file_status == FileStatus.NEW_DOWNLOAD.value:
                 models_downloaded = True
 
-        # downloading extra models
-        for model in extra_models_list:
-            status, file_status = await self.model_downloader.download_file(
-                model["filename"], model["url"], model["dest"]
-            )
-            if status:
-                models_downloaded = (
-                    True if file_status == FileStatus.NEW_DOWNLOAD.value else False
-                )
-                for m in models_not_found:
-                    if m["model"] == model["filename"]:
-                        models_not_found.remove(m)
-                        break
+        return models_downloaded
 
-        # checking if models_not_found are already inside comfy
-        for model in models_not_found:
-            if search_model(model["model"].split("/")[-1]):
-                models_not_found.remove(model)
-
-        return {
-            "data": {
-                "models_not_found": models_not_found,
-                "models_downloaded": models_downloaded,
-            },
-            "message": "model(s) not found" if len(models_not_found) else "",
-            "status": False if len(models_not_found) else True,
-        }
-
-    async def download_custom_nodes(self, workflow_json, extra_node_urls) -> dict:
+    async def download_custom_nodes(self, workflow_json) -> dict:
         nodes_installed = False
         # installing missing nodes
-        nodes_status = await self.determine_installed_and_missing_nodes(workflow_json)
-        if len(nodes_status["uninstalled_nodes"]):
+        nodes_status = await self.get_custom_nodes_status(workflow_json)
+        uninstalled_nodes = [
+            node for node in nodes_status if node["installed"] == "False"
+        ]
+        if len(uninstalled_nodes):
             logger.info(
                 f"Installing {len(nodes_status['uninstalled_nodes'])} custom nodes"
             )
-        for node in nodes_status["uninstalled_nodes"]:
+        for node in uninstalled_nodes:
             logger.info(f"Installing {node['title']}")
             if node["installed"] in ["False", False]:
-                nodes_installed = True
                 status = await self.comfy_api.install_custom_node(node)
+                nodes_installed = True
                 if status != {}:
                     logger.info("Failed to install custom node ", node["title"])
 
-        # installing custom git repos
-        if len(extra_node_urls):
-            custom_node_list = await self.comfy_api.get_all_custom_node_list()
-            custom_node_list = custom_node_list["custom_nodes"]
-            url_node_map = {}
-            for node in custom_node_list:
-                if node["reference"] not in url_node_map:
-                    url_node_map[node["reference"]] = [node]
-                else:
-                    url_node_map[node["reference"]].append(node)
-
-            for git_url in extra_node_urls:
-                nodes_to_install = []
-                if git_url in url_node_map:
-                    for node in url_node_map[git_url]:
-                        nodes_to_install.append(node)
-                else:
-                    node = {
-                        "author": "",
-                        "title": "",
-                        "reference": git_url,
-                        "files": [git_url],
-                        "install_type": "git-clone",
-                        "description": "",
-                        "installed": "False",
-                    }
-                    nodes_to_install.append(node)
-
-                for n in nodes_to_install:
-                    nodes_installed = True
-                    status = await self.comfy_api.install_custom_node(n)
-                    if status != {}:
-                        logger.info("Failed to install custom node ", n["title"])
-
-        return {
-            "data": {"nodes_installed": nodes_installed},
-            "message": "",
-            "status": True,
-        }
+        return nodes_installed
 
     async def get_output_item_url(self, file):
         s3_enabled = False
@@ -389,13 +319,14 @@ class ComfyRunner:
         else:
             return f"http://127.0.0.1:{APP_PORT}/view?filename={filename}&subfolder={subfolder}&type=temp"
 
-    async def infer_dependencies(self, workflow):
-        missing_nodes = await self.determine_installed_and_missing_nodes(workflow)
-        return missing_nodes
+    async def infer_dependencies(self, workflow_json, workflow_api_json):
+        nodes = await self.get_custom_nodes_status(workflow_json)
+        models = await self.get_models_status(workflow_api_json)
+        return {"nodes": nodes, "models": models}
 
     async def auto_install_missing_nodes(self, workflow_json):
-        res = await self.determine_installed_and_missing_nodes(workflow_json)
-        uninstalled_nodes = res["uninstalled_nodes"]
+        nodes = await self.get_custom_nodes_status(workflow_json)
+        uninstalled_nodes = [node for node in nodes if node["installed"] == "False"]
         installed_new_node = False
         for node in uninstalled_nodes:
             try:
@@ -432,43 +363,15 @@ class ComfyRunner:
         input_data={},
         input_config={},
         output_config=None,
-        extra_models_list=[],
-        extra_node_urls=[],
-        ignore_model_list=[],
     ):
         # download custom nodes
-        res_custom_nodes = await self.download_custom_nodes(
-            workflow_json, extra_node_urls
-        )
-        if not res_custom_nodes["status"]:
-            logger.info(res_custom_nodes["message"])
-            return
+        node_installed = await self.download_custom_nodes(workflow_json)
 
         # download models if not already present
-        res_models = await self.download_models(
-            workflow_api_json, extra_models_list, ignore_model_list
-        )
-        if not res_models["status"]:
-            logger.info(res_models["message"])
-            if len(res_models["data"]["models_not_found"]):
-                logger.warning(
-                    "Please provide custom model urls for the models listed below or modify the workflow json to one of the alternative models listed"
-                )
-                for model in res_models["data"]["models_not_found"]:
-                    logger.warning("Model: ", model["model"])
-                    logger.warning("Alternatives: ")
-                    if len(model["similar_models"]):
-                        for alternative in model["similar_models"]:
-                            logger.warning(" - ", alternative)
-                    else:
-                        logger.warning(" - None")
-                    logger.warning("---------------------------")
+        model_downloaded = await self.download_models(workflow_api_json)
 
         # restart the server if custom nodes or models are installed
-        if (
-            res_custom_nodes["data"]["nodes_installed"]
-            or res_models["data"]["models_downloaded"]
-        ):
+        if node_installed or model_downloaded:
             logger.info("Restarting the server")
             await self.comfy_api.reboot()
 
