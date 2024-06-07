@@ -381,13 +381,15 @@ class ComfyRunner:
                 if len(input_items) == 0:
                     continue
                 input_item = input_items[0]
-                comfy_options = input_item.get("comfyOptions", {})
+                type_options = input_item.get("typeOptions", {})
+                comfy_options = type_options.get("comfyOptions", {})
                 node_id, key = comfy_options.get("node"), comfy_options.get("key")
                 if node_id and key:
                     value = self.download_and_replace_value(
                         workflow_api_json, node_id, value
                     )
-                    workflow_api_json[node_id]["inputs"][key] = value
+                    if str(node_id) in workflow_api_json:
+                        workflow_api_json[str(node_id)]["inputs"][key] = value
         else:
             for node_id, values in input_data.items():
                 if node_id in workflow_api_json:
