@@ -1,0 +1,59 @@
+{
+  "parameters": [
+    {
+      "displayName": "文本",
+      "name": "chattts_text",
+      "type": "string",
+      "default": "chat T T S 是一款强大的对话式文本转语音模型。它有中英混读和多说话人的能力。",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 1,
+          "key": "text"
+        }
+      }
+    },
+    {
+      "displayName": "文本",
+      "name": "chattts_prompt",
+      "type": "string",
+      "default": "[oral_2][laugh_0][break_6]",
+      "description": "请阅读 https://github.com/2noise/ChatTTS 了解如何设置 prompt",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 1,
+          "key": "prompt"
+        }
+      }
+    },
+    {
+      "displayName": "文本",
+      "name": "chattts_speed",
+      "type": "number",
+      "default": 1,
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 1,
+          "key": "speed"
+        }
+      }
+    }
+  ],
+  "output": [
+    {
+      "name": "audio",
+      "type": "file",
+      "displayName": "语音文件",
+      "typeOptions": {
+        "multipleValues": false,
+        "accept": ".mp3,.wav",
+        "comfyOptions": {
+          "node": 11,
+          "key": "audio"
+        }
+      }
+    }
+  ]
+}

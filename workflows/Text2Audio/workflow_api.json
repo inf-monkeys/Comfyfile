@@ -1,0 +1,32 @@
+{
+  "10": {
+    "inputs": {
+      "text": "chat T T S 是一款强大的对话式文本转语音模型。它有中英混读和多说话人的能力。",
+      "prompt": "[oral_2][laugh_0][break_6]",
+      "speed": 1,
+      "seed": 534,
+      "top_P": 0.7,
+      "top_K": 20,
+      "temperature": 0.3,
+      "refine_temperature": 0.7,
+      "repetition_penalty": 1.05,
+      "use_decoder": true
+    },
+    "class_type": "ChatTTS",
+    "_meta": {
+      "title": "ChatTTS Node"
+    }
+  },
+  "11": {
+    "inputs": {
+      "audio": [
+        "10",
+        0
+      ]
+    },
+    "class_type": "PreViewAudio",
+    "_meta": {
+      "title": "PreView Audio"
+    }
+  }
+}

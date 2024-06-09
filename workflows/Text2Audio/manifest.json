@@ -1,0 +1,6 @@
+{
+    "appName": "Text2Audio",
+    "homepage": "https://github.com/AIFSH/ComfyUI-ChatTTS?tab=readme-ov-file",
+    "displayName": "文本生成语音",
+    "description": "基于 ChatTTS 文本生成语音"
+}

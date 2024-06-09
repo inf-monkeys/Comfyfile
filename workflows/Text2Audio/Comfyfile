@@ -1,0 +1,14 @@
+STAGE build
+
+PLUGIN https://github.com/AIFSH/ComfyUI-ChatTTS
+
+RUN pip install -r custom_nodes/ComfyUI-ChatTTS/requirements.txt
+RUN pip install pynini==2.1.5 Cython WeTextProcessing
+
+STAGE serve
+
+APP_NAME Text2Audio
+MANIFEST ./manifest.json
+WORKFLOW ./workflow.json
+WORKFLOW_API ./workflow_api.json
+REST_ENDPOINT ./rest_endpoint.json
