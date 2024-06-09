@@ -284,7 +284,7 @@ class ComfyRunner:
         ]
         if len(uninstalled_nodes):
             logger.info(
-                f"Installing {len(nodes_status['uninstalled_nodes'])} custom nodes"
+                f"Installing {len(uninstalled_nodes)} custom nodes"
             )
         for node in uninstalled_nodes:
             logger.info(f"Installing {node['title']}")
