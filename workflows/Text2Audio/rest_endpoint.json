@@ -14,7 +14,7 @@
       }
     },
     {
-      "displayName": "文本",
+      "displayName": "提示词",
       "name": "chattts_prompt",
       "type": "string",
       "default": "[oral_2][laugh_0][break_6]",
