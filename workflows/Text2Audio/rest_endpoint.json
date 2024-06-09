@@ -28,7 +28,7 @@
       }
     },
     {
-      "displayName": "文本",
+      "displayName": "音频速度",
       "name": "chattts_speed",
       "type": "number",
       "default": 1,
