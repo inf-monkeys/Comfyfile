@@ -108,6 +108,14 @@ class ComfyRunner:
                     for img in node_output["images"]:
                         url = await self.get_output_item_url(img)
                         result["file_list"].append(url)
+                if 'audio' in node_output:
+                    audio = node_output['audio'][0]
+                    url = await self.get_output_item_url({
+                        "filename": audio,
+                        "subfolder": "",
+                        "type": "output"
+                    })
+                    result["file_list"].append(audio)
             return result
         else:
             result = {}
@@ -149,6 +157,19 @@ class ComfyRunner:
                             result[name].append(url)
                         else:
                             result[name] = url
+                if "audio" in node_output_data:
+                    audio = node_output_data["audio"][0]
+                    url = await self.get_output_item_url({
+                        "filename": audio,
+                        "subfolder": "",
+                        "type": "output"
+                    })
+                    if is_array:
+                        if not result.get(name):
+                            result[name] = []
+                        result[name].append(url)
+                    else:
+                        result[name] = url
             return result
 
     async def get_custom_nodes_status(self, workflow_json):
