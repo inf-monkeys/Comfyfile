@@ -121,25 +121,31 @@ def find_git_root(path):
 # possible issues
 # 1. a different file of same name can be present in some other directory
 # 2. file may be corrupted
-def search_file(filename, directory, parent_folder=None):
-    for root, dirs, files in os.walk(directory):
-        for file in files:
-            if file == filename and (
-                not parent_folder
-                or (parent_folder and os.path.basename(root) == parent_folder)
-            ):
-                return True
-        for subdir in dirs:
-            subdir_path = os.path.join(root, subdir)
-            if search_file(filename, subdir_path):
-                return True  # File found in subdirectory
+def search_file(filename, search_directory):
+    """
+    检查文件是否存在于指定目录及其子目录中。
+
+    参数:
+    filename (str): 需要检查的文件名，可以是相对路径如 a.txt 或者 subfolder/a.txt
+    search_directory (str): 需要搜索的目录
+
+    返回:
+    bool: 文件是否存在
+    """
+    for root, dirs, files in os.walk(search_directory):
+        if filename in files:
+            return True
+        # 检查相对路径
+        filepath = os.path.join(root, filename)
+        if os.path.isfile(filepath):
+            return True
     return False
 
 
 def search_model(model_name):
-    if search_file(model_name, custom_nodes_path, None):
+    if search_file(model_name, custom_nodes_path):
         return True
-    if search_file(model_name, models_path, None):
+    if search_file(model_name, models_path):
         return True
     return False
 
