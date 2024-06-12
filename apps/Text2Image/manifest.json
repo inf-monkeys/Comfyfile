@@ -1,6 +1,0 @@
-{
-    "appName": "Text2Image",
-    "homepage": "https://comfyanonymous.github.io/ComfyUI_examples/2_pass_txt2img/",
-    "displayName": "文本生成图像",
-    "description": "根据 prompt 和 negative prompt 文本生成图像，基于 https://comfyanonymous.github.io/ComfyUI_examples/2_pass_txt2img/ 官方示例。"
-}
