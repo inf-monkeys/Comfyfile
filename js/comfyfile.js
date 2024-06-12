@@ -508,6 +508,28 @@ class S3ConfigMenuDialog extends ComfyDialog {
   }
 }
 
+export function rebootAPI() {
+	if (confirm("Are you sure you'd like to reboot the server?")) {
+		try {
+			api.fetchApi("/manager/reboot");
+		}
+		catch(exception) {
+
+		}
+		return true;
+	}
+
+	return false;
+}
+
+async function showRebootMessage() {
+  comfyfile_explorer_instance.updateMessage(
+    "<BR>To apply the installed app, please <button id='comfyfile-reboot' class='cm-small-button'>RESTART</button> ComfyUI. And refresh browser.", 'comfyfile-reboot'
+  );
+  const rebootButton = document.getElementById('comfyfile-reboot');
+  rebootButton.addEventListener("click", rebootAPI);
+}
+
 async function install_remote_comfyfile_app(url) {
   if (comfyfile_explorer_instance) {
     comfyfile_explorer_instance.startInstall(target);
@@ -525,15 +547,11 @@ async function install_remote_comfyfile_app(url) {
         show_message(`Install failed: ${errMsg}`);
         return false;
       }
+      showRebootMessage();
       return true;
     } catch (exception) {
       show_message(`Install failed: ${target.title} / ${exception}`);
       return false;
-    } finally {
-      await comfyfile_explorer_instance.invalidateControl();
-      comfyfile_explorer_instance.updateMessage(
-        "<BR>To apply the installed apps, please click the 'Refresh' button on the main menu."
-      );
     }
   }
 }
@@ -556,18 +574,42 @@ async function install_local_comfyfile_app(file) {
         show_message(message);
         return false;
       }
-      comfyfile_explorer_instance.updateMessage(
-        "<BR>To apply the installed apps, please click the 'Refresh' button on the main menu."
-      );
+      showRebootMessage();
       return true;
     } catch (exception) {
       show_message(`Install failed: ${file} / ${exception}`);
       return false;
-    } finally {
-      await comfyfile_explorer_instance.invalidateControl();
     }
   }
 }
+
+async function reinstall_local_comfyfile_app(file) {
+  if (comfyfile_explorer_instance) {
+    comfyfile_explorer_instance.startInstall(file);
+    try {
+      const response = await api.fetchApi("/comfyfile/apps/reinstall", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          local_comfyfile_repo: file,
+        }),
+      });
+      const data = await response.json();
+      var { success, errMsg } = data;
+      if (!success) {
+        const message = "Install failed.";
+        show_message(message);
+        return false;
+      }
+      showRebootMessage();
+      return true;
+    } catch (exception) {
+      show_message(`Install failed: ${file} / ${exception}`);
+      return false;
+    }
+  }
+}
+
 
 async function getAppList() {
   const response = await api.fetchApi(`/comfyfile/apps`);
@@ -630,6 +672,14 @@ export class ComfyfileExplorerMenuDislog extends ComfyDialog {
     if (local_comfyfile_repo) {
       this.startInstall(local_comfyfile_repo);
       await install_local_comfyfile_app(local_comfyfile_repo);
+    }
+  }
+
+  async reinstall_local_comfyfile(local_comfyfile_repo) {
+    console.log("reinstall_local_comfyfile: ", local_comfyfile_repo);
+    if (local_comfyfile_repo) {
+      this.startInstall(local_comfyfile_repo);
+      await reinstall_local_comfyfile_app(local_comfyfile_repo);
     }
   }
 
@@ -743,13 +793,15 @@ export class ComfyfileExplorerMenuDislog extends ComfyDialog {
         var installBtn = document.createElement("button");
         installBtn.style.textAlign = "center";
 
-        installBtn.innerHTML = data.installed ? "Installed" : "Install";
+        installBtn.innerHTML = data.installed ? "ReInstall" : "Install";
         installBtn.style.backgroundColor = "black";
         installBtn.style.color = "white";
         installBtn.style.width = "100px";
         if (data.installed) {
-          installBtn.disabled = true;
-          installBtn.style.backgroundColor = "gray";
+          installBtn.style.backgroundColor = "red";
+          installBtn.addEventListener("click", function () {
+            self.reinstall_local_comfyfile(data.folder);
+          });
         } else {
           installBtn.addEventListener("click", function () {
             self.install_local_comfyfile(data.folder);

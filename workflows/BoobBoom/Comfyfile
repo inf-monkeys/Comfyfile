@@ -2,8 +2,9 @@ STAGE build
 
 PLUGIN AUTO_INFER_FROM_WORKFLOW_JSON
 
+MODEL models/checkpoints/juggernautXL_v9Rdphoto2Lightning.safetensors https://huggingface.co/erohinem/SDXL/resolve/main/juggernautXL_v9Rdphoto2Lightning.safetensors?download=true
 MODEL custom_nodes/ComfyUI-YoloWorld-EfficientSAM/efficient_sam_s_cpu.jit https://huggingface.co/camenduru/YoloWorld-EfficientSAM/resolve/main/efficient_sam_s_cpu.jit
-MDOEL custom_nodes/ComfyUI-YoloWorld-EfficientSAM/efficient_sam_s_gpu.jit https://huggingface.co/camenduru/YoloWorld-EfficientSAM/resolve/main/efficient_sam_s_gpu.jit
+MODEL custom_nodes/ComfyUI-YoloWorld-EfficientSAM/efficient_sam_s_gpu.jit https://huggingface.co/camenduru/YoloWorld-EfficientSAM/resolve/main/efficient_sam_s_gpu.jit
 
 COPY 新垣结衣.jpeg input/
 

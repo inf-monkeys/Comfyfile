@@ -12,6 +12,8 @@ from tqdm import tqdm
 from .common import search_model
 import folder_paths
 from torchvision.datasets.utils import download_url as torchvision_download_url
+from enum import Enum
+from typing import Any
 
 # paths
 comfyui_monkeys_path = os.path.dirname(__file__)
@@ -25,6 +27,12 @@ input_path = os.path.join(comfy_path, "input")
 def make_tarfile(output_filename, source_dir):
     with tarfile.open(output_filename, "w:gz") as tar:
         tar.add(source_dir, arcname=os.path.basename(source_dir))
+
+class UniversalEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if hasattr(obj, '__dict__'):
+            return obj.__dict__  # 将对象转换为字典
+        return super().default(obj)  # 调用默认的实现
 
 
 class Stage:
@@ -53,6 +61,23 @@ class ComfyuiModel:
     def serialize(self):
         return {"name": self.name, "url": self.url, "path": self.path}
 
+class ComfyfileCommandType(Enum):
+    MODEL = 'MODEL'
+    PLUGIN = 'PLUGIN'
+    SCRIPT = 'SCRIPT'
+    RUN = 'RUN'
+    COPY = 'COPY'
+
+class ComfyfileExecutionStep:
+    def __init__(self, command_type: ComfyfileCommandType, command_data: Any):
+        self.command_type = command_type
+        self.command_data = command_data
+        
+    def serialize(self):
+        return {
+            "command_type": self.command_type.value,
+            "command_data": json.dumps(self.command_data, cls=UniversalEncoder)
+        }
 
 class ComfyfileApp:
     def __init__(
@@ -61,12 +86,15 @@ class ComfyfileApp:
         displayName: str,
         description: str,
         homepage: str,
-        plugins: list,
-        models: list,
+        plugins: list[ComfyuiPlugin],
+        models: list[ComfyuiModel],
+        runs: list[str],
+        scripts: list[str],
         workflow: dict,
         workflowApi: dict,
         tags: list,
         restEndpoint: dict,
+        steps: list[ComfyfileExecutionStep]
     ):
         self.appName = appName
         self.displayName = displayName
@@ -77,7 +105,10 @@ class ComfyfileApp:
         self.workflow = workflow
         self.workflowApi = workflowApi
         self.tags = tags
+        self.scripts = scripts
         self.restEndpoint = restEndpoint
+        self.steps = steps
+        self.runs = runs
 
     def serialize(self):
         return {
@@ -91,47 +122,10 @@ class ComfyfileApp:
             "workflowApi": self.workflowApi,
             "tags": self.tags,
             "restEndpoint": self.restEndpoint,
+            "scripts": self.scripts,
+            "steps": [step.serialize() for step in self.steps],
+            "runs": self.runs
         }
-
-
-class Comfyfile:
-    def __init__(self):
-        self.stages = {"build": Stage("build"), "serve": Stage("serve")}
-
-    def add_command_to_stage(self, stage_name, command):
-        if stage_name in self.stages:
-            self.stages[stage_name].add_command(command)
-        else:
-            raise ValueError(f"Unknown stage: {stage_name}")
-
-    def parse_comfyfile(self, comfyfile_path):
-        with open(comfyfile_path, "r") as f:
-            file_content = f.read()
-        current_stage = None
-        current_command = ""
-
-        for line in file_content.splitlines():
-            line = line.strip()
-            if line.startswith("#") or not line:
-                continue
-            if line.startswith("STAGE"):
-                if current_command:
-                    self.add_command_to_stage(current_stage, current_command)
-                    current_command = ""
-                _, stage_name = line.split()
-                current_stage = stage_name
-            elif current_stage:
-                if line.endswith("\\"):
-                    current_command += line[:-1].strip() + " "
-                else:
-                    current_command += line
-                    self.add_command_to_stage(current_stage, current_command)
-                    current_command = ""
-
-        if current_command:
-            self.add_command_to_stage(current_stage, current_command)
-
-        return self
 
 
 class ComfyfileExecutor:
@@ -212,102 +206,100 @@ class ComfyfileExecutor:
         else:
             raise FileNotFoundError(f"Source path does not exist: {full_src}")
 
-    def handle_workflow(self, app_name, src):
-        self.handle_copy(
-            src,
-            os.path.join("custom_nodes/Comfyfile/apps", app_name, "workflow.json"),
-        )
-
-    def handle_workflow_api(self, app_name, src):
-        self.handle_copy(
-            src,
-            os.path.join("custom_nodes/Comfyfile/apps", app_name, "workflow_api.json"),
-        )
-
-    def handle_rest_endpoint(self, app_name, src):
-        self.handle_copy(
-            src,
-            os.path.join("custom_nodes/Comfyfile/apps", app_name, "rest_endpoint.json"),
-        )
-
-    def handle_manifest(self, app_name, src):
-        self.handle_copy(
-            src,
-            os.path.join("custom_nodes/Comfyfile/apps", app_name, "manifest.json"),
-        )
-
-    def check_plugin(self, url: str):
-        repo_name = url.split("/")[-1].replace(".git", "")
-        repo_path = os.path.join(custom_nodes_path, repo_name)
-        return os.path.exists(repo_path)
-
     def check_model(self, model_path: str):
         model_name = model_path.split("/")[-1]
         return search_model(model_name)
 
-    async def process_comfyfile(self, comfyfile: Comfyfile):
-        build_stage = comfyfile.stages["build"]
-        AUTO_INFER_FROM_WORKFLOW_JSON = False
-        if build_stage:
-            for command in build_stage.commands:
-                if command.startswith("PLUGIN"):
-                    _, url = command.split(maxsplit=1)
-                    if url == "AUTO_INFER_FROM_WORKFLOW_JSON":
-                        AUTO_INFER_FROM_WORKFLOW_JSON = True
-                    else:
-                        self.handle_plugin(url)
-                elif command.startswith("MODEL"):
-                    _, model_info = command.split(maxsplit=1)
-                    model_path, model_url = model_info.split()
-                    self.handle_model(model_path, model_url)
-                elif command.startswith("COPY"):
-                    _, paths = command.split(maxsplit=1)
-                    src, dest = paths.split()
-                    self.handle_copy(src, dest)
-                elif command.startswith("RUN"):
-                    _, script = command.split(maxsplit=1)
-                    self.handle_run(script)
-                elif command.startswith("SCRIPT"):
-                    _, script_file = command.split(maxsplit=1)
-                    self.handle_script(script_file)
+    async def process_comfyfile_apps(self, comfyfile_apps: list[ComfyfileApp]):
+        comfyfile_app = comfyfile_apps[0]
+        for step in comfyfile_app.steps:
+            if step.command_type == ComfyfileCommandType.PLUGIN:
+                plugin = step.command_data
+                plugin_url = plugin.url
+                if plugin_url == "AUTO_INFER_FROM_WORKFLOW_JSON":
+                    logger.info("Auto infer missing nodes from workflow.json")
+                    runner = ComfyRunner()
+                    await runner.auto_install_missing_nodes(comfyfile_app.workflow)
+                else:
+                    self.handle_plugin(plugin_url)
+            elif step.command_type == ComfyfileCommandType.MODEL:
+                model = step.command_data
+                self.handle_model(model.path, model.url)
+            elif step.command_type == ComfyfileCommandType.RUN:
+                script = step.command_data
+                self.handle_run(script)
+            elif step.command_type == ComfyfileCommandType.SCRIPT:
+                script = step.command_data
+                self.handle_script(script)
+            elif step.command_type == ComfyfileCommandType.COPY:
+                src, dest = step.command_data
+                self.handle_copy(src, dest)
 
-        serve_stage = comfyfile.stages["serve"]
-        if serve_stage:
-            app_name_command = next(
-                (
-                    command
-                    for command in serve_stage.commands
-                    if command.startswith("APP_NAME")
-                ),
-                None,
-            )
-            if not app_name_command:
-                raise ValueError("APP_NAME is required in the serve stage")
-            app_name = app_name_command.split(maxsplit=1)[1]
-            other_commands = [
-                command
-                for command in serve_stage.commands
-                if not command.startswith("APP_NAME")
-            ]
-            for command in other_commands:
-                if command.startswith("WORKFLOW_API"):
-                    _, src = command.split(maxsplit=1)
-                    self.handle_workflow_api(app_name, src)
-                elif command.startswith("WORKFLOW"):
-                    _, src = command.split(maxsplit=1)
-                    if AUTO_INFER_FROM_WORKFLOW_JSON:
-                        full_src = os.path.join(self.context_directory, src)
-                        with open(full_src, "r", encoding="utf-8") as f:
-                            workflow_json = json.loads(f.read())
-                            runner = ComfyRunner()
-                            await runner.auto_install_missing_nodes(workflow_json)
-                    self.handle_workflow(app_name, src)
-                elif command.startswith("REST_ENDPOINT"):
-                    _, src = command.split(maxsplit=1)
-                    self.handle_rest_endpoint(app_name, src)
-                elif command.startswith("MANIFEST"):
-                    _, src = command.split(maxsplit=1)
-                    self.handle_manifest(app_name, src)
+        # build_stage = comfyfile.stages["build"]
+        # AUTO_INFER_FROM_WORKFLOW_JSON = False
+        # if build_stage:
+        #     for command in build_stage.commands:
+        #         if command.startswith("PLUGIN"):
+        #             _, url = command.split(maxsplit=1)
+        #             if url == "AUTO_INFER_FROM_WORKFLOW_JSON":
+        #                 AUTO_INFER_FROM_WORKFLOW_JSON = True
+        #             else:
+        #                 self.handle_plugin(url)
+        #         elif command.startswith("MODEL"):
+        #             _, model_info = command.split(maxsplit=1)
+        #             model_path, model_url = model_info.split()
+        #             self.handle_model(model_path, model_url)
+        #         elif command.startswith("COPY"):
+        #             _, paths = command.split(maxsplit=1)
+        #             src, dest = paths.split()
+        #             self.handle_copy(src, dest)
+        #         elif command.startswith("RUN"):
+        #             _, script = command.split(maxsplit=1)
+        #             self.handle_run(script)
+        #         elif command.startswith("SCRIPT"):
+        #             _, script_file = command.split(maxsplit=1)
+        #             self.handle_script(script_file)
+        #         else:
+        #             raise ValueError(f"Unknown command: {command}")
+
+        # serve_stage = comfyfile.stages["serve"]
+        # if serve_stage:
+        #     app_name_command = next(
+        #         (
+        #             command
+        #             for command in serve_stage.commands
+        #             if command.startswith("APP_NAME")
+        #         ),
+        #         None,
+        #     )
+        #     if not app_name_command:
+        #         raise ValueError("APP_NAME is required in the serve stage")
+        #     app_name = app_name_command.split(maxsplit=1)[1]
+        #     other_commands = [
+        #         command
+        #         for command in serve_stage.commands
+        #         if not command.startswith("APP_NAME")
+        #     ]
+        #     for command in other_commands:
+        #         if command.startswith("WORKFLOW_API"):
+        #             _, src = command.split(maxsplit=1)
+        #             self.handle_workflow_api(app_name, src)
+        #         elif command.startswith("WORKFLOW"):
+        #             _, src = command.split(maxsplit=1)
+        #             if AUTO_INFER_FROM_WORKFLOW_JSON:
+        #                 logger.info("Auto infer missing nodes from workflow.json")
+        #                 full_src = os.path.join(self.context_directory, src)
+        #                 with open(full_src, "r", encoding="utf-8") as f:
+        #                     workflow_json = json.loads(f.read())
+        #                     runner = ComfyRunner()
+        #                     await runner.auto_install_missing_nodes(workflow_json)
+        #             self.handle_workflow(app_name, src)
+        #         elif command.startswith("REST_ENDPOINT"):
+        #             _, src = command.split(maxsplit=1)
+        #             self.handle_rest_endpoint(app_name, src)
+        #         elif command.startswith("MANIFEST"):
+        #             _, src = command.split(maxsplit=1)
+        #             self.handle_manifest(app_name, src)
 
 
 class ComfyfileParser:
@@ -324,6 +316,9 @@ class ComfyfileParser:
         apps = []
         build_plugins = []
         build_models = []
+        build_runs = []
+        build_scripts = []
+        steps = []
         current_app = None
         for line in lines:
             if line.startswith("STAGE"):
@@ -341,26 +336,48 @@ class ComfyfileParser:
                         workflowApi=None,
                         tags=[],
                         restEndpoint=None,
+                        scripts=list(build_scripts),
+                        runs=list(build_runs),
+                        steps=list(steps),
                     )
             elif line.startswith("PLUGIN"):
-                _, url = line.split(" ")
-                plugin = ComfyuiPlugin(url)
+                plugin = self.__parse_plugin_line(line)
                 if current_app:
                     current_app.plugins.append(plugin)
                 else:
                     build_plugins.append(plugin)
+                steps.append(ComfyfileExecutionStep(ComfyfileCommandType.PLUGIN, plugin))
             elif line.startswith("MODEL"):
-                model = self.parse_model_line(line)
+                model = self.__parse_model_line(line)
                 if current_app:
                     current_app.models.append(model)
                 else:
                     build_models.append(model)
+                steps.append(ComfyfileExecutionStep(ComfyfileCommandType.MODEL, model))
+            elif line.startswith("RUN"):
+                command = self.__parse_run_line(line)
+                if current_app:
+                    current_app.runs.append(command)
+                else:
+                    build_runs.append(command)
+                steps.append(ComfyfileExecutionStep(ComfyfileCommandType.RUN, command))
+            elif line.startswith("SCRIPT"):
+                script_content = self.__parse_script_line(line)
+                if current_app:
+                    current_app.scripts.append(script_content)
+                else:
+                    build_scripts.append(script_content)
+                steps.append(ComfyfileExecutionStep(ComfyfileCommandType.SCRIPT, script_content))
+            elif line.startswith("COPY"):
+                src, dest = self.__parse_copy_line(line)
+                steps.append(ComfyfileExecutionStep(ComfyfileCommandType.COPY, (src, dest)))
+
             elif line.startswith("APP_NAME"):
                 _, appName = line.split(" ")
                 if current_app:
                     current_app.appName = appName
             elif line.startswith("MANIFEST"):
-                manifest = self.parse_manifest_line(line)
+                manifest = self.__parse_manifest_line(line)
                 if current_app:
                     if "appName" in manifest:
                         current_app.appName = manifest["appName"]
@@ -368,15 +385,15 @@ class ComfyfileParser:
                     current_app.description = manifest["description"]
                     current_app.homepage = manifest["homepage"]
             elif line.startswith("WORKFLOW_API"):
-                workflow_api = self.parse_workflow_api_line(line)
+                workflow_api = self.__parse_workflow_api_line(line)
                 if current_app:
                     current_app.workflowApi = workflow_api
             elif line.startswith("WORKFLOW"):
-                workflow = self.parse_workflow_line(line)
+                workflow = self.__parse_workflow_line(line)
                 if current_app:
                     current_app.workflow = workflow
             elif line.startswith("REST_ENDPOINT"):
-                rest_endpoint = self.parse_rest_endpoint_line(line)
+                rest_endpoint = self.__parse_rest_endpoint_line(line)
                 if current_app:
                     current_app.restEndpoint = rest_endpoint
 
@@ -385,45 +402,74 @@ class ComfyfileParser:
 
         return apps
 
-    def parse_model_line(self, line: str) -> ComfyuiModel:
+    def __parse_plugin_line(self, line: str) -> ComfyuiPlugin:
+        _, url = line.split(" ")
+        return ComfyuiPlugin(url)
+
+    def __parse_model_line(self, line: str) -> ComfyuiModel:
         parts = line.split()
         path = parts[1]
         url = parts[2]
         name = os.path.basename(path)
         return ComfyuiModel(name, url, path)
 
-    def parse_manifest_line(self, line: str) -> dict:
-        _, manifest_relative_file = line.split(" ")
+    def __parse_run_line(self, line: str) -> str:
+        script = " ".join(line.split()[1:])
+        return script
+
+    def __parse_script_line(self, line: str) -> str:
+        _, script_file = line.split()
+        script_file = os.path.join(self.context_directory, script_file)
+        if not os.path.exists(script_file):
+            raise Exception(f"Script file {script_file} not exists")
+        with open(script_file, "r", encoding="utf-8") as f:
+            script_content = f.read()
+        return script_content
+
+    def __parse_copy_line(self, line: str) -> tuple:
+        _, src, dest = line.split()
+        return src, dest
+
+    def __parse_manifest_line(self, line: str) -> dict:
+        _, manifest_relative_file = line.split()
         manifest_file = os.path.join(
             self.context_directory, manifest_relative_file.strip()
         )
+        if not os.path.exists(manifest_file):
+            raise FileNotFoundError(f"Manifest file {manifest_file} not exists")
         with open(manifest_file, "r", encoding="utf-8") as file:
             manifest = json.load(file)
         return manifest
 
-    def parse_workflow_line(self, line: str) -> dict:
-        _, workflow_relative_file = line.split(" ")
+    def __parse_workflow_line(self, line: str) -> dict:
+        _, workflow_relative_file = line.split()
         workflow_file = os.path.join(
             self.context_directory, workflow_relative_file.strip()
         )
+        if not os.path.exists(workflow_file):
+            raise FileNotFoundError(f"Workflow file {workflow_file} not exists")
         with open(workflow_file, "r", encoding="utf-8") as file:
             workflow = json.load(file)
         return workflow
 
-    def parse_workflow_api_line(self, line: str) -> dict:
-        _, workflow_api_relative_file = line.split(" ")
+    def __parse_workflow_api_line(self, line: str) -> dict:
+        _, workflow_api_relative_file = line.split()
         workflow_api_file = os.path.join(
             self.context_directory, workflow_api_relative_file.strip()
         )
+        if not os.path.exists(workflow_api_file):
+            raise FileNotFoundError(f"Workflow API file {workflow_api_file} not exists")
         with open(workflow_api_file, "r", encoding="utf-8") as file:
             workflow_api = json.load(file)
         return workflow_api
 
-    def parse_rest_endpoint_line(self, line: str) -> dict:
-        _, rest_endpoint_relative_file = line.split(" ")
+    def __parse_rest_endpoint_line(self, line: str) -> dict:
+        _, rest_endpoint_relative_file = line.split()
         rest_endpoint_file = os.path.join(
             self.context_directory, rest_endpoint_relative_file.strip()
         )
+        if not os.path.exists(rest_endpoint_file):
+            raise FileNotFoundError(f"Rest endpoint file {rest_endpoint_file} not exists")
         with open(rest_endpoint_file, "r", encoding="utf-8") as file:
             rest_endpoint = json.load(file)
         return rest_endpoint

@@ -12,7 +12,7 @@ import logging
 import boto3
 from botocore.client import Config
 from .comfyfile_downloader import download_github_directory
-from .buildkit import ComfyfileExecutor, Comfyfile, ComfyfileParser
+from .buildkit import ComfyfileExecutor, ComfyfileParser
 from .runner import ComfyRunner
 from loguru import logger
 from .constants import (
@@ -89,17 +89,17 @@ async def import_from_remote_comfyfile_repo(comfyfile_repo):
     if not os.path.exists(comfyfile_path):
         raise Exception("Invalid comfyfile repo, Comfyfile not found")
     context_directory = comfyfile_tmp_folder
-    comfyfile = Comfyfile().parse_comfyfile(comfyfile_path)
+    comfyfile_app = ComfyfileParser(comfyfile_path, context_directory).parse_comfyfile()
     executor = ComfyfileExecutor(context_directory, comfy_path)
-    await executor.process_comfyfile(comfyfile)
+    await executor.process_comfyfile_apps(comfyfile_app)
 
 
 async def import_from_local_comfyfile_repo(local_comfyfile_repo):
     local_comfyfile_repo_path = os.path.join(workflows_folder, local_comfyfile_repo)
     local_comfyfile = os.path.join(local_comfyfile_repo_path, "Comfyfile")
-    comfyfile = Comfyfile().parse_comfyfile(local_comfyfile)
+    comfyfile_app = ComfyfileParser(local_comfyfile, local_comfyfile_repo_path).parse_comfyfile()
     executor = ComfyfileExecutor(local_comfyfile_repo_path, comfy_path)
-    await executor.process_comfyfile(comfyfile)
+    await executor.process_comfyfile_apps(comfyfile_app)
     dot_installed_file = os.path.join(local_comfyfile_repo_path, ".installed")
     with open(dot_installed_file, "w") as f:
         f.write("")
@@ -123,6 +123,30 @@ async def import_app(request):
     except Exception as e:
         traceback.print_exc()
         return web.json_response({"success": False, "errMsg": str(e)})
+
+
+@server.PromptServer.instance.routes.post("/comfyfile/apps/reinstall")
+async def import_app(request):
+    json_data = await request.json()
+    comfyfile_repo = json_data.get("comfyfile_repo")
+    local_comfyfile_repo = json_data.get("local_comfyfile_repo")
+    if not comfyfile_repo and not local_comfyfile_repo:
+        return web.json_response(
+            {"success": False, "errMsg": "Comfyfile repo is required"}
+        )
+    try:
+        if comfyfile_repo:
+            await import_from_remote_comfyfile_repo(comfyfile_repo)
+        elif local_comfyfile_repo:
+            dot_installed_file = os.path.join(local_comfyfile_repo, ".installed")
+            if os.path.exists(dot_installed_file):
+                os.remove(dot_installed_file)
+            await import_from_local_comfyfile_repo(local_comfyfile_repo)
+        return web.json_response({"success": True, "errMsg": "Install success"})
+    except Exception as e:
+        traceback.print_exc()
+        return web.json_response({"success": False, "errMsg": str(e)})
+
 
 
 @server.PromptServer.instance.routes.get("/comfyfile/apps")
@@ -319,6 +343,6 @@ def setup_webapp():
 
 WEB_DIRECTORY = "js"
 setup_js()
-# setup_webapp()
+setup_webapp()
 
 NODE_CLASS_MAPPINGS = {}

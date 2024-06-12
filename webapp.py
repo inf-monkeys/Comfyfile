@@ -35,6 +35,14 @@ def execute_workflow(folder, params):
     return response.json()
 
 
+def install_workflow(folder):
+    response = requests.post(
+        f"http://127.0.0.1:{comfyui_port}/comfyfile/apps",
+        json={"local_comfyfile_repo": folder},
+    )
+    return response.json()
+
+
 def wait_comfyui_startup():
     ip = "127.0.0.1"
     timeout = 1
@@ -56,6 +64,8 @@ wait_comfyui_startup()
 if 'executing' not in st.session_state:
     st.session_state.executing = False
 
+if 'installing' not in st.session_state:
+    st.session_state.installing = False
 
 # Streamlit 应用
 st.set_page_config(layout="wide")  # 设置页面为宽布局
@@ -70,7 +80,7 @@ st.markdown(
 )
 
 # 页面布局
-left_column, right_column = st.columns([1, 2])
+left_column, _, right_column = st.columns([4, 1, 4])
 
 with left_column:
     st.markdown('<div class="left-col">', unsafe_allow_html=True)
@@ -131,7 +141,16 @@ with left_column:
     workflow_installed = is_workflow_installed(selected_workflow_folder)
 
     if not workflow_installed:
-        st.error("This workflow is not installed. Please install it first.")
+        col1, col2 = st.columns([3, 1])
+        with col1:
+            st.error("This workflow is not installed. Please install it first.")
+        with col2:
+            if st.button("Install", disabled=st.session_state.installing):
+                st.session_state.installing = True
+                with st.spinner('Installing workflow'):
+                    install_workflow(selected_workflow_folder)
+                st.session_state.installing = False
+                st.experimental_rerun()
 
     # 执行按钮
     if st.button("Execute", disabled=not workflow_installed or st.session_state.executing):
