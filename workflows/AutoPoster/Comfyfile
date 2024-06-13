@@ -15,12 +15,12 @@ HUGGINGFACE_MODEL custom_nodes/ComfyUI-BRIA_AI-RMBG/RMBG-1.4 briaai/RMBG-1.4
 MODEL models/insightface/models/antelopev2/ https://static.infmonkeys.com/comfyui/models/insightface/antelopev2.zip
 MODEL models/pulid/ip-adapter_pulid_sdxl_fp16.safetensors https://huggingface.co/huchenlei/ipadapter_pulid/resolve/main/ip-adapter_pulid_sdxl_fp16.safetensors
 MODEL models/controlnet/CN-anytest_v4-marged.safetensors https://huggingface.co/2vXpSwA7/iroiro-lora/resolve/main/test_controlnet2/CN-anytest_v4-marged.safetensors
-MODEL models/loras/Harrlogos_v2.0.safetensors https://static.infmonkeys.com/comfyui/models/loras/Harrlogos_v2.0.safetensors
-MODEL models/loras/dare_complex_color_notrigger.safetensors https://static.infmonkeys.com/comfyui/models/loras/dare_complex_color_notrigger.safetensors
 MODEL models/checkpoints/SDXL/dreamshaperXL_lightningDPMSDE.safetensors https://static.infmonkeys.com/comfyui/models/checkpoints/SDXL/dreamshaperXL_lightningDPMSDE.safetensors
 
 # Character Lora Stack
-MODEL models/loras/Sdxl/3D模型丨可爱化SDXL版.safetensors https://civitai.com/api/download/models/177483
+MODEL models/loras/Harrlogos_v2.0.safetensors https://static.infmonkeys.com/comfyui/models/loras/Harrlogos_v2.0.safetensors
+MODEL models/loras/SDXL功能性/复杂色彩dare_complex_color_notrigger.safetensors https://static.infmonkeys.com/comfyui/models/loras/dare_complex_color_notrigger.safetensors
+MODEL models/loras/Sdxl/3D模型丨可爱化SDXL版_v2.0.safetensors https://civitai.com/api/download/models/177483
 MODEL models/loras/SDXL功能性/lookingAwayToLookingAt_v10看着观众.safetensors https://civitai.com/api/download/models/443385
 MODEL models/loras/PT滑块/smiling笑.pt https://sliders.baulab.info/weights/xl_sliders/smiling.pt
 MODEL models/loras/PT滑块/cartoon_style卡通化.pt https://sliders.baulab.info/weights/xl_sliders/cartoon_style.pt
