@@ -75,6 +75,10 @@
       "text": [
         "528",
         0
+      ],
+      "clip": [
+        "515",
+        1
       ]
     },
     "class_type": "CLIPTextEncode",
@@ -86,6 +90,10 @@
     "inputs": {
       "text": [
         "528",
+        1
+      ],
+      "clip": [
+        "515",
         1
       ]
     },
@@ -182,6 +190,10 @@
   },
   "537": {
     "inputs": {
+      "text": [
+        "1160",
+        0
+      ],
       "selected_font": "Inter-Medium-dDRaJ8tM",
       "align": "center",
       "wrap": 121,
@@ -241,6 +253,10 @@
       "latent_image": [
         "5",
         0
+      ],
+      "optional_vae": [
+        "1060",
+        0
       ]
     },
     "class_type": "KSampler (Efficient)",
@@ -273,6 +289,10 @@
       "latent_image": [
         "462",
         0
+      ],
+      "optional_vae": [
+        "1060",
+        0
       ]
     },
     "class_type": "KSampler (Efficient)",
@@ -301,6 +321,10 @@
     "inputs": {
       "filename_prefix": [
         "829",
+        0
+      ],
+      "images": [
+        "1106",
         0
       ]
     },
@@ -423,6 +447,10 @@
         "798",
         0
       ],
+      "text2": [
+        "1160",
+        0
+      ],
       "separator": ""
     },
     "class_type": "Concat Text _O",
@@ -455,6 +483,10 @@
     "inputs": {
       "text1": [
         "1042",
+        0
+      ],
+      "text2": [
+        "1160",
         0
       ],
       "separator": ""
@@ -532,6 +564,14 @@
       "lora_stack": [
         "815",
         0
+      ],
+      "model": [
+        "515",
+        0
+      ],
+      "clip": [
+        "515",
+        1
       ]
     },
     "class_type": "CR Apply LoRA Stack",
@@ -674,6 +714,10 @@
       "latent_image": [
         "852",
         0
+      ],
+      "optional_vae": [
+        "1060",
+        0
       ]
     },
     "class_type": "KSampler (Efficient)",
@@ -728,7 +772,11 @@
         "870",
         0
       ],
-      "old": "#"
+      "old": "#",
+      "new": [
+        "1160",
+        0
+      ]
     },
     "class_type": "Replace Text _O",
     "_meta": {
@@ -763,6 +811,10 @@
     "inputs": {
       "text1": [
         "805",
+        0
+      ],
+      "text2": [
+        "1160",
         0
       ],
       "separator": ""
@@ -833,6 +885,10 @@
       "pixels": [
         "926",
         0
+      ],
+      "vae": [
+        "1060",
+        0
       ]
     },
     "class_type": "VAEEncode",
@@ -893,6 +949,10 @@
       "latent_image": [
         "925",
         0
+      ],
+      "optional_vae": [
+        "1060",
+        0
       ]
     },
     "class_type": "KSampler (Efficient)",
@@ -905,6 +965,10 @@
       "text": [
         "1233",
         0
+      ],
+      "clip": [
+        "515",
+        1
       ]
     },
     "class_type": "CLIPTextEncode",
@@ -916,6 +980,10 @@
     "inputs": {
       "text": [
         "1233",
+        1
+      ],
+      "clip": [
+        "515",
         1
       ]
     },
@@ -1937,7 +2005,11 @@
       "repetition_penalty": 1,
       "temperature_last": true,
       "seed": 86312452983478,
-      "text": "You: You, as the greatest screenwriter of all time, give me an interesting title for a film.\nThe Garden on the Dark Side of the Moon, for example.\nBot: Christmas Carnival\nYou: Please give me a random film title based on the above example.Just give a name and nothing else\nBot:"
+      "text": "You: You, as the greatest screenwriter of all time, give me an interesting title for a film.\nThe Garden on the Dark Side of the Moon, for example.\nBot: Christmas Carnival\nYou: Please give me a random film title based on the above example.Just give a name and nothing else\nBot:",
+      "model": [
+        "1201",
+        0
+      ]
     },
     "class_type": "ZuellniExLlamaGenerator",
     "_meta": {
@@ -2013,6 +2085,10 @@
       "text": [
         "1209",
         0
+      ],
+      "model": [
+        "1201",
+        0
       ]
     },
     "class_type": "ZuellniExLlamaGenerator",
@@ -2037,6 +2113,10 @@
       "text": [
         "1205",
         0
+      ],
+      "model": [
+        "1201",
+        0
       ]
     },
     "class_type": "ZuellniExLlamaGenerator",
@@ -2060,6 +2140,10 @@
       "seed": 853245813540605,
       "text": [
         "1210",
+        0
+      ],
+      "model": [
+        "1201",
         0
       ]
     },
@@ -2281,6 +2365,14 @@
       "lora_stack": [
         "1248",
         0
+      ],
+      "model": [
+        "515",
+        0
+      ],
+      "clip": [
+        "515",
+        1
       ]
     },
     "class_type": "CR Apply LoRA Stack",
@@ -2293,6 +2385,14 @@
       "lora_stack": [
         "1252",
         0
+      ],
+      "model": [
+        "515",
+        0
+      ],
+      "clip": [
+        "515",
+        1
       ]
     },
     "class_type": "CR Apply LoRA Stack",
@@ -2317,7 +2417,7 @@
       "lora_3_strength": 0.2,
       "lora_3_model_strength": 1,
       "lora_3_clip_strength": 1,
-      "lora_4_name": "PT滑块/cartoon_style卡通化.pt",
+      "lora_4_name": "PT滑块\\cartoon卡通化.pt",
       "lora_4_strength": 3,
       "lora_4_model_strength": 1,
       "lora_4_clip_strength": 1,
@@ -2374,7 +2474,10 @@
       "label": "TextBatch",
       "mode": "automatic",
       "index": 0,
-      "multiline_text": ""
+      "multiline_text": [
+        "1160",
+        0
+      ]
     },
     "class_type": "Text Load Line From File",
     "_meta": {
