@@ -1,0 +1,35 @@
+{
+    "parameters": [
+        {
+            "displayName": "人物图片",
+            "name": "input_image",
+            "type": "file",
+            "default": "https://static.infmonkeys.com/comfyui/workflows/AutoPoster/images/AutoPoster_frederika.jpg",
+            "description": "必须包含人脸的图片，否则会运行失败！",
+            "required": true,
+            "typeOptions": {
+                "comfyOptions": {
+                    "node": 797,
+                    "key": "image"
+                },
+                "multipleValues": false,
+                "accept": ".jpg,.jpeg,.png,.webp"
+            }
+        },
+        {
+            "displayName": "绘制主题",
+            "name": "input_prompt",
+            "type": "string",
+            "default": "天堂花园",
+            "description": "输入你想要绘制的主题，如果是中文的会自动翻译成英语",
+            "required": true,
+            "typeOptions": {
+                "comfyOptions": {
+                    "node": 1147,
+                    "key": "text"
+                },
+                "multipleValues": false
+            }
+        }
+    ]
+}

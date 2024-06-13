@@ -1,0 +1,40 @@
+STAGE build
+
+PLUGIN AUTO_INFER_FROM_WORKFLOW_JSON
+PLUGIN https://github.com/Zuellni/ComfyUI-ExLlama-Nodes
+PLUGIN https://github.com/shadowcz007/comfyui-mixlab-nodes
+# TODO: This should install dynamicly based on platform
+RUN pip install https://github.com/turboderp/exllamav2/releases/download/v0.1.4/exllamav2-0.1.4+cu121.torch2.3.0-cp310-cp310-linux_x86_64.whl
+
+# Huggingface models
+HUGGINGFACE_MODEL models/llm/MythoLogic-Mini-7B-GPTQ TheBloke/MythoLogic-Mini-7B-GPTQ
+HUGGINGFACE_MODEL models/vae_approx k4d3/vae_approx
+HUGGINGFACE_MODEL custom_nodes/ComfyUI-BRIA_AI-RMBG/RMBG-1.4 briaai/RMBG-1.4
+
+# Other models
+MODEL models/insightface/models/antelopev2/ https://static.infmonkeys.com/comfyui/models/insightface/antelopev2.zip
+MODEL models/pulid/ip-adapter_pulid_sdxl_fp16.safetensors https://huggingface.co/huchenlei/ipadapter_pulid/resolve/main/ip-adapter_pulid_sdxl_fp16.safetensors
+MODEL models/controlnet/CN-anytest_v4-marged.safetensors https://huggingface.co/2vXpSwA7/iroiro-lora/resolve/main/test_controlnet2/CN-anytest_v4-marged.safetensors
+MODEL models/loras/Harrlogos_v2.0.safetensors https://static.infmonkeys.com/comfyui/models/loras/Harrlogos_v2.0.safetensors
+MODEL models/loras/dare_complex_color_notrigger.safetensors https://static.infmonkeys.com/comfyui/models/loras/dare_complex_color_notrigger.safetensors
+MODEL models/checkpoints/SDXL/dreamshaperXL_lightningDPMSDE.safetensors https://static.infmonkeys.com/comfyui/models/checkpoints/SDXL/dreamshaperXL_lightningDPMSDE.safetensors
+
+# Character Lora Stack
+MODEL models/loras/Sdxl/3D模型丨可爱化SDXL版.safetensors https://civitai.com/api/download/models/177483
+MODEL models/loras/SDXL功能性/lookingAwayToLookingAt_v10看着观众.safetensors https://civitai.com/api/download/models/443385
+MODEL models/loras/PT滑块/smiling笑.pt https://sliders.baulab.info/weights/xl_sliders/smiling.pt
+MODEL models/loras/PT滑块/cartoon_style卡通化.pt https://sliders.baulab.info/weights/xl_sliders/cartoon_style.pt
+
+# Background Lora Stack
+MODEL models/loras/Sdxl/sdxl_offset_example_v10.safetensors https://huggingface.co/dhjhhu/pp/resolve/8e2f20fd98aee82a6e0616af353dcf3d6e1111b2/sdxl_offset_example_v10.safetensors
+MODEL models/loras/Sdxl/xl_more_art-full-beta2.safetensors https://huggingface.co/nolual/majic/resolve/main/xl_more_art-full-beta2.safetensors
+
+COPY AutoPoster_frederika.jpg input/
+
+STAGE serve
+
+APP_NAME AutoPoster
+MANIFEST ./manifest.json
+WORKFLOW ./workflow.json
+WORKFLOW_API ./workflow_api.json
+REST_ENDPOINT ./rest_endpoint.json
