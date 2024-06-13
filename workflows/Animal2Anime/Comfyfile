@@ -1,0 +1,19 @@
+STAGE build
+
+PLUGIN AUTO_INFER_FROM_WORKFLOW_JSON
+
+MODEL models/checkpoints/SDXL/dreamshaperXL_v21TurboDPMSDE.safetensors https://civitai.com/api/download/models/351306
+MODEL models/loras/StudioGhibli.Redmond-StdGBRRedmAF-StudioGhibli.safetensors https://huggingface.co/artificialguybr/StudioGhibli.Redmond-V2/resolve/main/StudioGhibli.Redmond-StdGBRRedmAF-StudioGhibli.safetensors
+MODEL models/controlnet/controllora256/control-lora-canny-rank256.safetensors https://huggingface.co/stabilityai/control-lora/resolve/main/control-LoRAs-rank256/control-lora-canny-rank256.safetensors
+MODEL models/controlnet/controllora256/control-lora-depth-rank256.safetensors https://huggingface.co/stabilityai/control-lora/resolve/main/control-LoRAs-rank256/control-lora-depth-rank256.safetensors
+HUGGINGFACE_MODEL models/diffusers/marigold-lcm-v1-0 prs-eth/marigold-depth-lcm-v1-0
+
+COPY Animal2Anime_Input.jpeg input/
+
+STAGE serve
+
+APP_NAME Animal2Anime
+MANIFEST ./manifest.json
+WORKFLOW ./workflow.json
+WORKFLOW_API ./workflow_api.json
+REST_ENDPOINT ./rest_endpoint.json
