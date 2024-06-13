@@ -20,7 +20,7 @@ MODEL models/checkpoints/SDXL/dreamshaperXL_lightningDPMSDE.safetensors https://
 # Character Lora Stack
 MODEL models/loras/Harrlogos_v2.0.safetensors https://static.infmonkeys.com/comfyui/models/loras/Harrlogos_v2.0.safetensors
 MODEL models/loras/SDXL功能性/复杂色彩dare_complex_color_notrigger.safetensors https://static.infmonkeys.com/comfyui/models/loras/dare_complex_color_notrigger.safetensors
-MODEL models/loras/Sdxl/3D模型丨可爱化SDXL版.safetensors https://civitai.com/api/download/models/177483
+MODEL models/loras/Sdxl/3D模型丨可爱化SDXL版_v2.0.safetensors https://civitai.com/api/download/models/177483
 MODEL models/loras/SDXL功能性/lookingAwayToLookingAt_v10看着观众.safetensors https://civitai.com/api/download/models/443385
 MODEL models/loras/PT滑块/smiling笑.pt https://sliders.baulab.info/weights/xl_sliders/smiling.pt
 MODEL models/loras/PT滑块/cartoon_style卡通化.pt https://sliders.baulab.info/weights/xl_sliders/cartoon_style.pt
