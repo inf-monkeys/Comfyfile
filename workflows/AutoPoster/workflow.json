@@ -1,6 +1,6 @@
 {
-  "last_node_id": 1306,
-  "last_link_id": 2217,
+  "last_node_id": 1322,
+  "last_link_id": 2256,
   "nodes": [
     {
       "id": 870,
@@ -34,7 +34,7 @@
         "Node name for S&R": "Text _O"
       },
       "widgets_values": [
-        "(#:1.4)text logo,Striking text,round logo,only logo,empty background,simpler background"
+        ""
       ],
       "locked": true
     },
@@ -50,7 +50,7 @@
         89.99998474121094
       ],
       "flags": {},
-      "order": 61,
+      "order": 66,
       "mode": 0,
       "inputs": [
         {
@@ -107,7 +107,7 @@
         80
       ],
       "flags": {},
-      "order": 99,
+      "order": 106,
       "mode": 0,
       "inputs": [
         {
@@ -157,7 +157,7 @@
         70
       ],
       "flags": {},
-      "order": 76,
+      "order": 77,
       "mode": 0,
       "inputs": [
         {
@@ -183,9 +183,9 @@
         }
       ],
       "properties": {
+        "Node name for S&R": "Anything Everywhere3",
         "group_restricted": 0,
-        "color_restricted": 0,
-        "Node name for S&R": "Anything Everywhere3"
+        "color_restricted": 0
       },
       "widgets_values": [],
       "locked": true
@@ -204,7 +204,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 152,
+      "order": 164,
       "mode": 0,
       "inputs": [
         {
@@ -254,7 +254,7 @@
         250
       ],
       "flags": {},
-      "order": 142,
+      "order": 154,
       "mode": 0,
       "inputs": [
         {
@@ -281,7 +281,7 @@
         250
       ],
       "flags": {},
-      "order": 150,
+      "order": 162,
       "mode": 0,
       "inputs": [
         {
@@ -308,7 +308,7 @@
         "1": 60
       },
       "flags": {},
-      "order": 151,
+      "order": 163,
       "mode": 0,
       "inputs": [
         {
@@ -345,7 +345,7 @@
         194
       ],
       "flags": {},
-      "order": 139,
+      "order": 151,
       "mode": 0,
       "inputs": [
         {
@@ -418,7 +418,7 @@
         46
       ],
       "flags": {},
-      "order": 111,
+      "order": 121,
       "mode": 0,
       "inputs": [
         {
@@ -475,7 +475,7 @@
         110
       ],
       "flags": {},
-      "order": 135,
+      "order": 147,
       "mode": 0,
       "inputs": [
         {
@@ -519,7 +519,7 @@
         194
       ],
       "flags": {},
-      "order": 130,
+      "order": 142,
       "mode": 0,
       "inputs": [
         {
@@ -591,7 +591,7 @@
         250
       ],
       "flags": {},
-      "order": 136,
+      "order": 148,
       "mode": 0,
       "inputs": [
         {
@@ -618,7 +618,7 @@
         50
       ],
       "flags": {},
-      "order": 149,
+      "order": 161,
       "mode": 0,
       "inputs": [
         {
@@ -664,7 +664,7 @@
         240
       ],
       "flags": {},
-      "order": 146,
+      "order": 158,
       "mode": 0,
       "inputs": [
         {
@@ -733,7 +733,7 @@
         250
       ],
       "flags": {},
-      "order": 145,
+      "order": 157,
       "mode": 0,
       "inputs": [
         {
@@ -760,7 +760,7 @@
         130
       ],
       "flags": {},
-      "order": 137,
+      "order": 149,
       "mode": 0,
       "inputs": [
         {
@@ -815,7 +815,7 @@
         194
       ],
       "flags": {},
-      "order": 141,
+      "order": 153,
       "mode": 0,
       "inputs": [
         {
@@ -886,7 +886,7 @@
         82
       ],
       "flags": {},
-      "order": 123,
+      "order": 135,
       "mode": 0,
       "inputs": [
         {
@@ -929,7 +929,7 @@
         30
       ],
       "flags": {},
-      "order": 127,
+      "order": 139,
       "mode": 0,
       "inputs": [
         {
@@ -971,7 +971,7 @@
         790
       ],
       "flags": {},
-      "order": 181,
+      "order": 193,
       "mode": 0,
       "inputs": [
         {
@@ -983,57 +983,6 @@
       ],
       "properties": {
         "Node name for S&R": "PreviewImage"
-      },
-      "locked": true
-    },
-    {
-      "id": 1001,
-      "type": "SplitImageWithAlpha",
-      "pos": [
-        -505.5381418228434,
-        -3750.753477126367
-      ],
-      "size": [
-        140,
-        50
-      ],
-      "flags": {
-        "collapsed": false
-      },
-      "order": 82,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "link": 1756,
-          "label": "图像"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "IMAGE",
-          "type": "IMAGE",
-          "links": [
-            1725
-          ],
-          "shape": 3,
-          "label": "图像",
-          "slot_index": 0
-        },
-        {
-          "name": "MASK",
-          "type": "MASK",
-          "links": [
-            1724
-          ],
-          "shape": 3,
-          "label": "遮罩",
-          "slot_index": 1
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "SplitImageWithAlpha"
       },
       "locked": true
     },
@@ -1051,7 +1000,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 114,
+      "order": 134,
       "mode": 0,
       "inputs": [
         {
@@ -1096,7 +1045,7 @@
         80
       ],
       "flags": {},
-      "order": 104,
+      "order": 127,
       "mode": 0,
       "inputs": [
         {
@@ -1144,7 +1093,7 @@
         340
       ],
       "flags": {},
-      "order": 182,
+      "order": 194,
       "mode": 0,
       "inputs": [
         {
@@ -1205,43 +1154,6 @@
       "locked": true
     },
     {
-      "id": 1004,
-      "type": "Reroute",
-      "pos": [
-        -510.4854135242322,
-        -3872.3880543833184
-      ],
-      "size": [
-        75,
-        26
-      ],
-      "flags": {},
-      "order": 64,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "",
-          "type": "*",
-          "link": 1759
-        }
-      ],
-      "outputs": [
-        {
-          "name": "",
-          "type": "IMAGE",
-          "links": [
-            1755,
-            1756
-          ],
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "showOutputText": false,
-        "horizontal": false
-      }
-    },
-    {
       "id": 999,
       "type": "ImageGenResolutionFromImage",
       "pos": [
@@ -1255,7 +1167,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 81,
+      "order": 110,
       "mode": 0,
       "inputs": [
         {
@@ -1336,7 +1248,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 96,
+      "order": 119,
       "mode": 0,
       "inputs": [
         {
@@ -1429,7 +1341,7 @@
         340
       ],
       "flags": {},
-      "order": 184,
+      "order": 196,
       "mode": 0,
       "inputs": [
         {
@@ -1503,7 +1415,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 120,
+      "order": 130,
       "mode": 0,
       "inputs": [
         {
@@ -1550,7 +1462,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 95,
+      "order": 104,
       "mode": 0,
       "inputs": [
         {
@@ -1599,7 +1511,7 @@
         80
       ],
       "flags": {},
-      "order": 113,
+      "order": 123,
       "mode": 0,
       "inputs": [
         {
@@ -1649,7 +1561,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 103,
+      "order": 113,
       "mode": 0,
       "inputs": [
         {
@@ -1744,7 +1656,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 94,
+      "order": 103,
       "mode": 0,
       "inputs": [
         {
@@ -1793,7 +1705,7 @@
         26
       ],
       "flags": {},
-      "order": 80,
+      "order": 89,
       "mode": 0,
       "inputs": [
         {
@@ -1829,7 +1741,7 @@
         340
       ],
       "flags": {},
-      "order": 186,
+      "order": 198,
       "mode": 0,
       "inputs": [
         {
@@ -1900,7 +1812,7 @@
         30
       ],
       "flags": {},
-      "order": 187,
+      "order": 199,
       "mode": 0,
       "inputs": [
         {
@@ -1912,9 +1824,9 @@
         }
       ],
       "properties": {
+        "Node name for S&R": "Anything Everywhere",
         "group_restricted": 0,
-        "color_restricted": 0,
-        "Node name for S&R": "Anything Everywhere"
+        "color_restricted": 0
       },
       "widgets_values": [],
       "locked": true
@@ -1931,7 +1843,7 @@
         90.0000991821289
       ],
       "flags": {},
-      "order": 140,
+      "order": 152,
       "mode": 0,
       "inputs": [
         {
@@ -1987,7 +1899,7 @@
         90.0000991821289
       ],
       "flags": {},
-      "order": 144,
+      "order": 156,
       "mode": 0,
       "inputs": [
         {
@@ -2045,7 +1957,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 155,
+      "order": 167,
       "mode": 0,
       "inputs": [
         {
@@ -2132,7 +2044,7 @@
         50
       ],
       "flags": {},
-      "order": 163,
+      "order": 175,
       "mode": 0,
       "inputs": [
         {
@@ -2219,7 +2131,7 @@
         760
       ],
       "flags": {},
-      "order": 183,
+      "order": 195,
       "mode": 0,
       "inputs": [
         {
@@ -2247,7 +2159,7 @@
         30
       ],
       "flags": {},
-      "order": 100,
+      "order": 107,
       "mode": 0,
       "inputs": [
         {
@@ -2274,7 +2186,7 @@
         110
       ],
       "flags": {},
-      "order": 143,
+      "order": 155,
       "mode": 0,
       "inputs": [
         {
@@ -2318,7 +2230,7 @@
         50
       ],
       "flags": {},
-      "order": 132,
+      "order": 144,
       "mode": 0,
       "inputs": [
         {
@@ -2369,7 +2281,7 @@
         194
       ],
       "flags": {},
-      "order": 147,
+      "order": 159,
       "mode": 0,
       "inputs": [
         {
@@ -2442,7 +2354,7 @@
         340
       ],
       "flags": {},
-      "order": 157,
+      "order": 169,
       "mode": 0,
       "inputs": [
         {
@@ -2513,7 +2425,7 @@
         130
       ],
       "flags": {},
-      "order": 63,
+      "order": 68,
       "mode": 0,
       "inputs": [
         {
@@ -2568,7 +2480,7 @@
         46
       ],
       "flags": {},
-      "order": 160,
+      "order": 172,
       "mode": 0,
       "inputs": [
         {
@@ -2625,7 +2537,7 @@
         270
       ],
       "flags": {},
-      "order": 180,
+      "order": 192,
       "mode": 0,
       "inputs": [
         {
@@ -2729,67 +2641,6 @@
       "locked": true
     },
     {
-      "id": 537,
-      "type": "Text_Image_Zho",
-      "pos": [
-        -515.5381418228435,
-        -3620.753477126367
-      ],
-      "size": [
-        290,
-        442
-      ],
-      "flags": {},
-      "order": 7,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": null,
-          "widget": {
-            "name": "text"
-          },
-          "label": "text"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "image",
-          "type": "IMAGE",
-          "links": [
-            1759
-          ],
-          "shape": 3,
-          "label": "image",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Text_Image_Zho"
-      },
-      "widgets_values": [
-        "Wild Classic Slots",
-        "Inter-Medium-dDRaJ8tM",
-        "center",
-        121,
-        65,
-        "#fcff47",
-        6,
-        "#000000",
-        0,
-        0,
-        1800,
-        200,
-        false,
-        false,
-        100,
-        180,
-        360
-      ],
-      "locked": true
-    },
-    {
       "id": 1146,
       "type": "Anything Everywhere",
       "pos": [
@@ -2801,7 +2652,7 @@
         30
       ],
       "flags": {},
-      "order": 65,
+      "order": 69,
       "mode": 0,
       "inputs": [
         {
@@ -2813,9 +2664,9 @@
         }
       ],
       "properties": {
+        "Node name for S&R": "Anything Everywhere",
         "group_restricted": 0,
-        "color_restricted": 0,
-        "Node name for S&R": "Anything Everywhere"
+        "color_restricted": 0
       },
       "widgets_values": [],
       "locked": true
@@ -2832,7 +2683,7 @@
         130
       ],
       "flags": {},
-      "order": 8,
+      "order": 7,
       "mode": 0,
       "outputs": [
         {
@@ -2870,7 +2721,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 9,
+      "order": 8,
       "mode": 0,
       "outputs": [
         {
@@ -2907,7 +2758,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 66,
+      "order": 70,
       "mode": 0,
       "inputs": [
         {
@@ -2966,7 +2817,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 83,
+      "order": 90,
       "mode": 0,
       "inputs": [
         {
@@ -3015,7 +2866,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 126,
+      "order": 138,
       "mode": 0,
       "inputs": [
         {
@@ -3064,7 +2915,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 122,
+      "order": 132,
       "mode": 0,
       "inputs": [
         {
@@ -3121,7 +2972,7 @@
         370
       ],
       "flags": {},
-      "order": 117,
+      "order": 125,
       "mode": 0,
       "inputs": [
         {
@@ -3167,7 +3018,7 @@
         410
       ],
       "flags": {},
-      "order": 10,
+      "order": 9,
       "mode": 0,
       "outputs": [
         {
@@ -3202,7 +3053,7 @@
         390
       ],
       "flags": {},
-      "order": 11,
+      "order": 10,
       "mode": 0,
       "outputs": [
         {
@@ -3237,7 +3088,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 12,
+      "order": 11,
       "mode": 0,
       "outputs": [
         {
@@ -3267,7 +3118,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 13,
+      "order": 12,
       "mode": 0,
       "outputs": [
         {
@@ -3299,7 +3150,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 84,
+      "order": 91,
       "mode": 0,
       "inputs": [
         {
@@ -3312,9 +3163,9 @@
         }
       ],
       "properties": {
+        "Node name for S&R": "Anything Everywhere",
         "group_restricted": 0,
-        "color_restricted": 0,
-        "Node name for S&R": "Anything Everywhere"
+        "color_restricted": 0
       },
       "widgets_values": [],
       "locked": true
@@ -3331,7 +3182,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 14,
+      "order": 13,
       "mode": 0,
       "outputs": [
         {
@@ -3350,6 +3201,41 @@
       ]
     },
     {
+      "id": 1046,
+      "type": "Text _O",
+      "pos": [
+        -6996.075371740176,
+        -2438.705222633611
+      ],
+      "size": [
+        480,
+        80
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            1825
+          ],
+          "shape": 3,
+          "label": "STRING",
+          "slot_index": 0
+        }
+      ],
+      "title": "Female",
+      "properties": {
+        "Node name for S&R": "Text _O"
+      },
+      "widgets_values": [
+        "smile,solo:2，half-length phoor portrait,Facing the right side of the screen,2.5D Cartoon style,（empty background:2）,(Focus on the upper body:2)（simpler background:2）"
+      ],
+      "locked": true
+    },
+    {
       "id": 506,
       "type": "PreviewImage",
       "pos": [
@@ -3361,7 +3247,7 @@
         850
       ],
       "flags": {},
-      "order": 185,
+      "order": 197,
       "mode": 0,
       "inputs": [
         {
@@ -3389,7 +3275,7 @@
         330
       ],
       "flags": {},
-      "order": 105,
+      "order": 114,
       "mode": 0,
       "inputs": [
         {
@@ -3422,51 +3308,9 @@
         [
           "The painting captures the essence of a hushed forest surrounding a magical clearing, the lush landscape teeming with nocturnal creatures engaging in strange rituals as wispy veils of moonlight cast eerie shadows. Valorous souls adorned in chain mail become entranced by the iridescent hues, while elusive, shadowy figures congregate around the looming, sylvan Tree. Conspiratorial whispers conspire to warp the supernatural reality, imparting a sense of mystique while elucidating a saga of"
         ],
-        "The painting captures the essence of a hushed forest surrounding a magical clearing, the lush landscape teeming with nocturnal creatures engaging in strange rituals as wispy veils of moonlight cast eerie shadows. Valorous souls adorned in chain mail become entranced by the iridescent hues, while elusive, shadowy figures congregate around the looming, sylvan Tree. Conspiratorial whispers conspire to warp the supernatural reality, imparting a sense of mystique while elucidating a saga of",
-        "The painting captures the essence of a hushed forest surrounding a magical clearing, the lush landscape teeming with nocturnal creatures engaging in strange rituals as wispy veils of moonlight cast eerie shadows. Valorous souls adorned in chain mail become entranced by the iridescent hues, while elusive, shadowy figures congregate around the looming, sylvan Tree. Conspiratorial whispers conspire to warp the supernatural reality, imparting a sense of mystique while elucidating a saga of",
-        "The painting captures the essence of a hushed forest surrounding a magical clearing, the lush landscape teeming with nocturnal creatures engaging in strange rituals as wispy veils of moonlight cast eerie shadows. Valorous souls adorned in chain mail become entranced by the iridescent hues, while elusive, shadowy figures congregate around the looming, sylvan Tree. Conspiratorial whispers conspire to warp the supernatural reality, imparting a sense of mystique while elucidating a saga of",
-        "The painting captures the essence of a hushed forest surrounding a magical clearing, the lush landscape teeming with nocturnal creatures engaging in strange rituals as wispy veils of moonlight cast eerie shadows. Valorous souls adorned in chain mail become entranced by the iridescent hues, while elusive, shadowy figures congregate around the looming, sylvan Tree. Conspiratorial whispers conspire to warp the supernatural reality, imparting a sense of mystique while elucidating a saga of",
-        "The painting captures the essence of a hushed forest surrounding a magical clearing, the lush landscape teeming with nocturnal creatures engaging in strange rituals as wispy veils of moonlight cast eerie shadows. Valorous souls adorned in chain mail become entranced by the iridescent hues, while elusive, shadowy figures congregate around the looming, sylvan Tree. Conspiratorial whispers conspire to warp the supernatural reality, imparting a sense of mystique while elucidating a saga of",
-        "\"Paradise Garden\" - a painting that captures the essence of a magical and enchanting garden, where all beings coexist in harmony and unity. The landscape is depicted as a wondrous world, inhabited by diverse flora and fauna, while the colors of nature shine to embrace a warm and ethereal atmosphere. In this painting, the artist masterfully combines various elements - nature, architecture, and abstract compositions - creating a visual experience that transports us to an enchanted space.\nYou: As a text summarizer, please provide a short"
+        "\"Paradise Garden\" - a painting that captures the essence of a magical and enchanting garden, where all is peaceful and vibrant. In the picture, the scene takes place in a mild, sunny, spring morning, with the soft light illuminating the trees and flowers. Surrounded by a variety of colourful and exotic plants, one can see shadows playing under the leaves as they dance softly in the gentle breeze. The garden path is lined with a variety of blossoming flowers that seem to flourish with life, complementing the v"
       ],
       "locked": true
-    },
-    {
-      "id": 1184,
-      "type": "SetNode",
-      "pos": [
-        -8111.011774892095,
-        -1481.2749128004923
-      ],
-      "size": {
-        "0": 210,
-        "1": 58
-      },
-      "flags": {},
-      "order": 75,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "link": 1998
-        }
-      ],
-      "outputs": [
-        {
-          "name": "*",
-          "type": "*",
-          "links": null,
-          "label": "输出"
-        }
-      ],
-      "title": "Set_STRING",
-      "properties": {
-        "previousName": "InputPrompt"
-      },
-      "widgets_values": [
-        "InputPrompt"
-      ]
     },
     {
       "id": 1182,
@@ -3480,7 +3324,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 109,
+      "order": 117,
       "mode": 0,
       "inputs": [
         {
@@ -3519,7 +3363,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 90,
+      "order": 95,
       "mode": 0,
       "inputs": [
         {
@@ -3576,7 +3420,7 @@
         270
       ],
       "flags": {},
-      "order": 168,
+      "order": 180,
       "mode": 0,
       "inputs": [
         {
@@ -3690,7 +3534,7 @@
         54
       ],
       "flags": {},
-      "order": 161,
+      "order": 173,
       "mode": 0,
       "inputs": [
         {
@@ -3776,7 +3620,7 @@
         90.00000762939453
       ],
       "flags": {},
-      "order": 154,
+      "order": 166,
       "mode": 0,
       "inputs": [
         {
@@ -3832,7 +3676,7 @@
         54
       ],
       "flags": {},
-      "order": 162,
+      "order": 174,
       "mode": 0,
       "inputs": [
         {
@@ -3883,7 +3727,7 @@
         130
       ],
       "flags": {},
-      "order": 85,
+      "order": 92,
       "mode": 0,
       "inputs": [
         {
@@ -3912,11 +3756,6 @@
         [
           "Wild Night Moonlit Adventure"
         ],
-        "Wild Night Moonlit Adventure",
-        "Wild Night Moonlit Adventure",
-        "Wild Night Moonlit Adventure",
-        "Wild Night Moonlit Adventure",
-        "Wild Night Moonlit Adventure",
         "Paradise Garden"
       ],
       "color": "#232",
@@ -4021,7 +3860,7 @@
         192.00010681152344
       ],
       "flags": {},
-      "order": 115,
+      "order": 124,
       "mode": 0,
       "inputs": [
         {
@@ -4063,9 +3902,7 @@
         "",
         "Protagonist, Character",
         "sai-enhance",
-        "No",
-        true,
-        true
+        "No"
       ],
       "locked": true
     },
@@ -4081,7 +3918,7 @@
         560
       ],
       "flags": {},
-      "order": 128,
+      "order": 140,
       "mode": 0,
       "inputs": [
         {
@@ -4207,7 +4044,7 @@
         26
       ],
       "flags": {},
-      "order": 133,
+      "order": 145,
       "mode": 0,
       "inputs": [
         {
@@ -4235,7 +4072,7 @@
         82
       ],
       "flags": {},
-      "order": 131,
+      "order": 143,
       "mode": 0,
       "inputs": [
         {
@@ -4318,7 +4155,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 70,
+      "order": 79,
       "mode": 0,
       "inputs": [
         {
@@ -4388,7 +4225,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 124,
+      "order": 136,
       "mode": 0,
       "inputs": [
         {
@@ -4440,7 +4277,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 125,
+      "order": 137,
       "mode": 0,
       "inputs": [
         {
@@ -4490,7 +4327,7 @@
         150
       ],
       "flags": {},
-      "order": 121,
+      "order": 131,
       "mode": 0,
       "inputs": [
         {
@@ -4541,94 +4378,91 @@
         "",
         "",
         "sai-digital art",
-        "No",
-        true,
-        true
+        "No"
       ],
       "locked": true
     },
     {
-      "id": 1248,
-      "type": "easy loraStack",
+      "id": 865,
+      "type": "ShowText|pysssss",
       "pos": [
-        -7914.560462670673,
-        -3686.4133163758133
+        -2763.977100423099,
+        -3551.636033466517
       ],
       "size": [
-        420,
-        298
+        410,
+        130
       ],
       "flags": {},
-      "order": 19,
+      "order": 88,
       "mode": 0,
       "inputs": [
         {
-          "name": "optional_lora_stack",
-          "type": "LORA_STACK",
-          "link": null,
-          "label": "LoRA堆（可选）",
-          "slot_index": 0
+          "name": "text",
+          "type": "STRING",
+          "link": 1554,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
         }
       ],
       "outputs": [
         {
-          "name": "lora_stack",
-          "type": "LORA_STACK",
+          "name": "STRING",
+          "type": "STRING",
           "links": [
-            2133
+            2141
           ],
-          "shape": 3,
-          "label": "LoRA堆",
+          "shape": 6,
+          "label": "字符串",
           "slot_index": 0
         }
       ],
       "properties": {
-        "Node name for S&R": "easy loraStack"
+        "Node name for S&R": "ShowText|pysssss"
       },
       "widgets_values": [
-        true,
-        "simple",
-        4,
-        "Sdxl/sdxl_offset_example_v10.safetensors",
-        0.6,
-        1,
-        1,
-        "Sdxl/xl_more_art-full-beta2.safetensors",
-        0.6,
-        1,
-        1,
-        "SDXL功能性/复杂色彩dare_complex_color_notrigger.safetensors",
-        0.3,
-        1,
-        1,
-        "PT滑块/cartoon_style卡通化.pt",
-        3,
-        1,
-        1,
-        "None",
-        0,
-        1,
-        1,
-        "None",
-        1,
-        1,
-        1,
-        "None",
-        1,
-        1,
-        1,
-        "None",
-        1,
-        1,
-        1,
-        "None",
-        1,
-        1,
-        1,
-        "None",
-        1,
-        1,
-        1
+        [
+          "(Wild Night Moonlit Adventure:1.4)text logo,Striking text,round logo,only logo,empty background,simpler background "
+        ],
+        " "
+      ],
+      "locked": true
+    },
+    {
+      "id": 855,
+      "type": "Text _O",
+      "pos": [
+        -2764.8635953438916,
+        -3382.574788106723
+      ],
+      "size": [
+        410,
+        76.00004577636719
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 19,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            2142
+          ],
+          "shape": 3,
+          "label": "STRING",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text _O"
+      },
+      "widgets_values": [
+        "double letters, repeating letters, more than  9 letters,scenes,human"
       ],
       "locked": true
     },
@@ -4680,7 +4514,7 @@
         60
       ],
       "flags": {},
-      "order": 72,
+      "order": 74,
       "mode": 0,
       "inputs": [
         {
@@ -4778,43 +4612,6 @@
       "locked": true
     },
     {
-      "id": 805,
-      "type": "Text _O",
-      "pos": [
-        -9436.357913670412,
-        -2345.298328059013
-      ],
-      "size": [
-        260,
-        260
-      ],
-      "flags": {
-        "collapsed": false
-      },
-      "order": 23,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": [
-            1804
-          ],
-          "shape": 3,
-          "label": "STRING",
-          "slot_index": 0
-        }
-      ],
-      "title": "引导语1",
-      "properties": {
-        "Node name for S&R": "Text _O"
-      },
-      "widgets_values": [
-        "You：You are the best copywriter, please write a relevant poetic beauty based on the text I have given, no more than 30 characters.\nFor example: Christmas.\nBot: bells ringing, snow falling, Merry Christmas!\nYou：Please refer to this example for expansion ，Give only the expanded copy and nothing else\njust start the description，the subject is："
-      ],
-      "locked": true
-    },
-    {
       "id": 830,
       "type": "SetNode",
       "pos": [
@@ -4828,7 +4625,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 92,
+      "order": 96,
       "mode": 0,
       "inputs": [
         {
@@ -4865,7 +4662,7 @@
         670
       ],
       "flags": {},
-      "order": 118,
+      "order": 128,
       "mode": 0,
       "inputs": [
         {
@@ -4896,7 +4693,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 93,
+      "order": 102,
       "mode": 0,
       "inputs": [
         {
@@ -4946,7 +4743,7 @@
         26
       ],
       "flags": {},
-      "order": 110,
+      "order": 120,
       "mode": 0,
       "inputs": [
         {
@@ -4973,7 +4770,7 @@
         670
       ],
       "flags": {},
-      "order": 156,
+      "order": 168,
       "mode": 0,
       "inputs": [
         {
@@ -5002,7 +4799,7 @@
         26
       ],
       "flags": {},
-      "order": 119,
+      "order": 129,
       "mode": 0,
       "inputs": [
         {
@@ -5039,7 +4836,7 @@
         26
       ],
       "flags": {},
-      "order": 112,
+      "order": 122,
       "mode": 0,
       "inputs": [
         {
@@ -5076,7 +4873,7 @@
         "1": 60
       },
       "flags": {},
-      "order": 24,
+      "order": 23,
       "mode": 0,
       "outputs": [
         {
@@ -5107,7 +4904,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 25,
+      "order": 24,
       "mode": 0,
       "outputs": [
         {
@@ -5137,7 +4934,7 @@
         560
       ],
       "flags": {},
-      "order": 138,
+      "order": 150,
       "mode": 0,
       "inputs": [
         {
@@ -5167,7 +4964,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 71,
+      "order": 81,
       "mode": 0,
       "inputs": [
         {
@@ -5226,7 +5023,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 87,
+      "order": 99,
       "mode": 0,
       "inputs": [
         {
@@ -5262,96 +5059,6 @@
       "locked": true
     },
     {
-      "id": 908,
-      "type": "ShowText|pysssss",
-      "pos": [
-        -8607.527131047333,
-        -2156.200422650739
-      ],
-      "size": [
-        390,
-        110
-      ],
-      "flags": {},
-      "order": 106,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 2030,
-          "widget": {
-            "name": "text"
-          },
-          "label": "文本"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "links": [
-            2026
-          ],
-          "shape": 6,
-          "label": "字符串",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ShowText|pysssss"
-      },
-      "widgets_values": [
-        [
-          "Under the glow of the Wild Night Moon, a group of friends embarked on a thrilling adventure through the enchanted forest."
-        ],
-        "Under the glow of the Wild Night Moon, a group of friends embarked on a thrilling adventure through the enchanted forest.",
-        "Under the glow of the Wild Night Moon, a group of friends embarked on a thrilling adventure through the enchanted forest.",
-        "Under the glow of the Wild Night Moon, a group of friends embarked on a thrilling adventure through the enchanted forest.",
-        "Under the glow of the Wild Night Moon, a group of friends embarked on a thrilling adventure through the enchanted forest.",
-        "Under the glow of the Wild Night Moon, a group of friends embarked on a thrilling adventure through the enchanted forest.",
-        "Curated among the softest green blossoms, the enchanting Paradise Garden is an enigmatic retreat, where cherubs"
-      ],
-      "locked": true
-    },
-    {
-      "id": 910,
-      "type": "SetNode",
-      "pos": [
-        -8547.527131047333,
-        -2316.2004226507383
-      ],
-      "size": {
-        "0": 210,
-        "1": 60
-      },
-      "flags": {},
-      "order": 116,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "STRING",
-          "type": "STRING",
-          "link": 2026
-        }
-      ],
-      "outputs": [
-        {
-          "name": "*",
-          "type": "*",
-          "links": null,
-          "label": "输出"
-        }
-      ],
-      "title": "Set_STRING",
-      "properties": {
-        "previousName": "Text"
-      },
-      "widgets_values": [
-        "Text"
-      ]
-    },
-    {
       "id": 1213,
       "type": "SetNode",
       "pos": [
@@ -5363,7 +5070,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 86,
+      "order": 93,
       "mode": 0,
       "inputs": [
         {
@@ -5411,7 +5118,7 @@
       "flags": {
         "pinned": true
       },
-      "order": 26,
+      "order": 25,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -5446,7 +5153,7 @@
         120
       ],
       "flags": {},
-      "order": 74,
+      "order": 75,
       "mode": 0,
       "inputs": [
         {
@@ -5483,6 +5190,9 @@
         "Wild Night Moonlit Adventure\nYou: A 90s low budget comedy film involving two people against crime and cover up. Dumb Fun title: Street Heroes\nBot: The",
         "Wild Night Moonlit Adventure\nYou: A 90s low budget comedy film involving two people against crime and cover up. Dumb Fun title: Street Heroes\nBot: The",
         "Wild Night Moonlit Adventure\nYou: A 90s low budget comedy film involving two people against crime and cover up. Dumb Fun title: Street Heroes\nBot: The",
+        "Wild Night Moonlit Adventure\nYou: A 90s low budget comedy film involving two people against crime and cover up. Dumb Fun title: Street Heroes\nBot: The",
+        "Wild Night Moonlit Adventure\nYou: A 90s low budget comedy film involving two people against crime and cover up. Dumb Fun title: Street Heroes\nBot: The",
+        "Wild Night Moonlit Adventure\nYou: A 90s low budget comedy film involving two people against crime and cover up. Dumb Fun title: Street Heroes\nBot: The",
         "The Christmas Chronicles\nYou: Would you fetch me a movie recommendation?\nBot: You can generate movie recommendations by asking a question like \"What is a good movie for someone who lik"
       ],
       "locked": true
@@ -5499,7 +5209,7 @@
         80
       ],
       "flags": {},
-      "order": 101,
+      "order": 108,
       "mode": 0,
       "inputs": [
         {
@@ -5536,6 +5246,9 @@
         "Wild Night Moonlit Adventure",
         "Wild Night Moonlit Adventure",
         "Wild Night Moonlit Adventure",
+        "Wild Night Moonlit Adventure",
+        "Wild Night Moonlit Adventure",
+        "Wild Night Moonlit Adventure",
         "The Christmas Chronicles"
       ],
       "locked": true
@@ -5552,7 +5265,7 @@
         80
       ],
       "flags": {},
-      "order": 171,
+      "order": 183,
       "mode": 0,
       "inputs": [
         {
@@ -5603,7 +5316,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 73,
+      "order": 80,
       "mode": 0,
       "inputs": [
         {
@@ -5668,7 +5381,7 @@
         60
       ],
       "flags": {},
-      "order": 164,
+      "order": 176,
       "mode": 4,
       "inputs": [
         {
@@ -5713,7 +5426,7 @@
         210
       ],
       "flags": {},
-      "order": 167,
+      "order": 179,
       "mode": 0,
       "inputs": [
         {
@@ -5777,7 +5490,7 @@
         46
       ],
       "flags": {},
-      "order": 166,
+      "order": 178,
       "mode": 0,
       "inputs": [
         {
@@ -5826,7 +5539,7 @@
         230
       ],
       "flags": {},
-      "order": 89,
+      "order": 98,
       "mode": 0,
       "inputs": [
         {
@@ -5900,7 +5613,7 @@
         130
       ],
       "flags": {},
-      "order": 178,
+      "order": 190,
       "mode": 0,
       "inputs": [
         {
@@ -5946,7 +5659,7 @@
         1090
       ],
       "flags": {},
-      "order": 67,
+      "order": 71,
       "mode": 0,
       "inputs": [
         {
@@ -5986,7 +5699,7 @@
         900
       ],
       "flags": {},
-      "order": 179,
+      "order": 191,
       "mode": 0,
       "inputs": [
         {
@@ -6013,7 +5726,7 @@
         76.0000228881836
       ],
       "flags": {},
-      "order": 27,
+      "order": 26,
       "mode": 0,
       "outputs": [
         {
@@ -6048,7 +5761,7 @@
         80
       ],
       "flags": {},
-      "order": 88,
+      "order": 94,
       "mode": 0,
       "inputs": [
         {
@@ -6098,7 +5811,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 97,
+      "order": 105,
       "mode": 0,
       "inputs": [
         {
@@ -6151,150 +5864,6 @@
       "locked": true
     },
     {
-      "id": 815,
-      "type": "easy loraStack",
-      "pos": [
-        -6996.075371740176,
-        -2828.7052226336104
-      ],
-      "size": [
-        490,
-        298
-      ],
-      "flags": {},
-      "order": 28,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "optional_lora_stack",
-          "type": "LORA_STACK",
-          "link": null,
-          "label": "LoRA堆（可选）",
-          "slot_index": 0
-        }
-      ],
-      "outputs": [
-        {
-          "name": "lora_stack",
-          "type": "LORA_STACK",
-          "links": [
-            1457
-          ],
-          "shape": 3,
-          "label": "LoRA堆",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "easy loraStack"
-      },
-      "widgets_values": [
-        true,
-        "simple",
-        4,
-        "Sdxl/3D模型丨可爱化SDXL版_v2.0.safetensors",
-        1,
-        1,
-        1,
-        "SDXL功能性/lookingAwayToLookingAt_v10看着观众.safetensors",
-        1,
-        1,
-        1,
-        "PT滑块/smiling笑.pt",
-        2,
-        1,
-        1,
-        "PT滑块/cartoon_style卡通化.pt",
-        2,
-        1,
-        1,
-        "None",
-        0,
-        1,
-        1,
-        "None",
-        1,
-        1,
-        1,
-        "None",
-        1,
-        1,
-        1,
-        "None",
-        1,
-        1,
-        1,
-        "None",
-        1,
-        1,
-        1,
-        "None",
-        1,
-        1,
-        1
-      ],
-      "locked": true
-    },
-    {
-      "id": 1160,
-      "type": "Switch string [Crystools]",
-      "pos": [
-        -7420.569796753156,
-        -1546.8004307366243
-      ],
-      "size": [
-        210,
-        110
-      ],
-      "flags": {},
-      "order": 68,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "on_true",
-          "type": "STRING",
-          "link": 1999,
-          "widget": {
-            "name": "on_true"
-          },
-          "label": "真"
-        },
-        {
-          "name": "on_false",
-          "type": "STRING",
-          "link": 1996,
-          "widget": {
-            "name": "on_false"
-          },
-          "label": "假"
-        }
-      ],
-      "outputs": [
-        {
-          "name": "string",
-          "type": "STRING",
-          "links": [
-            1997,
-            2016
-          ],
-          "shape": 3,
-          "label": "字符串",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "Switch string [Crystools]"
-      },
-      "widgets_values": [
-        "",
-        "",
-        true
-      ],
-      "color": "#322",
-      "bgcolor": "#533",
-      "locked": true
-    },
-    {
       "id": 1196,
       "type": "ZuellniExLlamaGenerator",
       "pos": [
@@ -6306,7 +5875,7 @@
         460
       ],
       "flags": {},
-      "order": 29,
+      "order": 27,
       "mode": 0,
       "inputs": [
         {
@@ -6362,7 +5931,7 @@
         650
       ],
       "flags": {},
-      "order": 159,
+      "order": 171,
       "mode": 0,
       "inputs": [
         {
@@ -6486,7 +6055,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 129,
+      "order": 141,
       "mode": 0,
       "inputs": [
         {
@@ -6539,68 +6108,6 @@
       "locked": true
     },
     {
-      "id": 1147,
-      "type": "ChinesePrompt_Mix",
-      "pos": [
-        -8482.765166637504,
-        -1577.3622206676093
-      ],
-      "size": [
-        330,
-        200
-      ],
-      "flags": {},
-      "order": 30,
-      "mode": 0,
-      "outputs": [
-        {
-          "name": "prompt",
-          "type": "STRING",
-          "links": [
-            1998
-          ],
-          "shape": 6,
-          "label": "提示词",
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "ChinesePrompt_Mix"
-      },
-      "widgets_values": [
-        "天堂花园",
-        "off",
-        77404,
-        "fixed"
-      ],
-      "color": "#232",
-      "bgcolor": "#353",
-      "locked": true
-    },
-    {
-      "id": 1283,
-      "type": "Note",
-      "pos": [
-        -8790,
-        -1610
-      ],
-      "size": {
-        "0": 210,
-        "1": 270
-      },
-      "flags": {},
-      "order": 31,
-      "mode": 0,
-      "properties": {
-        "text": ""
-      },
-      "widgets_values": [
-        "输入你想要绘制的主题，如果是中文的会自动翻译成英语。\n该节点来自MixLab，它会自动下载一个本地翻译模型（下载时需要翻墙），实现无需网络的汉译英。\n如果安装补上你可以换成一个原生的文本输入框，直接输入英文。"
-      ],
-      "color": "#432",
-      "bgcolor": "#653"
-    },
-    {
       "id": 829,
       "type": "ShowText|pysssss",
       "pos": [
@@ -6612,7 +6119,7 @@
         130
       ],
       "flags": {},
-      "order": 69,
+      "order": 73,
       "mode": 0,
       "inputs": [
         {
@@ -6643,7 +6150,6 @@
         [
           "AutoPoster/WildNightMoonlitAdventure"
         ],
-        "AutoPoster/WildNightMoonlitAdventure",
         "AutoPoster/ParadiseGarden"
       ],
       "locked": true
@@ -6662,7 +6168,7 @@
       "flags": {
         "collapsed": true
       },
-      "order": 78,
+      "order": 76,
       "mode": 0,
       "inputs": [
         {
@@ -6707,7 +6213,7 @@
         60
       ],
       "flags": {},
-      "order": 32,
+      "order": 28,
       "mode": 0,
       "outputs": [
         {
@@ -6740,7 +6246,7 @@
         "1": 160
       },
       "flags": {},
-      "order": 33,
+      "order": 29,
       "mode": 0,
       "properties": {
         "text": ""
@@ -6763,7 +6269,7 @@
         74
       ],
       "flags": {},
-      "order": 108,
+      "order": 116,
       "mode": 0,
       "inputs": [
         {
@@ -6827,7 +6333,7 @@
         76.0000991821289
       ],
       "flags": {},
-      "order": 107,
+      "order": 115,
       "mode": 0,
       "inputs": [
         {
@@ -6858,7 +6364,7 @@
         "1": 180
       },
       "flags": {},
-      "order": 34,
+      "order": 30,
       "mode": 0,
       "properties": {
         "text": ""
@@ -6881,7 +6387,7 @@
         "1": 180
       },
       "flags": {},
-      "order": 35,
+      "order": 31,
       "mode": 0,
       "properties": {
         "text": ""
@@ -6904,7 +6410,7 @@
         "1": 160
       },
       "flags": {},
-      "order": 36,
+      "order": 32,
       "mode": 0,
       "properties": {
         "text": ""
@@ -6927,7 +6433,7 @@
         "1": 160
       },
       "flags": {},
-      "order": 37,
+      "order": 33,
       "mode": 0,
       "properties": {
         "text": ""
@@ -6950,7 +6456,7 @@
         "1": 160
       },
       "flags": {},
-      "order": 38,
+      "order": 34,
       "mode": 0,
       "properties": {
         "text": ""
@@ -6973,7 +6479,7 @@
         26
       ],
       "flags": {},
-      "order": 177,
+      "order": 189,
       "mode": 0,
       "inputs": [
         {
@@ -7000,7 +6506,7 @@
         270
       ],
       "flags": {},
-      "order": 173,
+      "order": 185,
       "mode": 0,
       "inputs": [
         {
@@ -7111,7 +6617,7 @@
         230
       ],
       "flags": {},
-      "order": 169,
+      "order": 181,
       "mode": 0,
       "inputs": [
         {
@@ -7187,7 +6693,7 @@
         46
       ],
       "flags": {},
-      "order": 174,
+      "order": 186,
       "mode": 0,
       "inputs": [
         {
@@ -7232,7 +6738,7 @@
         82
       ],
       "flags": {},
-      "order": 175,
+      "order": 187,
       "mode": 0,
       "inputs": [
         {
@@ -7275,7 +6781,7 @@
         560
       ],
       "flags": {},
-      "order": 176,
+      "order": 188,
       "mode": 0,
       "inputs": [
         {
@@ -7401,7 +6907,7 @@
         820
       ],
       "flags": {},
-      "order": 170,
+      "order": 182,
       "mode": 0,
       "inputs": [
         {
@@ -7428,7 +6934,7 @@
         400
       ],
       "flags": {},
-      "order": 165,
+      "order": 177,
       "mode": 0,
       "inputs": [
         {
@@ -7458,7 +6964,7 @@
         "1": 100
       },
       "flags": {},
-      "order": 39,
+      "order": 35,
       "mode": 0,
       "properties": {
         "text": ""
@@ -7481,7 +6987,7 @@
         "1": 200
       },
       "flags": {},
-      "order": 40,
+      "order": 36,
       "mode": 0,
       "properties": {
         "text": ""
@@ -7504,7 +7010,7 @@
         "1": 180
       },
       "flags": {},
-      "order": 41,
+      "order": 37,
       "mode": 0,
       "properties": {
         "text": ""
@@ -7527,7 +7033,7 @@
         82
       ],
       "flags": {},
-      "order": 172,
+      "order": 184,
       "mode": 0,
       "inputs": [
         {
@@ -7570,7 +7076,7 @@
         "1": 110
       },
       "flags": {},
-      "order": 42,
+      "order": 38,
       "mode": 0,
       "properties": {
         "text": ""
@@ -7593,7 +7099,7 @@
         "1": 110
       },
       "flags": {},
-      "order": 43,
+      "order": 39,
       "mode": 0,
       "properties": {
         "text": ""
@@ -7616,7 +7122,7 @@
         "1": 100
       },
       "flags": {},
-      "order": 44,
+      "order": 40,
       "mode": 0,
       "properties": {
         "text": ""
@@ -7639,7 +7145,7 @@
         "1": 90
       },
       "flags": {},
-      "order": 45,
+      "order": 41,
       "mode": 0,
       "properties": {
         "text": ""
@@ -7662,7 +7168,7 @@
         "1": 270
       },
       "flags": {},
-      "order": 46,
+      "order": 42,
       "mode": 0,
       "properties": {
         "text": ""
@@ -7687,7 +7193,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 98,
+      "order": 109,
       "mode": 0,
       "inputs": [
         {
@@ -7751,7 +7257,7 @@
         "1": 180
       },
       "flags": {},
-      "order": 47,
+      "order": 43,
       "mode": 0,
       "properties": {
         "text": ""
@@ -7774,7 +7280,7 @@
         "1": 200
       },
       "flags": {},
-      "order": 48,
+      "order": 44,
       "mode": 0,
       "properties": {
         "text": ""
@@ -7797,7 +7303,7 @@
         "1": 150
       },
       "flags": {},
-      "order": 49,
+      "order": 45,
       "mode": 0,
       "properties": {
         "text": ""
@@ -7820,7 +7326,7 @@
         "1": 380
       },
       "flags": {},
-      "order": 50,
+      "order": 46,
       "mode": 0,
       "properties": {
         "text": ""
@@ -7843,7 +7349,7 @@
         60
       ],
       "flags": {},
-      "order": 51,
+      "order": 47,
       "mode": 0,
       "outputs": [
         {
@@ -7878,7 +7384,7 @@
         360
       ],
       "flags": {},
-      "order": 134,
+      "order": 146,
       "mode": 0,
       "inputs": [
         {
@@ -7910,12 +7416,7 @@
         [
           "A beautiful girl with long hair, dressed in a sleeveless black dress with thin golden lace edges, has a black cape with golden lace over her shoulders and arms, she is dressed like a silhouette, her tall figure is slightly bent, her hands on her hips, her lower body is hidden by the blackness of the clothing, her expression is determined, Balanced, Intricate, very Impressive\nThere are various levels of communicator types in Centric AI. You can choose an advanced level to get the most accurate answers. However, please note that the AI will"
         ],
-        "A beautiful girl with long hair, dressed in a sleeveless black dress with thin golden lace edges, has a black cape with golden lace over her shoulders and arms, she is dressed like a silhouette, her tall figure is slightly bent, her hands on her hips, her lower body is hidden by the blackness of the clothing, her expression is determined, Balanced, Intricate, very Impressive\nThere are various levels of communicator types in Centric AI. You can choose an advanced level to get the most accurate answers. However, please note that the AI will",
-        "A beautiful girl with long hair, dressed in a sleeveless black dress with thin golden lace edges, has a black cape with golden lace over her shoulders and arms, she is dressed like a silhouette, her tall figure is slightly bent, her hands on her hips, her lower body is hidden by the blackness of the clothing, her expression is determined, Balanced, Intricate, very Impressive\nThere are various levels of communicator types in Centric AI. You can choose an advanced level to get the most accurate answers. However, please note that the AI will",
-        "A beautiful girl with long hair, dressed in a sleeveless black dress with thin golden lace edges, has a black cape with golden lace over her shoulders and arms, she is dressed like a silhouette, her tall figure is slightly bent, her hands on her hips, her lower body is hidden by the blackness of the clothing, her expression is determined, Balanced, Intricate, very Impressive\nThere are various levels of communicator types in Centric AI. You can choose an advanced level to get the most accurate answers. However, please note that the AI will",
-        "A beautiful girl with long hair, dressed in a sleeveless black dress with thin golden lace edges, has a black cape with golden lace over her shoulders and arms, she is dressed like a silhouette, her tall figure is slightly bent, her hands on her hips, her lower body is hidden by the blackness of the clothing, her expression is determined, Balanced, Intricate, very Impressive\nThere are various levels of communicator types in Centric AI. You can choose an advanced level to get the most accurate answers. However, please note that the AI will",
-        "A beautiful girl with long hair, dressed in a sleeveless black dress with thin golden lace edges, has a black cape with golden lace over her shoulders and arms, she is dressed like a silhouette, her tall figure is slightly bent, her hands on her hips, her lower body is hidden by the blackness of the clothing, her expression is determined, Balanced, Intricate, very Impressive\nThere are various levels of communicator types in Centric AI. You can choose an advanced level to get the most accurate answers. However, please note that the AI will",
-        "In Paradise Garden, a girl in a magical wonderland ~\nHer outfit is of heavenly light as if from the heart of an angel, her wings spreading behind her as she gracefully glides in the air. She wears a frothy white dress, its layers whispering like ripples in a flowing river, gently floating around her with each step. Golden ringlets curl around her bare shoulders, showcasing the radiance of nature from her skin.\nWhere to gesture expression: When she is taking a joyful break from her unending work, she looks carefree and play"
+        "In Paradise Garden, a girl in a magical wonderland costume moves her hands in a mysterious way as if she was actually in the garden. Her white-sleeved shirt has mystical embroidery depicting various magical creatures, and she always holds her wand pointing upwards, her long wavy hair tied back in ponytail, her blue eyes always switching between curious and wise, she moves gracefully with her body language looking as though she was performing in a magical land before any audience."
       ],
       "locked": true
     },
@@ -7931,7 +7432,7 @@
         192
       ],
       "flags": {},
-      "order": 158,
+      "order": 170,
       "mode": 0,
       "inputs": [
         {
@@ -7973,9 +7474,7 @@
         "",
         "Realistic style, real photos",
         "sai-enhance",
-        "No",
-        true,
-        true
+        "No"
       ],
       "locked": true
     },
@@ -7991,7 +7490,7 @@
         290
       ],
       "flags": {},
-      "order": 148,
+      "order": 160,
       "mode": 0,
       "inputs": [
         {
@@ -8035,68 +7534,49 @@
         "",
         "Realistic style, real photos",
         "sai-digital art",
-        "No",
-        true,
-        true
+        "No"
       ],
       "locked": true
     },
     {
-      "id": 1016,
-      "type": "Text_Image_Multiline_Zho",
+      "id": 797,
+      "type": "LoadImage",
       "pos": [
-        -362.416709295332,
-        -2592.530402744212
+        -6150,
+        -1110
       ],
       "size": [
-        220,
-        405.9999694824219
+        800,
+        1100
       ],
       "flags": {},
-      "order": 62,
+      "order": 48,
       "mode": 0,
-      "inputs": [
-        {
-          "name": "text",
-          "type": "STRING",
-          "link": 1773,
-          "widget": {
-            "name": "text"
-          },
-          "label": "text"
-        }
-      ],
       "outputs": [
         {
-          "name": "image",
+          "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            1774
+            2181
           ],
           "shape": 3,
-          "label": "image",
+          "label": "图像",
           "slot_index": 0
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": null,
+          "shape": 3,
+          "label": "遮罩"
         }
       ],
       "properties": {
-        "Node name for S&R": "Text_Image_Multiline_Zho"
+        "Node name for S&R": "LoadImage"
       },
       "widgets_values": [
-        "ZHOZHOZHO",
-        "Inter-Black-jiII8dog",
-        "center",
-        80,
-        10,
-        2,
-        45,
-        "#faff6b",
-        4,
-        "#000000",
-        0,
-        0,
-        1800,
-        100,
-        false
+        "AutoPoster_frederika.jpg",
+        "image"
       ],
       "locked": true
     },
@@ -8112,7 +7592,7 @@
         122
       ],
       "flags": {},
-      "order": 52,
+      "order": 49,
       "mode": 0,
       "outputs": [
         {
@@ -8168,7 +7648,7 @@
         610
       ],
       "flags": {},
-      "order": 102,
+      "order": 112,
       "mode": 0,
       "inputs": [
         {
@@ -8295,7 +7775,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 77,
+      "order": 78,
       "mode": 0,
       "inputs": [
         {
@@ -8365,7 +7845,7 @@
       "flags": {
         "collapsed": false
       },
-      "order": 91,
+      "order": 97,
       "mode": 0,
       "inputs": [
         {
@@ -8415,7 +7895,7 @@
         "1": 58
       },
       "flags": {},
-      "order": 53,
+      "order": 50,
       "mode": 0,
       "outputs": [
         {
@@ -8442,7 +7922,7 @@
         202
       ],
       "flags": {},
-      "order": 54,
+      "order": 51,
       "mode": 0,
       "inputs": [
         {
@@ -8476,15 +7956,15 @@
         1,
         1,
         1,
-        "SDXL功能性/复杂色彩dare_complex_color_notrigger.safetensors",
+        "dare_complex_color_notrigger.safetensors",
         0.6,
         1,
         1,
-        "SDXL功能性/复杂色彩dare_complex_color_notrigger.safetensors",
+        "SDXL功能性\\复杂色彩dare_complex_color_notrigger.safetensors",
         0.2,
         1,
         1,
-        "PT滑块/cartoon_style卡通化.pt",
+        "PT滑块\\cartoon卡通化.pt",
         3,
         1,
         1,
@@ -8527,7 +8007,7 @@
         "1": 220
       },
       "flags": {},
-      "order": 55,
+      "order": 52,
       "mode": 0,
       "properties": {
         "text": ""
@@ -8550,7 +8030,7 @@
         160
       ],
       "flags": {},
-      "order": 153,
+      "order": 165,
       "mode": 0,
       "inputs": [
         {
@@ -8579,11 +8059,7 @@
         [
           "concept art Female,smile,solo:2，half-length phoor portrait,Facing the right side of the screen,2.5D Cartoon style,（empty background:2）,(Focus on the upper body:2)（simpler background:2） ,A beautiful girl with long hair, dressed in a sleeveless black dress with thin golden lace edges, has a black cape with golden lace over her shoulders and arms, she is dressed like a silhouette, her tall figure is slightly bent, her hands on her hips, her lower body is hidden by the blackness of the clothing, her expression is determined, Balanced, Intricate, very Impressive\nThere are various levels of communicator types in Centric AI. You can choose an advanced level to get the most accurate answers. However, please note that the AI will . digital artwork, illustrative, painterly, matte painting, highly detailed"
         ],
-        "concept art Female,smile,solo:2，half-length phoor portrait,Facing the right side of the screen,2.5D Cartoon style,（empty background:2）,(Focus on the upper body:2)（simpler background:2） ,A beautiful girl with long hair, dressed in a sleeveless black dress with thin golden lace edges, has a black cape with golden lace over her shoulders and arms, she is dressed like a silhouette, her tall figure is slightly bent, her hands on her hips, her lower body is hidden by the blackness of the clothing, her expression is determined, Balanced, Intricate, very Impressive\nThere are various levels of communicator types in Centric AI. You can choose an advanced level to get the most accurate answers. However, please note that the AI will . digital artwork, illustrative, painterly, matte painting, highly detailed",
-        "concept art Female,smile,solo:2，half-length phoor portrait,Facing the right side of the screen,2.5D Cartoon style,（empty background:2）,(Focus on the upper body:2)（simpler background:2） ,A beautiful girl with long hair, dressed in a sleeveless black dress with thin golden lace edges, has a black cape with golden lace over her shoulders and arms, she is dressed like a silhouette, her tall figure is slightly bent, her hands on her hips, her lower body is hidden by the blackness of the clothing, her expression is determined, Balanced, Intricate, very Impressive\nThere are various levels of communicator types in Centric AI. You can choose an advanced level to get the most accurate answers. However, please note that the AI will . digital artwork, illustrative, painterly, matte painting, highly detailed",
-        "concept art Female,smile,solo:2，half-length phoor portrait,Facing the right side of the screen,2.5D Cartoon style,（empty background:2）,(Focus on the upper body:2)（simpler background:2） ,A beautiful girl with long hair, dressed in a sleeveless black dress with thin golden lace edges, has a black cape with golden lace over her shoulders and arms, she is dressed like a silhouette, her tall figure is slightly bent, her hands on her hips, her lower body is hidden by the blackness of the clothing, her expression is determined, Balanced, Intricate, very Impressive\nThere are various levels of communicator types in Centric AI. You can choose an advanced level to get the most accurate answers. However, please note that the AI will . digital artwork, illustrative, painterly, matte painting, highly detailed",
-        "concept art Female,smile,solo:2，half-length phoor portrait,Facing the right side of the screen,2.5D Cartoon style,（empty background:2）,(Focus on the upper body:2)（simpler background:2） ,A beautiful girl with long hair, dressed in a sleeveless black dress with thin golden lace edges, has a black cape with golden lace over her shoulders and arms, she is dressed like a silhouette, her tall figure is slightly bent, her hands on her hips, her lower body is hidden by the blackness of the clothing, her expression is determined, Balanced, Intricate, very Impressive\nThere are various levels of communicator types in Centric AI. You can choose an advanced level to get the most accurate answers. However, please note that the AI will . digital artwork, illustrative, painterly, matte painting, highly detailed",
-        "concept art Female,smile,solo:2，half-length phoor portrait,Facing the right side of the screen,2.5D Cartoon style,（empty background:2）,(Focus on the upper body:2)（simpler background:2） ,In Paradise Garden, a girl in a magical wonderland ~\nHer outfit is of heavenly light as if from the heart of an angel, her wings spreading behind her as she gracefully glides in the air. She wears a frothy white dress, its layers whispering like ripples in a flowing river, gently floating around her with each step. Golden ringlets curl around her bare shoulders, showcasing the radiance of nature from her skin.\nWhere to gesture expression: When she is taking a joyful break from her unending work, she looks carefree and play . digital artwork, illustrative, painterly, matte painting, highly detailed"
+        "concept art Female,smile,solo:2，half-length phoor portrait,Facing the right side of the screen,2.5D Cartoon style,（empty background:2）,(Focus on the upper body:2)（simpler background:2） ,In Paradise Garden, a girl in a magical wonderland costume moves her hands in a mysterious way as if she was actually in the garden. Her white-sleeved shirt has mystical embroidery depicting various magical creatures, and she always holds her wand pointing upwards, her long wavy hair tied back in ponytail, her blue eyes always switching between curious and wise, she moves gracefully with her body language looking as though she was performing in a magical land before any audience. . digital artwork, illustrative, painterly, matte painting, highly detailed"
       ],
       "locked": true
     },
@@ -8599,7 +8075,7 @@
         "1": 250
       },
       "flags": {},
-      "order": 56,
+      "order": 53,
       "mode": 0,
       "properties": {
         "text": ""
@@ -8611,91 +8087,327 @@
       "bgcolor": "#653"
     },
     {
-      "id": 865,
-      "type": "ShowText|pysssss",
+      "id": 1248,
+      "type": "easy loraStack",
       "pos": [
-        -2763.977100423099,
-        -3551.636033466517
+        -7914.560462670673,
+        -3686.4133163758133
       ],
       "size": [
-        410,
-        130
+        420,
+        298
       ],
       "flags": {},
-      "order": 79,
+      "order": 54,
       "mode": 0,
       "inputs": [
         {
-          "name": "text",
-          "type": "STRING",
-          "link": 1554,
-          "widget": {
-            "name": "text"
-          },
-          "label": "文本"
+          "name": "optional_lora_stack",
+          "type": "LORA_STACK",
+          "link": null,
+          "label": "LoRA堆（可选）",
+          "slot_index": 0
         }
       ],
       "outputs": [
         {
-          "name": "STRING",
+          "name": "lora_stack",
+          "type": "LORA_STACK",
+          "links": [
+            2133
+          ],
+          "shape": 3,
+          "label": "LoRA堆",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy loraStack"
+      },
+      "widgets_values": [
+        true,
+        "simple",
+        4,
+        "Sdxl/sdxl_offset_example_v10.safetensors",
+        0.6,
+        1,
+        1,
+        "Sdxl/xl_more_art-full-beta2.safetensors",
+        0.6,
+        1,
+        1,
+        "dare_complex_color_notrigger.safetensors",
+        0.3,
+        1,
+        1,
+        "PT滑块/cartoon_style卡通化.pt",
+        3,
+        1,
+        1,
+        "None",
+        0,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1
+      ],
+      "locked": true
+    },
+    {
+      "id": 815,
+      "type": "easy loraStack",
+      "pos": [
+        -6996.075371740176,
+        -2828.7052226336104
+      ],
+      "size": [
+        490,
+        298
+      ],
+      "flags": {},
+      "order": 55,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "optional_lora_stack",
+          "type": "LORA_STACK",
+          "link": null,
+          "label": "LoRA堆（可选）",
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "lora_stack",
+          "type": "LORA_STACK",
+          "links": [
+            1457
+          ],
+          "shape": 3,
+          "label": "LoRA堆",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "easy loraStack"
+      },
+      "widgets_values": [
+        true,
+        "simple",
+        4,
+        "Sdxl/3D模型丨可爱化SDXL版.safetensors",
+        1,
+        1,
+        1,
+        "SDXL功能性/lookingAwayToLookingAt_v10看着观众.safetensors",
+        1,
+        1,
+        1,
+        "PT滑块/smiling笑.pt",
+        2,
+        1,
+        1,
+        "PT滑块/cartoon_style卡通化.pt",
+        2,
+        1,
+        1,
+        "None",
+        0,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1,
+        "None",
+        1,
+        1,
+        1
+      ],
+      "locked": true
+    },
+    {
+      "id": 1160,
+      "type": "Switch string [Crystools]",
+      "pos": [
+        -7420.569796753156,
+        -1546.8004307366243
+      ],
+      "size": [
+        210,
+        110
+      ],
+      "flags": {},
+      "order": 72,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "on_true",
+          "type": "STRING",
+          "link": 1999,
+          "widget": {
+            "name": "on_true"
+          },
+          "label": "真"
+        },
+        {
+          "name": "on_false",
+          "type": "STRING",
+          "link": 1996,
+          "widget": {
+            "name": "on_false"
+          },
+          "label": "假"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "string",
           "type": "STRING",
           "links": [
-            2141
+            1997,
+            2016
           ],
-          "shape": 6,
+          "shape": 3,
           "label": "字符串",
           "slot_index": 0
         }
       ],
       "properties": {
-        "Node name for S&R": "ShowText|pysssss"
+        "Node name for S&R": "Switch string [Crystools]"
       },
       "widgets_values": [
-        [
-          "(Wild Night Moonlit Adventure:1.4)text logo,Striking text,round logo,only logo,empty background,simpler background "
-        ],
-        "(Wild Night Moonlit Adventure:1.4)text logo,Striking text,round logo,only logo,empty background,simpler background ",
-        "(Wild Night Moonlit Adventure:1.4)text logo,Striking text,round logo,only logo,empty background,simpler background ",
-        "(Wild Night Moonlit Adventure:1.4)text logo,Striking text,round logo,only logo,empty background,simpler background ",
-        "(Wild Night Moonlit Adventure:1.4)text logo,Striking text,round logo,only logo,empty background,simpler background ",
-        "(Wild Night Moonlit Adventure:1.4)text logo,Striking text,round logo,only logo,empty background,simpler background ",
-        "(Paradise Garden:1.4)text logo,Striking text,round logo,only logo,empty background,simpler background "
+        "",
+        "",
+        true
       ],
+      "color": "#322",
+      "bgcolor": "#533",
       "locked": true
     },
     {
-      "id": 855,
+      "id": 805,
       "type": "Text _O",
       "pos": [
-        -2764.8635953438916,
-        -3382.574788106723
+        -9436.357913670412,
+        -2345.298328059013
       ],
       "size": [
-        410,
-        76.00004577636719
+        260,
+        260
       ],
       "flags": {
         "collapsed": false
       },
-      "order": 57,
+      "order": 56,
       "mode": 0,
       "outputs": [
         {
           "name": "STRING",
           "type": "STRING",
           "links": [
-            2142
+            1804
           ],
           "shape": 3,
           "label": "STRING",
           "slot_index": 0
         }
       ],
+      "title": "引导语1",
       "properties": {
         "Node name for S&R": "Text _O"
       },
       "widgets_values": [
-        "double letters, repeating letters, more than  9 letters,scenes,human"
+        "You：You are the best copywriter, please write a relevant poetic beauty based on the text I have given, no more than 30 characters.\nFor example: Christmas.\nBot: bells ringing, snow falling, Merry Christmas!\nYou：Please refer to this example for expansion ，Give only the expanded copy and nothing else\njust start the description，the subject is："
+      ],
+      "locked": true
+    },
+    {
+      "id": 1016,
+      "type": "Text_Image_Multiline_Zho",
+      "pos": [
+        -362.416709295332,
+        -2592.530402744212
+      ],
+      "size": [
+        220,
+        405.9999694824219
+      ],
+      "flags": {},
+      "order": 67,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 1773,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            1774
+          ],
+          "shape": 3,
+          "label": "image",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text_Image_Multiline_Zho"
+      },
+      "widgets_values": [
+        "ZHOZHOZHO",
+        "Alibaba-PuHuiTi-Heavy",
+        "center",
+        80,
+        10,
+        2,
+        45,
+        "#faff6b",
+        4,
+        "#000000",
+        0,
+        0,
+        1800,
+        100,
+        false
       ],
       "locked": true
     },
@@ -8711,7 +8423,7 @@
         440
       ],
       "flags": {},
-      "order": 58,
+      "order": 57,
       "mode": 0,
       "inputs": [],
       "outputs": [
@@ -8731,7 +8443,7 @@
       },
       "widgets_values": [
         "AI Digital Artworks Copyright © 2024 Rui",
-        "Inter-Bold-srYz_-1B",
+        "Alibaba-PuHuiTi-Heavy",
         "right",
         80,
         10,
@@ -8749,16 +8461,294 @@
       "locked": true
     },
     {
-      "id": 1046,
-      "type": "Text _O",
+      "id": 1283,
+      "type": "Note",
       "pos": [
-        -6996.075371740176,
-        -2438.705222633611
+        -9147,
+        -1739
+      ],
+      "size": {
+        "0": 210,
+        "1": 270
+      },
+      "flags": {},
+      "order": 58,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "输入你想要绘制的主题，如果是中文的会自动翻译成英语。\n该节点来自MixLab，它会自动下载一个本地翻译模型（下载时需要翻墙），实现无需网络的汉译英。\n如果安装补上你可以换成一个原生的文本输入框，直接输入英文。"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 1184,
+      "type": "SetNode",
+      "pos": [
+        -8108.933721141418,
+        -1833.729797072339
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 100,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "link": 1998
+        }
+      ],
+      "outputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "links": null,
+          "label": "输出"
+        }
+      ],
+      "title": "Set_STRING",
+      "properties": {
+        "previousName": "InputPrompt"
+      },
+      "widgets_values": [
+        "InputPrompt"
+      ]
+    },
+    {
+      "id": 1309,
+      "type": "SetNode",
+      "pos": [
+        -8106.933721141418,
+        -1723.729797072339
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 83,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "link": 2250
+        }
+      ],
+      "outputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "title": "Set_RawInputPrompt",
+      "properties": {
+        "previousName": "RawInputPrompt"
+      },
+      "widgets_values": [
+        "RawInputPrompt"
+      ]
+    },
+    {
+      "id": 1310,
+      "type": "SetNode",
+      "pos": [
+        -8104.933721141418,
+        -1610.729797072339
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 87,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "link": 2251
+        }
+      ],
+      "outputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "title": "Set_CustomCopywriter",
+      "properties": {
+        "previousName": "CustomCopywriter"
+      },
+      "widgets_values": [
+        "CustomCopywriter"
+      ]
+    },
+    {
+      "id": 908,
+      "type": "ShowText|pysssss",
+      "pos": [
+        -8605,
+        -2110
       ],
       "size": [
-        480,
-        80
+        390,
+        110
       ],
+      "flags": {},
+      "order": 118,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 2030,
+          "widget": {
+            "name": "text"
+          },
+          "label": "文本"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            2246
+          ],
+          "shape": 6,
+          "label": "字符串",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        [
+          "Under the glow of the Wild Night Moon, a group of friends embarked on a thrilling adventure through the enchanted forest."
+        ],
+        "Before the advent of modern technologies, the construction of a colorful and lovely paradise garden was a dream that seemed unattainable,"
+      ],
+      "locked": true
+    },
+    {
+      "id": 1307,
+      "type": "Switch string [Crystools]",
+      "pos": [
+        -8270,
+        -2375
+      ],
+      "size": [
+        315,
+        106
+      ],
+      "flags": {},
+      "order": 126,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "on_true",
+          "type": "STRING",
+          "link": 2253,
+          "widget": {
+            "name": "on_true"
+          }
+        },
+        {
+          "name": "on_false",
+          "type": "STRING",
+          "link": 2246,
+          "widget": {
+            "name": "on_false"
+          }
+        },
+        {
+          "name": "boolean",
+          "type": "BOOLEAN",
+          "link": 2255,
+          "widget": {
+            "name": "boolean"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "string",
+          "type": "STRING",
+          "links": [
+            2247
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Switch string [Crystools]"
+      },
+      "widgets_values": [
+        "",
+        "",
+        true
+      ]
+    },
+    {
+      "id": 910,
+      "type": "SetNode",
+      "pos": [
+        -8156,
+        -2182
+      ],
+      "size": {
+        "0": 210,
+        "1": 60
+      },
+      "flags": {},
+      "order": 133,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "link": 2247
+        }
+      ],
+      "outputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "links": [],
+          "label": "输出",
+          "slot_index": 0
+        }
+      ],
+      "title": "Set_STRING",
+      "properties": {
+        "previousName": "Text"
+      },
+      "widgets_values": [
+        "Text"
+      ]
+    },
+    {
+      "id": 1315,
+      "type": "GetNode",
+      "pos": [
+        -8567,
+        -2379
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
       "flags": {},
       "order": 59,
       "mode": 0,
@@ -8767,42 +8757,399 @@
           "name": "STRING",
           "type": "STRING",
           "links": [
-            1825
+            2253
           ],
-          "shape": 3,
-          "label": "STRING",
           "slot_index": 0
         }
       ],
-      "title": "Female",
-      "properties": {
-        "Node name for S&R": "Text _O"
-      },
+      "title": "Get_CustomCopywriter",
+      "properties": {},
       "widgets_values": [
-        "smile,solo:2，half-length phoor portrait,Facing the right side of the screen,2.5D Cartoon style,（empty background:2）,(Focus on the upper body:2)（simpler background:2）"
-      ],
-      "locked": true
+        "CustomCopywriter"
+      ]
     },
     {
-      "id": 797,
-      "type": "LoadImage",
+      "id": 1311,
+      "type": "SetNode",
       "pos": [
-        -6150,
-        -1110
+        -8103,
+        -1401
       ],
-      "size": [
-        800,
-        1100
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 84,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "link": 2252
+        }
       ],
+      "outputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "title": "Set_Title",
+      "properties": {
+        "previousName": "Title"
+      },
+      "widgets_values": [
+        "Title"
+      ]
+    },
+    {
+      "id": 1316,
+      "type": "SetNode",
+      "pos": [
+        -8100,
+        -1504
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 85,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "BOOLEAN",
+          "type": "BOOLEAN",
+          "link": 2254
+        }
+      ],
+      "outputs": [
+        {
+          "name": "*",
+          "type": "*",
+          "links": null
+        }
+      ],
+      "title": "Set_CustomCopywriterEnable",
+      "properties": {
+        "previousName": "CustomCopywriterEnable"
+      },
+      "widgets_values": [
+        "CustomCopywriterEnable"
+      ]
+    },
+    {
+      "id": 1320,
+      "type": "GetNode",
+      "pos": [
+        -8569,
+        -2249
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
       "flags": {},
       "order": 60,
       "mode": 0,
       "outputs": [
         {
+          "name": "BOOLEAN",
+          "type": "BOOLEAN",
+          "links": [
+            2255
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "Get_CustomCopywriterEnable",
+      "properties": {},
+      "widgets_values": [
+        "CustomCopywriterEnable"
+      ]
+    },
+    {
+      "id": 1147,
+      "type": "ChinesePrompt_Mix",
+      "pos": [
+        -8466,
+        -1824
+      ],
+      "size": [
+        318.28583410889314,
+        118.00003814697266
+      ],
+      "flags": {},
+      "order": 82,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 2249,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "prompt",
+          "type": "STRING",
+          "links": [
+            1998
+          ],
+          "shape": 6,
+          "label": "提示词",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ChinesePrompt_Mix"
+      },
+      "widgets_values": [
+        "天堂花园",
+        "off",
+        77404,
+        "fixed"
+      ],
+      "color": "#232",
+      "bgcolor": "#353",
+      "locked": true
+    },
+    {
+      "id": 1312,
+      "type": "Text _O",
+      "pos": [
+        -8862,
+        -1827
+      ],
+      "size": [
+        350.92319608845355,
+        116.38687898718922
+      ],
+      "flags": {},
+      "order": 61,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            2249,
+            2250
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "主题",
+      "properties": {
+        "Node name for S&R": "Text _O"
+      },
+      "widgets_values": [
+        "天堂花园"
+      ],
+      "locked": true
+    },
+    {
+      "id": 1314,
+      "type": "Text _O",
+      "pos": [
+        -8478,
+        -1519
+      ],
+      "size": [
+        339.7102256282815,
+        165.46659891502372
+      ],
+      "flags": {},
+      "order": 62,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            2252
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "标题",
+      "properties": {
+        "Node name for S&R": "Text _O"
+      },
+      "widgets_values": [
+        "天堂花园"
+      ],
+      "locked": true
+    },
+    {
+      "id": 1319,
+      "type": "easy boolean",
+      "pos": [
+        -8472,
+        -1649
+      ],
+      "size": [
+        327.427336296636,
+        78.7055939690888
+      ],
+      "flags": {},
+      "order": 63,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "boolean",
+          "type": "BOOLEAN",
+          "links": [
+            2254
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "启用自定义文案",
+      "properties": {
+        "Node name for S&R": "easy boolean"
+      },
+      "widgets_values": [
+        true
+      ],
+      "locked": true
+    },
+    {
+      "id": 537,
+      "type": "Text_Image_Zho",
+      "pos": [
+        -506,
+        -3595
+      ],
+      "size": [
+        290,
+        442
+      ],
+      "flags": {},
+      "order": 86,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 2256,
+          "widget": {
+            "name": "text"
+          },
+          "label": "text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "links": [
+            1759
+          ],
+          "shape": 3,
+          "label": "image",
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Text_Image_Zho"
+      },
+      "widgets_values": [
+        "Wild Classic Slots",
+        "Alibaba-PuHuiTi-Heavy",
+        "center",
+        121,
+        65,
+        "#fcff47",
+        6,
+        "#000000",
+        0,
+        0,
+        1800,
+        200,
+        false,
+        false,
+        100,
+        180,
+        360
+      ],
+      "locked": true
+    },
+    {
+      "id": 1004,
+      "type": "Reroute",
+      "pos": [
+        -514,
+        -3886
+      ],
+      "size": [
+        75,
+        26
+      ],
+      "flags": {},
+      "order": 101,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "",
+          "type": "*",
+          "link": 1759
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "IMAGE",
+          "links": [
+            1755,
+            1756
+          ],
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "showOutputText": false,
+        "horizontal": false
+      }
+    },
+    {
+      "id": 1001,
+      "type": "SplitImageWithAlpha",
+      "pos": [
+        -510,
+        -3811
+      ],
+      "size": [
+        140,
+        50
+      ],
+      "flags": {
+        "collapsed": false
+      },
+      "order": 111,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 1756,
+          "label": "图像"
+        }
+      ],
+      "outputs": [
+        {
           "name": "IMAGE",
           "type": "IMAGE",
           "links": [
-            2181
+            1725
           ],
           "shape": 3,
           "label": "图像",
@@ -8811,17 +9158,80 @@
         {
           "name": "MASK",
           "type": "MASK",
-          "links": null,
+          "links": [
+            1724
+          ],
           "shape": 3,
-          "label": "遮罩"
+          "label": "遮罩",
+          "slot_index": 1
         }
       ],
       "properties": {
-        "Node name for S&R": "LoadImage"
+        "Node name for S&R": "SplitImageWithAlpha"
+      },
+      "locked": true
+    },
+    {
+      "id": 1322,
+      "type": "GetNode",
+      "pos": [
+        -505,
+        -3703
+      ],
+      "size": {
+        "0": 210,
+        "1": 58
+      },
+      "flags": {},
+      "order": 64,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            2256
+          ],
+          "slot_index": 0
+        }
+      ],
+      "title": "Get_Title",
+      "properties": {},
+      "widgets_values": [
+        "Title"
+      ]
+    },
+    {
+      "id": 1313,
+      "type": "Text _O",
+      "pos": [
+        -8856.933721141422,
+        -1651.729797072339
+      ],
+      "size": [
+        343.9731088130666,
+        301.2740507773992
+      ],
+      "flags": {},
+      "order": 65,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            2251
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "自定义文案",
+      "properties": {
+        "Node name for S&R": "Text _O"
       },
       "widgets_values": [
-        "AutoPoster_frederika.jpg",
-        "image"
+        "自定义文案"
       ],
       "locked": true
     }
@@ -10284,14 +10694,6 @@
       "STRING"
     ],
     [
-      2026,
-      908,
-      0,
-      910,
-      0,
-      "STRING"
-    ],
-    [
       2028,
       829,
       0,
@@ -10818,6 +11220,294 @@
       1196,
       0,
       "EXL_MODEL"
+    ],
+    [
+      2218,
+      1160,
+      0,
+      871,
+      1,
+      "STRING"
+    ],
+    [
+      2219,
+      515,
+      1,
+      523,
+      0,
+      "CLIP"
+    ],
+    [
+      2220,
+      515,
+      1,
+      524,
+      0,
+      "CLIP"
+    ],
+    [
+      2221,
+      1160,
+      0,
+      537,
+      0,
+      "STRING"
+    ],
+    [
+      2222,
+      1160,
+      0,
+      802,
+      1,
+      "STRING"
+    ],
+    [
+      2223,
+      1160,
+      0,
+      809,
+      1,
+      "STRING"
+    ],
+    [
+      2224,
+      515,
+      1,
+      928,
+      0,
+      "CLIP"
+    ],
+    [
+      2225,
+      515,
+      1,
+      929,
+      0,
+      "CLIP"
+    ],
+    [
+      2226,
+      1160,
+      0,
+      "1247:0",
+      "0",
+      "STRING"
+    ],
+    [
+      2227,
+      1060,
+      0,
+      599,
+      4,
+      "VAE"
+    ],
+    [
+      2228,
+      515,
+      0,
+      1249,
+      0,
+      "MODEL"
+    ],
+    [
+      2229,
+      515,
+      1,
+      1249,
+      1,
+      "CLIP"
+    ],
+    [
+      2230,
+      1160,
+      0,
+      909,
+      1,
+      "STRING"
+    ],
+    [
+      2231,
+      515,
+      0,
+      817,
+      0,
+      "MODEL"
+    ],
+    [
+      2232,
+      515,
+      1,
+      817,
+      1,
+      "CLIP"
+    ],
+    [
+      2233,
+      1106,
+      0,
+      760,
+      0,
+      "IMAGE"
+    ],
+    [
+      2234,
+      1201,
+      0,
+      1203,
+      0,
+      "EXL_MODEL"
+    ],
+    [
+      2235,
+      1201,
+      0,
+      1196,
+      0,
+      "EXL_MODEL"
+    ],
+    [
+      2236,
+      1060,
+      0,
+      597,
+      4,
+      "VAE"
+    ],
+    [
+      2237,
+      1201,
+      0,
+      1202,
+      0,
+      "EXL_MODEL"
+    ],
+    [
+      2238,
+      1060,
+      0,
+      924,
+      1,
+      "VAE"
+    ],
+    [
+      2239,
+      1060,
+      0,
+      927,
+      4,
+      "VAE"
+    ],
+    [
+      2240,
+      1201,
+      0,
+      1204,
+      0,
+      "EXL_MODEL"
+    ],
+    [
+      2241,
+      1060,
+      0,
+      848,
+      4,
+      "VAE"
+    ],
+    [
+      2242,
+      515,
+      0,
+      1251,
+      0,
+      "MODEL"
+    ],
+    [
+      2243,
+      515,
+      1,
+      1251,
+      1,
+      "CLIP"
+    ],
+    [
+      2246,
+      908,
+      0,
+      1307,
+      1,
+      "STRING"
+    ],
+    [
+      2247,
+      1307,
+      0,
+      910,
+      0,
+      "STRING"
+    ],
+    [
+      2249,
+      1312,
+      0,
+      1147,
+      0,
+      "STRING"
+    ],
+    [
+      2250,
+      1312,
+      0,
+      1309,
+      0,
+      "*"
+    ],
+    [
+      2251,
+      1313,
+      0,
+      1310,
+      0,
+      "*"
+    ],
+    [
+      2252,
+      1314,
+      0,
+      1311,
+      0,
+      "*"
+    ],
+    [
+      2253,
+      1315,
+      0,
+      1307,
+      0,
+      "STRING"
+    ],
+    [
+      2254,
+      1319,
+      0,
+      1316,
+      0,
+      "*"
+    ],
+    [
+      2255,
+      1320,
+      0,
+      1307,
+      2,
+      "BOOLEAN"
+    ],
+    [
+      2256,
+      1322,
+      0,
+      537,
+      0,
+      "STRING"
     ]
   ],
   "groups": [
@@ -10958,8 +11648,8 @@
       "bounding": [
         -9452,
         -2467,
-        1262,
-        485
+        1557,
+        511
       ],
       "color": "#3f789e",
       "font_size": 24,
@@ -11064,10 +11754,10 @@
     {
       "title": "InputPrompt",
       "bounding": [
-        -8532,
-        -1674,
-        662,
-        340
+        -8891,
+        -1924,
+        1024,
+        606
       ],
       "color": "#3f789e",
       "font_size": 24,
@@ -11077,10 +11767,10 @@
   "config": {},
   "extra": {
     "ds": {
-      "scale": 0.37190082644628114,
+      "scale": 0.544500000000006,
       "offset": [
-        6838.844978107275,
-        1656.4342862861524
+        9515.147724404032,
+        2267.96861178962
       ]
     },
     "groupNodes": {

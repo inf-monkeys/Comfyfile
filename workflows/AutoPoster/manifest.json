@@ -1,6 +1,6 @@
 {
     "appName": "AutoPoster",
-    "homepage": "",
-    "displayName": "自动生成海报",
-    "description": "自动生成海报"
+    "homepage": "https://openart.ai/workflows/rui400/auto-poster-by-rui/rGIPQI88tgn30gPCv3zW",
+    "displayName": "Auto Poster 自动生成海报",
+    "description": "只需要输入一个关键词，即可实现全自动出图。配置的多个LLM助手会分别负责不同部分的提示词编写。"
 }

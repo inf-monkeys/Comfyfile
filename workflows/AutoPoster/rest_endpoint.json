@@ -1,35 +1,2139 @@
 {
-    "parameters": [
+  "parameters": [
+    {
+      "displayName": "人物图片",
+      "name": "input_image",
+      "type": "file",
+      "default": "https://static.infmonkeys.com/comfyui/workflows/AutoPoster/images/AutoPoster_frederika.jpg",
+      "required": true,
+      "description": "必须包含人脸的图片，否则会运行失败！",
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 797,
+          "key": "image"
+        },
+        "multipleValues": false,
+        "accept": ".jpg,.jpeg,.png,.webp"
+      }
+    },
+    {
+      "displayName": "绘制主题",
+      "name": "input_prompt",
+      "type": "string",
+      "default": "天堂花园",
+      "description": "输入你想要绘制的主题，如果是中文的会自动翻译成英语",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 1312,
+          "key": "text"
+        },
+        "multipleValues": false
+      }
+    },
+    {
+      "displayName": "文案字体",
+      "name": "copywriter_font",
+      "type": "options",
+      "default": "Alibaba-PuHuiTi-Heavy",
+      "required": true,
+      "options": [
         {
-            "displayName": "人物图片",
-            "name": "input_image",
-            "type": "file",
-            "default": "https://static.infmonkeys.com/comfyui/workflows/AutoPoster/images/AutoPoster_frederika.jpg",
-            "description": "必须包含人脸的图片，否则会运行失败！",
-            "required": true,
-            "typeOptions": {
-                "comfyOptions": {
-                    "node": 797,
-                    "key": "image"
-                },
-                "multipleValues": false,
-                "accept": ".jpg,.jpeg,.png,.webp"
-            }
+          "name": "Alibaba-PuHuiTi-Heavy",
+          "value": "Alibaba-PuHuiTi-Heavy"
         },
         {
-            "displayName": "绘制主题",
-            "name": "input_prompt",
-            "type": "string",
-            "default": "天堂花园",
-            "description": "输入你想要绘制的主题，如果是中文的会自动翻译成英语",
-            "required": true,
-            "typeOptions": {
-                "comfyOptions": {
-                    "node": 1147,
-                    "key": "text"
-                },
-                "multipleValues": false
-            }
+          "name": "Alkatra",
+          "value": "Alkatra"
+        },
+        {
+          "name": "AlumniSansCollegiateOne-Regular",
+          "value": "AlumniSansCollegiateOne-Regular"
+        },
+        {
+          "name": "Caveat-VariableFont_wght",
+          "value": "Caveat-VariableFont_wght"
+        },
+        {
+          "name": "DejaVuSans",
+          "value": "DejaVuSans"
+        },
+        {
+          "name": "DejaVuSans-Bold",
+          "value": "DejaVuSans-Bold"
+        },
+        {
+          "name": "DejaVuSans-BoldOblique",
+          "value": "DejaVuSans-BoldOblique"
+        },
+        {
+          "name": "DejaVuSans-ExtraLight",
+          "value": "DejaVuSans-ExtraLight"
+        },
+        {
+          "name": "DejaVuSans-Oblique",
+          "value": "DejaVuSans-Oblique"
+        },
+        {
+          "name": "DejaVuSansCondensed",
+          "value": "DejaVuSansCondensed"
+        },
+        {
+          "name": "DejaVuSansCondensed-Bold",
+          "value": "DejaVuSansCondensed-Bold"
+        },
+        {
+          "name": "DejaVuSansCondensed-BoldOblique",
+          "value": "DejaVuSansCondensed-BoldOblique"
+        },
+        {
+          "name": "DejaVuSansCondensed-Oblique",
+          "value": "DejaVuSansCondensed-Oblique"
+        },
+        {
+          "name": "DejaVuSansDisplay",
+          "value": "DejaVuSansDisplay"
+        },
+        {
+          "name": "DejaVuSansMono",
+          "value": "DejaVuSansMono"
+        },
+        {
+          "name": "DejaVuSansMono-Bold",
+          "value": "DejaVuSansMono-Bold"
+        },
+        {
+          "name": "DejaVuSansMono-BoldOblique",
+          "value": "DejaVuSansMono-BoldOblique"
+        },
+        {
+          "name": "DejaVuSansMono-Oblique",
+          "value": "DejaVuSansMono-Oblique"
+        },
+        {
+          "name": "DejaVuSerif",
+          "value": "DejaVuSerif"
+        },
+        {
+          "name": "DejaVuSerif-Bold",
+          "value": "DejaVuSerif-Bold"
+        },
+        {
+          "name": "DejaVuSerif-BoldItalic",
+          "value": "DejaVuSerif-BoldItalic"
+        },
+        {
+          "name": "DejaVuSerif-Italic",
+          "value": "DejaVuSerif-Italic"
+        },
+        {
+          "name": "DejaVuSerifDisplay",
+          "value": "DejaVuSerifDisplay"
+        },
+        {
+          "name": "FangSong",
+          "value": "FangSong"
+        },
+        {
+          "name": "FreeMono",
+          "value": "FreeMono"
+        },
+        {
+          "name": "FreeMonoBoldOblique",
+          "value": "FreeMonoBoldOblique"
+        },
+        {
+          "name": "Inter-Black-jiII8dog",
+          "value": "Inter-Black-jiII8dog"
+        },
+        {
+          "name": "Inter-BlackItalic-1413vuen",
+          "value": "Inter-BlackItalic-1413vuen"
+        },
+        {
+          "name": "Inter-Bold-srYz_-1B",
+          "value": "Inter-Bold-srYz_-1B"
+        },
+        {
+          "name": "Inter-BoldItalic-dE_gZyur",
+          "value": "Inter-BoldItalic-dE_gZyur"
+        },
+        {
+          "name": "Inter-ExtraBold-TduDdwUu",
+          "value": "Inter-ExtraBold-TduDdwUu"
+        },
+        {
+          "name": "Inter-ExtraBoldItalic-BJafRE5I",
+          "value": "Inter-ExtraBoldItalic-BJafRE5I"
+        },
+        {
+          "name": "Inter-ExtraLight-w5HAp5iF",
+          "value": "Inter-ExtraLight-w5HAp5iF"
+        },
+        {
+          "name": "Inter-ExtraLightItalic-ZptecSuc",
+          "value": "Inter-ExtraLightItalic-ZptecSuc"
+        },
+        {
+          "name": "Inter-Italic-f6M78thn",
+          "value": "Inter-Italic-f6M78thn"
+        },
+        {
+          "name": "Inter-Light-DFhX0qo-",
+          "value": "Inter-Light-DFhX0qo-"
+        },
+        {
+          "name": "Inter-LightItalic-fu56_DRc",
+          "value": "Inter-LightItalic-fu56_DRc"
+        },
+        {
+          "name": "Inter-Medium-dDRaJ8tM",
+          "value": "Inter-Medium-dDRaJ8tM"
+        },
+        {
+          "name": "Inter-MediumItalic-zr3roggP",
+          "value": "Inter-MediumItalic-zr3roggP"
+        },
+        {
+          "name": "Inter-Regular-dEFHw1tF",
+          "value": "Inter-Regular-dEFHw1tF"
+        },
+        {
+          "name": "Inter-SemiBold-PyS8DO2L",
+          "value": "Inter-SemiBold-PyS8DO2L"
+        },
+        {
+          "name": "Inter-SemiBoldItalic-uIDb7hsH",
+          "value": "Inter-SemiBoldItalic-uIDb7hsH"
+        },
+        {
+          "name": "Inter-Thin-eKObIkJC",
+          "value": "Inter-Thin-eKObIkJC"
+        },
+        {
+          "name": "Inter-ThinItalic-L6uBn3RP",
+          "value": "Inter-ThinItalic-L6uBn3RP"
+        },
+        {
+          "name": "KaTeX_AMS-Regular-BQhdFMY1",
+          "value": "KaTeX_AMS-Regular-BQhdFMY1"
+        },
+        {
+          "name": "KaTeX_AMS-Regular-DMm9YOAa",
+          "value": "KaTeX_AMS-Regular-DMm9YOAa"
+        },
+        {
+          "name": "KaTeX_AMS-Regular-DRggAlZN",
+          "value": "KaTeX_AMS-Regular-DRggAlZN"
+        },
+        {
+          "name": "KaTeX_AMS-Regular.73ea273a72f4aca30ca5",
+          "value": "KaTeX_AMS-Regular.73ea273a72f4aca30ca5"
+        },
+        {
+          "name": "KaTeX_AMS-Regular.853be92419a6c3766b9a",
+          "value": "KaTeX_AMS-Regular.853be92419a6c3766b9a"
+        },
+        {
+          "name": "KaTeX_AMS-Regular.d562e886c52f12660a41",
+          "value": "KaTeX_AMS-Regular.d562e886c52f12660a41"
+        },
+        {
+          "name": "KaTeX_Caligraphic-Bold-ATXxdsX0",
+          "value": "KaTeX_Caligraphic-Bold-ATXxdsX0"
+        },
+        {
+          "name": "KaTeX_Caligraphic-Bold-BEiXGLvX",
+          "value": "KaTeX_Caligraphic-Bold-BEiXGLvX"
+        },
+        {
+          "name": "KaTeX_Caligraphic-Bold-Dq_IR9rO",
+          "value": "KaTeX_Caligraphic-Bold-Dq_IR9rO"
+        },
+        {
+          "name": "KaTeX_Caligraphic-Bold.7489a2fbfb9bfe704420",
+          "value": "KaTeX_Caligraphic-Bold.7489a2fbfb9bfe704420"
+        },
+        {
+          "name": "KaTeX_Caligraphic-Bold.a1abf90dfd72792a577a",
+          "value": "KaTeX_Caligraphic-Bold.a1abf90dfd72792a577a"
+        },
+        {
+          "name": "KaTeX_Caligraphic-Bold.d757c535a2e5902f1325",
+          "value": "KaTeX_Caligraphic-Bold.d757c535a2e5902f1325"
+        },
+        {
+          "name": "KaTeX_Caligraphic-Regular-CTRA-rTL",
+          "value": "KaTeX_Caligraphic-Regular-CTRA-rTL"
+        },
+        {
+          "name": "KaTeX_Caligraphic-Regular-Di6jR-x-",
+          "value": "KaTeX_Caligraphic-Regular-Di6jR-x-"
+        },
+        {
+          "name": "KaTeX_Caligraphic-Regular-wX97UBjC",
+          "value": "KaTeX_Caligraphic-Regular-wX97UBjC"
+        },
+        {
+          "name": "KaTeX_Caligraphic-Regular.7e873d3833eb108a0758",
+          "value": "KaTeX_Caligraphic-Regular.7e873d3833eb108a0758"
+        },
+        {
+          "name": "KaTeX_Caligraphic-Regular.d6484fce1ef428d5bd94",
+          "value": "KaTeX_Caligraphic-Regular.d6484fce1ef428d5bd94"
+        },
+        {
+          "name": "KaTeX_Caligraphic-Regular.db074fa22cf224af93d7",
+          "value": "KaTeX_Caligraphic-Regular.db074fa22cf224af93d7"
+        },
+        {
+          "name": "KaTeX_Fraktur-Bold-BdnERNNW",
+          "value": "KaTeX_Fraktur-Bold-BdnERNNW"
+        },
+        {
+          "name": "KaTeX_Fraktur-Bold-BsDP51OF",
+          "value": "KaTeX_Fraktur-Bold-BsDP51OF"
+        },
+        {
+          "name": "KaTeX_Fraktur-Bold-CL6g_b3V",
+          "value": "KaTeX_Fraktur-Bold-CL6g_b3V"
+        },
+        {
+          "name": "KaTeX_Fraktur-Bold.354501bac435c3264834",
+          "value": "KaTeX_Fraktur-Bold.354501bac435c3264834"
+        },
+        {
+          "name": "KaTeX_Fraktur-Bold.4c761b3711973ab04edf",
+          "value": "KaTeX_Fraktur-Bold.4c761b3711973ab04edf"
+        },
+        {
+          "name": "KaTeX_Fraktur-Bold.931d67ea207ab37ee693",
+          "value": "KaTeX_Fraktur-Bold.931d67ea207ab37ee693"
+        },
+        {
+          "name": "KaTeX_Fraktur-Regular-CB_wures",
+          "value": "KaTeX_Fraktur-Regular-CB_wures"
+        },
+        {
+          "name": "KaTeX_Fraktur-Regular-CTYiF6lA",
+          "value": "KaTeX_Fraktur-Regular-CTYiF6lA"
+        },
+        {
+          "name": "KaTeX_Fraktur-Regular-Dxdc4cR9",
+          "value": "KaTeX_Fraktur-Regular-Dxdc4cR9"
+        },
+        {
+          "name": "KaTeX_Fraktur-Regular.172d3529b26f8cedef6b",
+          "value": "KaTeX_Fraktur-Regular.172d3529b26f8cedef6b"
+        },
+        {
+          "name": "KaTeX_Fraktur-Regular.6fdf0ac577be0ba82a4c",
+          "value": "KaTeX_Fraktur-Regular.6fdf0ac577be0ba82a4c"
+        },
+        {
+          "name": "KaTeX_Fraktur-Regular.ed305b5434865e06ffde",
+          "value": "KaTeX_Fraktur-Regular.ed305b5434865e06ffde"
+        },
+        {
+          "name": "KaTeX_Main-Bold-Cx986IdX",
+          "value": "KaTeX_Main-Bold-Cx986IdX"
+        },
+        {
+          "name": "KaTeX_Main-Bold-Jm3AIy58",
+          "value": "KaTeX_Main-Bold-Jm3AIy58"
+        },
+        {
+          "name": "KaTeX_Main-Bold-waoOVXN0",
+          "value": "KaTeX_Main-Bold-waoOVXN0"
+        },
+        {
+          "name": "KaTeX_Main-Bold.0c3b8929d377c0e9b2f3",
+          "value": "KaTeX_Main-Bold.0c3b8929d377c0e9b2f3"
+        },
+        {
+          "name": "KaTeX_Main-Bold.39890742bc957b368704",
+          "value": "KaTeX_Main-Bold.39890742bc957b368704"
+        },
+        {
+          "name": "KaTeX_Main-Bold.8169508bf58f8bd92ad8",
+          "value": "KaTeX_Main-Bold.8169508bf58f8bd92ad8"
+        },
+        {
+          "name": "KaTeX_Main-BoldItalic-DxDJ3AOS",
+          "value": "KaTeX_Main-BoldItalic-DxDJ3AOS"
+        },
+        {
+          "name": "KaTeX_Main-BoldItalic-DzxPMmG6",
+          "value": "KaTeX_Main-BoldItalic-DzxPMmG6"
+        },
+        {
+          "name": "KaTeX_Main-BoldItalic-SpSLRI95",
+          "value": "KaTeX_Main-BoldItalic-SpSLRI95"
+        },
+        {
+          "name": "KaTeX_Main-BoldItalic.20f389c4120be058d80a",
+          "value": "KaTeX_Main-BoldItalic.20f389c4120be058d80a"
+        },
+        {
+          "name": "KaTeX_Main-BoldItalic.428978dc7837d46de091",
+          "value": "KaTeX_Main-BoldItalic.428978dc7837d46de091"
+        },
+        {
+          "name": "KaTeX_Main-BoldItalic.828abcb200061cffbaae",
+          "value": "KaTeX_Main-BoldItalic.828abcb200061cffbaae"
+        },
+        {
+          "name": "KaTeX_Main-Italic-3WenGoN9",
+          "value": "KaTeX_Main-Italic-3WenGoN9"
+        },
+        {
+          "name": "KaTeX_Main-Italic-BMLOBm91",
+          "value": "KaTeX_Main-Italic-BMLOBm91"
+        },
+        {
+          "name": "KaTeX_Main-Italic-NWA7e6Wa",
+          "value": "KaTeX_Main-Italic-NWA7e6Wa"
+        },
+        {
+          "name": "KaTeX_Main-Italic.fa675e5e4bec9eb250b6",
+          "value": "KaTeX_Main-Italic.fa675e5e4bec9eb250b6"
+        },
+        {
+          "name": "KaTeX_Main-Italic.fd947498bc16392e76c2",
+          "value": "KaTeX_Main-Italic.fd947498bc16392e76c2"
+        },
+        {
+          "name": "KaTeX_Main-Italic.fe2176f79edaa716e621",
+          "value": "KaTeX_Main-Italic.fe2176f79edaa716e621"
+        },
+        {
+          "name": "KaTeX_Main-Regular-B22Nviop",
+          "value": "KaTeX_Main-Regular-B22Nviop"
+        },
+        {
+          "name": "KaTeX_Main-Regular-Dr94JaBh",
+          "value": "KaTeX_Main-Regular-Dr94JaBh"
+        },
+        {
+          "name": "KaTeX_Main-Regular-ypZvNtVU",
+          "value": "KaTeX_Main-Regular-ypZvNtVU"
+        },
+        {
+          "name": "KaTeX_Main-Regular.4f35fbcc9ee8614c2bcc",
+          "value": "KaTeX_Main-Regular.4f35fbcc9ee8614c2bcc"
+        },
+        {
+          "name": "KaTeX_Main-Regular.9eba1d77abcf2aa6e94e",
+          "value": "KaTeX_Main-Regular.9eba1d77abcf2aa6e94e"
+        },
+        {
+          "name": "KaTeX_Main-Regular.f650f111a3b890d116f1",
+          "value": "KaTeX_Main-Regular.f650f111a3b890d116f1"
+        },
+        {
+          "name": "KaTeX_Math-BoldItalic-B3XSjfu4",
+          "value": "KaTeX_Math-BoldItalic-B3XSjfu4"
+        },
+        {
+          "name": "KaTeX_Math-BoldItalic-CZnvNsCZ",
+          "value": "KaTeX_Math-BoldItalic-CZnvNsCZ"
+        },
+        {
+          "name": "KaTeX_Math-BoldItalic-iY-2wyZ7",
+          "value": "KaTeX_Math-BoldItalic-iY-2wyZ7"
+        },
+        {
+          "name": "KaTeX_Math-BoldItalic.3f07ed67f06c720120ce",
+          "value": "KaTeX_Math-BoldItalic.3f07ed67f06c720120ce"
+        },
+        {
+          "name": "KaTeX_Math-BoldItalic.bf2d440b3a42ea78a998",
+          "value": "KaTeX_Math-BoldItalic.bf2d440b3a42ea78a998"
+        },
+        {
+          "name": "KaTeX_Math-BoldItalic.dcbcbd93bac0470b462d",
+          "value": "KaTeX_Math-BoldItalic.dcbcbd93bac0470b462d"
+        },
+        {
+          "name": "KaTeX_Math-Italic-DA0__PXp",
+          "value": "KaTeX_Math-Italic-DA0__PXp"
+        },
+        {
+          "name": "KaTeX_Math-Italic-flOr_0UB",
+          "value": "KaTeX_Math-Italic-flOr_0UB"
+        },
+        {
+          "name": "KaTeX_Math-Italic-t53AETM-",
+          "value": "KaTeX_Math-Italic-t53AETM-"
+        },
+        {
+          "name": "KaTeX_Math-Italic.6d3d25f4820d0da8f01f",
+          "value": "KaTeX_Math-Italic.6d3d25f4820d0da8f01f"
+        },
+        {
+          "name": "KaTeX_Math-Italic.8a5f936332e8028c7278",
+          "value": "KaTeX_Math-Italic.8a5f936332e8028c7278"
+        },
+        {
+          "name": "KaTeX_Math-Italic.96759856b4e70f3a8338",
+          "value": "KaTeX_Math-Italic.96759856b4e70f3a8338"
+        },
+        {
+          "name": "KaTeX_SansSerif-Bold-CFMepnvq",
+          "value": "KaTeX_SansSerif-Bold-CFMepnvq"
+        },
+        {
+          "name": "KaTeX_SansSerif-Bold-D1sUS0GD",
+          "value": "KaTeX_SansSerif-Bold-D1sUS0GD"
+        },
+        {
+          "name": "KaTeX_SansSerif-Bold-DbIhKOiC",
+          "value": "KaTeX_SansSerif-Bold-DbIhKOiC"
+        },
+        {
+          "name": "KaTeX_SansSerif-Bold.5b49f4993ae22d7975b4",
+          "value": "KaTeX_SansSerif-Bold.5b49f4993ae22d7975b4"
+        },
+        {
+          "name": "KaTeX_SansSerif-Bold.95591a929f0d32aa282a",
+          "value": "KaTeX_SansSerif-Bold.95591a929f0d32aa282a"
+        },
+        {
+          "name": "KaTeX_SansSerif-Bold.b9cd458ac6d5889ff9c3",
+          "value": "KaTeX_SansSerif-Bold.b9cd458ac6d5889ff9c3"
+        },
+        {
+          "name": "KaTeX_SansSerif-Italic-C3H0VqGB",
+          "value": "KaTeX_SansSerif-Italic-C3H0VqGB"
+        },
+        {
+          "name": "KaTeX_SansSerif-Italic-DN2j7dab",
+          "value": "KaTeX_SansSerif-Italic-DN2j7dab"
+        },
+        {
+          "name": "KaTeX_SansSerif-Italic-YYjJ1zSn",
+          "value": "KaTeX_SansSerif-Italic-YYjJ1zSn"
+        },
+        {
+          "name": "KaTeX_SansSerif-Italic.7d393d382f3e7fb1c637",
+          "value": "KaTeX_SansSerif-Italic.7d393d382f3e7fb1c637"
+        },
+        {
+          "name": "KaTeX_SansSerif-Italic.8d593cfaa96238d5e2f8",
+          "value": "KaTeX_SansSerif-Italic.8d593cfaa96238d5e2f8"
+        },
+        {
+          "name": "KaTeX_SansSerif-Italic.b257a18c016f37ee4543",
+          "value": "KaTeX_SansSerif-Italic.b257a18c016f37ee4543"
+        },
+        {
+          "name": "KaTeX_SansSerif-Regular-BNo7hRIc",
+          "value": "KaTeX_SansSerif-Regular-BNo7hRIc"
+        },
+        {
+          "name": "KaTeX_SansSerif-Regular-CS6fqUqJ",
+          "value": "KaTeX_SansSerif-Regular-CS6fqUqJ"
+        },
+        {
+          "name": "KaTeX_SansSerif-Regular-DDBCnlJ7",
+          "value": "KaTeX_SansSerif-Regular-DDBCnlJ7"
+        },
+        {
+          "name": "KaTeX_SansSerif-Regular.02271ec5cb9f5b4588ac",
+          "value": "KaTeX_SansSerif-Regular.02271ec5cb9f5b4588ac"
+        },
+        {
+          "name": "KaTeX_SansSerif-Regular.2f7bc363fc5424ebda59",
+          "value": "KaTeX_SansSerif-Regular.2f7bc363fc5424ebda59"
+        },
+        {
+          "name": "KaTeX_SansSerif-Regular.cd5e231e0cc53b2cb2c0",
+          "value": "KaTeX_SansSerif-Regular.cd5e231e0cc53b2cb2c0"
+        },
+        {
+          "name": "KaTeX_Script-Regular-C5JkGWo-",
+          "value": "KaTeX_Script-Regular-C5JkGWo-"
+        },
+        {
+          "name": "KaTeX_Script-Regular-D3wIWfF6",
+          "value": "KaTeX_Script-Regular-D3wIWfF6"
+        },
+        {
+          "name": "KaTeX_Script-Regular-D5yQViql",
+          "value": "KaTeX_Script-Regular-D5yQViql"
+        },
+        {
+          "name": "KaTeX_Script-Regular.073b3402d036714b4370",
+          "value": "KaTeX_Script-Regular.073b3402d036714b4370"
+        },
+        {
+          "name": "KaTeX_Script-Regular.c81d1b2a4b75d3eded60",
+          "value": "KaTeX_Script-Regular.c81d1b2a4b75d3eded60"
+        },
+        {
+          "name": "KaTeX_Script-Regular.fc9ba5249878cd8f8d88",
+          "value": "KaTeX_Script-Regular.fc9ba5249878cd8f8d88"
+        },
+        {
+          "name": "KaTeX_Size1-Regular-C195tn64",
+          "value": "KaTeX_Size1-Regular-C195tn64"
+        },
+        {
+          "name": "KaTeX_Size1-Regular-Dbsnue_I",
+          "value": "KaTeX_Size1-Regular-Dbsnue_I"
+        },
+        {
+          "name": "KaTeX_Size1-Regular-mCD8mA8B",
+          "value": "KaTeX_Size1-Regular-mCD8mA8B"
+        },
+        {
+          "name": "KaTeX_Size1-Regular.0108e89c9003e8c14ea3",
+          "value": "KaTeX_Size1-Regular.0108e89c9003e8c14ea3"
+        },
+        {
+          "name": "KaTeX_Size1-Regular.6de7d4b539221a49e9e2",
+          "value": "KaTeX_Size1-Regular.6de7d4b539221a49e9e2"
+        },
+        {
+          "name": "KaTeX_Size1-Regular.6eec866c69313624be60",
+          "value": "KaTeX_Size1-Regular.6eec866c69313624be60"
+        },
+        {
+          "name": "KaTeX_Size2-Regular-B7gKUWhC",
+          "value": "KaTeX_Size2-Regular-B7gKUWhC"
+        },
+        {
+          "name": "KaTeX_Size2-Regular-Dy4dx90m",
+          "value": "KaTeX_Size2-Regular-Dy4dx90m"
+        },
+        {
+          "name": "KaTeX_Size2-Regular-oD1tc_U0",
+          "value": "KaTeX_Size2-Regular-oD1tc_U0"
+        },
+        {
+          "name": "KaTeX_Size2-Regular.2960900c4f271311eb36",
+          "value": "KaTeX_Size2-Regular.2960900c4f271311eb36"
+        },
+        {
+          "name": "KaTeX_Size2-Regular.3a99e70aee4076660d38",
+          "value": "KaTeX_Size2-Regular.3a99e70aee4076660d38"
+        },
+        {
+          "name": "KaTeX_Size2-Regular.57f5c1837853986ea1db",
+          "value": "KaTeX_Size2-Regular.57f5c1837853986ea1db"
+        },
+        {
+          "name": "KaTeX_Size3-Regular-CTq5MqoE",
+          "value": "KaTeX_Size3-Regular-CTq5MqoE"
+        },
+        {
+          "name": "KaTeX_Size3-Regular-DgpXs0kz",
+          "value": "KaTeX_Size3-Regular-DgpXs0kz"
+        },
+        {
+          "name": "KaTeX_Size3-Regular.7947224e8a9914fa332b",
+          "value": "KaTeX_Size3-Regular.7947224e8a9914fa332b"
+        },
+        {
+          "name": "KaTeX_Size3-Regular.8d6b6822586eea3d3b20",
+          "value": "KaTeX_Size3-Regular.8d6b6822586eea3d3b20"
+        },
+        {
+          "name": "KaTeX_Size3-Regular.e1951519f6f0596f7356",
+          "value": "KaTeX_Size3-Regular.e1951519f6f0596f7356"
+        },
+        {
+          "name": "KaTeX_Size4-Regular-BF-4gkZK",
+          "value": "KaTeX_Size4-Regular-BF-4gkZK"
+        },
+        {
+          "name": "KaTeX_Size4-Regular-DWFBv043",
+          "value": "KaTeX_Size4-Regular-DWFBv043"
+        },
+        {
+          "name": "KaTeX_Size4-Regular-Dl5lxZxV",
+          "value": "KaTeX_Size4-Regular-Dl5lxZxV"
+        },
+        {
+          "name": "KaTeX_Size4-Regular.4ad7c7e8bb8d10a34bb7",
+          "value": "KaTeX_Size4-Regular.4ad7c7e8bb8d10a34bb7"
+        },
+        {
+          "name": "KaTeX_Size4-Regular.aeffd8025cba3647f1a6",
+          "value": "KaTeX_Size4-Regular.aeffd8025cba3647f1a6"
+        },
+        {
+          "name": "KaTeX_Size4-Regular.e418bf257af1052628d8",
+          "value": "KaTeX_Size4-Regular.e418bf257af1052628d8"
+        },
+        {
+          "name": "KaTeX_Typewriter-Regular-C0xS9mPB",
+          "value": "KaTeX_Typewriter-Regular-C0xS9mPB"
+        },
+        {
+          "name": "KaTeX_Typewriter-Regular-CO6r4hn1",
+          "value": "KaTeX_Typewriter-Regular-CO6r4hn1"
+        },
+        {
+          "name": "KaTeX_Typewriter-Regular-D3Ib7_Hf",
+          "value": "KaTeX_Typewriter-Regular-D3Ib7_Hf"
+        },
+        {
+          "name": "KaTeX_Typewriter-Regular.4c6b94fd1d07f8beff7c",
+          "value": "KaTeX_Typewriter-Regular.4c6b94fd1d07f8beff7c"
+        },
+        {
+          "name": "KaTeX_Typewriter-Regular.c295e7f71970f03c0549",
+          "value": "KaTeX_Typewriter-Regular.c295e7f71970f03c0549"
+        },
+        {
+          "name": "KaTeX_Typewriter-Regular.c5c02d763c89380dcb4e",
+          "value": "KaTeX_Typewriter-Regular.c5c02d763c89380dcb4e"
+        },
+        {
+          "name": "MaterialSymbols-Outlined.909d2dce4aba724ad02f",
+          "value": "MaterialSymbols-Outlined.909d2dce4aba724ad02f"
+        },
+        {
+          "name": "Merienda-Black",
+          "value": "Merienda-Black"
+        },
+        {
+          "name": "Merienda-Bold",
+          "value": "Merienda-Bold"
+        },
+        {
+          "name": "Merienda-ExtraBold",
+          "value": "Merienda-ExtraBold"
+        },
+        {
+          "name": "Merienda-Light",
+          "value": "Merienda-Light"
+        },
+        {
+          "name": "Merienda-Medium",
+          "value": "Merienda-Medium"
+        },
+        {
+          "name": "Merienda-Regular",
+          "value": "Merienda-Regular"
+        },
+        {
+          "name": "Merienda-SemiBold",
+          "value": "Merienda-SemiBold"
+        },
+        {
+          "name": "Merienda-VariableFont_wght",
+          "value": "Merienda-VariableFont_wght"
+        },
+        {
+          "name": "NotoSansArabic-Regular",
+          "value": "NotoSansArabic-Regular"
+        },
+        {
+          "name": "OpenSans-Medium",
+          "value": "OpenSans-Medium"
+        },
+        {
+          "name": "Oswald-Bold",
+          "value": "Oswald-Bold"
+        },
+        {
+          "name": "OverlockSC-Regular",
+          "value": "OverlockSC-Regular"
+        },
+        {
+          "name": "PixelifySans-Bold",
+          "value": "PixelifySans-Bold"
+        },
+        {
+          "name": "Quicksand-Bold",
+          "value": "Quicksand-Bold"
+        },
+        {
+          "name": "Roboto-Regular",
+          "value": "Roboto-Regular"
+        },
+        {
+          "name": "Roboto-Slab-Bold",
+          "value": "Roboto-Slab-Bold"
+        },
+        {
+          "name": "Roboto-Slab-Regular",
+          "value": "Roboto-Slab-Regular"
+        },
+        {
+          "name": "STIXGeneral",
+          "value": "STIXGeneral"
+        },
+        {
+          "name": "STIXGeneralBol",
+          "value": "STIXGeneralBol"
+        },
+        {
+          "name": "STIXGeneralBolIta",
+          "value": "STIXGeneralBolIta"
+        },
+        {
+          "name": "STIXGeneralItalic",
+          "value": "STIXGeneralItalic"
+        },
+        {
+          "name": "STIXNonUni",
+          "value": "STIXNonUni"
+        },
+        {
+          "name": "STIXNonUniBol",
+          "value": "STIXNonUniBol"
+        },
+        {
+          "name": "STIXNonUniBolIta",
+          "value": "STIXNonUniBolIta"
+        },
+        {
+          "name": "STIXNonUniIta",
+          "value": "STIXNonUniIta"
+        },
+        {
+          "name": "STIXSizFiveSymReg",
+          "value": "STIXSizFiveSymReg"
+        },
+        {
+          "name": "STIXSizFourSymBol",
+          "value": "STIXSizFourSymBol"
+        },
+        {
+          "name": "STIXSizFourSymReg",
+          "value": "STIXSizFourSymReg"
+        },
+        {
+          "name": "STIXSizOneSymBol",
+          "value": "STIXSizOneSymBol"
+        },
+        {
+          "name": "STIXSizOneSymReg",
+          "value": "STIXSizOneSymReg"
+        },
+        {
+          "name": "STIXSizThreeSymBol",
+          "value": "STIXSizThreeSymBol"
+        },
+        {
+          "name": "STIXSizThreeSymReg",
+          "value": "STIXSizThreeSymReg"
+        },
+        {
+          "name": "STIXSizTwoSymBol",
+          "value": "STIXSizTwoSymBol"
+        },
+        {
+          "name": "STIXSizTwoSymReg",
+          "value": "STIXSizTwoSymReg"
+        },
+        {
+          "name": "SourceCodePro-Bold.17a68a0751a813474a0e",
+          "value": "SourceCodePro-Bold.17a68a0751a813474a0e"
+        },
+        {
+          "name": "SourceCodePro-BoldItalic.d45b7a3df103d441d78b",
+          "value": "SourceCodePro-BoldItalic.d45b7a3df103d441d78b"
+        },
+        {
+          "name": "SourceCodePro-Italic.ec122a420df4175e74f2",
+          "value": "SourceCodePro-Italic.ec122a420df4175e74f2"
+        },
+        {
+          "name": "SourceCodePro-Regular.84b900b88d09398d86b0",
+          "value": "SourceCodePro-Regular.84b900b88d09398d86b0"
+        },
+        {
+          "name": "SourceCodePro-SemiBold.17291d1c493cb25eb2c3",
+          "value": "SourceCodePro-SemiBold.17291d1c493cb25eb2c3"
+        },
+        {
+          "name": "SourceCodePro-SemiBoldItalic.f879ae27307c3926522b",
+          "value": "SourceCodePro-SemiBoldItalic.f879ae27307c3926522b"
+        },
+        {
+          "name": "SourceSansPro-Bold.118dea98980e20a81ced",
+          "value": "SourceSansPro-Bold.118dea98980e20a81ced"
+        },
+        {
+          "name": "SourceSansPro-BoldItalic.1d664be59d2eb5fef029",
+          "value": "SourceSansPro-BoldItalic.1d664be59d2eb5fef029"
+        },
+        {
+          "name": "SourceSansPro-Italic.8a9bfea74d43927d6eec",
+          "value": "SourceSansPro-Italic.8a9bfea74d43927d6eec"
+        },
+        {
+          "name": "SourceSansPro-Regular.0d69e5ff5e92ac64a0c9",
+          "value": "SourceSansPro-Regular.0d69e5ff5e92ac64a0c9"
+        },
+        {
+          "name": "SourceSansPro-SemiBold.abed79cd0df1827e18cf",
+          "value": "SourceSansPro-SemiBold.abed79cd0df1827e18cf"
+        },
+        {
+          "name": "SourceSansPro-SemiBoldItalic.befb0a2824eabc5ce36b",
+          "value": "SourceSansPro-SemiBoldItalic.befb0a2824eabc5ce36b"
+        },
+        {
+          "name": "SourceSerifPro-Bold.d7975b56594770699ae0",
+          "value": "SourceSerifPro-Bold.d7975b56594770699ae0"
+        },
+        {
+          "name": "SourceSerifPro-BoldItalic.913697a7178b128caa4c",
+          "value": "SourceSerifPro-BoldItalic.913697a7178b128caa4c"
+        },
+        {
+          "name": "SourceSerifPro-Italic.d3529cb5797663ac5d88",
+          "value": "SourceSerifPro-Italic.d3529cb5797663ac5d88"
+        },
+        {
+          "name": "SourceSerifPro-Regular.e6c37aa3926474cc93e1",
+          "value": "SourceSerifPro-Regular.e6c37aa3926474cc93e1"
+        },
+        {
+          "name": "SourceSerifPro-SemiBold.5c1d378dd5990ef334ca",
+          "value": "SourceSerifPro-SemiBold.5c1d378dd5990ef334ca"
+        },
+        {
+          "name": "SourceSerifPro-SemiBoldItalic.249e948b885d0c7d30a8",
+          "value": "SourceSerifPro-SemiBoldItalic.249e948b885d0c7d30a8"
+        },
+        {
+          "name": "TTNorms-Black",
+          "value": "TTNorms-Black"
+        },
+        {
+          "name": "Vera",
+          "value": "Vera"
+        },
+        {
+          "name": "VeraBI",
+          "value": "VeraBI"
+        },
+        {
+          "name": "VeraBd",
+          "value": "VeraBd"
+        },
+        {
+          "name": "VeraIt",
+          "value": "VeraIt"
+        },
+        {
+          "name": "YoungSerif-Regular",
+          "value": "YoungSerif-Regular"
+        },
+        {
+          "name": "arial",
+          "value": "arial"
+        },
+        {
+          "name": "cmb10",
+          "value": "cmb10"
+        },
+        {
+          "name": "cmex10",
+          "value": "cmex10"
+        },
+        {
+          "name": "cmmi10",
+          "value": "cmmi10"
+        },
+        {
+          "name": "cmr10",
+          "value": "cmr10"
+        },
+        {
+          "name": "cmss10",
+          "value": "cmss10"
+        },
+        {
+          "name": "cmsy10",
+          "value": "cmsy10"
+        },
+        {
+          "name": "cmtt10",
+          "value": "cmtt10"
+        },
+        {
+          "name": "comic",
+          "value": "comic"
+        },
+        {
+          "name": "fa-brands-400",
+          "value": "fa-brands-400"
+        },
+        {
+          "name": "fa-regular-400",
+          "value": "fa-regular-400"
+        },
+        {
+          "name": "fa-solid-900",
+          "value": "fa-solid-900"
+        },
+        {
+          "name": "fa-v4compatibility",
+          "value": "fa-v4compatibility"
+        },
+        {
+          "name": "font",
+          "value": "font"
+        },
+        {
+          "name": "fontawesome-webfont",
+          "value": "fontawesome-webfont"
+        },
+        {
+          "name": "impact",
+          "value": "impact"
+        },
+        {
+          "name": "lato-bold",
+          "value": "lato-bold"
+        },
+        {
+          "name": "lato-bold-italic",
+          "value": "lato-bold-italic"
+        },
+        {
+          "name": "lato-normal",
+          "value": "lato-normal"
+        },
+        {
+          "name": "lato-normal-italic",
+          "value": "lato-normal-italic"
+        },
+        {
+          "name": "庞门正道粗书体6.0",
+          "value": "庞门正道粗书体6.0"
+        },
+        {
+          "name": "王汉宗颜楷体繁",
+          "value": "王汉宗颜楷体繁"
         }
-    ]
+      ],
+      "typeOptions": {
+        "comfyOptions": [
+          {
+            "node": 1016,
+            "key": "selected_font"
+          },
+          {
+            "node": 537,
+            "key": "selected_font"
+          }
+        ],
+        "multipleValues": false
+      }
+    },
+    {
+      "displayName": "标题",
+      "name": "title",
+      "type": "string",
+      "default": "天堂花园",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 1314,
+          "key": "text"
+        },
+        "multipleValues": false
+      }
+    },
+    {
+      "displayName": "启用自定义文案",
+      "name": "custom_copywriter_enable",
+      "type": "boolean",
+      "default": false,
+      "description": "开启此开关后，将使用自定义文案",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 1319,
+          "key": "value"
+        },
+        "multipleValues": false
+      }
+    },
+    {
+      "displayName": "自定义文案",
+      "name": "custom_copywriter",
+      "type": "string",
+      "default": "自定义文案示例",
+      "required": false,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 1313,
+          "key": "text"
+        },
+        "multipleValues": false
+      }
+    },
+    {
+      "displayName": "版权字体",
+      "name": "copyright_font",
+      "type": "options",
+      "default": "Alibaba-PuHuiTi-Heavy",
+      "required": true,
+      "options": [
+        {
+          "name": "Alibaba-PuHuiTi-Heavy",
+          "value": "Alibaba-PuHuiTi-Heavy"
+        },
+        {
+          "name": "Alkatra",
+          "value": "Alkatra"
+        },
+        {
+          "name": "AlumniSansCollegiateOne-Regular",
+          "value": "AlumniSansCollegiateOne-Regular"
+        },
+        {
+          "name": "Caveat-VariableFont_wght",
+          "value": "Caveat-VariableFont_wght"
+        },
+        {
+          "name": "DejaVuSans",
+          "value": "DejaVuSans"
+        },
+        {
+          "name": "DejaVuSans-Bold",
+          "value": "DejaVuSans-Bold"
+        },
+        {
+          "name": "DejaVuSans-BoldOblique",
+          "value": "DejaVuSans-BoldOblique"
+        },
+        {
+          "name": "DejaVuSans-ExtraLight",
+          "value": "DejaVuSans-ExtraLight"
+        },
+        {
+          "name": "DejaVuSans-Oblique",
+          "value": "DejaVuSans-Oblique"
+        },
+        {
+          "name": "DejaVuSansCondensed",
+          "value": "DejaVuSansCondensed"
+        },
+        {
+          "name": "DejaVuSansCondensed-Bold",
+          "value": "DejaVuSansCondensed-Bold"
+        },
+        {
+          "name": "DejaVuSansCondensed-BoldOblique",
+          "value": "DejaVuSansCondensed-BoldOblique"
+        },
+        {
+          "name": "DejaVuSansCondensed-Oblique",
+          "value": "DejaVuSansCondensed-Oblique"
+        },
+        {
+          "name": "DejaVuSansDisplay",
+          "value": "DejaVuSansDisplay"
+        },
+        {
+          "name": "DejaVuSansMono",
+          "value": "DejaVuSansMono"
+        },
+        {
+          "name": "DejaVuSansMono-Bold",
+          "value": "DejaVuSansMono-Bold"
+        },
+        {
+          "name": "DejaVuSansMono-BoldOblique",
+          "value": "DejaVuSansMono-BoldOblique"
+        },
+        {
+          "name": "DejaVuSansMono-Oblique",
+          "value": "DejaVuSansMono-Oblique"
+        },
+        {
+          "name": "DejaVuSerif",
+          "value": "DejaVuSerif"
+        },
+        {
+          "name": "DejaVuSerif-Bold",
+          "value": "DejaVuSerif-Bold"
+        },
+        {
+          "name": "DejaVuSerif-BoldItalic",
+          "value": "DejaVuSerif-BoldItalic"
+        },
+        {
+          "name": "DejaVuSerif-Italic",
+          "value": "DejaVuSerif-Italic"
+        },
+        {
+          "name": "DejaVuSerifDisplay",
+          "value": "DejaVuSerifDisplay"
+        },
+        {
+          "name": "FangSong",
+          "value": "FangSong"
+        },
+        {
+          "name": "FreeMono",
+          "value": "FreeMono"
+        },
+        {
+          "name": "FreeMonoBoldOblique",
+          "value": "FreeMonoBoldOblique"
+        },
+        {
+          "name": "Inter-Black-jiII8dog",
+          "value": "Inter-Black-jiII8dog"
+        },
+        {
+          "name": "Inter-BlackItalic-1413vuen",
+          "value": "Inter-BlackItalic-1413vuen"
+        },
+        {
+          "name": "Inter-Bold-srYz_-1B",
+          "value": "Inter-Bold-srYz_-1B"
+        },
+        {
+          "name": "Inter-BoldItalic-dE_gZyur",
+          "value": "Inter-BoldItalic-dE_gZyur"
+        },
+        {
+          "name": "Inter-ExtraBold-TduDdwUu",
+          "value": "Inter-ExtraBold-TduDdwUu"
+        },
+        {
+          "name": "Inter-ExtraBoldItalic-BJafRE5I",
+          "value": "Inter-ExtraBoldItalic-BJafRE5I"
+        },
+        {
+          "name": "Inter-ExtraLight-w5HAp5iF",
+          "value": "Inter-ExtraLight-w5HAp5iF"
+        },
+        {
+          "name": "Inter-ExtraLightItalic-ZptecSuc",
+          "value": "Inter-ExtraLightItalic-ZptecSuc"
+        },
+        {
+          "name": "Inter-Italic-f6M78thn",
+          "value": "Inter-Italic-f6M78thn"
+        },
+        {
+          "name": "Inter-Light-DFhX0qo-",
+          "value": "Inter-Light-DFhX0qo-"
+        },
+        {
+          "name": "Inter-LightItalic-fu56_DRc",
+          "value": "Inter-LightItalic-fu56_DRc"
+        },
+        {
+          "name": "Inter-Medium-dDRaJ8tM",
+          "value": "Inter-Medium-dDRaJ8tM"
+        },
+        {
+          "name": "Inter-MediumItalic-zr3roggP",
+          "value": "Inter-MediumItalic-zr3roggP"
+        },
+        {
+          "name": "Inter-Regular-dEFHw1tF",
+          "value": "Inter-Regular-dEFHw1tF"
+        },
+        {
+          "name": "Inter-SemiBold-PyS8DO2L",
+          "value": "Inter-SemiBold-PyS8DO2L"
+        },
+        {
+          "name": "Inter-SemiBoldItalic-uIDb7hsH",
+          "value": "Inter-SemiBoldItalic-uIDb7hsH"
+        },
+        {
+          "name": "Inter-Thin-eKObIkJC",
+          "value": "Inter-Thin-eKObIkJC"
+        },
+        {
+          "name": "Inter-ThinItalic-L6uBn3RP",
+          "value": "Inter-ThinItalic-L6uBn3RP"
+        },
+        {
+          "name": "KaTeX_AMS-Regular-BQhdFMY1",
+          "value": "KaTeX_AMS-Regular-BQhdFMY1"
+        },
+        {
+          "name": "KaTeX_AMS-Regular-DMm9YOAa",
+          "value": "KaTeX_AMS-Regular-DMm9YOAa"
+        },
+        {
+          "name": "KaTeX_AMS-Regular-DRggAlZN",
+          "value": "KaTeX_AMS-Regular-DRggAlZN"
+        },
+        {
+          "name": "KaTeX_AMS-Regular.73ea273a72f4aca30ca5",
+          "value": "KaTeX_AMS-Regular.73ea273a72f4aca30ca5"
+        },
+        {
+          "name": "KaTeX_AMS-Regular.853be92419a6c3766b9a",
+          "value": "KaTeX_AMS-Regular.853be92419a6c3766b9a"
+        },
+        {
+          "name": "KaTeX_AMS-Regular.d562e886c52f12660a41",
+          "value": "KaTeX_AMS-Regular.d562e886c52f12660a41"
+        },
+        {
+          "name": "KaTeX_Caligraphic-Bold-ATXxdsX0",
+          "value": "KaTeX_Caligraphic-Bold-ATXxdsX0"
+        },
+        {
+          "name": "KaTeX_Caligraphic-Bold-BEiXGLvX",
+          "value": "KaTeX_Caligraphic-Bold-BEiXGLvX"
+        },
+        {
+          "name": "KaTeX_Caligraphic-Bold-Dq_IR9rO",
+          "value": "KaTeX_Caligraphic-Bold-Dq_IR9rO"
+        },
+        {
+          "name": "KaTeX_Caligraphic-Bold.7489a2fbfb9bfe704420",
+          "value": "KaTeX_Caligraphic-Bold.7489a2fbfb9bfe704420"
+        },
+        {
+          "name": "KaTeX_Caligraphic-Bold.a1abf90dfd72792a577a",
+          "value": "KaTeX_Caligraphic-Bold.a1abf90dfd72792a577a"
+        },
+        {
+          "name": "KaTeX_Caligraphic-Bold.d757c535a2e5902f1325",
+          "value": "KaTeX_Caligraphic-Bold.d757c535a2e5902f1325"
+        },
+        {
+          "name": "KaTeX_Caligraphic-Regular-CTRA-rTL",
+          "value": "KaTeX_Caligraphic-Regular-CTRA-rTL"
+        },
+        {
+          "name": "KaTeX_Caligraphic-Regular-Di6jR-x-",
+          "value": "KaTeX_Caligraphic-Regular-Di6jR-x-"
+        },
+        {
+          "name": "KaTeX_Caligraphic-Regular-wX97UBjC",
+          "value": "KaTeX_Caligraphic-Regular-wX97UBjC"
+        },
+        {
+          "name": "KaTeX_Caligraphic-Regular.7e873d3833eb108a0758",
+          "value": "KaTeX_Caligraphic-Regular.7e873d3833eb108a0758"
+        },
+        {
+          "name": "KaTeX_Caligraphic-Regular.d6484fce1ef428d5bd94",
+          "value": "KaTeX_Caligraphic-Regular.d6484fce1ef428d5bd94"
+        },
+        {
+          "name": "KaTeX_Caligraphic-Regular.db074fa22cf224af93d7",
+          "value": "KaTeX_Caligraphic-Regular.db074fa22cf224af93d7"
+        },
+        {
+          "name": "KaTeX_Fraktur-Bold-BdnERNNW",
+          "value": "KaTeX_Fraktur-Bold-BdnERNNW"
+        },
+        {
+          "name": "KaTeX_Fraktur-Bold-BsDP51OF",
+          "value": "KaTeX_Fraktur-Bold-BsDP51OF"
+        },
+        {
+          "name": "KaTeX_Fraktur-Bold-CL6g_b3V",
+          "value": "KaTeX_Fraktur-Bold-CL6g_b3V"
+        },
+        {
+          "name": "KaTeX_Fraktur-Bold.354501bac435c3264834",
+          "value": "KaTeX_Fraktur-Bold.354501bac435c3264834"
+        },
+        {
+          "name": "KaTeX_Fraktur-Bold.4c761b3711973ab04edf",
+          "value": "KaTeX_Fraktur-Bold.4c761b3711973ab04edf"
+        },
+        {
+          "name": "KaTeX_Fraktur-Bold.931d67ea207ab37ee693",
+          "value": "KaTeX_Fraktur-Bold.931d67ea207ab37ee693"
+        },
+        {
+          "name": "KaTeX_Fraktur-Regular-CB_wures",
+          "value": "KaTeX_Fraktur-Regular-CB_wures"
+        },
+        {
+          "name": "KaTeX_Fraktur-Regular-CTYiF6lA",
+          "value": "KaTeX_Fraktur-Regular-CTYiF6lA"
+        },
+        {
+          "name": "KaTeX_Fraktur-Regular-Dxdc4cR9",
+          "value": "KaTeX_Fraktur-Regular-Dxdc4cR9"
+        },
+        {
+          "name": "KaTeX_Fraktur-Regular.172d3529b26f8cedef6b",
+          "value": "KaTeX_Fraktur-Regular.172d3529b26f8cedef6b"
+        },
+        {
+          "name": "KaTeX_Fraktur-Regular.6fdf0ac577be0ba82a4c",
+          "value": "KaTeX_Fraktur-Regular.6fdf0ac577be0ba82a4c"
+        },
+        {
+          "name": "KaTeX_Fraktur-Regular.ed305b5434865e06ffde",
+          "value": "KaTeX_Fraktur-Regular.ed305b5434865e06ffde"
+        },
+        {
+          "name": "KaTeX_Main-Bold-Cx986IdX",
+          "value": "KaTeX_Main-Bold-Cx986IdX"
+        },
+        {
+          "name": "KaTeX_Main-Bold-Jm3AIy58",
+          "value": "KaTeX_Main-Bold-Jm3AIy58"
+        },
+        {
+          "name": "KaTeX_Main-Bold-waoOVXN0",
+          "value": "KaTeX_Main-Bold-waoOVXN0"
+        },
+        {
+          "name": "KaTeX_Main-Bold.0c3b8929d377c0e9b2f3",
+          "value": "KaTeX_Main-Bold.0c3b8929d377c0e9b2f3"
+        },
+        {
+          "name": "KaTeX_Main-Bold.39890742bc957b368704",
+          "value": "KaTeX_Main-Bold.39890742bc957b368704"
+        },
+        {
+          "name": "KaTeX_Main-Bold.8169508bf58f8bd92ad8",
+          "value": "KaTeX_Main-Bold.8169508bf58f8bd92ad8"
+        },
+        {
+          "name": "KaTeX_Main-BoldItalic-DxDJ3AOS",
+          "value": "KaTeX_Main-BoldItalic-DxDJ3AOS"
+        },
+        {
+          "name": "KaTeX_Main-BoldItalic-DzxPMmG6",
+          "value": "KaTeX_Main-BoldItalic-DzxPMmG6"
+        },
+        {
+          "name": "KaTeX_Main-BoldItalic-SpSLRI95",
+          "value": "KaTeX_Main-BoldItalic-SpSLRI95"
+        },
+        {
+          "name": "KaTeX_Main-BoldItalic.20f389c4120be058d80a",
+          "value": "KaTeX_Main-BoldItalic.20f389c4120be058d80a"
+        },
+        {
+          "name": "KaTeX_Main-BoldItalic.428978dc7837d46de091",
+          "value": "KaTeX_Main-BoldItalic.428978dc7837d46de091"
+        },
+        {
+          "name": "KaTeX_Main-BoldItalic.828abcb200061cffbaae",
+          "value": "KaTeX_Main-BoldItalic.828abcb200061cffbaae"
+        },
+        {
+          "name": "KaTeX_Main-Italic-3WenGoN9",
+          "value": "KaTeX_Main-Italic-3WenGoN9"
+        },
+        {
+          "name": "KaTeX_Main-Italic-BMLOBm91",
+          "value": "KaTeX_Main-Italic-BMLOBm91"
+        },
+        {
+          "name": "KaTeX_Main-Italic-NWA7e6Wa",
+          "value": "KaTeX_Main-Italic-NWA7e6Wa"
+        },
+        {
+          "name": "KaTeX_Main-Italic.fa675e5e4bec9eb250b6",
+          "value": "KaTeX_Main-Italic.fa675e5e4bec9eb250b6"
+        },
+        {
+          "name": "KaTeX_Main-Italic.fd947498bc16392e76c2",
+          "value": "KaTeX_Main-Italic.fd947498bc16392e76c2"
+        },
+        {
+          "name": "KaTeX_Main-Italic.fe2176f79edaa716e621",
+          "value": "KaTeX_Main-Italic.fe2176f79edaa716e621"
+        },
+        {
+          "name": "KaTeX_Main-Regular-B22Nviop",
+          "value": "KaTeX_Main-Regular-B22Nviop"
+        },
+        {
+          "name": "KaTeX_Main-Regular-Dr94JaBh",
+          "value": "KaTeX_Main-Regular-Dr94JaBh"
+        },
+        {
+          "name": "KaTeX_Main-Regular-ypZvNtVU",
+          "value": "KaTeX_Main-Regular-ypZvNtVU"
+        },
+        {
+          "name": "KaTeX_Main-Regular.4f35fbcc9ee8614c2bcc",
+          "value": "KaTeX_Main-Regular.4f35fbcc9ee8614c2bcc"
+        },
+        {
+          "name": "KaTeX_Main-Regular.9eba1d77abcf2aa6e94e",
+          "value": "KaTeX_Main-Regular.9eba1d77abcf2aa6e94e"
+        },
+        {
+          "name": "KaTeX_Main-Regular.f650f111a3b890d116f1",
+          "value": "KaTeX_Main-Regular.f650f111a3b890d116f1"
+        },
+        {
+          "name": "KaTeX_Math-BoldItalic-B3XSjfu4",
+          "value": "KaTeX_Math-BoldItalic-B3XSjfu4"
+        },
+        {
+          "name": "KaTeX_Math-BoldItalic-CZnvNsCZ",
+          "value": "KaTeX_Math-BoldItalic-CZnvNsCZ"
+        },
+        {
+          "name": "KaTeX_Math-BoldItalic-iY-2wyZ7",
+          "value": "KaTeX_Math-BoldItalic-iY-2wyZ7"
+        },
+        {
+          "name": "KaTeX_Math-BoldItalic.3f07ed67f06c720120ce",
+          "value": "KaTeX_Math-BoldItalic.3f07ed67f06c720120ce"
+        },
+        {
+          "name": "KaTeX_Math-BoldItalic.bf2d440b3a42ea78a998",
+          "value": "KaTeX_Math-BoldItalic.bf2d440b3a42ea78a998"
+        },
+        {
+          "name": "KaTeX_Math-BoldItalic.dcbcbd93bac0470b462d",
+          "value": "KaTeX_Math-BoldItalic.dcbcbd93bac0470b462d"
+        },
+        {
+          "name": "KaTeX_Math-Italic-DA0__PXp",
+          "value": "KaTeX_Math-Italic-DA0__PXp"
+        },
+        {
+          "name": "KaTeX_Math-Italic-flOr_0UB",
+          "value": "KaTeX_Math-Italic-flOr_0UB"
+        },
+        {
+          "name": "KaTeX_Math-Italic-t53AETM-",
+          "value": "KaTeX_Math-Italic-t53AETM-"
+        },
+        {
+          "name": "KaTeX_Math-Italic.6d3d25f4820d0da8f01f",
+          "value": "KaTeX_Math-Italic.6d3d25f4820d0da8f01f"
+        },
+        {
+          "name": "KaTeX_Math-Italic.8a5f936332e8028c7278",
+          "value": "KaTeX_Math-Italic.8a5f936332e8028c7278"
+        },
+        {
+          "name": "KaTeX_Math-Italic.96759856b4e70f3a8338",
+          "value": "KaTeX_Math-Italic.96759856b4e70f3a8338"
+        },
+        {
+          "name": "KaTeX_SansSerif-Bold-CFMepnvq",
+          "value": "KaTeX_SansSerif-Bold-CFMepnvq"
+        },
+        {
+          "name": "KaTeX_SansSerif-Bold-D1sUS0GD",
+          "value": "KaTeX_SansSerif-Bold-D1sUS0GD"
+        },
+        {
+          "name": "KaTeX_SansSerif-Bold-DbIhKOiC",
+          "value": "KaTeX_SansSerif-Bold-DbIhKOiC"
+        },
+        {
+          "name": "KaTeX_SansSerif-Bold.5b49f4993ae22d7975b4",
+          "value": "KaTeX_SansSerif-Bold.5b49f4993ae22d7975b4"
+        },
+        {
+          "name": "KaTeX_SansSerif-Bold.95591a929f0d32aa282a",
+          "value": "KaTeX_SansSerif-Bold.95591a929f0d32aa282a"
+        },
+        {
+          "name": "KaTeX_SansSerif-Bold.b9cd458ac6d5889ff9c3",
+          "value": "KaTeX_SansSerif-Bold.b9cd458ac6d5889ff9c3"
+        },
+        {
+          "name": "KaTeX_SansSerif-Italic-C3H0VqGB",
+          "value": "KaTeX_SansSerif-Italic-C3H0VqGB"
+        },
+        {
+          "name": "KaTeX_SansSerif-Italic-DN2j7dab",
+          "value": "KaTeX_SansSerif-Italic-DN2j7dab"
+        },
+        {
+          "name": "KaTeX_SansSerif-Italic-YYjJ1zSn",
+          "value": "KaTeX_SansSerif-Italic-YYjJ1zSn"
+        },
+        {
+          "name": "KaTeX_SansSerif-Italic.7d393d382f3e7fb1c637",
+          "value": "KaTeX_SansSerif-Italic.7d393d382f3e7fb1c637"
+        },
+        {
+          "name": "KaTeX_SansSerif-Italic.8d593cfaa96238d5e2f8",
+          "value": "KaTeX_SansSerif-Italic.8d593cfaa96238d5e2f8"
+        },
+        {
+          "name": "KaTeX_SansSerif-Italic.b257a18c016f37ee4543",
+          "value": "KaTeX_SansSerif-Italic.b257a18c016f37ee4543"
+        },
+        {
+          "name": "KaTeX_SansSerif-Regular-BNo7hRIc",
+          "value": "KaTeX_SansSerif-Regular-BNo7hRIc"
+        },
+        {
+          "name": "KaTeX_SansSerif-Regular-CS6fqUqJ",
+          "value": "KaTeX_SansSerif-Regular-CS6fqUqJ"
+        },
+        {
+          "name": "KaTeX_SansSerif-Regular-DDBCnlJ7",
+          "value": "KaTeX_SansSerif-Regular-DDBCnlJ7"
+        },
+        {
+          "name": "KaTeX_SansSerif-Regular.02271ec5cb9f5b4588ac",
+          "value": "KaTeX_SansSerif-Regular.02271ec5cb9f5b4588ac"
+        },
+        {
+          "name": "KaTeX_SansSerif-Regular.2f7bc363fc5424ebda59",
+          "value": "KaTeX_SansSerif-Regular.2f7bc363fc5424ebda59"
+        },
+        {
+          "name": "KaTeX_SansSerif-Regular.cd5e231e0cc53b2cb2c0",
+          "value": "KaTeX_SansSerif-Regular.cd5e231e0cc53b2cb2c0"
+        },
+        {
+          "name": "KaTeX_Script-Regular-C5JkGWo-",
+          "value": "KaTeX_Script-Regular-C5JkGWo-"
+        },
+        {
+          "name": "KaTeX_Script-Regular-D3wIWfF6",
+          "value": "KaTeX_Script-Regular-D3wIWfF6"
+        },
+        {
+          "name": "KaTeX_Script-Regular-D5yQViql",
+          "value": "KaTeX_Script-Regular-D5yQViql"
+        },
+        {
+          "name": "KaTeX_Script-Regular.073b3402d036714b4370",
+          "value": "KaTeX_Script-Regular.073b3402d036714b4370"
+        },
+        {
+          "name": "KaTeX_Script-Regular.c81d1b2a4b75d3eded60",
+          "value": "KaTeX_Script-Regular.c81d1b2a4b75d3eded60"
+        },
+        {
+          "name": "KaTeX_Script-Regular.fc9ba5249878cd8f8d88",
+          "value": "KaTeX_Script-Regular.fc9ba5249878cd8f8d88"
+        },
+        {
+          "name": "KaTeX_Size1-Regular-C195tn64",
+          "value": "KaTeX_Size1-Regular-C195tn64"
+        },
+        {
+          "name": "KaTeX_Size1-Regular-Dbsnue_I",
+          "value": "KaTeX_Size1-Regular-Dbsnue_I"
+        },
+        {
+          "name": "KaTeX_Size1-Regular-mCD8mA8B",
+          "value": "KaTeX_Size1-Regular-mCD8mA8B"
+        },
+        {
+          "name": "KaTeX_Size1-Regular.0108e89c9003e8c14ea3",
+          "value": "KaTeX_Size1-Regular.0108e89c9003e8c14ea3"
+        },
+        {
+          "name": "KaTeX_Size1-Regular.6de7d4b539221a49e9e2",
+          "value": "KaTeX_Size1-Regular.6de7d4b539221a49e9e2"
+        },
+        {
+          "name": "KaTeX_Size1-Regular.6eec866c69313624be60",
+          "value": "KaTeX_Size1-Regular.6eec866c69313624be60"
+        },
+        {
+          "name": "KaTeX_Size2-Regular-B7gKUWhC",
+          "value": "KaTeX_Size2-Regular-B7gKUWhC"
+        },
+        {
+          "name": "KaTeX_Size2-Regular-Dy4dx90m",
+          "value": "KaTeX_Size2-Regular-Dy4dx90m"
+        },
+        {
+          "name": "KaTeX_Size2-Regular-oD1tc_U0",
+          "value": "KaTeX_Size2-Regular-oD1tc_U0"
+        },
+        {
+          "name": "KaTeX_Size2-Regular.2960900c4f271311eb36",
+          "value": "KaTeX_Size2-Regular.2960900c4f271311eb36"
+        },
+        {
+          "name": "KaTeX_Size2-Regular.3a99e70aee4076660d38",
+          "value": "KaTeX_Size2-Regular.3a99e70aee4076660d38"
+        },
+        {
+          "name": "KaTeX_Size2-Regular.57f5c1837853986ea1db",
+          "value": "KaTeX_Size2-Regular.57f5c1837853986ea1db"
+        },
+        {
+          "name": "KaTeX_Size3-Regular-CTq5MqoE",
+          "value": "KaTeX_Size3-Regular-CTq5MqoE"
+        },
+        {
+          "name": "KaTeX_Size3-Regular-DgpXs0kz",
+          "value": "KaTeX_Size3-Regular-DgpXs0kz"
+        },
+        {
+          "name": "KaTeX_Size3-Regular.7947224e8a9914fa332b",
+          "value": "KaTeX_Size3-Regular.7947224e8a9914fa332b"
+        },
+        {
+          "name": "KaTeX_Size3-Regular.8d6b6822586eea3d3b20",
+          "value": "KaTeX_Size3-Regular.8d6b6822586eea3d3b20"
+        },
+        {
+          "name": "KaTeX_Size3-Regular.e1951519f6f0596f7356",
+          "value": "KaTeX_Size3-Regular.e1951519f6f0596f7356"
+        },
+        {
+          "name": "KaTeX_Size4-Regular-BF-4gkZK",
+          "value": "KaTeX_Size4-Regular-BF-4gkZK"
+        },
+        {
+          "name": "KaTeX_Size4-Regular-DWFBv043",
+          "value": "KaTeX_Size4-Regular-DWFBv043"
+        },
+        {
+          "name": "KaTeX_Size4-Regular-Dl5lxZxV",
+          "value": "KaTeX_Size4-Regular-Dl5lxZxV"
+        },
+        {
+          "name": "KaTeX_Size4-Regular.4ad7c7e8bb8d10a34bb7",
+          "value": "KaTeX_Size4-Regular.4ad7c7e8bb8d10a34bb7"
+        },
+        {
+          "name": "KaTeX_Size4-Regular.aeffd8025cba3647f1a6",
+          "value": "KaTeX_Size4-Regular.aeffd8025cba3647f1a6"
+        },
+        {
+          "name": "KaTeX_Size4-Regular.e418bf257af1052628d8",
+          "value": "KaTeX_Size4-Regular.e418bf257af1052628d8"
+        },
+        {
+          "name": "KaTeX_Typewriter-Regular-C0xS9mPB",
+          "value": "KaTeX_Typewriter-Regular-C0xS9mPB"
+        },
+        {
+          "name": "KaTeX_Typewriter-Regular-CO6r4hn1",
+          "value": "KaTeX_Typewriter-Regular-CO6r4hn1"
+        },
+        {
+          "name": "KaTeX_Typewriter-Regular-D3Ib7_Hf",
+          "value": "KaTeX_Typewriter-Regular-D3Ib7_Hf"
+        },
+        {
+          "name": "KaTeX_Typewriter-Regular.4c6b94fd1d07f8beff7c",
+          "value": "KaTeX_Typewriter-Regular.4c6b94fd1d07f8beff7c"
+        },
+        {
+          "name": "KaTeX_Typewriter-Regular.c295e7f71970f03c0549",
+          "value": "KaTeX_Typewriter-Regular.c295e7f71970f03c0549"
+        },
+        {
+          "name": "KaTeX_Typewriter-Regular.c5c02d763c89380dcb4e",
+          "value": "KaTeX_Typewriter-Regular.c5c02d763c89380dcb4e"
+        },
+        {
+          "name": "MaterialSymbols-Outlined.909d2dce4aba724ad02f",
+          "value": "MaterialSymbols-Outlined.909d2dce4aba724ad02f"
+        },
+        {
+          "name": "Merienda-Black",
+          "value": "Merienda-Black"
+        },
+        {
+          "name": "Merienda-Bold",
+          "value": "Merienda-Bold"
+        },
+        {
+          "name": "Merienda-ExtraBold",
+          "value": "Merienda-ExtraBold"
+        },
+        {
+          "name": "Merienda-Light",
+          "value": "Merienda-Light"
+        },
+        {
+          "name": "Merienda-Medium",
+          "value": "Merienda-Medium"
+        },
+        {
+          "name": "Merienda-Regular",
+          "value": "Merienda-Regular"
+        },
+        {
+          "name": "Merienda-SemiBold",
+          "value": "Merienda-SemiBold"
+        },
+        {
+          "name": "Merienda-VariableFont_wght",
+          "value": "Merienda-VariableFont_wght"
+        },
+        {
+          "name": "NotoSansArabic-Regular",
+          "value": "NotoSansArabic-Regular"
+        },
+        {
+          "name": "OpenSans-Medium",
+          "value": "OpenSans-Medium"
+        },
+        {
+          "name": "Oswald-Bold",
+          "value": "Oswald-Bold"
+        },
+        {
+          "name": "OverlockSC-Regular",
+          "value": "OverlockSC-Regular"
+        },
+        {
+          "name": "PixelifySans-Bold",
+          "value": "PixelifySans-Bold"
+        },
+        {
+          "name": "Quicksand-Bold",
+          "value": "Quicksand-Bold"
+        },
+        {
+          "name": "Roboto-Regular",
+          "value": "Roboto-Regular"
+        },
+        {
+          "name": "Roboto-Slab-Bold",
+          "value": "Roboto-Slab-Bold"
+        },
+        {
+          "name": "Roboto-Slab-Regular",
+          "value": "Roboto-Slab-Regular"
+        },
+        {
+          "name": "STIXGeneral",
+          "value": "STIXGeneral"
+        },
+        {
+          "name": "STIXGeneralBol",
+          "value": "STIXGeneralBol"
+        },
+        {
+          "name": "STIXGeneralBolIta",
+          "value": "STIXGeneralBolIta"
+        },
+        {
+          "name": "STIXGeneralItalic",
+          "value": "STIXGeneralItalic"
+        },
+        {
+          "name": "STIXNonUni",
+          "value": "STIXNonUni"
+        },
+        {
+          "name": "STIXNonUniBol",
+          "value": "STIXNonUniBol"
+        },
+        {
+          "name": "STIXNonUniBolIta",
+          "value": "STIXNonUniBolIta"
+        },
+        {
+          "name": "STIXNonUniIta",
+          "value": "STIXNonUniIta"
+        },
+        {
+          "name": "STIXSizFiveSymReg",
+          "value": "STIXSizFiveSymReg"
+        },
+        {
+          "name": "STIXSizFourSymBol",
+          "value": "STIXSizFourSymBol"
+        },
+        {
+          "name": "STIXSizFourSymReg",
+          "value": "STIXSizFourSymReg"
+        },
+        {
+          "name": "STIXSizOneSymBol",
+          "value": "STIXSizOneSymBol"
+        },
+        {
+          "name": "STIXSizOneSymReg",
+          "value": "STIXSizOneSymReg"
+        },
+        {
+          "name": "STIXSizThreeSymBol",
+          "value": "STIXSizThreeSymBol"
+        },
+        {
+          "name": "STIXSizThreeSymReg",
+          "value": "STIXSizThreeSymReg"
+        },
+        {
+          "name": "STIXSizTwoSymBol",
+          "value": "STIXSizTwoSymBol"
+        },
+        {
+          "name": "STIXSizTwoSymReg",
+          "value": "STIXSizTwoSymReg"
+        },
+        {
+          "name": "SourceCodePro-Bold.17a68a0751a813474a0e",
+          "value": "SourceCodePro-Bold.17a68a0751a813474a0e"
+        },
+        {
+          "name": "SourceCodePro-BoldItalic.d45b7a3df103d441d78b",
+          "value": "SourceCodePro-BoldItalic.d45b7a3df103d441d78b"
+        },
+        {
+          "name": "SourceCodePro-Italic.ec122a420df4175e74f2",
+          "value": "SourceCodePro-Italic.ec122a420df4175e74f2"
+        },
+        {
+          "name": "SourceCodePro-Regular.84b900b88d09398d86b0",
+          "value": "SourceCodePro-Regular.84b900b88d09398d86b0"
+        },
+        {
+          "name": "SourceCodePro-SemiBold.17291d1c493cb25eb2c3",
+          "value": "SourceCodePro-SemiBold.17291d1c493cb25eb2c3"
+        },
+        {
+          "name": "SourceCodePro-SemiBoldItalic.f879ae27307c3926522b",
+          "value": "SourceCodePro-SemiBoldItalic.f879ae27307c3926522b"
+        },
+        {
+          "name": "SourceSansPro-Bold.118dea98980e20a81ced",
+          "value": "SourceSansPro-Bold.118dea98980e20a81ced"
+        },
+        {
+          "name": "SourceSansPro-BoldItalic.1d664be59d2eb5fef029",
+          "value": "SourceSansPro-BoldItalic.1d664be59d2eb5fef029"
+        },
+        {
+          "name": "SourceSansPro-Italic.8a9bfea74d43927d6eec",
+          "value": "SourceSansPro-Italic.8a9bfea74d43927d6eec"
+        },
+        {
+          "name": "SourceSansPro-Regular.0d69e5ff5e92ac64a0c9",
+          "value": "SourceSansPro-Regular.0d69e5ff5e92ac64a0c9"
+        },
+        {
+          "name": "SourceSansPro-SemiBold.abed79cd0df1827e18cf",
+          "value": "SourceSansPro-SemiBold.abed79cd0df1827e18cf"
+        },
+        {
+          "name": "SourceSansPro-SemiBoldItalic.befb0a2824eabc5ce36b",
+          "value": "SourceSansPro-SemiBoldItalic.befb0a2824eabc5ce36b"
+        },
+        {
+          "name": "SourceSerifPro-Bold.d7975b56594770699ae0",
+          "value": "SourceSerifPro-Bold.d7975b56594770699ae0"
+        },
+        {
+          "name": "SourceSerifPro-BoldItalic.913697a7178b128caa4c",
+          "value": "SourceSerifPro-BoldItalic.913697a7178b128caa4c"
+        },
+        {
+          "name": "SourceSerifPro-Italic.d3529cb5797663ac5d88",
+          "value": "SourceSerifPro-Italic.d3529cb5797663ac5d88"
+        },
+        {
+          "name": "SourceSerifPro-Regular.e6c37aa3926474cc93e1",
+          "value": "SourceSerifPro-Regular.e6c37aa3926474cc93e1"
+        },
+        {
+          "name": "SourceSerifPro-SemiBold.5c1d378dd5990ef334ca",
+          "value": "SourceSerifPro-SemiBold.5c1d378dd5990ef334ca"
+        },
+        {
+          "name": "SourceSerifPro-SemiBoldItalic.249e948b885d0c7d30a8",
+          "value": "SourceSerifPro-SemiBoldItalic.249e948b885d0c7d30a8"
+        },
+        {
+          "name": "TTNorms-Black",
+          "value": "TTNorms-Black"
+        },
+        {
+          "name": "Vera",
+          "value": "Vera"
+        },
+        {
+          "name": "VeraBI",
+          "value": "VeraBI"
+        },
+        {
+          "name": "VeraBd",
+          "value": "VeraBd"
+        },
+        {
+          "name": "VeraIt",
+          "value": "VeraIt"
+        },
+        {
+          "name": "YoungSerif-Regular",
+          "value": "YoungSerif-Regular"
+        },
+        {
+          "name": "arial",
+          "value": "arial"
+        },
+        {
+          "name": "cmb10",
+          "value": "cmb10"
+        },
+        {
+          "name": "cmex10",
+          "value": "cmex10"
+        },
+        {
+          "name": "cmmi10",
+          "value": "cmmi10"
+        },
+        {
+          "name": "cmr10",
+          "value": "cmr10"
+        },
+        {
+          "name": "cmss10",
+          "value": "cmss10"
+        },
+        {
+          "name": "cmsy10",
+          "value": "cmsy10"
+        },
+        {
+          "name": "cmtt10",
+          "value": "cmtt10"
+        },
+        {
+          "name": "comic",
+          "value": "comic"
+        },
+        {
+          "name": "fa-brands-400",
+          "value": "fa-brands-400"
+        },
+        {
+          "name": "fa-regular-400",
+          "value": "fa-regular-400"
+        },
+        {
+          "name": "fa-solid-900",
+          "value": "fa-solid-900"
+        },
+        {
+          "name": "fa-v4compatibility",
+          "value": "fa-v4compatibility"
+        },
+        {
+          "name": "font",
+          "value": "font"
+        },
+        {
+          "name": "fontawesome-webfont",
+          "value": "fontawesome-webfont"
+        },
+        {
+          "name": "impact",
+          "value": "impact"
+        },
+        {
+          "name": "lato-bold",
+          "value": "lato-bold"
+        },
+        {
+          "name": "lato-bold-italic",
+          "value": "lato-bold-italic"
+        },
+        {
+          "name": "lato-normal",
+          "value": "lato-normal"
+        },
+        {
+          "name": "lato-normal-italic",
+          "value": "lato-normal-italic"
+        },
+        {
+          "name": "庞门正道粗书体6.0",
+          "value": "庞门正道粗书体6.0"
+        },
+        {
+          "name": "王汉宗颜楷体繁",
+          "value": "王汉宗颜楷体繁"
+        }
+      ],
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 1107,
+          "key": "selected_font"
+        },
+        "multipleValues": false
+      }
+    },
+    {
+      "displayName": "版权文案",
+      "name": "copyright_text",
+      "type": "string",
+      "default": "AI Digital Artworks Copyright © 2024 Rui",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 1107,
+          "key": "text"
+        },
+        "multipleValues": false
+      }
+    },
+    {
+      "displayName": "背景图片 Prompt",
+      "name": "background_prompt",
+      "type": "string",
+      "default": "You: As a prompt generator for AI paintings, you can help me to write prompts related to scene paintings.\nFor example, write a detailed description of a painting of a Christmas scene, making sure to account for the season, the time of day, and the light.\nBOT: panoramic view, distant view, flat view perspective, Christmas night, winter, the streets of the town are brightly lit, there is a huge Christmas tree in the square signed by the church, the Christmas tree is full of all kinds of gifts, the children are running around the Christmas tree, the fuchsia sky, the roof has a lot of snow, the colours are brilliant, the dreamy atmosphere, the fairy tale atmosphere. The whole picture is full of life, overall warm colours, purple tones are dominant, the highest quality, rich details, the highest quality.\nYou: Please follow the example above and help me write a detailed description of the scene painting, Note that only parts of the scene can be depicted, no protagonists are allowed, and you have to try to avoid depictions of the characters,making sure to account for the season, time and light. No need \"Assistant:\", just start the description with the subject:",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 798,
+          "key": "text"
+        },
+        "multipleValues": false
+      }
+    },
+    {
+      "displayName": "背景图片 Prompt",
+      "name": "background_prompt",
+      "type": "string",
+      "default": "You: As a prompt generator for AI paintings, you can help me to write prompts related to scene paintings.\nFor example, write a detailed description of a painting of a Christmas scene, making sure to account for the season, the time of day, and the light.\nBOT: panoramic view, distant view, flat view perspective, Christmas night, winter, the streets of the town are brightly lit, there is a huge Christmas tree in the square signed by the church, the Christmas tree is full of all kinds of gifts, the children are running around the Christmas tree, the fuchsia sky, the roof has a lot of snow, the colours are brilliant, the dreamy atmosphere, the fairy tale atmosphere. The whole picture is full of life, overall warm colours, purple tones are dominant, the highest quality, rich details, the highest quality.\nYou: Please follow the example above and help me write a detailed description of the scene painting, Note that only parts of the scene can be depicted, no protagonists are allowed, and you have to try to avoid depictions of the characters,making sure to account for the season, time and light. No need \"Assistant:\", just start the description with the subject:",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 798,
+          "key": "text"
+        },
+        "multipleValues": false
+      }
+    },
+    {
+      "displayName": "角色 Prompt",
+      "name": "character_prompt",
+      "type": "string",
+      "default": "YOU:You will act as a cue word generator for AI character drawing, helping me to write styling cues for female characters with different themes.\nExample: Describe what a young woman would wear during the Christmas season.\nBot: A lovely girl wearing a red Christmas hat with a white fluffy pom-pom on her head and a red Christmas shawl with white fluffy trim on her upper body, she is smiling happily, holding a Christmas bell in her right hand and shaking it in front of her, her glasses are looking at the viewer, Gorgeous Costumes, Exquisite Clothing, Drawing of the Highest Quality, Richly Detailed, and of the Highest Quality.\nYou:Please help me describe in detail the appropriate clothing for a girl and when to gesture expressions based on the theme I have given you, only one character on the screen, do not describe the background content,\nthere is no need for \"Assistant:\", just start the description with the subject: ",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 1036,
+          "key": "text"
+        },
+        "multipleValues": false
+      }
+    },
+    {
+      "displayName": "文案生成 Prompt",
+      "name": "copywriter_prompt",
+      "type": "string",
+      "default": "You: You are the best copywriter, please write a relevant poetic beauty based on the text I have given, no more than 30 characters.\nFor example: Christmas.\nBot: bells ringing, snow falling, Merry Christmas!\nYou: Please refer to this example for expansion ，Give only the expanded copy and nothing else\njust start the description，the subject is: ",
+      "required": true,
+      "description": "当 自定义文案 启用时，该 prompt 无实际作用",
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 805,
+          "key": "text"
+        },
+        "multipleValues": false
+      }
+    }
+  ]
 }
