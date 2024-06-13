@@ -1,0 +1,2434 @@
+{
+  "5": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "462": {
+    "inputs": {
+      "width": 1024,
+      "height": 512,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "464": {
+    "inputs": {
+      "images": [
+        "941",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "503": {
+    "inputs": {
+      "images": [
+        "838",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "506": {
+    "inputs": {
+      "images": [
+        "839",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "515": {
+    "inputs": {
+      "ckpt_name": {
+        "content": "SDXL/dreamshaperXL_lightningDPMSDE.safetensors",
+        "image": null
+      },
+      "example": "[none]"
+    },
+    "class_type": "CheckpointLoader|pysssss",
+    "_meta": {
+      "title": "Checkpoint Loader 🐍"
+    }
+  },
+  "523": {
+    "inputs": {
+      "text": [
+        "528",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "524": {
+    "inputs": {
+      "text": [
+        "528",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "528": {
+    "inputs": {
+      "text_positive": [
+        "1061",
+        0
+      ],
+      "text_negative": "Realistic style, real photos",
+      "style": "sai-digital art",
+      "log_prompt": "No",
+      "style_positive": true,
+      "style_negative": true
+    },
+    "class_type": "SDXLPromptStyler",
+    "_meta": {
+      "title": "SDXL Prompt Styler"
+    }
+  },
+  "531": {
+    "inputs": {
+      "text": [
+        "536",
+        0
+      ],
+      "clip": [
+        "1249",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "532": {
+    "inputs": {
+      "text": [
+        "536",
+        1
+      ],
+      "clip": [
+        "1249",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "535": {
+    "inputs": {
+      "text_positive": [
+        "801",
+        0
+      ],
+      "text_negative": "Protagonist, Character",
+      "style": "sai-enhance",
+      "log_prompt": "No",
+      "style_positive": true,
+      "style_negative": true
+    },
+    "class_type": "SDXLPromptStyler",
+    "_meta": {
+      "title": "SDXL Prompt Styler"
+    }
+  },
+  "536": {
+    "inputs": {
+      "text_positive": [
+        "535",
+        0
+      ],
+      "text_negative": [
+        "535",
+        1
+      ],
+      "style": "sai-digital art",
+      "log_prompt": "No",
+      "style_positive": true,
+      "style_negative": true
+    },
+    "class_type": "SDXLPromptStyler",
+    "_meta": {
+      "title": "SDXL Prompt Styler"
+    }
+  },
+  "537": {
+    "inputs": {
+      "selected_font": "Inter-Medium-dDRaJ8tM",
+      "align": "center",
+      "wrap": 121,
+      "font_size": 65,
+      "color": "#fcff47",
+      "outline_size": 6,
+      "outline_color": "#000000",
+      "margin_x": 0,
+      "margin_y": 0,
+      "width": 1800,
+      "height": 200,
+      "swap": false,
+      "arc_text": false,
+      "arc_radius": 100,
+      "arc_start_angle": 180,
+      "arc_end_angle": 360
+    },
+    "class_type": "Text_Image_Zho",
+    "_meta": {
+      "title": "Text_Image_Zho"
+    }
+  },
+  "545": {
+    "inputs": {
+      "images": [
+        "1081",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "597": {
+    "inputs": {
+      "seed": 9,
+      "steps": 6,
+      "cfg": 1.5,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "sgm_uniform",
+      "denoise": 1,
+      "preview_method": "auto",
+      "vae_decode": "true",
+      "model": [
+        "796",
+        0
+      ],
+      "positive": [
+        "523",
+        0
+      ],
+      "negative": [
+        "524",
+        0
+      ],
+      "latent_image": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "KSampler (Efficient)",
+    "_meta": {
+      "title": "KSampler (Efficient)"
+    }
+  },
+  "599": {
+    "inputs": {
+      "seed": 2,
+      "steps": 6,
+      "cfg": 1.5,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "sgm_uniform",
+      "denoise": 1,
+      "preview_method": "auto",
+      "vae_decode": "true",
+      "model": [
+        "1249",
+        0
+      ],
+      "positive": [
+        "531",
+        0
+      ],
+      "negative": [
+        "532",
+        0
+      ],
+      "latent_image": [
+        "462",
+        0
+      ]
+    },
+    "class_type": "KSampler (Efficient)",
+    "_meta": {
+      "title": "KSampler (Efficient)"
+    }
+  },
+  "651": {
+    "inputs": {
+      "text1": [
+        "1046",
+        0
+      ],
+      "text2": [
+        "808",
+        0
+      ],
+      "separator": ","
+    },
+    "class_type": "Concat Text _O",
+    "_meta": {
+      "title": "Concat Text _O"
+    }
+  },
+  "760": {
+    "inputs": {
+      "filename_prefix": [
+        "829",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "773": {
+    "inputs": {
+      "MODEL": [
+        "515",
+        0
+      ],
+      "CLIP": [
+        "515",
+        1
+      ],
+      "VAE": [
+        "1060",
+        0
+      ]
+    },
+    "class_type": "Anything Everywhere3",
+    "_meta": {
+      "title": "Anything Everywhere3"
+    }
+  },
+  "793": {
+    "inputs": {
+      "pulid_file": "ip-adapter_pulid_sdxl_fp16.safetensors"
+    },
+    "class_type": "PulidModelLoader",
+    "_meta": {
+      "title": "Load PuLID Model"
+    }
+  },
+  "794": {
+    "inputs": {
+      "provider": "CPU"
+    },
+    "class_type": "PulidInsightFaceLoader",
+    "_meta": {
+      "title": "Load InsightFace (PuLID)"
+    }
+  },
+  "795": {
+    "inputs": {},
+    "class_type": "PulidEvaClipLoader",
+    "_meta": {
+      "title": "Load Eva Clip (PuLID)"
+    }
+  },
+  "796": {
+    "inputs": {
+      "method": "style",
+      "weight": 0.8,
+      "start_at": 0,
+      "end_at": 0.7000000000000001,
+      "model": [
+        "817",
+        0
+      ],
+      "pulid": [
+        "793",
+        0
+      ],
+      "eva_clip": [
+        "795",
+        0
+      ],
+      "face_analysis": [
+        "794",
+        0
+      ],
+      "image": [
+        "1276",
+        0
+      ]
+    },
+    "class_type": "ApplyPulid",
+    "_meta": {
+      "title": "Apply PuLID"
+    }
+  },
+  "797": {
+    "inputs": {
+      "image": "AutoPoster_frederika.jpg",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "798": {
+    "inputs": {
+      "text": "You: As a prompt generator for AI paintings, you can help me to write prompts related to scene paintings.\nFor example, write a detailed description of a painting of a Christmas scene, making sure to account for the season, the time of day, and the light.\nBOT: panoramic view, distant view, flat view perspective, Christmas night, winter, the streets of the town are brightly lit, there is a huge Christmas tree in the square signed by the church, the Christmas tree is full of all kinds of gifts, the children are running around the Christmas tree, the fuchsia sky, the roof has a lot of snow, the colours are brilliant, the dreamy atmosphere, the fairy tale atmosphere. The whole picture is full of life, overall warm colours, purple tones are dominant, the highest quality, rich details, the highest quality.\nYou: Please follow the example above and help me write a detailed description of the scene painting, Note that only parts of the scene can be depicted, no protagonists are allowed, and you have to try to avoid depictions of the characters,making sure to account for the season, time and light. No need \"Assistant:\", just start the description with the subject："
+    },
+    "class_type": "Text _O",
+    "_meta": {
+      "title": "引导语1"
+    }
+  },
+  "801": {
+    "inputs": {
+      "text": [
+        "1203",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "Show Text 🐍"
+    }
+  },
+  "802": {
+    "inputs": {
+      "text1": [
+        "798",
+        0
+      ],
+      "separator": ""
+    },
+    "class_type": "Concat Text _O",
+    "_meta": {
+      "title": "Concat Text _O"
+    }
+  },
+  "805": {
+    "inputs": {
+      "text": "You：You are the best copywriter, please write a relevant poetic beauty based on the text I have given, no more than 30 characters.\nFor example: Christmas.\nBot: bells ringing, snow falling, Merry Christmas!\nYou：Please refer to this example for expansion ，Give only the expanded copy and nothing else\njust start the description，the subject is："
+    },
+    "class_type": "Text _O",
+    "_meta": {
+      "title": "引导语1"
+    }
+  },
+  "808": {
+    "inputs": {
+      "text": [
+        "1202",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "Show Text 🐍"
+    }
+  },
+  "809": {
+    "inputs": {
+      "text1": [
+        "1042",
+        0
+      ],
+      "separator": ""
+    },
+    "class_type": "Concat Text _O",
+    "_meta": {
+      "title": "Concat Text _O"
+    }
+  },
+  "811": {
+    "inputs": {
+      "STRING": [
+        "1160",
+        0
+      ]
+    },
+    "class_type": "Anything Everywhere",
+    "_meta": {
+      "title": "Anything Everywhere"
+    }
+  },
+  "815": {
+    "inputs": {
+      "toggle": true,
+      "mode": "simple",
+      "num_loras": 4,
+      "lora_1_name": "Sdxl/3D模型丨可爱化SDXL版_v2.0.safetensors",
+      "lora_1_strength": 1,
+      "lora_1_model_strength": 1,
+      "lora_1_clip_strength": 1,
+      "lora_2_name": "SDXL功能性/lookingAwayToLookingAt_v10看着观众.safetensors",
+      "lora_2_strength": 1,
+      "lora_2_model_strength": 1,
+      "lora_2_clip_strength": 1,
+      "lora_3_name": "PT滑块/smiling笑.pt",
+      "lora_3_strength": 2,
+      "lora_3_model_strength": 1,
+      "lora_3_clip_strength": 1,
+      "lora_4_name": "PT滑块/cartoon卡通化.pt",
+      "lora_4_strength": 2,
+      "lora_4_model_strength": 1,
+      "lora_4_clip_strength": 1,
+      "lora_5_name": "None",
+      "lora_5_strength": 0,
+      "lora_5_model_strength": 1,
+      "lora_5_clip_strength": 1,
+      "lora_6_name": "None",
+      "lora_6_strength": 1,
+      "lora_6_model_strength": 1,
+      "lora_6_clip_strength": 1,
+      "lora_7_name": "None",
+      "lora_7_strength": 1,
+      "lora_7_model_strength": 1,
+      "lora_7_clip_strength": 1,
+      "lora_8_name": "None",
+      "lora_8_strength": 1,
+      "lora_8_model_strength": 1,
+      "lora_8_clip_strength": 1,
+      "lora_9_name": "None",
+      "lora_9_strength": 1,
+      "lora_9_model_strength": 1,
+      "lora_9_clip_strength": 1,
+      "lora_10_name": "None",
+      "lora_10_strength": 1,
+      "lora_10_model_strength": 1,
+      "lora_10_clip_strength": 1
+    },
+    "class_type": "easy loraStack",
+    "_meta": {
+      "title": "EasyLoraStack"
+    }
+  },
+  "817": {
+    "inputs": {
+      "lora_stack": [
+        "815",
+        0
+      ]
+    },
+    "class_type": "CR Apply LoRA Stack",
+    "_meta": {
+      "title": "💊 CR Apply LoRA Stack"
+    }
+  },
+  "818": {
+    "inputs": {
+      "IMAGE": [
+        "1106",
+        0
+      ]
+    },
+    "class_type": "Anything Everywhere",
+    "_meta": {
+      "title": "Anything Everywhere"
+    }
+  },
+  "829": {
+    "inputs": {
+      "text": [
+        "1247:3",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "Show Text 🐍"
+    }
+  },
+  "838": {
+    "inputs": {
+      "invert_mask": true,
+      "blend_mode": "normal",
+      "opacity": 100,
+      "x_percent": 60,
+      "y_percent": 88,
+      "mirror": "None",
+      "scale": 1,
+      "aspect_ratio": 1,
+      "rotate": 0,
+      "transform_method": "lanczos",
+      "anti_aliasing": 0,
+      "background_image": [
+        "1094",
+        0
+      ],
+      "layer_image": [
+        "1002",
+        0
+      ]
+    },
+    "class_type": "LayerUtility: ImageBlendAdvance",
+    "_meta": {
+      "title": "LayerUtility: ImageBlendAdvance"
+    }
+  },
+  "839": {
+    "inputs": {
+      "invert_mask": true,
+      "blend_mode": "normal",
+      "opacity": 100,
+      "x_percent": 60,
+      "y_percent": 94,
+      "mirror": "None",
+      "scale": 1,
+      "aspect_ratio": 1,
+      "rotate": 0,
+      "transform_method": "lanczos",
+      "anti_aliasing": 0,
+      "background_image": [
+        "838",
+        0
+      ],
+      "layer_image": [
+        "1011",
+        0
+      ]
+    },
+    "class_type": "LayerUtility: ImageBlendAdvance",
+    "_meta": {
+      "title": "LayerUtility: ImageBlendAdvance"
+    }
+  },
+  "845": {
+    "inputs": {
+      "text": [
+        "855",
+        0
+      ],
+      "clip": [
+        "1251",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "847": {
+    "inputs": {
+      "text": [
+        "865",
+        0
+      ],
+      "clip": [
+        "1251",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "848": {
+    "inputs": {
+      "seed": 9,
+      "steps": 5,
+      "cfg": 1.5,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "sgm_uniform",
+      "denoise": 1,
+      "preview_method": "auto",
+      "vae_decode": "true",
+      "model": [
+        "1251",
+        0
+      ],
+      "positive": [
+        "847",
+        0
+      ],
+      "negative": [
+        "845",
+        0
+      ],
+      "latent_image": [
+        "852",
+        0
+      ]
+    },
+    "class_type": "KSampler (Efficient)",
+    "_meta": {
+      "title": "KSampler (Efficient)"
+    }
+  },
+  "852": {
+    "inputs": {
+      "width": 768,
+      "height": 768,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "855": {
+    "inputs": {
+      "text": "double letters, repeating letters, more than  9 letters,scenes,human"
+    },
+    "class_type": "Text _O",
+    "_meta": {
+      "title": "Text _O"
+    }
+  },
+  "865": {
+    "inputs": {
+      "text": [
+        "871",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "Show Text 🐍"
+    }
+  },
+  "870": {
+    "inputs": {
+      "text": "(#:1.4)text logo,Striking text,round logo,only logo,empty background,simpler background"
+    },
+    "class_type": "Text _O",
+    "_meta": {
+      "title": "Text _O"
+    }
+  },
+  "871": {
+    "inputs": {
+      "text": [
+        "870",
+        0
+      ],
+      "old": "#"
+    },
+    "class_type": "Replace Text _O",
+    "_meta": {
+      "title": "Replace Text _O"
+    }
+  },
+  "875": {
+    "inputs": {
+      "images": [
+        "1134",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "908": {
+    "inputs": {
+      "text": [
+        "1204",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "Show Text 🐍"
+    }
+  },
+  "909": {
+    "inputs": {
+      "text1": [
+        "805",
+        0
+      ],
+      "separator": ""
+    },
+    "class_type": "Concat Text _O",
+    "_meta": {
+      "title": "Concat Text _O"
+    }
+  },
+  "916": {
+    "inputs": {
+      "invert_mask": false,
+      "blend_mode": "screen",
+      "opacity": 100,
+      "brightness": 10,
+      "glow_range": 50,
+      "blur": 50,
+      "light_color": [
+        "951",
+        1
+      ],
+      "glow_color": [
+        "946",
+        1
+      ],
+      "background_image": [
+        "941",
+        0
+      ],
+      "layer_image": [
+        "918",
+        0
+      ],
+      "layer_mask": [
+        "918",
+        1
+      ]
+    },
+    "class_type": "LayerStyle: OuterGlow V2",
+    "_meta": {
+      "title": "LayerStyle: OuterGlow V2"
+    }
+  },
+  "918": {
+    "inputs": {
+      "invert_mask": true,
+      "top": 0,
+      "bottom": 0,
+      "left": 0,
+      "right": 1024,
+      "color": "#000000",
+      "image": [
+        "1063",
+        0
+      ],
+      "mask": [
+        "1063",
+        1
+      ]
+    },
+    "class_type": "LayerUtility: ExtendCanvas",
+    "_meta": {
+      "title": "LayerUtility: ExtendCanvas"
+    }
+  },
+  "924": {
+    "inputs": {
+      "pixels": [
+        "926",
+        0
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE Encode"
+    }
+  },
+  "925": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "scale_by": 2,
+      "samples": [
+        "924",
+        0
+      ]
+    },
+    "class_type": "LatentUpscaleBy",
+    "_meta": {
+      "title": "Upscale Latent By"
+    }
+  },
+  "926": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "scale_by": 0.5,
+      "image": [
+        "1217",
+        0
+      ]
+    },
+    "class_type": "ImageScaleBy",
+    "_meta": {
+      "title": "Upscale Image By"
+    }
+  },
+  "927": {
+    "inputs": {
+      "seed": 10,
+      "steps": 8,
+      "cfg": 2,
+      "sampler_name": "euler_ancestral",
+      "scheduler": "karras",
+      "denoise": 0.8,
+      "preview_method": "auto",
+      "vae_decode": "true",
+      "model": [
+        "1246",
+        0
+      ],
+      "positive": [
+        "932",
+        0
+      ],
+      "negative": [
+        "932",
+        1
+      ],
+      "latent_image": [
+        "925",
+        0
+      ]
+    },
+    "class_type": "KSampler (Efficient)",
+    "_meta": {
+      "title": "KSampler (Efficient)"
+    }
+  },
+  "928": {
+    "inputs": {
+      "text": [
+        "1233",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "929": {
+    "inputs": {
+      "text": [
+        "1233",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "931": {
+    "inputs": {
+      "control_net_name": "CN-anytest_v4-marged.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "932": {
+    "inputs": {
+      "strength": 0.72,
+      "start_percent": 0,
+      "end_percent": 0.7000000000000001,
+      "positive": [
+        "928",
+        0
+      ],
+      "negative": [
+        "929",
+        0
+      ],
+      "control_net": [
+        "931",
+        0
+      ],
+      "image": [
+        "1217",
+        0
+      ]
+    },
+    "class_type": "ACN_AdvancedControlNetApply",
+    "_meta": {
+      "title": "Apply Advanced ControlNet 🛂🅐🅒🅝"
+    }
+  },
+  "939": {
+    "inputs": {
+      "images": [
+        "916",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "940": {
+    "inputs": {
+      "images": [
+        "1235",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "941": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "scale_by": 2,
+      "image": [
+        "599",
+        5
+      ]
+    },
+    "class_type": "ImageScaleBy",
+    "_meta": {
+      "title": "Upscale Image By"
+    }
+  },
+  "946": {
+    "inputs": {
+      "mode": "average",
+      "color_of": "entire",
+      "remove_bkgd_method": "BiRefNet",
+      "invert_mask": false,
+      "mask_grow": 16,
+      "image": [
+        "948",
+        0
+      ],
+      "mask": [
+        "948",
+        1
+      ]
+    },
+    "class_type": "LayerUtility: GetColorToneV2",
+    "_meta": {
+      "title": "LayerUtility: GetColorTone V2"
+    }
+  },
+  "947": {
+    "inputs": {
+      "images": [
+        "946",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "948": {
+    "inputs": {
+      "image": [
+        "599",
+        5
+      ]
+    },
+    "class_type": "SplitImageWithAlpha",
+    "_meta": {
+      "title": "Split Image with Alpha"
+    }
+  },
+  "949": {
+    "inputs": {
+      "brightness": 2,
+      "contrast": 1,
+      "saturation": 1,
+      "image": [
+        "946",
+        0
+      ]
+    },
+    "class_type": "LayerColor: Brightness & Contrast",
+    "_meta": {
+      "title": "LayerColor: Brightness & Contrast"
+    }
+  },
+  "951": {
+    "inputs": {
+      "mode": "average",
+      "color_of": "entire",
+      "remove_bkgd_method": "BiRefNet",
+      "invert_mask": false,
+      "mask_grow": 16,
+      "image": [
+        "949",
+        0
+      ],
+      "mask": [
+        "948",
+        1
+      ]
+    },
+    "class_type": "LayerUtility: GetColorToneV2",
+    "_meta": {
+      "title": "LayerUtility: GetColorTone V2"
+    }
+  },
+  "953": {
+    "inputs": {
+      "images": [
+        "951",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "955": {
+    "inputs": {
+      "text": [
+        "528",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "Show Text 🐍"
+    }
+  },
+  "998": {
+    "inputs": {
+      "mode": "Color",
+      "blend_image": [
+        "1000",
+        0
+      ],
+      "base_image": [
+        "1001",
+        0
+      ]
+    },
+    "class_type": "Color Blend",
+    "_meta": {
+      "title": "Color Blend"
+    }
+  },
+  "999": {
+    "inputs": {
+      "image": [
+        "537",
+        0
+      ]
+    },
+    "class_type": "ImageGenResolutionFromImage",
+    "_meta": {
+      "title": "Generation Resolution From Image"
+    }
+  },
+  "1000": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "width": [
+        "999",
+        0
+      ],
+      "height": [
+        "999",
+        1
+      ],
+      "crop": "disabled",
+      "image": [
+        "951",
+        0
+      ]
+    },
+    "class_type": "ImageScale",
+    "_meta": {
+      "title": "Upscale Image"
+    }
+  },
+  "1001": {
+    "inputs": {
+      "image": [
+        "537",
+        0
+      ]
+    },
+    "class_type": "SplitImageWithAlpha",
+    "_meta": {
+      "title": "Split Image with Alpha"
+    }
+  },
+  "1002": {
+    "inputs": {
+      "image": [
+        "998",
+        0
+      ],
+      "alpha": [
+        "1001",
+        1
+      ]
+    },
+    "class_type": "JoinImageWithAlpha",
+    "_meta": {
+      "title": "Join Image with Alpha"
+    }
+  },
+  "1007": {
+    "inputs": {
+      "mode": "Color",
+      "blend_image": [
+        "1009",
+        0
+      ],
+      "base_image": [
+        "1010",
+        0
+      ]
+    },
+    "class_type": "Color Blend",
+    "_meta": {
+      "title": "Color Blend"
+    }
+  },
+  "1008": {
+    "inputs": {
+      "image": [
+        "1016",
+        0
+      ]
+    },
+    "class_type": "ImageGenResolutionFromImage",
+    "_meta": {
+      "title": "Generation Resolution From Image"
+    }
+  },
+  "1009": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "width": [
+        "1008",
+        0
+      ],
+      "height": [
+        "1008",
+        1
+      ],
+      "crop": "disabled",
+      "image": [
+        "951",
+        0
+      ]
+    },
+    "class_type": "ImageScale",
+    "_meta": {
+      "title": "Upscale Image"
+    }
+  },
+  "1010": {
+    "inputs": {
+      "image": [
+        "1016",
+        0
+      ]
+    },
+    "class_type": "SplitImageWithAlpha",
+    "_meta": {
+      "title": "Split Image with Alpha"
+    }
+  },
+  "1011": {
+    "inputs": {
+      "image": [
+        "1007",
+        0
+      ],
+      "alpha": [
+        "1010",
+        1
+      ]
+    },
+    "class_type": "JoinImageWithAlpha",
+    "_meta": {
+      "title": "Join Image with Alpha"
+    }
+  },
+  "1016": {
+    "inputs": {
+      "text": [
+        "908",
+        0
+      ],
+      "selected_font": "Inter-Black-jiII8dog",
+      "align": "center",
+      "wrap": 80,
+      "graphspace": 10,
+      "linespace": 2,
+      "font_size": 45,
+      "color": "#faff6b",
+      "outline_size": 4,
+      "outline_color": "#000000",
+      "margin_x": 0,
+      "margin_y": 0,
+      "width": 1800,
+      "height": 100,
+      "swap": false
+    },
+    "class_type": "Text_Image_Multiline_Zho",
+    "_meta": {
+      "title": "Text_Image_Multiline_Zho"
+    }
+  },
+  "1033": {
+    "inputs": {
+      "question": "Male or Female?",
+      "image": [
+        "1276",
+        0
+      ]
+    },
+    "class_type": "LayerUtility: QWenImage2Prompt",
+    "_meta": {
+      "title": "LayerUtility: QWenImage2Prompt"
+    }
+  },
+  "1035": {
+    "inputs": {
+      "text": "YOU：You will act as a cue word generator for AI character drawing, helping me to write styling cues for male characters with different themes.\nExample: Describe what a young male would wear during the Christmas season.\nBot: a handsome boy with a red Santa hat on his head, he has a white decorative beard plastered on his face as Father Christmas, he has a red Christmas shawl on his upper body with white fluffy trim, he has his right hand pinched at his waist, his left hand is raised in front of his chest giving a thumbs up, he is looking at the audience over his spectacles, smiling confidently, gorgeous costume, exquisite clothing, highest quality drawing, rich detail, highest quality of the painting.\nYOU：Please help me describe in detail the appropriate clothing for a boy and when to gesture expressions based on the theme I have given you,only be one character on the screen, Do not describe background content,\nthere is no need for \"Assistant:\"， just start the description with the subject： "
+    },
+    "class_type": "Text _O",
+    "_meta": {
+      "title": "Male"
+    }
+  },
+  "1036": {
+    "inputs": {
+      "text": "YOU：You will act as a cue word generator for AI character drawing, helping me to write styling cues for female characters with different themes.\nExample: Describe what a young woman would wear during the Christmas season.\nBot: A lovely girl wearing a red Christmas hat with a white fluffy pom-pom on her head and a red Christmas shawl with white fluffy trim on her upper body, she is smiling happily, holding a Christmas bell in her right hand and shaking it in front of her, her glasses are looking at the viewer, Gorgeous Costumes, Exquisite Clothing, Drawing of the Highest Quality, Richly Detailed, and of the Highest Quality.\nYou：Please help me describe in detail the appropriate clothing for a girl and when to gesture expressions based on the theme I have given you, only one character on the screen, do not describe the background content,\nthere is no need for \"Assistant:\"， just start the description with the subject："
+    },
+    "class_type": "Text _O",
+    "_meta": {
+      "title": "Female"
+    }
+  },
+  "1037": {
+    "inputs": {
+      "comparison": "a <= b",
+      "a": [
+        "1040",
+        0
+      ],
+      "b": [
+        "1038",
+        0
+      ]
+    },
+    "class_type": "easy compare",
+    "_meta": {
+      "title": "Compare"
+    }
+  },
+  "1038": {
+    "inputs": {
+      "text": "Female"
+    },
+    "class_type": "Text _O",
+    "_meta": {
+      "title": "Female"
+    }
+  },
+  "1039": {
+    "inputs": {
+      "output": "",
+      "source": [
+        "1037",
+        0
+      ]
+    },
+    "class_type": "Display Any (rgthree)",
+    "_meta": {
+      "title": "Display Any (rgthree)"
+    }
+  },
+  "1040": {
+    "inputs": {
+      "text": [
+        "1033",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "Show Text 🐍"
+    }
+  },
+  "1041": {
+    "inputs": {
+      "text_a": [
+        "1036",
+        0
+      ],
+      "text_b": [
+        "1035",
+        0
+      ],
+      "boolean": [
+        "1037",
+        0
+      ]
+    },
+    "class_type": "Text Input Switch",
+    "_meta": {
+      "title": "Text Input Switch"
+    }
+  },
+  "1042": {
+    "inputs": {
+      "text": [
+        "1041",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "Show Text 🐍"
+    }
+  },
+  "1046": {
+    "inputs": {
+      "text": "smile,solo:2，half-length phoor portrait,Facing the right side of the screen,2.5D Cartoon style,（empty background:2）,(Focus on the upper body:2)（simpler background:2）"
+    },
+    "class_type": "Text _O",
+    "_meta": {
+      "title": "Female"
+    }
+  },
+  "1053": {
+    "inputs": {
+      "anything": [
+        "927",
+        5
+      ]
+    },
+    "class_type": "easy cleanGpuUsed",
+    "_meta": {
+      "title": "Clean GPU Used"
+    }
+  },
+  "1055": {
+    "inputs": {
+      "anything": [
+        "599",
+        5
+      ]
+    },
+    "class_type": "easy cleanGpuUsed",
+    "_meta": {
+      "title": "Clean GPU Used"
+    }
+  },
+  "1056": {
+    "inputs": {
+      "anything": [
+        "1040",
+        0
+      ]
+    },
+    "class_type": "easy cleanGpuUsed",
+    "_meta": {
+      "title": "Clean GPU Used"
+    }
+  },
+  "1057": {
+    "inputs": {
+      "anything": [
+        "848",
+        5
+      ]
+    },
+    "class_type": "easy cleanGpuUsed",
+    "_meta": {
+      "title": "Clean GPU Used"
+    }
+  },
+  "1060": {
+    "inputs": {
+      "vae_name": "taesdxl"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "1061": {
+    "inputs": {
+      "text1": [
+        "1040",
+        0
+      ],
+      "text2": [
+        "651",
+        0
+      ],
+      "separator": ","
+    },
+    "class_type": "Concat Text _O",
+    "_meta": {
+      "title": "Concat Text _O"
+    }
+  },
+  "1063": {
+    "inputs": {
+      "image": [
+        "1081",
+        0
+      ]
+    },
+    "class_type": "SplitImageWithAlpha",
+    "_meta": {
+      "title": "Split Image with Alpha"
+    }
+  },
+  "1081": {
+    "inputs": {
+      "rmbgmodel": [
+        "1082",
+        0
+      ],
+      "image": [
+        "597",
+        5
+      ]
+    },
+    "class_type": "BRIA_RMBG_Zho",
+    "_meta": {
+      "title": "🧹BRIA RMBG"
+    }
+  },
+  "1082": {
+    "inputs": {},
+    "class_type": "BRIA_RMBG_ModelLoader_Zho",
+    "_meta": {
+      "title": "🧹BRIA_RMBG Model Loader"
+    }
+  },
+  "1083": {
+    "inputs": {
+      "rmbgmodel": [
+        "1082",
+        0
+      ],
+      "image": [
+        "848",
+        5
+      ]
+    },
+    "class_type": "BRIA_RMBG_Zho",
+    "_meta": {
+      "title": "🧹BRIA RMBG"
+    }
+  },
+  "1092": {
+    "inputs": {
+      "invert_mask": true,
+      "blend_mode": "normal",
+      "opacity": 100,
+      "x_percent": 60,
+      "y_percent": 40,
+      "mirror": "None",
+      "scale": 1,
+      "aspect_ratio": 1,
+      "rotate": 0,
+      "transform_method": "lanczos",
+      "anti_aliasing": 0,
+      "background_image": [
+        "1149",
+        0
+      ],
+      "layer_image": [
+        "1134",
+        0
+      ],
+      "layer_mask": [
+        "1135",
+        0
+      ]
+    },
+    "class_type": "LayerUtility: ImageBlendAdvance",
+    "_meta": {
+      "title": "LayerUtility: ImageBlendAdvance"
+    }
+  },
+  "1094": {
+    "inputs": {
+      "invert_mask": false,
+      "blend_mode": "screen",
+      "opacity": 100,
+      "brightness": 5,
+      "glow_range": 30,
+      "blur": 25,
+      "light_color": [
+        "951",
+        1
+      ],
+      "glow_color": [
+        "946",
+        1
+      ],
+      "background_image": [
+        "1235",
+        0
+      ],
+      "layer_image": [
+        "1095",
+        0
+      ],
+      "layer_mask": [
+        "1095",
+        1
+      ]
+    },
+    "class_type": "LayerStyle: OuterGlow V2",
+    "_meta": {
+      "title": "LayerStyle: OuterGlow V2"
+    }
+  },
+  "1095": {
+    "inputs": {
+      "rmbgmodel": [
+        "1082",
+        0
+      ],
+      "image": [
+        "1092",
+        0
+      ]
+    },
+    "class_type": "BRIA_RMBG_Zho",
+    "_meta": {
+      "title": "🧹BRIA RMBG"
+    }
+  },
+  "1096": {
+    "inputs": {
+      "images": [
+        "1094",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "1106": {
+    "inputs": {
+      "invert_mask": true,
+      "blend_mode": "normal",
+      "opacity": 50,
+      "x_percent": 55.5,
+      "y_percent": 5.5,
+      "mirror": "None",
+      "scale": 1,
+      "aspect_ratio": 1,
+      "rotate": 0,
+      "transform_method": "lanczos",
+      "anti_aliasing": 0,
+      "background_image": [
+        "839",
+        0
+      ],
+      "layer_image": [
+        "1107",
+        0
+      ]
+    },
+    "class_type": "LayerUtility: ImageBlendAdvance",
+    "_meta": {
+      "title": "LayerUtility: ImageBlendAdvance"
+    }
+  },
+  "1107": {
+    "inputs": {
+      "text": "AI Digital Artworks Copyright © 2024 Rui",
+      "selected_font": "Inter-Bold-srYz_-1B",
+      "align": "right",
+      "wrap": 80,
+      "graphspace": 10,
+      "linespace": 4,
+      "font_size": 30,
+      "color": "#ffffff",
+      "outline_size": 3,
+      "outline_color": "#000000",
+      "margin_x": 0,
+      "margin_y": 0,
+      "width": 1800,
+      "height": 100,
+      "swap": false
+    },
+    "class_type": "Text_Image_Multiline_Zho",
+    "_meta": {
+      "title": "Text_Image_Multiline_Zho"
+    }
+  },
+  "1130": {
+    "inputs": {
+      "invert_mask": false,
+      "blend_mode": "hard light",
+      "opacity": 100,
+      "stroke_grow": 12,
+      "stroke_width": 6,
+      "blur": 0,
+      "stroke_color": [
+        "1140",
+        1
+      ],
+      "background_image": [
+        "1145",
+        0
+      ],
+      "layer_image": [
+        "848",
+        5
+      ],
+      "layer_mask": [
+        "1083",
+        1
+      ]
+    },
+    "class_type": "LayerStyle: Stroke V2",
+    "_meta": {
+      "title": "LayerStyle: Stroke V2"
+    }
+  },
+  "1133": {
+    "inputs": {
+      "expand": 6,
+      "tapered_corners": true,
+      "mask": [
+        "1083",
+        1
+      ]
+    },
+    "class_type": "GrowMask",
+    "_meta": {
+      "title": "GrowMask"
+    }
+  },
+  "1134": {
+    "inputs": {
+      "image": [
+        "1130",
+        0
+      ],
+      "alpha": [
+        "1135",
+        0
+      ]
+    },
+    "class_type": "JoinImageWithAlpha",
+    "_meta": {
+      "title": "Join Image with Alpha"
+    }
+  },
+  "1135": {
+    "inputs": {
+      "mask": [
+        "1133",
+        0
+      ]
+    },
+    "class_type": "InvertMask",
+    "_meta": {
+      "title": "InvertMask"
+    }
+  },
+  "1136": {
+    "inputs": {
+      "mode": "average",
+      "color_of": "entire",
+      "remove_bkgd_method": "BiRefNet",
+      "invert_mask": false,
+      "mask_grow": 16,
+      "image": [
+        "848",
+        5
+      ],
+      "mask": [
+        "1135",
+        0
+      ]
+    },
+    "class_type": "LayerUtility: GetColorToneV2",
+    "_meta": {
+      "title": "LayerUtility: GetColorTone V2"
+    }
+  },
+  "1137": {
+    "inputs": {
+      "brightness": 0.5,
+      "contrast": 1,
+      "saturation": 1,
+      "image": [
+        "1136",
+        0
+      ]
+    },
+    "class_type": "LayerColor: Brightness & Contrast",
+    "_meta": {
+      "title": "LayerColor: Brightness & Contrast"
+    }
+  },
+  "1139": {
+    "inputs": {
+      "images": [
+        "1136",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "1140": {
+    "inputs": {
+      "mode": "average",
+      "color_of": "entire",
+      "remove_bkgd_method": "BiRefNet",
+      "invert_mask": false,
+      "mask_grow": 16,
+      "image": [
+        "1137",
+        0
+      ],
+      "mask": [
+        "1135",
+        0
+      ]
+    },
+    "class_type": "LayerUtility: GetColorToneV2",
+    "_meta": {
+      "title": "LayerUtility: GetColorTone V2"
+    }
+  },
+  "1141": {
+    "inputs": {
+      "images": [
+        "1140",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "1144": {
+    "inputs": {
+      "images": [
+        "1083",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "1145": {
+    "inputs": {
+      "size": "custom",
+      "custom_width": 768,
+      "custom_height": 768,
+      "color": [
+        "1136",
+        1
+      ]
+    },
+    "class_type": "LayerUtility: ColorImage V2",
+    "_meta": {
+      "title": "LayerUtility: ColorImage V2"
+    }
+  },
+  "1146": {
+    "inputs": {
+      "EXL_MODEL": [
+        "1201",
+        0
+      ]
+    },
+    "class_type": "Anything Everywhere",
+    "_meta": {
+      "title": "Anything Everywhere"
+    }
+  },
+  "1147": {
+    "inputs": {
+      "text": "天堂花园",
+      "generation": "off",
+      "seed": 77404
+    },
+    "class_type": "ChinesePrompt_Mix",
+    "_meta": {
+      "title": "Chinese Prompt ♾️Mixlab"
+    }
+  },
+  "1149": {
+    "inputs": {
+      "size": "custom",
+      "custom_width": 2048,
+      "custom_height": 1024,
+      "color": [
+        "1152",
+        0
+      ]
+    },
+    "class_type": "LayerUtility: ColorImage V2",
+    "_meta": {
+      "title": "LayerUtility: ColorImage V2"
+    }
+  },
+  "1152": {
+    "inputs": {
+      "color": "#03ad00",
+      "mode": "HEX"
+    },
+    "class_type": "LayerUtility: ColorPicker",
+    "_meta": {
+      "title": "LayerUtility: ColorPicker"
+    }
+  },
+  "1160": {
+    "inputs": {
+      "on_true": [
+        "1147",
+        0
+      ],
+      "on_false": [
+        "1200",
+        0
+      ],
+      "boolean": true
+    },
+    "class_type": "Switch string [Crystools]",
+    "_meta": {
+      "title": "🪛 Switch string"
+    }
+  },
+  "1196": {
+    "inputs": {
+      "unload": "Wild Night Moonlit Adventure\nYou: A 90s low budget comedy film involving two people against crime and cover up. Dumb Fun title: Street Heroes\nBot: The",
+      "single_line": false,
+      "max_tokens": 40,
+      "temperature": 1,
+      "top_k": 0,
+      "top_p": 1,
+      "typical_p": 1,
+      "min_p": 0,
+      "top_a": 0,
+      "repetition_penalty": 1,
+      "temperature_last": true,
+      "seed": 86312452983478,
+      "text": "You: You, as the greatest screenwriter of all time, give me an interesting title for a film.\nThe Garden on the Dark Side of the Moon, for example.\nBot: Christmas Carnival\nYou: Please give me a random film title based on the above example.Just give a name and nothing else\nBot:"
+    },
+    "class_type": "ZuellniExLlamaGenerator",
+    "_meta": {
+      "title": "Generator"
+    }
+  },
+  "1198": {
+    "inputs": {
+      "text": [
+        "1196",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "Show Text 🐍"
+    }
+  },
+  "1199": {
+    "inputs": {
+      "file_path": "",
+      "dictionary_name": "[filename]",
+      "label": "TextBatch",
+      "mode": "index",
+      "index": 0,
+      "multiline_text": [
+        "1198",
+        0
+      ]
+    },
+    "class_type": "Text Load Line From File",
+    "_meta": {
+      "title": "Text Load Line From File"
+    }
+  },
+  "1200": {
+    "inputs": {
+      "text": [
+        "1199",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "Show Text 🐍"
+    }
+  },
+  "1201": {
+    "inputs": {
+      "model": "MythoLogic-Mini-7B-GPTQ",
+      "cache_bits": "",
+      "max_seq_len": false
+    },
+    "class_type": "ZuellniExLlamaLoader",
+    "_meta": {
+      "title": "Loader"
+    }
+  },
+  "1202": {
+    "inputs": {
+      "unload": "A beautiful girl with long hair, dressed in a sleeveless black dress with thin golden lace edges, has a black cape with golden lace over her shoulders and arms, she is dressed like a silhouette, her tall figure is slightly bent, her hands on her hips, her lower body is hidden by the blackness of the clothing, her expression is determined, Balanced, Intricate, very Impressive\nThere are various levels of communicator types in Centric AI. You can choose an advanced level to get the most accurate answers. However, please note that the AI will",
+      "single_line": false,
+      "max_tokens": 128,
+      "temperature": 1,
+      "top_k": 0,
+      "top_p": 1,
+      "typical_p": 1,
+      "min_p": 0,
+      "top_a": 0,
+      "repetition_penalty": 1,
+      "temperature_last": true,
+      "seed": 105910276900001,
+      "text": [
+        "1209",
+        0
+      ]
+    },
+    "class_type": "ZuellniExLlamaGenerator",
+    "_meta": {
+      "title": "Generator"
+    }
+  },
+  "1203": {
+    "inputs": {
+      "unload": "The painting captures the essence of a hushed forest surrounding a magical clearing, the lush landscape teeming with nocturnal creatures engaging in strange rituals as wispy veils of moonlight cast eerie shadows. Valorous souls adorned in chain mail become entranced by the iridescent hues, while elusive, shadowy figures congregate around the looming, sylvan Tree. Conspiratorial whispers conspire to warp the supernatural reality, imparting a sense of mystique while elucidating a saga of",
+      "single_line": false,
+      "max_tokens": 128,
+      "temperature": 1,
+      "top_k": 0,
+      "top_p": 1,
+      "typical_p": 1,
+      "min_p": 0,
+      "top_a": 0,
+      "repetition_penalty": 1,
+      "temperature_last": true,
+      "seed": 466147579425588,
+      "text": [
+        "1205",
+        0
+      ]
+    },
+    "class_type": "ZuellniExLlamaGenerator",
+    "_meta": {
+      "title": "Generator"
+    }
+  },
+  "1204": {
+    "inputs": {
+      "unload": "Under the glow of the Wild Night Moon, a group of friends embarked on a thrilling adventure through the enchanted forest.",
+      "single_line": false,
+      "max_tokens": 30,
+      "temperature": 1,
+      "top_k": 0,
+      "top_p": 1,
+      "typical_p": 1,
+      "min_p": 0,
+      "top_a": 0,
+      "repetition_penalty": 1,
+      "temperature_last": true,
+      "seed": 853245813540605,
+      "text": [
+        "1210",
+        0
+      ]
+    },
+    "class_type": "ZuellniExLlamaGenerator",
+    "_meta": {
+      "title": "Generator"
+    }
+  },
+  "1205": {
+    "inputs": {
+      "text1": [
+        "802",
+        0
+      ],
+      "text2": "\nBot:",
+      "separator": ""
+    },
+    "class_type": "Concat Text _O",
+    "_meta": {
+      "title": "Concat Text _O"
+    }
+  },
+  "1206": {
+    "inputs": {
+      "text": [
+        "1160",
+        0
+      ]
+    },
+    "class_type": "ShowText|pysssss",
+    "_meta": {
+      "title": "Show Text 🐍"
+    }
+  },
+  "1209": {
+    "inputs": {
+      "text1": [
+        "809",
+        0
+      ],
+      "text2": "\nBot:",
+      "separator": ""
+    },
+    "class_type": "Concat Text _O",
+    "_meta": {
+      "title": "Concat Text _O"
+    }
+  },
+  "1210": {
+    "inputs": {
+      "text1": [
+        "909",
+        0
+      ],
+      "text2": "\nBot:",
+      "separator": ""
+    },
+    "class_type": "Concat Text _O",
+    "_meta": {
+      "title": "Concat Text _O"
+    }
+  },
+  "1217": {
+    "inputs": {
+      "opacity": 40,
+      "image": [
+        "916",
+        0
+      ],
+      "color_ref_image": [
+        "599",
+        5
+      ]
+    },
+    "class_type": "LayerColor: ColorAdapter",
+    "_meta": {
+      "title": "LayerColor: ColorAdapter"
+    }
+  },
+  "1232": {
+    "inputs": {
+      "text1": [
+        "528",
+        0
+      ],
+      "text2": [
+        "801",
+        0
+      ],
+      "separator": ","
+    },
+    "class_type": "Concat Text _O",
+    "_meta": {
+      "title": "Concat Text _O"
+    }
+  },
+  "1233": {
+    "inputs": {
+      "text_positive": [
+        "1232",
+        0
+      ],
+      "text_negative": "Realistic style, real photos",
+      "style": "sai-enhance",
+      "log_prompt": "No",
+      "style_positive": true,
+      "style_negative": true
+    },
+    "class_type": "SDXLPromptStyler",
+    "_meta": {
+      "title": "SDXL Prompt Styler"
+    }
+  },
+  "1235": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "width": 2048,
+      "height": 1024,
+      "crop": "disabled",
+      "image": [
+        "927",
+        5
+      ]
+    },
+    "class_type": "ImageScale",
+    "_meta": {
+      "title": "Upscale Image"
+    }
+  },
+  "1246": {
+    "inputs": {
+      "method": "fidelity",
+      "weight": 0.6,
+      "start_at": 0.3,
+      "end_at": 0.7000000000000001,
+      "model": [
+        "817",
+        0
+      ],
+      "pulid": [
+        "793",
+        0
+      ],
+      "eva_clip": [
+        "795",
+        0
+      ],
+      "face_analysis": [
+        "794",
+        0
+      ],
+      "image": [
+        "1276",
+        0
+      ],
+      "attn_mask": [
+        "918",
+        1
+      ]
+    },
+    "class_type": "ApplyPulid",
+    "_meta": {
+      "title": "Apply PuLID"
+    }
+  },
+  "1248": {
+    "inputs": {
+      "toggle": true,
+      "mode": "simple",
+      "num_loras": 4,
+      "lora_1_name": "Sdxl/sdxl_offset_example_v10.safetensors",
+      "lora_1_strength": 0.6,
+      "lora_1_model_strength": 1,
+      "lora_1_clip_strength": 1,
+      "lora_2_name": "Sdxl/xl_more_art-full-beta2.safetensors",
+      "lora_2_strength": 0.6,
+      "lora_2_model_strength": 1,
+      "lora_2_clip_strength": 1,
+      "lora_3_name": "SDXL功能性/复杂色彩dare_complex_color_notrigger.safetensors",
+      "lora_3_strength": 0.3,
+      "lora_3_model_strength": 1,
+      "lora_3_clip_strength": 1,
+      "lora_4_name": "PT滑块/cartoon卡通化.pt",
+      "lora_4_strength": 3,
+      "lora_4_model_strength": 1,
+      "lora_4_clip_strength": 1,
+      "lora_5_name": "None",
+      "lora_5_strength": 0,
+      "lora_5_model_strength": 1,
+      "lora_5_clip_strength": 1,
+      "lora_6_name": "None",
+      "lora_6_strength": 1,
+      "lora_6_model_strength": 1,
+      "lora_6_clip_strength": 1,
+      "lora_7_name": "None",
+      "lora_7_strength": 1,
+      "lora_7_model_strength": 1,
+      "lora_7_clip_strength": 1,
+      "lora_8_name": "None",
+      "lora_8_strength": 1,
+      "lora_8_model_strength": 1,
+      "lora_8_clip_strength": 1,
+      "lora_9_name": "None",
+      "lora_9_strength": 1,
+      "lora_9_model_strength": 1,
+      "lora_9_clip_strength": 1,
+      "lora_10_name": "None",
+      "lora_10_strength": 1,
+      "lora_10_model_strength": 1,
+      "lora_10_clip_strength": 1
+    },
+    "class_type": "easy loraStack",
+    "_meta": {
+      "title": "EasyLoraStack"
+    }
+  },
+  "1249": {
+    "inputs": {
+      "lora_stack": [
+        "1248",
+        0
+      ]
+    },
+    "class_type": "CR Apply LoRA Stack",
+    "_meta": {
+      "title": "💊 CR Apply LoRA Stack"
+    }
+  },
+  "1251": {
+    "inputs": {
+      "lora_stack": [
+        "1252",
+        0
+      ]
+    },
+    "class_type": "CR Apply LoRA Stack",
+    "_meta": {
+      "title": "💊 CR Apply LoRA Stack"
+    }
+  },
+  "1252": {
+    "inputs": {
+      "toggle": true,
+      "mode": "simple",
+      "num_loras": 2,
+      "lora_1_name": "Harrlogos_v2.0.safetensors",
+      "lora_1_strength": 1,
+      "lora_1_model_strength": 1,
+      "lora_1_clip_strength": 1,
+      "lora_2_name": "dare_complex_color_notrigger.safetensors",
+      "lora_2_strength": 0.6,
+      "lora_2_model_strength": 1,
+      "lora_2_clip_strength": 1,
+      "lora_3_name": "SDXL功能性/复杂色彩dare_complex_color_notrigger.safetensors",
+      "lora_3_strength": 0.2,
+      "lora_3_model_strength": 1,
+      "lora_3_clip_strength": 1,
+      "lora_4_name": "PT滑块/cartoon卡通化.pt",
+      "lora_4_strength": 3,
+      "lora_4_model_strength": 1,
+      "lora_4_clip_strength": 1,
+      "lora_5_name": "None",
+      "lora_5_strength": 0,
+      "lora_5_model_strength": 1,
+      "lora_5_clip_strength": 1,
+      "lora_6_name": "None",
+      "lora_6_strength": 1,
+      "lora_6_model_strength": 1,
+      "lora_6_clip_strength": 1,
+      "lora_7_name": "None",
+      "lora_7_strength": 1,
+      "lora_7_model_strength": 1,
+      "lora_7_clip_strength": 1,
+      "lora_8_name": "None",
+      "lora_8_strength": 1,
+      "lora_8_model_strength": 1,
+      "lora_8_clip_strength": 1,
+      "lora_9_name": "None",
+      "lora_9_strength": 1,
+      "lora_9_model_strength": 1,
+      "lora_9_clip_strength": 1,
+      "lora_10_name": "None",
+      "lora_10_strength": 1,
+      "lora_10_model_strength": 1,
+      "lora_10_clip_strength": 1
+    },
+    "class_type": "easy loraStack",
+    "_meta": {
+      "title": "EasyLoraStack"
+    }
+  },
+  "1276": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "width": 1200,
+      "height": 1200,
+      "crop": "disabled",
+      "image": [
+        "797",
+        0
+      ]
+    },
+    "class_type": "ImageScale",
+    "_meta": {
+      "title": "Upscale Image"
+    }
+  },
+  "1247:0": {
+    "inputs": {
+      "file_path": "",
+      "dictionary_name": "[filename]",
+      "label": "TextBatch",
+      "mode": "automatic",
+      "index": 0,
+      "multiline_text": ""
+    },
+    "class_type": "Text Load Line From File",
+    "_meta": {
+      "title": "Text Load Line From File"
+    }
+  },
+  "1247:1": {
+    "inputs": {
+      "text1": "AutoPoster",
+      "text2": [
+        "1247:0",
+        0
+      ],
+      "separator": "/"
+    },
+    "class_type": "Concat Text _O",
+    "_meta": {
+      "title": "Concat Text _O"
+    }
+  },
+  "1247:2": {
+    "inputs": {
+      "text": [
+        "1247:1",
+        0
+      ],
+      "find1": " ",
+      "replace1": "",
+      "find2": "\"",
+      "replace2": "",
+      "find3": ",",
+      "replace3": ""
+    },
+    "class_type": "CR Text Replace",
+    "_meta": {
+      "title": "🔤 CR Text Replace"
+    }
+  },
+  "1247:3": {
+    "inputs": {
+      "text": [
+        "1247:2",
+        0
+      ],
+      "find1": "?",
+      "replace1": "",
+      "find2": ".",
+      "replace2": "",
+      "find3": ":",
+      "replace3": ""
+    },
+    "class_type": "CR Text Replace",
+    "_meta": {
+      "title": "🔤 CR Text Replace"
+    }
+  }
+}
