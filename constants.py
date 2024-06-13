@@ -47,3 +47,7 @@ if not os.path.exists(config_folder):
     os.mkdir(config_folder)
 s3_config_file = os.path.join(config_folder, "s3.json")
 workflows_folder = os.path.join(comfyfile_path, "workflows")
+local_workflows_folder = os.path.join(comfyfile_path, "local-workflows")
+
+if not os.path.exists(local_workflows_folder):
+    os.mkdir(local_workflows_folder)

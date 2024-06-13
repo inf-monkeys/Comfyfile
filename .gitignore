@@ -418,4 +418,4 @@ upload.py
 
 .installed
 
-apps/
+local-workflows/

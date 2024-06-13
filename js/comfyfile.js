@@ -509,17 +509,17 @@ class S3ConfigMenuDialog extends ComfyDialog {
 }
 
 export function rebootAPI() {
-	if (confirm("Are you sure you'd like to reboot the server?")) {
-		try {
-			api.fetchApi("/manager/reboot");
-		}
-		catch(exception) {
+  if (confirm("Are you sure you'd like to reboot the server?")) {
+    try {
+      api.fetchApi("/manager/reboot");
+    }
+    catch (exception) {
 
-		}
-		return true;
-	}
+    }
+    return true;
+  }
 
-	return false;
+  return false;
 }
 
 async function showRebootMessage() {
@@ -570,7 +570,7 @@ async function install_local_comfyfile_app(file) {
       const data = await response.json();
       var { success, errMsg } = data;
       if (!success) {
-        const message = "Install failed.";
+        const message = `Install failed: ${errMsg}`;
         show_message(message);
         return false;
       }
@@ -597,7 +597,7 @@ async function reinstall_local_comfyfile_app(file) {
       const data = await response.json();
       var { success, errMsg } = data;
       if (!success) {
-        const message = "Install failed.";
+        const message = `Install failed: ${errMsg}`;
         show_message(message);
         return false;
       }
@@ -660,11 +660,33 @@ export class ComfyfileExplorerMenuDislog extends ComfyDialog {
     }
   }
 
-  async install_comfyfile() {
-    let comfyfile_repo_url = this.comfyfile_input_box.value.toLowerCase();
-    console.log("comfyfile_repo_url: ", comfyfile_repo_url);
-    if (comfyfile_repo_url) {
-      await install_remote_comfyfile_app(comfyfile_repo_url);
+  async upload_comfyfile(file) {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    if (comfyfile_explorer_instance) {
+      comfyfile_explorer_instance.startInstall(file.name);
+    }
+
+    try {
+      const response = await api.fetchApi("/comfyfile/apps/zip", {
+        method: "POST",
+        body: formData
+      })
+      const data = await response.json();
+      var { success, errMsg, apps } = data;
+      if (!success) {
+        const message = `Install failed: ${errMsg}`;
+        show_message(message);
+        return false;
+      }
+      var comfyfileApp = apps[0]
+      app.handleFile(jsonToFile(comfyfileApp.workflow));
+      showRebootMessage();
+      return true;
+    } catch (exception) {
+      show_message(`Install failed: ${file.name} / ${exception}`);
+      return false;
     }
   }
 
@@ -851,34 +873,34 @@ export class ComfyfileExplorerMenuDislog extends ComfyDialog {
 
   createHeaderControls() {
     let self = this;
-    this.comfyfile_input_box = $el(
-      "input.cm-search-filter",
-      {
-        type: "text",
-        id: "comfyfile-input-box",
-        placeholder: "Input comfyfile repo url",
-        value: this.comfyfile_repo,
-      },
-      []
-    );
-    this.comfyfile_input_box.style.width = "300px";
-    this.comfyfile_input_box.onkeydown = (event) => {
-      if (event.key === "Enter") {
-        self.comfyfile_repo = self.comfyfile_input_box.value;
-        self.install_comfyfile();
-      }
-    };
+    this.comfyfile_upload = document.createElement("input")
+    this.comfyfile_upload.type = 'file'
+    this.comfyfile_upload.accept = '.zip';
 
+    this.comfyfile_upload.style.width = "200px";
+    this.comfyfile_upload.addEventListener('change', function (event) {
+      const file = event.target.files[0];
+      if (file) {
+        // 在这里处理文件上传后的操作
+        console.log('文件名:', file.name);
+        console.log('文件类型:', file.type);
+        console.log('文件大小:', file.size);
+        // 例如，可以将文件上传到服务器
+        self.comfyfile_upload_value = file
+      }
+    });
     let install_button = document.createElement("button");
     install_button.className = "cm-small-button";
     install_button.innerHTML = "Installl";
     install_button.onclick = () => {
-      self.comfyfile_repo = self.comfyfile_input_box.value;
-      self.install_comfyfile();
+      if (!self.comfyfile_upload_value) {
+        alert("Please upload a valid comfyfile zip")
+      }
+      self.upload_comfyfile(self.comfyfile_upload_value);
     };
     install_button.style.display = "inline-block";
     let cell = $el("td", { width: "100%" }, [
-      this.comfyfile_input_box,
+      this.comfyfile_upload,
       "  ",
       install_button,
     ]);
@@ -923,7 +945,7 @@ export class ComfyfileExplorerMenuDislog extends ComfyDialog {
 
 app.registerExtension({
   name: "Comfy.ComfyfileMenu",
-  init() {},
+  init() { },
 
   async setupS3Config(menu) {
     const container = document.createElement("div");

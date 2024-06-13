@@ -4,3 +4,4 @@ fuzzywuzzy
 loguru
 streamlit
 transformers
+optimum

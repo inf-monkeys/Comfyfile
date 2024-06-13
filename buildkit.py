@@ -5,6 +5,7 @@ import zipfile
 from loguru import logger
 import tarfile
 import json
+from .api import ComfyAPI
 from .runner import ComfyRunner
 import json
 import requests
@@ -14,7 +15,7 @@ import folder_paths
 from torchvision.datasets.utils import download_url as torchvision_download_url
 from enum import Enum
 from typing import Any
-from transformers import AutoModel, AutoTokenizer
+from .constants import APP_PORT, APP_HOST
 
 # paths
 comfyui_monkeys_path = os.path.dirname(__file__)
@@ -153,6 +154,7 @@ class ComfyfileApp:
 
 class ComfyfileExecutor:
     def __init__(self, context_directory, working_directory):
+        self.comfy_api = ComfyAPI(APP_HOST, APP_PORT)
         self.context_directory = context_directory
         self.working_directory = working_directory
         os.makedirs(self.working_directory, exist_ok=True)
@@ -170,13 +172,10 @@ class ComfyfileExecutor:
                 progress_bar.update(len(data))
 
     def execute_command(self, command):
-        subprocess.run(command, shell=True, check=True, cwd=self.working_directory)
+        subprocess.run(command, shell=True, check=True, cwd=self.working_directory, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
-    def handle_plugin(self, url):
-        repo_name = url.split("/")[-1].replace(".git", "")
-        repo_path = os.path.join(self.working_directory, "custom_nodes", repo_name)
-        if not os.path.exists(repo_path):
-            self.execute_command(f"git clone {url} {repo_path}")
+    async def handle_plugin(self, url):
+        await self.comfy_api.install_custom_node_by_git_url(url)
 
     def handle_run(self, script):
         self.execute_command(script)
@@ -218,14 +217,24 @@ class ComfyfileExecutor:
 
     def handle_huggingface_model(self, model_name, model_path):
         model_path = os.path.join(comfy_path, model_path)
-        if os.path.exists(model_path):
-            logger.info(f"Huggingface Model {model_path} exists, skipping")
-            return
-
         model_parent_folder = os.path.dirname(model_path)
         os.makedirs(model_parent_folder, exist_ok=True)
-        AutoTokenizer.from_pretrained(model_name, cache_dir=model_path)
-        AutoModel.from_pretrained(model_name, cache_dir=model_path)
+        commands = [
+            f"cd {model_parent_folder}",
+            f"hfd {model_name} --tool aria2c -x 4",
+        ]
+        command = " && ".join(commands)
+        
+        try:
+            self.execute_command(command)
+        except subprocess.CalledProcessError as e:
+            returncode = e.returncode
+            stderr = str(e.stderr)
+            stdout = str(e.stdout)
+            logger.info(f"Install huggingface model error: {e}, returncode: {returncode}, sdtout: {stdout}, stderr: {stderr}")
+            if stderr and 'already exists' in stderr:
+                self.execute_command(f"rm -rf {model_path}")
+                self.execute_command(command)
 
     def handle_copy(self, src, dest):
         full_src = os.path.join(self.context_directory, src)
@@ -255,7 +264,7 @@ class ComfyfileExecutor:
                     runner = ComfyRunner()
                     await runner.auto_install_missing_nodes(comfyfile_app.workflow)
                 else:
-                    self.handle_plugin(plugin_url)
+                    await self.handle_plugin(plugin_url)
             elif step.command_type == ComfyfileCommandType.MODEL:
                 model = step.command_data
                 self.handle_model(model.path, model.url)
@@ -273,73 +282,6 @@ class ComfyfileExecutor:
                 self.handle_huggingface_model(
                     huggingface_model.model_name, huggingface_model.path
                 )
-
-        # build_stage = comfyfile.stages["build"]
-        # AUTO_INFER_FROM_WORKFLOW_JSON = False
-        # if build_stage:
-        #     for command in build_stage.commands:
-        #         if command.startswith("PLUGIN"):
-        #             _, url = command.split(maxsplit=1)
-        #             if url == "AUTO_INFER_FROM_WORKFLOW_JSON":
-        #                 AUTO_INFER_FROM_WORKFLOW_JSON = True
-        #             else:
-        #                 self.handle_plugin(url)
-        #         elif command.startswith("MODEL"):
-        #             _, model_info = command.split(maxsplit=1)
-        #             model_path, model_url = model_info.split()
-        #             self.handle_model(model_path, model_url)
-        #         elif command.startswith("COPY"):
-        #             _, paths = command.split(maxsplit=1)
-        #             src, dest = paths.split()
-        #             self.handle_copy(src, dest)
-        #         elif command.startswith("RUN"):
-        #             _, script = command.split(maxsplit=1)
-        #             self.handle_run(script)
-        #         elif command.startswith("SCRIPT"):
-        #             _, script_file = command.split(maxsplit=1)
-        #             self.handle_script(script_file)
-        #         else:
-        #             raise ValueError(f"Unknown command: {command}")
-
-        # serve_stage = comfyfile.stages["serve"]
-        # if serve_stage:
-        #     app_name_command = next(
-        #         (
-        #             command
-        #             for command in serve_stage.commands
-        #             if command.startswith("APP_NAME")
-        #         ),
-        #         None,
-        #     )
-        #     if not app_name_command:
-        #         raise ValueError("APP_NAME is required in the serve stage")
-        #     app_name = app_name_command.split(maxsplit=1)[1]
-        #     other_commands = [
-        #         command
-        #         for command in serve_stage.commands
-        #         if not command.startswith("APP_NAME")
-        #     ]
-        #     for command in other_commands:
-        #         if command.startswith("WORKFLOW_API"):
-        #             _, src = command.split(maxsplit=1)
-        #             self.handle_workflow_api(app_name, src)
-        #         elif command.startswith("WORKFLOW"):
-        #             _, src = command.split(maxsplit=1)
-        #             if AUTO_INFER_FROM_WORKFLOW_JSON:
-        #                 logger.info("Auto infer missing nodes from workflow.json")
-        #                 full_src = os.path.join(self.context_directory, src)
-        #                 with open(full_src, "r", encoding="utf-8") as f:
-        #                     workflow_json = json.loads(f.read())
-        #                     runner = ComfyRunner()
-        #                     await runner.auto_install_missing_nodes(workflow_json)
-        #             self.handle_workflow(app_name, src)
-        #         elif command.startswith("REST_ENDPOINT"):
-        #             _, src = command.split(maxsplit=1)
-        #             self.handle_rest_endpoint(app_name, src)
-        #         elif command.startswith("MANIFEST"):
-        #             _, src = command.split(maxsplit=1)
-        #             self.handle_manifest(app_name, src)
-
 
 class ComfyfileParser:
 

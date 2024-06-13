@@ -63,6 +63,15 @@ class BaseAPI:
                     data = await response.json()
                     return data
 
+    async def http_post_plaintext(self, url, text):
+        async with aiohttp.ClientSession() as session:
+            async with session.post(
+                url=urljoin(self.base_url, url),
+                data=text,
+                headers=self._get_headers("text/plain"),
+            ) as response:
+                pass
+
     def http_put(self, url, data=None):
         res = requests.put(self.base_url + url, json=data, headers=self._get_headers())
         return res.json()
@@ -90,6 +99,9 @@ class ComfyAPI(BaseAPI):
         self.CUSTOM_NODE_LIST_URL = "/customnode/getlist"
         self.CUSTOM_NODE_URL = (
             "/customnode/"  # mode can be added infront {install, uninstall, update}
+        )
+        self.CUSTOM_NODE_GIT_URL = (
+            "/customnode/install/git_url"
         )
         self.REGISTERED_NODE_LIST_URL = "/object_info"
         self.NODE_MAPPING_LIST_URL = "/customnode/getmappings"
@@ -130,3 +142,6 @@ class ComfyAPI(BaseAPI):
             return {
                 "reboot": True
             }
+
+    async def install_custom_node_by_git_url(self, git_url):
+        return await self.http_post_plaintext(self.CUSTOM_NODE_GIT_URL, git_url)

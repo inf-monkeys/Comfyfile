@@ -3,7 +3,7 @@ FROM nvidia/cuda:12.0.0-cudnn8-runtime-ubuntu22.04
 ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=Asia/Shanghai
 RUN apt-get update && \
-    apt-get install git default-jre python3 python3-pip python3.10-venv vim wget curl git git-lfs proxychains aria2 -y && \
+    apt-get install git default-jre python3 python3-pip python3.10-venv vim wget lsof curl git git-lfs proxychains aria2 -y && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 

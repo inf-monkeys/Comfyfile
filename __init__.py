@@ -1,9 +1,8 @@
 import asyncio
-from copy import deepcopy
 import os.path
 import shutil
 import traceback
-import requests
+import zipfile
 import server
 import sys
 import json
@@ -21,6 +20,7 @@ from .constants import (
     js_path,
     s3_config_file,
     workflows_folder,
+    local_workflows_folder,
 )
 import os
 import subprocess
@@ -95,14 +95,16 @@ async def import_from_remote_comfyfile_repo(comfyfile_repo):
 
 
 async def import_from_local_comfyfile_repo(local_comfyfile_repo):
-    local_comfyfile_repo_path = os.path.join(workflows_folder, local_comfyfile_repo)
-    local_comfyfile = os.path.join(local_comfyfile_repo_path, "Comfyfile")
-    comfyfile_app = ComfyfileParser(local_comfyfile, local_comfyfile_repo_path).parse_comfyfile()
-    executor = ComfyfileExecutor(local_comfyfile_repo_path, comfy_path)
-    await executor.process_comfyfile_apps(comfyfile_app)
-    dot_installed_file = os.path.join(local_comfyfile_repo_path, ".installed")
+    local_comfyfile = os.path.join(local_comfyfile_repo, "Comfyfile")
+    comfyfile_apps = ComfyfileParser(local_comfyfile, local_comfyfile_repo).parse_comfyfile()
+    if len(comfyfile_apps) == 0:
+        raise Exception("No apps found in Comfyfile, please check the Comfyfile format.")
+    executor = ComfyfileExecutor(local_comfyfile_repo, comfy_path)
+    await executor.process_comfyfile_apps(comfyfile_apps)
+    dot_installed_file = os.path.join(local_comfyfile_repo, ".installed")
     with open(dot_installed_file, "w") as f:
         f.write("")
+    return comfyfile_apps
 
 
 @server.PromptServer.instance.routes.post("/comfyfile/apps")
@@ -118,7 +120,7 @@ async def import_app(request):
         if comfyfile_repo:
             await import_from_remote_comfyfile_repo(comfyfile_repo)
         elif local_comfyfile_repo:
-            await import_from_local_comfyfile_repo(local_comfyfile_repo)
+            await import_from_local_comfyfile_repo(os.path.join(workflows_folder, local_comfyfile_repo))
         return web.json_response({"success": True, "errMsg": "Install success"})
     except Exception as e:
         traceback.print_exc()
@@ -141,13 +143,62 @@ async def import_app(request):
             dot_installed_file = os.path.join(local_comfyfile_repo, ".installed")
             if os.path.exists(dot_installed_file):
                 os.remove(dot_installed_file)
-            await import_from_local_comfyfile_repo(local_comfyfile_repo)
+            await import_from_local_comfyfile_repo(os.path.join(workflows_folder, local_comfyfile_repo))
         return web.json_response({"success": True, "errMsg": "Install success"})
     except Exception as e:
         traceback.print_exc()
         return web.json_response({"success": False, "errMsg": str(e)})
 
+def extract_comfyfile_zip(zip_path, extract_path):
+    # 检查 zip 文件是否存在
+    if not os.path.exists(zip_path):
+        raise FileNotFoundError(f"Zip file '{zip_path}' not found.")
+    
+    # 创建解压目录（如果不存在）
+    if not os.path.exists(extract_path):
+        os.makedirs(extract_path)
+    
+    # 解压文件
+    with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+        zip_ref.extractall(extract_path)
+        
+    os.remove(zip_path)
 
+    # 检查解压后的内容是否为一个目录
+    extracted_items = os.listdir(extract_path)
+    if len(extracted_items) != 1 or not os.path.isdir(os.path.join(extract_path, extracted_items[0])):
+        raise ValueError("The extracted content is not a single directory.")
+    
+    # 返回解压后的目录路径
+    return os.path.join(extract_path, extracted_items[0])
+
+
+@server.PromptServer.instance.routes.post("/comfyfile/apps/zip")
+async def import_app(request):
+    try:
+        reader = await request.multipart()
+        field = await reader.next()
+        assert field.name == 'file'
+        filename = field.filename
+        size = 0
+        random_id = str(uuid.uuid4())
+        zip_file = os.path.join(local_workflows_folder, random_id, filename)
+        if not os.path.exists(os.path.dirname(zip_file)):
+            os.makedirs(os.path.dirname(zip_file))
+        with open(zip_file, 'wb') as f:
+            while True:
+                chunk = await field.read_chunk()  # 8192 bytes by default.
+                if not chunk:
+                    break
+                size += len(chunk)
+                f.write(chunk)
+        extracted_folder = extract_comfyfile_zip(zip_file, os.path.join(local_workflows_folder, random_id))
+        logger.info(f"Extracted comfyfile zip to folder: {extracted_folder}")
+        apps = await import_from_local_comfyfile_repo(extracted_folder)
+        return web.json_response({"success": True, "errMsg": "Install success", "apps": [app.serialize() for app in apps]})
+    except Exception as e:
+        traceback.print_exc()
+        return web.json_response({"success": False, "errMsg": str(e)})
 
 @server.PromptServer.instance.routes.get("/comfyfile/apps")
 async def list_apps(request):
