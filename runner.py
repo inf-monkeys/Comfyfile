@@ -245,10 +245,11 @@ class ComfyRunner:
                         and any(input.endswith(ft) for ft in MODEL_FILETYPES)
                         and not any(input.endswith(m) for m in OPTIONAL_MODELS)
                     ):
-                        all_models.append(input)
+                        if input not in all_models:
+                            all_models.append(input)
         uninstalled_models = []
         for model in all_models:
-            if not search_model(model):
+            if not search_model(model) and model not in uninstalled_models:
                 uninstalled_models.append(model)
         return [
             {
