@@ -2417,7 +2417,7 @@
       "lora_3_strength": 0.2,
       "lora_3_model_strength": 1,
       "lora_3_clip_strength": 1,
-      "lora_4_name": "PT滑块\\cartoon卡通化.pt",
+      "lora_4_name": "PT滑块/cartoon_style卡通化.pt",
       "lora_4_strength": 3,
       "lora_4_model_strength": 1,
       "lora_4_clip_strength": 1,
