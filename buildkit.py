@@ -14,6 +14,7 @@ import folder_paths
 from torchvision.datasets.utils import download_url as torchvision_download_url
 from enum import Enum
 from typing import Any
+from transformers import AutoModel, AutoTokenizer
 
 # paths
 comfyui_monkeys_path = os.path.dirname(__file__)
@@ -28,9 +29,10 @@ def make_tarfile(output_filename, source_dir):
     with tarfile.open(output_filename, "w:gz") as tar:
         tar.add(source_dir, arcname=os.path.basename(source_dir))
 
+
 class UniversalEncoder(json.JSONEncoder):
     def default(self, obj):
-        if hasattr(obj, '__dict__'):
+        if hasattr(obj, "__dict__"):
             return obj.__dict__  # 将对象转换为字典
         return super().default(obj)  # 调用默认的实现
 
@@ -61,23 +63,39 @@ class ComfyuiModel:
     def serialize(self):
         return {"name": self.name, "url": self.url, "path": self.path}
 
+
+class ComfyuiHuggingfaceModel:
+    def __init__(self, model_name: str, path: str):
+        self.model_name = model_name
+        self.path = path
+
+    def serialize(self):
+        return {
+            "model_name": self.model_name,
+            "path": self.path,
+        }
+
+
 class ComfyfileCommandType(Enum):
-    MODEL = 'MODEL'
-    PLUGIN = 'PLUGIN'
-    SCRIPT = 'SCRIPT'
-    RUN = 'RUN'
-    COPY = 'COPY'
+    MODEL = "MODEL"
+    PLUGIN = "PLUGIN"
+    SCRIPT = "SCRIPT"
+    RUN = "RUN"
+    COPY = "COPY"
+    HUGGINGFACE_MODEL = "HUGGINGFACE_MODEL"
+
 
 class ComfyfileExecutionStep:
     def __init__(self, command_type: ComfyfileCommandType, command_data: Any):
         self.command_type = command_type
         self.command_data = command_data
-        
+
     def serialize(self):
         return {
             "command_type": self.command_type.value,
-            "command_data": json.dumps(self.command_data, cls=UniversalEncoder)
+            "command_data": json.dumps(self.command_data, cls=UniversalEncoder),
         }
+
 
 class ComfyfileApp:
     def __init__(
@@ -88,13 +106,14 @@ class ComfyfileApp:
         homepage: str,
         plugins: list[ComfyuiPlugin],
         models: list[ComfyuiModel],
+        huggingface_models: list[ComfyuiHuggingfaceModel],
         runs: list[str],
         scripts: list[str],
         workflow: dict,
         workflowApi: dict,
         tags: list,
         restEndpoint: dict,
-        steps: list[ComfyfileExecutionStep]
+        steps: list[ComfyfileExecutionStep],
     ):
         self.appName = appName
         self.displayName = displayName
@@ -109,6 +128,7 @@ class ComfyfileApp:
         self.restEndpoint = restEndpoint
         self.steps = steps
         self.runs = runs
+        self.huuggingface_models = huggingface_models
 
     def serialize(self):
         return {
@@ -124,7 +144,10 @@ class ComfyfileApp:
             "restEndpoint": self.restEndpoint,
             "scripts": self.scripts,
             "steps": [step.serialize() for step in self.steps],
-            "runs": self.runs
+            "runs": self.runs,
+            "huggingface_models": [
+                model.serialize() for model in self.huuggingface_models
+            ],
         }
 
 
@@ -193,6 +216,17 @@ class ComfyfileExecutor:
                 model_url, model_path_folder, os.path.basename(model_path)
             )
 
+    def handle_huggingface_model(self, model_name, model_path):
+        model_path = os.path.join(comfy_path, model_path)
+        if os.path.exists(model_path):
+            logger.info(f"Huggingface Model {model_path} exists, skipping")
+            return
+
+        model_parent_folder = os.path.dirname(model_path)
+        os.makedirs(model_parent_folder, exist_ok=True)
+        AutoTokenizer.from_pretrained(model_name, cache_dir=model_path)
+        AutoModel.from_pretrained(model_name, cache_dir=model_path)
+
     def handle_copy(self, src, dest):
         full_src = os.path.join(self.context_directory, src)
         full_dest = os.path.join(self.working_directory, dest)
@@ -234,6 +268,11 @@ class ComfyfileExecutor:
             elif step.command_type == ComfyfileCommandType.COPY:
                 src, dest = step.command_data
                 self.handle_copy(src, dest)
+            elif step.command_type == ComfyfileCommandType.HUGGINGFACE_MODEL:
+                huggingface_model = step.command_data
+                self.handle_huggingface_model(
+                    huggingface_model.model_name, huggingface_model.path
+                )
 
         # build_stage = comfyfile.stages["build"]
         # AUTO_INFER_FROM_WORKFLOW_JSON = False
@@ -318,6 +357,7 @@ class ComfyfileParser:
         build_models = []
         build_runs = []
         build_scripts = []
+        build_huggingface_models = []
         steps = []
         current_app = None
         for line in lines:
@@ -339,6 +379,7 @@ class ComfyfileParser:
                         scripts=list(build_scripts),
                         runs=list(build_runs),
                         steps=list(steps),
+                        huggingface_models=list(build_huggingface_models),
                     )
             elif line.startswith("PLUGIN"):
                 plugin = self.__parse_plugin_line(line)
@@ -346,7 +387,9 @@ class ComfyfileParser:
                     current_app.plugins.append(plugin)
                 else:
                     build_plugins.append(plugin)
-                steps.append(ComfyfileExecutionStep(ComfyfileCommandType.PLUGIN, plugin))
+                steps.append(
+                    ComfyfileExecutionStep(ComfyfileCommandType.PLUGIN, plugin)
+                )
             elif line.startswith("MODEL"):
                 model = self.__parse_model_line(line)
                 if current_app:
@@ -354,6 +397,17 @@ class ComfyfileParser:
                 else:
                     build_models.append(model)
                 steps.append(ComfyfileExecutionStep(ComfyfileCommandType.MODEL, model))
+            elif line.startswith("HUGGINGFACE_MODEL"):
+                huggingface_model = self.__parse_huggingface_model_line(line)
+                if current_app:
+                    current_app.huuggingface_models.append(huggingface_model)
+                else:
+                    build_huggingface_models.append(huggingface_model)
+                steps.append(
+                    ComfyfileExecutionStep(
+                        ComfyfileCommandType.HUGGINGFACE_MODEL, huggingface_model
+                    )
+                )
             elif line.startswith("RUN"):
                 command = self.__parse_run_line(line)
                 if current_app:
@@ -367,10 +421,14 @@ class ComfyfileParser:
                     current_app.scripts.append(script_content)
                 else:
                     build_scripts.append(script_content)
-                steps.append(ComfyfileExecutionStep(ComfyfileCommandType.SCRIPT, script_content))
+                steps.append(
+                    ComfyfileExecutionStep(ComfyfileCommandType.SCRIPT, script_content)
+                )
             elif line.startswith("COPY"):
                 src, dest = self.__parse_copy_line(line)
-                steps.append(ComfyfileExecutionStep(ComfyfileCommandType.COPY, (src, dest)))
+                steps.append(
+                    ComfyfileExecutionStep(ComfyfileCommandType.COPY, (src, dest))
+                )
 
             elif line.startswith("APP_NAME"):
                 _, appName = line.split(" ")
@@ -412,6 +470,12 @@ class ComfyfileParser:
         url = parts[2]
         name = os.path.basename(path)
         return ComfyuiModel(name, url, path)
+
+    def __parse_huggingface_model_line(self, line: str) -> ComfyuiHuggingfaceModel:
+        parts = line.split()
+        path = parts[1]
+        model_name = parts[2]
+        return ComfyuiHuggingfaceModel(model_name, path)
 
     def __parse_run_line(self, line: str) -> str:
         script = " ".join(line.split()[1:])
@@ -469,7 +533,9 @@ class ComfyfileParser:
             self.context_directory, rest_endpoint_relative_file.strip()
         )
         if not os.path.exists(rest_endpoint_file):
-            raise FileNotFoundError(f"Rest endpoint file {rest_endpoint_file} not exists")
+            raise FileNotFoundError(
+                f"Rest endpoint file {rest_endpoint_file} not exists"
+            )
         with open(rest_endpoint_file, "r", encoding="utf-8") as file:
             rest_endpoint = json.load(file)
         return rest_endpoint
