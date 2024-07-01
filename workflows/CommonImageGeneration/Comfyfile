@@ -6,7 +6,7 @@ MODEL models/checkpoints/photon_v1.safetensors https://civitai.com/api/download/
 MODEL models/controlnet/control_v11p_sd15s2_lineart_anime.pth https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11p_sd15s2_lineart_anime.pth
 MODEL models/vae/vaeFtMse840000Ema_v100.pt https://huggingface.co/casque/vaeFtMse840000Ema_v100/resolve/main/vaeFtMse840000Ema_v100.pt
 
-COPY CommonImageGeneration_Input.jpeg input/
+COPY CommonImageGeneration_Input.png input/
 
 STAGE serve
 
