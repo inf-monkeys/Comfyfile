@@ -1,0 +1,17 @@
+STAGE build
+
+PLUGIN AUTO_INFER_FROM_WORKFLOW_JSON
+
+MODEL models/checkpoints/photon_v1.safetensors https://civitai.com/api/download/models/90072
+MODEL models/controlnet/control_v11p_sd15s2_lineart_anime.pth https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11p_sd15s2_lineart_anime.pth
+MODEL models/vae/vaeFtMse840000Ema_v100.pt https://huggingface.co/casque/vaeFtMse840000Ema_v100/resolve/main/vaeFtMse840000Ema_v100.pt
+
+COPY CommonImageGeneration_Input.jpeg input/
+
+STAGE serve
+
+APP_NAME CommonImageGeneration
+MANIFEST ./manifest.json
+WORKFLOW ./workflow.json
+WORKFLOW_API ./workflow_api.json
+REST_ENDPOINT ./rest_endpoint.json

@@ -2,7 +2,7 @@
   "parameters": [
     {
       "displayName": "输入图片",
-      "name": " input_image",
+      "name": "input_image",
       "type": "file",
       "default": "https://static.infmonkeys.com/comfyui/workflows/Animal2Anime/images/Animal2Anime_Input.jpeg",
       "required": true,

@@ -1,0 +1,427 @@
+{
+  "3": {
+    "inputs": {
+      "seed": 353968272360110,
+      "steps": 20,
+      "cfg": 6,
+      "sampler_name": "uni_pc",
+      "scheduler": "sgm_uniform",
+      "denoise": 1,
+      "model": [
+        "15",
+        0
+      ],
+      "positive": [
+        "10",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "latent_image": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "5": {
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "6": {
+    "inputs": {
+      "text": "a high-end washing machine,on the ground,L_G_WM_M,Leader_ Style,4K,masterpiece,Product Design,ultra hd rendering,white plastic material,white background:1.2),Dark, C_G_WM_MZ, Cuboid, Round window, Glass, Metal, Product Design, Ultra HD Rendering, Plastic, White Background, High-end Washing Machine, Display, Smart, High Quality, Technology Products,",
+      "clip": [
+        "15",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "7": {
+    "inputs": {
+      "text": "asynegative,FastNegative,XNegative,elpeo_puru,characters,human body,limb,action,male,female,girl,grid mesh,mesh,sketches,(worst quality:2),(low quality:2),(normal quality:2),lowers,normal quality,((monochrome)),((grayscale)),skin spots,acnes,skin blemishes,bad anatomy,DeepNegative,(fat:1.2),facing away,looking away,tilted head,bad anatomy,bad hands,text,error,logo,missing fingers,extra digit,fewer digits,cropped,worst quality,low quality,normal quality,jpeg artifacts,signature,(watermark:2),character watermark,username,blurry,bad feet,cropped,poorly drawn hands,poorly drawn face,mutation,deformed,worst quality,low quality,normal quality,jpeg artifacts,signature,watermark,extra fingers,fewer digits,extra limbs,extra arms,extra legs,malformed limbs,fused fingers,too many fingers,long neck,mutated hands,bad body,bad proportions,gross proportions,text,error,missing fingers,missing arms,missing legs,extra digit,extra arms,extra leg,extra,",
+      "clip": [
+        "15",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "8": {
+    "inputs": {
+      "samples": [
+        "3",
+        0
+      ],
+      "vae": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "9": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "10": {
+    "inputs": {
+      "strength": 0.85,
+      "conditioning": [
+        "6",
+        0
+      ],
+      "control_net": [
+        "12",
+        0
+      ],
+      "image": [
+        "21",
+        0
+      ]
+    },
+    "class_type": "ControlNetApply",
+    "_meta": {
+      "title": "Apply ControlNet"
+    }
+  },
+  "11": {
+    "inputs": {
+      "image": "washing_machine.png",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "12": {
+    "inputs": {
+      "control_net_name": "control_v11p_sd15s2_lineart_anime.pth"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "13": {
+    "inputs": {
+      "vae_name": "vaeFtMse840000Ema_v100.pt"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "14": {
+    "inputs": {
+      "ckpt_name": "photon_v1.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "15": {
+    "inputs": {
+      "lora_name": "PE_PencilDrawing.safetensors",
+      "strength_model": 0.8,
+      "strength_clip": 0.8,
+      "model": [
+        "14",
+        0
+      ],
+      "clip": [
+        "31",
+        0
+      ]
+    },
+    "class_type": "LoraLoader",
+    "_meta": {
+      "title": "Load LoRA"
+    }
+  },
+  "16": {
+    "inputs": {
+      "lora_name": "CLAYMATE_V2.03_.safetensors",
+      "strength_model": 0.35000000000000003,
+      "strength_clip": 0.68
+    },
+    "class_type": "LoraLoader",
+    "_meta": {
+      "title": "Load LoRA"
+    }
+  },
+  "21": {
+    "inputs": {
+      "coarse": "disable",
+      "resolution": 1216,
+      "image": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "LineArtPreprocessor",
+    "_meta": {
+      "title": "Realistic Lineart"
+    }
+  },
+  "22": {
+    "inputs": {
+      "images": [
+        "24",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "24": {
+    "inputs": {
+      "guassian_sigma": 7,
+      "intensity_threshold": 12,
+      "resolution": 1216,
+      "image": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "LineartStandardPreprocessor",
+    "_meta": {
+      "title": "Standard Lineart"
+    }
+  },
+  "25": {
+    "inputs": {
+      "images": [
+        "21",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "26": {
+    "inputs": {
+      "resolution": 1216,
+      "image": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "AnimeLineArtPreprocessor",
+    "_meta": {
+      "title": "Anime Lineart"
+    }
+  },
+  "27": {
+    "inputs": {
+      "resolution": 1216,
+      "image": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "Manga2Anime_LineArt_Preprocessor",
+    "_meta": {
+      "title": "Manga Lineart (aka lineart_anime_denoise)"
+    }
+  },
+  "28": {
+    "inputs": {
+      "images": [
+        "26",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "29": {
+    "inputs": {
+      "images": [
+        "27",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "30": {
+    "inputs": {
+      "lora_name": "3DMM_V12.safetensors",
+      "strength_model": 0.6,
+      "strength_clip": 0.37,
+      "model": [
+        "16",
+        0
+      ],
+      "clip": [
+        "16",
+        1
+      ]
+    },
+    "class_type": "LoraLoader",
+    "_meta": {
+      "title": "Load LoRA"
+    }
+  },
+  "31": {
+    "inputs": {
+      "stop_at_clip_layer": -1,
+      "clip": [
+        "14",
+        1
+      ]
+    },
+    "class_type": "CLIPSetLastLayer",
+    "_meta": {
+      "title": "CLIP Set Last Layer"
+    }
+  },
+  "49": {
+    "inputs": {
+      "low_threshold": 0.4,
+      "high_threshold": 0.8,
+      "image": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "Canny",
+    "_meta": {
+      "title": "Canny"
+    }
+  },
+  "50": {
+    "inputs": {
+      "images": [
+        "49",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "51": {
+    "inputs": {
+      "strength": 1,
+      "conditioning": [
+        "6",
+        0
+      ],
+      "control_net": [
+        "12",
+        0
+      ],
+      "image": [
+        "49",
+        0
+      ]
+    },
+    "class_type": "ControlNetApply",
+    "_meta": {
+      "title": "Apply ControlNet"
+    }
+  },
+  "53": {
+    "inputs": {
+      "samples": [
+        "54",
+        0
+      ],
+      "vae": [
+        "13",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "54": {
+    "inputs": {
+      "seed": 353968272360110,
+      "steps": 20,
+      "cfg": 6,
+      "sampler_name": "uni_pc",
+      "scheduler": "sgm_uniform",
+      "denoise": 1,
+      "model": [
+        "15",
+        0
+      ],
+      "positive": [
+        "51",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "latent_image": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "55": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "53",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  }
+}
