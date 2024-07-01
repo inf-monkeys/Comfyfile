@@ -1,0 +1,583 @@
+{
+  "3": {
+    "inputs": {
+      "seed": 427430616180548,
+      "steps": 27,
+      "cfg": 3,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 0.55,
+      "model": [
+        "4",
+        0
+      ],
+      "positive": [
+        "52",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "latent_image": [
+        "12",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "4": {
+    "inputs": {
+      "ckpt_name": "revAnimated_v2Rebirth.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "6": {
+    "inputs": {
+      "text": "",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "7": {
+    "inputs": {
+      "text": "NSFW,easynegative,ng_deepnegative_v1_75t,negative_hand-neg,negative_hand,badhandv4,bad-hands-5, lowres,bad anatomy,bad hand,paintings,sketches,(worst quality:2),(low quality:2),(normal quality:2),lowres,((monochrome)),((grayscale)),skin spots,acnes,skin blemishes,age spot,glans,extra fingers,fewer fingers,((watermark:2)),(white letters:1),(multi nipples),bad anatomy,bad hands,text,error,missing fingers,missing arms,missing legs,extra digit,fewer digits,cropped,worst quality,jpeg artifacts,signature,watermark,username,bad feet,{Multiple people},blurry,poorly drawn hands,poorly drawn face,mutation,deformed,extra limbs,extra arms,extra legs,malformed limbs,fused fingers,too many fingers,long neck,cross-eyed,mutated hands,polar lowres,bad body,bad proportions,gross proportions,wrong feet bottom render,abdominal stretch,briefs,knickers,kecks,thong,{{fused fingers}},{{bad body}},bad proportion body to legs,wrong toes,extra toes,missing toes,weird toes,2 body,2 pussy,2 upper,2 lower,2 head,3 hand,3 feet,extra long leg,super long leg,mirrored image,mirrored noise,embed,naked，S",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "8": {
+    "inputs": {
+      "samples": [
+        "3",
+        0
+      ],
+      "vae": [
+        "4",
+        2
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "11": {
+    "inputs": {
+      "pixels": [
+        "119",
+        0
+      ],
+      "vae": [
+        "4",
+        2
+      ]
+    },
+    "class_type": "VAEEncode",
+    "_meta": {
+      "title": "VAE Encode"
+    }
+  },
+  "12": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "scale_by": 1.35,
+      "samples": [
+        "11",
+        0
+      ]
+    },
+    "class_type": "LatentUpscaleBy",
+    "_meta": {
+      "title": "Upscale Latent By"
+    }
+  },
+  "14": {
+    "inputs": {
+      "amount": 0.5,
+      "image": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "ImageCASharpening+",
+    "_meta": {
+      "title": "🔧 Image Contrast Adaptive Sharpening"
+    }
+  },
+  "47": {
+    "inputs": {
+      "text": "(masterpiece:1.2),best quality,ultra-detailed,hires,8k,masterpiece,",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "48": {
+    "inputs": {
+      "conditioning_1": [
+        "6",
+        0
+      ],
+      "conditioning_2": [
+        "47",
+        0
+      ]
+    },
+    "class_type": "ConditioningCombine",
+    "_meta": {
+      "title": "Conditioning (Combine)"
+    }
+  },
+  "52": {
+    "inputs": {
+      "strength": 0.85,
+      "conditioning": [
+        "48",
+        0
+      ],
+      "control_net": [
+        "53",
+        0
+      ],
+      "image": [
+        "54",
+        0
+      ]
+    },
+    "class_type": "ControlNetApply",
+    "_meta": {
+      "title": "Apply ControlNet"
+    }
+  },
+  "53": {
+    "inputs": {
+      "control_net_name": "control_v11p_sd15_lineart.pth",
+      "model": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "DiffControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model (diff)"
+    }
+  },
+  "54": {
+    "inputs": {
+      "preprocessor": "LineArtPreprocessor",
+      "resolution": 768,
+      "image": [
+        "119",
+        0
+      ]
+    },
+    "class_type": "AIO_Preprocessor",
+    "_meta": {
+      "title": "AIO Aux Preprocessor"
+    }
+  },
+  "55": {
+    "inputs": {
+      "images": [
+        "54",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "73": {
+    "inputs": {
+      "filename_prefix": "2024-07-01/%Image.width%x%Image.height%",
+      "images": [
+        "14",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "119": {
+    "inputs": {
+      "image": "LatentTileUpscaleTripleMagnification_Input.jpeg",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "154": {
+    "inputs": {
+      "upscale_by": 1.35,
+      "seed": 884525180705163,
+      "steps": 27,
+      "cfg": 4,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 0.3,
+      "mode_type": "Linear",
+      "tile_width": 512,
+      "tile_height": 512,
+      "mask_blur": 8,
+      "tile_padding": 32,
+      "seam_fix_mode": "None",
+      "seam_fix_denoise": 1,
+      "seam_fix_width": 64,
+      "seam_fix_mask_blur": 8,
+      "seam_fix_padding": 16,
+      "force_uniform_tiles": true,
+      "tiled_decode": false,
+      "image": [
+        "256",
+        0
+      ],
+      "model": [
+        "4",
+        0
+      ],
+      "positive": [
+        "261",
+        0
+      ],
+      "negative": [
+        "159",
+        0
+      ],
+      "vae": [
+        "4",
+        2
+      ],
+      "upscale_model": [
+        "155",
+        0
+      ]
+    },
+    "class_type": "UltimateSDUpscale",
+    "_meta": {
+      "title": "Ultimate SD Upscale"
+    }
+  },
+  "155": {
+    "inputs": {
+      "model_name": "4xNMKDSuperscale_4xNMKDSuperscale.pth"
+    },
+    "class_type": "UpscaleModelLoader",
+    "_meta": {
+      "title": "Load Upscale Model"
+    }
+  },
+  "156": {
+    "inputs": {
+      "text": "(masterpiece:1.2),best quality,ultra-detailed,hires,8k,masterpiece,",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "157": {
+    "inputs": {
+      "text": "(masterpiece:1.2),best quality,ultra-detailed,hires,8k,masterpiece,",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "159": {
+    "inputs": {
+      "text": "NSFW,easynegative,ng_deepnegative_v1_75t,negative_hand-neg,negative_hand,badhandv4,bad-hands-5, lowres,bad anatomy,bad hand,paintings,sketches,(worst quality:2),(low quality:2),(normal quality:2),lowres,((monochrome)),((grayscale)),skin spots,acnes,skin blemishes,age spot,glans,extra fingers,fewer fingers,((watermark:2)),(white letters:1),(multi nipples),bad anatomy,bad hands,text,error,missing fingers,missing arms,missing legs,extra digit,fewer digits,cropped,worst quality,jpeg artifacts,signature,watermark,username,bad feet,{Multiple people},blurry,poorly drawn hands,poorly drawn face,mutation,deformed,extra limbs,extra arms,extra legs,malformed limbs,fused fingers,too many fingers,long neck,cross-eyed,mutated hands,polar lowres,bad body,bad proportions,gross proportions,wrong feet bottom render,abdominal stretch,briefs,knickers,kecks,thong,{{fused fingers}},{{bad body}},bad proportion body to legs,wrong toes,extra toes,missing toes,weird toes,2 body,2 pussy,2 upper,2 lower,2 head,3 hand,3 feet,extra long leg,super long leg,mirrored image,mirrored noise,embed,naked，S",
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "160": {
+    "inputs": {
+      "amount": 0.5,
+      "image": [
+        "154",
+        0
+      ]
+    },
+    "class_type": "ImageCASharpening+",
+    "_meta": {
+      "title": "🔧 Image Contrast Adaptive Sharpening"
+    }
+  },
+  "161": {
+    "inputs": {
+      "filename_prefix": "comfy",
+      "images": [
+        "160",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "250": {
+    "inputs": {
+      "method": "Mixture of Diffusers",
+      "tile_width": 512,
+      "tile_height": 512,
+      "tile_overlap": 64,
+      "tile_batch_size": 4,
+      "model": [
+        "4",
+        0
+      ]
+    },
+    "class_type": "TiledDiffusion",
+    "_meta": {
+      "title": "Tiled Diffusion"
+    }
+  },
+  "251": {
+    "inputs": {
+      "strength": 1,
+      "start_percent": 0,
+      "end_percent": 1,
+      "positive": [
+        "48",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "control_net": [
+        "252",
+        0
+      ],
+      "image": [
+        "272",
+        0
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced",
+    "_meta": {
+      "title": "Apply ControlNet (Advanced)"
+    }
+  },
+  "252": {
+    "inputs": {
+      "control_net_name": "control_v11f1e_sd15_tile.pth"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "253": {
+    "inputs": {
+      "seed": 387149406247918,
+      "steps": 27,
+      "cfg": 3,
+      "sampler_name": "dpmpp_2m",
+      "scheduler": "karras",
+      "denoise": 0.45,
+      "model": [
+        "250",
+        0
+      ],
+      "positive": [
+        "251",
+        0
+      ],
+      "negative": [
+        "251",
+        1
+      ],
+      "latent_image": [
+        "268",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "256": {
+    "inputs": {
+      "tile_size": 512,
+      "fast": false,
+      "samples": [
+        "253",
+        0
+      ],
+      "vae": [
+        "257",
+        0
+      ]
+    },
+    "class_type": "VAEDecodeTiled_TiledDiffusion",
+    "_meta": {
+      "title": "Tiled VAE Decode"
+    }
+  },
+  "257": {
+    "inputs": {
+      "vae_name": "vae-ft-mse-840000-ema-pruned.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "258": {
+    "inputs": {
+      "filename_prefix": "2024-07-01/%Image.width%x%Image.height%",
+      "images": [
+        "273",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "261": {
+    "inputs": {
+      "conditioning_to_strength": 1,
+      "conditioning_to": [
+        "156",
+        0
+      ],
+      "conditioning_from": [
+        "157",
+        0
+      ]
+    },
+    "class_type": "ConditioningAverage",
+    "_meta": {
+      "title": "ConditioningAverage"
+    }
+  },
+  "263": {
+    "inputs": {
+      "model_name": "4xNMKDSuperscale_4xNMKDSuperscale.pth"
+    },
+    "class_type": "UpscaleModelLoader",
+    "_meta": {
+      "title": "Load Upscale Model"
+    }
+  },
+  "264": {
+    "inputs": {
+      "upscale_model": [
+        "263",
+        0
+      ],
+      "image": [
+        "14",
+        0
+      ]
+    },
+    "class_type": "ImageUpscaleWithModel",
+    "_meta": {
+      "title": "Upscale Image (using Model)"
+    }
+  },
+  "265": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "scale_by": 1.35,
+      "image": [
+        "264",
+        0
+      ]
+    },
+    "class_type": "ImageScaleBy",
+    "_meta": {
+      "title": "Upscale Image By"
+    }
+  },
+  "268": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "scale_by": 1.35,
+      "samples": [
+        "3",
+        0
+      ]
+    },
+    "class_type": "LatentUpscaleBy",
+    "_meta": {
+      "title": "Upscale Latent By"
+    }
+  },
+  "272": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "scale_by": 0.25,
+      "image": [
+        "265",
+        0
+      ]
+    },
+    "class_type": "ImageScaleBy",
+    "_meta": {
+      "title": "Upscale Image By"
+    }
+  },
+  "273": {
+    "inputs": {
+      "amount": 0.5,
+      "image": [
+        "256",
+        0
+      ]
+    },
+    "class_type": "ImageCASharpening+",
+    "_meta": {
+      "title": "🔧 Image Contrast Adaptive Sharpening"
+    }
+  }
+}

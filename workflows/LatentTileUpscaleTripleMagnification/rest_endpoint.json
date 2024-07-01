@@ -1,0 +1,119 @@
+{
+  "parameters": [
+    {
+      "displayName": "输入图片",
+      "name": "input_image",
+      "type": "file",
+      "default": "https://static.infmonkeys.com/comfyui/workflows/LatentTileUpscaleTripleMagnification/images/LatentTileUpscaleTripleMagnification_Input.jpeg",
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "accept": ".jpg,.jpeg,.png,.webp",
+        "comfyOptions": {
+          "node": 119,
+          "key": "image"
+        }
+      }
+    },
+    {
+      "displayName": "Latent 放大倍数",
+      "name": "latent_scale",
+      "type": "number",
+      "default": 1.35,
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 12,
+          "key": "scale_by"
+        }
+      }
+    },
+    {
+      "displayName": "Tile Diffusion 放大倍数",
+      "name": "tile_diffusion_scale",
+      "type": "number",
+      "default": 1.35,
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 268,
+          "key": "scale_by"
+        }
+      }
+    },
+    {
+      "displayName": "SD 放大倍数",
+      "name": "sd_value",
+      "type": "number",
+      "default": 1.35,
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 154,
+          "key": "upscale_by"
+        }
+      }
+    },
+    {
+      "displayName": "正向提示词",
+      "name": "positive_prompt",
+      "type": "string",
+      "default": "",
+      "required": false,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 6,
+          "key": "text"
+        }
+      }
+    },
+    {
+      "displayName": "正向提示词 - 起手式",
+      "name": "positive_prompt_init",
+      "type": "string",
+      "default": "(masterpiece:1.2),best quality,ultra-detailed,hires,8k,masterpiece,",
+      "required": false,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": [
+          {
+            "node": 47,
+            "key": "text"
+          },
+          {
+            "node": 156,
+            "key": "text"
+          },
+          {
+            "node": 157,
+            "key": "text"
+          }
+        ]
+      }
+    },
+    {
+      "displayName": "负向提示词",
+      "name": "negative_prompt",
+      "type": "string",
+      "default": "NSFW,easynegative,ng_deepnegative_v1_75t,negative_hand-neg,negative_hand,badhandv4,bad-hands-5, lowres,bad anatomy,bad hand,paintings,sketches,(worst quality:2),(low quality:2),(normal quality:2),lowres,((monochrome)),((grayscale)),skin spots,acnes,skin blemishes,age spot,glans,extra fingers,fewer fingers,((watermark:2)),(white letters:1),(multi nipples),bad anatomy,bad hands,text,error,missing fingers,missing arms,missing legs,extra digit,fewer digits,cropped,worst quality,jpeg artifacts,signature,watermark,username,bad feet,{Multiple people},blurry,poorly drawn hands,poorly drawn face,mutation,deformed,extra limbs,extra arms,extra legs,malformed limbs,fused fingers,too many fingers,long neck,cross-eyed,mutated hands,polar lowres,bad body,bad proportions,gross proportions,wrong feet bottom render,abdominal stretch,briefs,knickers,kecks,thong,{{fused fingers}},{{bad body}},bad proportion body to legs,wrong toes,extra toes,missing toes,weird toes,2 body,2 pussy,2 upper,2 lower,2 head,3 hand,3 feet,extra long leg,super long leg,mirrored image,mirrored noise,embed,naked",
+      "required": false,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": [
+          {
+            "node": 7,
+            "key": "text"
+          },
+          {
+            "node": 159,
+            "key": "text"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+STAGE build
+
+PLUGIN AUTO_INFER_FROM_WORKFLOW_JSON
+
+MODEL models/checkpoints/revAnimated_v2Rebirth.safetensors https://static.infmonkeys.com/comfyui/models/checkpoints/revAnimated_v2Rebirth.safetensors
+MODEL models/controlnet/control_v11p_sd15_lineart.pth https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11p_sd15_lineart.pth
+MODEL models/controlnet/control_v11f1e_sd15_tile.pth https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.pth
+MODEL models/upscale_models/4xNMKDSuperscale_4xNMKDSuperscale.pth https://civitai.com/api/download/models/156841
+MODEL models/vae/vae-ft-mse-840000-ema-pruned.safetensors https://weights.replicate.delivery/default/comfy-ui/vae/vae-ft-mse-840000-ema-pruned.safetensors.tar
+
+COPY LatentTileUpscaleTripleMagnification_Input.jpeg input/
+
+STAGE serve
+
+APP_NAME LatentTileUpscaleTripleMagnification
+MANIFEST ./manifest.json
+WORKFLOW ./workflow.json
+WORKFLOW_API ./workflow_api.json
+REST_ENDPOINT ./rest_endpoint.json
