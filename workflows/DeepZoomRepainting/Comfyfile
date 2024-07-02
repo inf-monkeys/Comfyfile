@@ -1,0 +1,15 @@
+STAGE build
+
+PLUGIN AUTO_INFER_FROM_WORKFLOW_JSON
+
+MODEL models/checkpoints/SDXL/formulaxl_v10.safetensors https://huggingface.co/Tijness98/SDXLpr/resolve/main/formulaxl_v10.safetensors
+MODEL models/vae/sdxl_vae.safetensors https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors
+MODEL models/controlnet/sai_xl_depth_128lora.safetensors https://huggingface.co/lllyasviel/sd_control_collection/resolve/3795b2881400d1cfa7a700c59348de4579d7f71c/sai_xl_depth_128lora.safetensors
+
+STAGE serve
+
+APP_NAME DeepZoomRepainting
+MANIFEST ./manifest.json
+WORKFLOW ./workflow.json
+WORKFLOW_API ./workflow_api.json
+REST_ENDPOINT ./rest_endpoint.json

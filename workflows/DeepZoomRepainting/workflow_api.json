@@ -1,0 +1,340 @@
+{
+  "311": {
+    "inputs": {
+      "vae_name": "sdxl_vae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "312": {
+    "inputs": {
+      "text": [
+        "1088",
+        0
+      ],
+      "clip": [
+        "975",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "313": {
+    "inputs": {
+      "text": [
+        "1088",
+        1
+      ],
+      "clip": [
+        "975",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "331": {
+    "inputs": {
+      "seed": 845928370177544,
+      "steps": [
+        "873",
+        0
+      ],
+      "cfg": [
+        "873",
+        2
+      ],
+      "sampler_name": "dpmpp_2m_sde",
+      "scheduler": "karras",
+      "denoise": 1,
+      "model": [
+        "975",
+        0
+      ],
+      "positive": [
+        "312",
+        0
+      ],
+      "negative": [
+        "313",
+        0
+      ],
+      "latent_image": [
+        "1074",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "551": {
+    "inputs": {
+      "samples": [
+        "331",
+        0
+      ],
+      "vae": [
+        "311",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "552": {
+    "inputs": {
+      "images": [
+        "551",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "873": {
+    "inputs": {
+      "steps_total": 35,
+      "refiner_step": 30,
+      "cfg": 5,
+      "sampler_name": "euler",
+      "scheduler": "normal"
+    },
+    "class_type": "KSampler Config (rgthree)",
+    "_meta": {
+      "title": "KSampler Config"
+    }
+  },
+  "949": {
+    "inputs": {
+      "seed": 845928370177544,
+      "steps": [
+        "873",
+        1
+      ],
+      "cfg": [
+        "873",
+        2
+      ],
+      "sampler_name": "dpmpp_2m_sde",
+      "scheduler": "karras",
+      "denoise": 0.5499999999999999,
+      "model": [
+        "975",
+        0
+      ],
+      "positive": [
+        "1001",
+        0
+      ],
+      "negative": [
+        "1001",
+        1
+      ],
+      "latent_image": [
+        "1072",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "955": {
+    "inputs": {
+      "samples": [
+        "949",
+        0
+      ],
+      "vae": [
+        "311",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "959": {
+    "inputs": {
+      "images": [
+        "955",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "975": {
+    "inputs": {
+      "ckpt_name": "SDXL/formulaxl_v10.safetensors"
+    },
+    "class_type": "Checkpoint Loader w/Name (WLSH)",
+    "_meta": {
+      "title": "Checkpoint Loader (Name)"
+    }
+  },
+  "1001": {
+    "inputs": {
+      "strength": 0.75,
+      "start_percent": 0,
+      "end_percent": 0.75,
+      "positive": [
+        "312",
+        0
+      ],
+      "negative": [
+        "313",
+        0
+      ],
+      "control_net": [
+        "1020",
+        0
+      ],
+      "image": [
+        "1089",
+        0
+      ]
+    },
+    "class_type": "ControlNetApplyAdvanced",
+    "_meta": {
+      "title": "Apply ControlNet (Advanced)"
+    }
+  },
+  "1020": {
+    "inputs": {
+      "control_net_name": "sai_xl_depth_128lora.safetensors"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "1036": {
+    "inputs": {
+      "image": [
+        "551",
+        0
+      ]
+    },
+    "class_type": "ImageGenResolutionFromImage",
+    "_meta": {
+      "title": "Generation Resolution From Image"
+    }
+  },
+  "1053": {
+    "inputs": {
+      "images": [
+        "1056",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "1056": {
+    "inputs": {
+      "image": [
+        "551",
+        0
+      ]
+    },
+    "class_type": "Zoe-DepthMapPreprocessor",
+    "_meta": {
+      "title": "Zoe Depth Map"
+    }
+  },
+  "1072": {
+    "inputs": {
+      "upscale_method": "nearest-exact",
+      "scale_by": 1.5,
+      "samples": [
+        "331",
+        0
+      ]
+    },
+    "class_type": "LatentUpscaleBy",
+    "_meta": {
+      "title": "Upscale Latent By"
+    }
+  },
+  "1074": {
+    "inputs": {
+      "width": 512,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "1088": {
+    "inputs": {
+      "text_positive": "clown",
+      "text_negative": "",
+      "style": "sai-analog film",
+      "log_prompt": "Yes"
+    },
+    "class_type": "SDXLPromptStyler",
+    "_meta": {
+      "title": "SDXL Prompt Styler"
+    }
+  },
+  "1089": {
+    "inputs": {
+      "seed": 747116664542594,
+      "denoise_steps": 10,
+      "n_repeat": 10,
+      "regularizer_strength": 0.02,
+      "reduction_method": "median",
+      "max_iter": 5,
+      "tol": 0.001,
+      "invert": true,
+      "keep_model_loaded": true,
+      "n_repeat_batch_size": 2,
+      "use_fp16": true,
+      "scheduler": "DDIMScheduler",
+      "normalize": true,
+      "model": "Marigold",
+      "image": [
+        "551",
+        0
+      ]
+    },
+    "class_type": "MarigoldDepthEstimation",
+    "_meta": {
+      "title": "MarigoldDepthEstimation"
+    }
+  },
+  "1090": {
+    "inputs": {
+      "images": [
+        "1089",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  }
+}

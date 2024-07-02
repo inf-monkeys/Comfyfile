@@ -1,0 +1,32 @@
+{
+  "parameters": [
+    {
+      "displayName": "正向提示词",
+      "name": "positive_prompt",
+      "type": "string",
+      "default": "clown",
+      "required": false,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 1088,
+          "key": "text_positive"
+        }
+      }
+    },
+    {
+      "displayName": "负向提示词",
+      "name": "negative_prompt",
+      "type": "string",
+      "default": "",
+      "required": false,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 1088,
+          "key": "text_negative"
+        }
+      }
+    }
+  ]
+}
