@@ -15,6 +15,62 @@
       }
     },
     {
+      "displayName": "Latent 宽度",
+      "name": "latent_image_width",
+      "type": "number",
+      "default": 512,
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 5,
+          "key": "width"
+        }
+      }
+    },
+    {
+      "displayName": "Latent 高度",
+      "name": "latent_image_height",
+      "type": "number",
+      "default": 1024,
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 5,
+          "key": "height"
+        }
+      }
+    },
+    {
+      "displayName": "Latent Batch 大小",
+      "name": "latent_image_batch_size",
+      "type": "number",
+      "default": 1,
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 5,
+          "key": "batch_size"
+        }
+      }
+    },
+    {
+      "displayName": "ControlNet 强度",
+      "name": "controlnet_strength",
+      "type": "number",
+      "default": 0.4,
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 38,
+          "key": "strength"
+        }
+      }
+    },
+    {
       "displayName": "正向提示词",
       "name": "positive_prompt",
       "type": "string",
@@ -57,6 +113,20 @@
       }
     },
     {
+      "displayName": "IPAdapter 权重 1",
+      "name": "ipadapter_weight_1",
+      "type": "number",
+      "default": 0.55,
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 56,
+          "key": "weight"
+        }
+      }
+    },
+    {
       "displayName": "风格图片 2",
       "name": "style_image_2",
       "type": "file",
@@ -71,6 +141,20 @@
       }
     },
     {
+      "displayName": "IPAdapter 权重 2",
+      "name": "ipadapter_weight_2",
+      "type": "number",
+      "default": 0.55,
+      "required": false,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 59,
+          "key": "weight"
+        }
+      }
+    },
+    {
       "displayName": "风格图片 3",
       "name": "style_image_3",
       "type": "file",
@@ -81,6 +165,20 @@
         "comfyOptions": {
           "node": 19,
           "key": "image"
+        }
+      }
+    },
+    {
+      "displayName": "IPAdapter 权重 3",
+      "name": "ipadapter_weight_3",
+      "type": "number",
+      "default": 0.55,
+      "required": false,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 60,
+          "key": "weight"
         }
       }
     }
