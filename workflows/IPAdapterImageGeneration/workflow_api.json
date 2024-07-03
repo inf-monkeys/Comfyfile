@@ -1,0 +1,525 @@
+{
+  "3": {
+    "inputs": {
+      "seed": 329646962520059,
+      "steps": 20,
+      "cfg": 8,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": [
+        "60",
+        0
+      ],
+      "positive": [
+        "38",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "latent_image": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "4": {
+    "inputs": {
+      "ckpt_name": "photon_v1.safetensors"
+    },
+    "class_type": "CheckpointLoaderSimple",
+    "_meta": {
+      "title": "Load Checkpoint"
+    }
+  },
+  "5": {
+    "inputs": {
+      "width": 512,
+      "height": 1024,
+      "batch_size": 1
+    },
+    "class_type": "EmptyLatentImage",
+    "_meta": {
+      "title": "Empty Latent Image"
+    }
+  },
+  "6": {
+    "inputs": {
+      "text": "computer host,composed facets style,light strip, 3D product render,finely detailed,purism,ue 5,a computer rendering,minimalism,octane render,best quality,highres,8k,wlop,stunning,much detail,UHD,product design, exquisite, styling, 4K,",
+      "clip": [
+        "50",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "7": {
+    "inputs": {
+      "text": "text, watermark,low quality,jpeg artifacts,signature,watermark,username,blurry,missing fingers,missing arms,Humpbacked,shadow",
+      "clip": [
+        "50",
+        1
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Prompt)"
+    }
+  },
+  "8": {
+    "inputs": {
+      "samples": [
+        "3",
+        0
+      ],
+      "vae": [
+        "31",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "9": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "13": {
+    "inputs": {
+      "ipadapter_file": "ip-adapter-plus_sd15.safetensors"
+    },
+    "class_type": "IPAdapterModelLoader",
+    "_meta": {
+      "title": "IPAdapter Model Loader"
+    }
+  },
+  "15": {
+    "inputs": {
+      "clip_name": "CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors"
+    },
+    "class_type": "CLIPVisionLoader",
+    "_meta": {
+      "title": "Load CLIP Vision"
+    }
+  },
+  "16": {
+    "inputs": {
+      "image": "微信图片_20240402202036.jpg",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "17": {
+    "inputs": {
+      "image": "",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "19": {
+    "inputs": {
+      "image": "",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "26": {
+    "inputs": {
+      "seed": 113440885622295,
+      "steps": 20,
+      "cfg": 8,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": [
+        "56",
+        0
+      ],
+      "positive": [
+        "38",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "latent_image": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "27": {
+    "inputs": {
+      "seed": 163280660367854,
+      "steps": 20,
+      "cfg": 8,
+      "sampler_name": "euler",
+      "scheduler": "normal",
+      "denoise": 1,
+      "model": [
+        "59",
+        0
+      ],
+      "positive": [
+        "38",
+        0
+      ],
+      "negative": [
+        "7",
+        0
+      ],
+      "latent_image": [
+        "5",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "31": {
+    "inputs": {
+      "vae_name": "kl-f8-anime2.ckpt"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "32": {
+    "inputs": {
+      "samples": [
+        "27",
+        0
+      ],
+      "vae": [
+        "31",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "33": {
+    "inputs": {
+      "samples": [
+        "26",
+        0
+      ],
+      "vae": [
+        "31",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "34": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "32",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "35": {
+    "inputs": {
+      "filename_prefix": "ComfyUI",
+      "images": [
+        "33",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "36": {
+    "inputs": {
+      "image": "123 (3).jpg",
+      "upload": "image"
+    },
+    "class_type": "LoadImage",
+    "_meta": {
+      "title": "Load Image"
+    }
+  },
+  "37": {
+    "inputs": {
+      "control_net_name": "control_v11p_sd15_lineart.pth"
+    },
+    "class_type": "ControlNetLoader",
+    "_meta": {
+      "title": "Load ControlNet Model"
+    }
+  },
+  "38": {
+    "inputs": {
+      "strength": 0.4,
+      "conditioning": [
+        "6",
+        0
+      ],
+      "control_net": [
+        "37",
+        0
+      ],
+      "image": [
+        "40",
+        0
+      ]
+    },
+    "class_type": "ControlNetApply",
+    "_meta": {
+      "title": "Apply ControlNet"
+    }
+  },
+  "39": {
+    "inputs": {
+      "images": [
+        "41",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "40": {
+    "inputs": {
+      "coarse": "enable",
+      "resolution": 704,
+      "image": [
+        "36",
+        0
+      ]
+    },
+    "class_type": "LineArtPreprocessor",
+    "_meta": {
+      "title": "Realistic Lineart"
+    }
+  },
+  "41": {
+    "inputs": {
+      "guassian_sigma": 6,
+      "intensity_threshold": 8,
+      "resolution": 512,
+      "image": [
+        "36",
+        0
+      ]
+    },
+    "class_type": "LineartStandardPreprocessor",
+    "_meta": {
+      "title": "Standard Lineart"
+    }
+  },
+  "42": {
+    "inputs": {
+      "resolution": 512,
+      "image": [
+        "36",
+        0
+      ]
+    },
+    "class_type": "Manga2Anime_LineArt_Preprocessor",
+    "_meta": {
+      "title": "Manga Lineart (aka lineart_anime_denoise)"
+    }
+  },
+  "43": {
+    "inputs": {
+      "images": [
+        "42",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "44": {
+    "inputs": {
+      "images": [
+        "40",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "45": {
+    "inputs": {
+      "low_threshold": 0.4,
+      "high_threshold": 0.8
+    },
+    "class_type": "Canny",
+    "_meta": {
+      "title": "Canny"
+    }
+  },
+  "50": {
+    "inputs": {
+      "lora_name": "CLAYMATE_V2.03_.safetensors",
+      "strength_model": 0.4,
+      "strength_clip": 1,
+      "model": [
+        "4",
+        0
+      ],
+      "clip": [
+        "4",
+        1
+      ]
+    },
+    "class_type": "LoraLoader",
+    "_meta": {
+      "title": "Load LoRA"
+    }
+  },
+  "56": {
+    "inputs": {
+      "ip_adapter_name": "None",
+      "clip_name": "None",
+      "weight": 0.55,
+      "noise": 0.17,
+      "start_at": 0.2,
+      "end_at": 1,
+      "weight_type": "standard",
+      "enabled": true,
+      "model": [
+        "50",
+        0
+      ],
+      "image": [
+        "17",
+        0
+      ],
+      "ip_adapter_opt": [
+        "13",
+        0
+      ],
+      "clip_vision_opt": [
+        "15",
+        0
+      ]
+    },
+    "class_type": "AV_IPAdapter",
+    "_meta": {
+      "title": "IP Adapter Apply"
+    }
+  },
+  "59": {
+    "inputs": {
+      "ip_adapter_name": "None",
+      "clip_name": "None",
+      "weight": 0.55,
+      "noise": 0.17,
+      "start_at": 0.2,
+      "end_at": 1,
+      "weight_type": "standard",
+      "enabled": true,
+      "model": [
+        "50",
+        0
+      ],
+      "image": [
+        "19",
+        0
+      ],
+      "ip_adapter_opt": [
+        "13",
+        0
+      ],
+      "clip_vision_opt": [
+        "15",
+        0
+      ]
+    },
+    "class_type": "AV_IPAdapter",
+    "_meta": {
+      "title": "IP Adapter Apply"
+    }
+  },
+  "60": {
+    "inputs": {
+      "ip_adapter_name": "None",
+      "clip_name": "None",
+      "weight": 0.55,
+      "noise": 0.17,
+      "start_at": 0.2,
+      "end_at": 1,
+      "weight_type": "standard",
+      "enabled": true,
+      "model": [
+        "50",
+        0
+      ],
+      "image": [
+        "16",
+        0
+      ],
+      "ip_adapter_opt": [
+        "13",
+        0
+      ],
+      "clip_vision_opt": [
+        "15",
+        0
+      ]
+    },
+    "class_type": "AV_IPAdapter",
+    "_meta": {
+      "title": "IP Adapter Apply"
+    }
+  }
+}

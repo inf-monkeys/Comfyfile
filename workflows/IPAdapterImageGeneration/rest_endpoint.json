@@ -1,0 +1,88 @@
+{
+  "parameters": [
+    {
+      "displayName": "输入图片",
+      "name": "input_image",
+      "type": "file",
+      "default": "https://static.infmonkeys.com/comfyui/workflows/IPAdapterImageGeneration/images/1.jpg",
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 36,
+          "key": "image"
+        }
+      }
+    },
+    {
+      "displayName": "正向提示词",
+      "name": "positive_prompt",
+      "type": "string",
+      "default": "computer host,composed facets style,light strip, 3D product render,finely detailed,purism,ue 5,a computer rendering,minimalism,octane render,best quality,highres,8k,wlop,stunning,much detail,UHD,product design, exquisite, styling, 4K,",
+      "required": false,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 6,
+          "key": "text"
+        }
+      }
+    },
+    {
+      "displayName": "负向提示词",
+      "name": "negative_prompt",
+      "type": "string",
+      "default": "text, watermark,low quality,jpeg artifacts,signature,watermark,username,blurry,missing fingers,missing arms,Humpbacked,shadow",
+      "required": false,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 7,
+          "key": "text"
+        }
+      }
+    },
+    {
+      "displayName": "风格图片 1",
+      "name": "style_image_1",
+      "type": "file",
+      "default": "https://static.infmonkeys.com/comfyui/workflows/IPAdapterImageGeneration/images/2.jpg",
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 16,
+          "key": "image"
+        }
+      }
+    },
+    {
+      "displayName": "风格图片 2",
+      "name": "style_image_2",
+      "type": "file",
+      "default": "",
+      "required": false,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 17,
+          "key": "image"
+        }
+      }
+    },
+    {
+      "displayName": "风格图片 3",
+      "name": "style_image_3",
+      "type": "file",
+      "default": "",
+      "required": false,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 19,
+          "key": "image"
+        }
+      }
+    }
+  ]
+}
