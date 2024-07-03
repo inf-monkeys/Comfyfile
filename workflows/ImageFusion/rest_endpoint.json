@@ -1,0 +1,130 @@
+{
+  "parameters": [
+    {
+      "displayName": "输入图片 1",
+      "name": "input_image_1",
+      "type": "file",
+      "default": "https://static.infmonkeys.com/comfyui/workflows/ImageFusion/images/1.png",
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 16,
+          "key": "image"
+        }
+      }
+    },
+    {
+      "displayName": "输入图片 2",
+      "name": "input_image_2",
+      "type": "file",
+      "default": "https://static.infmonkeys.com/comfyui/workflows/ImageFusion/images/2.png",
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 17,
+          "key": "image"
+        }
+      }
+    },
+    {
+      "displayName": "输入图片 3",
+      "name": "input_image_3",
+      "type": "file",
+      "default": "https://static.infmonkeys.com/comfyui/workflows/ImageFusion/images/3.png",
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 18,
+          "key": "image"
+        }
+      }
+    },
+    {
+      "displayName": "输入图片 4",
+      "name": "input_image_4",
+      "type": "file",
+      "default": "https://static.infmonkeys.com/comfyui/workflows/ImageFusion/images/4.png",
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 19,
+          "key": "image"
+        }
+      }
+    },
+    {
+      "displayName": "正向提示词 1",
+      "name": "positive_prompt_1",
+      "type": "string",
+      "default": "photo,washing machine, ",
+      "required": false,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 41,
+          "key": "text"
+        }
+      }
+    },
+    {
+      "displayName": "负向提示词 1",
+      "name": "negative_prompt_1",
+      "type": "string",
+      "default": "watermark signature, blurry blurred, simple background",
+      "required": false,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 42,
+          "key": "text"
+        }
+      }
+    },
+    {
+      "displayName": "正向提示词 2",
+      "name": "positive_prompt_2",
+      "type": "string",
+      "default": "photo shot with fujifilm film grain, intricate details, detailed background",
+      "required": false,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 39,
+          "key": "text"
+        }
+      }
+    },
+    {
+      "displayName": "负向提示词 2",
+      "name": "negative_prompt_2",
+      "type": "string",
+      "default": "minimal minimalistic, blurry blurred, grey background simple background",
+      "required": false,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 40,
+          "key": "text"
+        }
+      }
+    },
+    {
+      "displayName": "比例",
+      "name": "aspect_ratio",
+      "type": "string",
+      "default": "4:3  - 1152x896 landscape",
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 84,
+          "key": "aspectRatio"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+STAGE build
+
+PLUGIN AUTO_INFER_FROM_WORKFLOW_JSON
+
+MODEL models/vae/vae-ft-mse-840000-ema-pruned.safetensors https://weights.replicate.delivery/default/comfy-ui/vae/vae-ft-mse-840000-ema-pruned.safetensors.tar
+MODEL models/checkpoints/photon_v1.safetensors https://civitai.com/api/download/models/90072
+MODEL models/ipadapter/ip-adapter-plus_sd15.safetensors https://huggingface.co/h94/IP-Adapter/resolve/main/models/ip-adapter-plus_sd15.safetensors
+MODEL models/clip_vision/CLIP-ViT-H-14-laion2B-s32B-b79K.safetensors https://huggingface.co/laion/CLIP-ViT-H-14-laion2B-s32B-b79K/resolve/main/model.safetensors
+MODEL models/checkpoints/Deliberate_v2.safetensors https://huggingface.co/XpucT/Deliberate/resolve/main/Deliberate_v2.safetensors
+
+COPY images/ input/
+
+STAGE serve
+
+APP_NAME ImageFusion
+MANIFEST ./manifest.json
+WORKFLOW ./workflow.json
+WORKFLOW_API ./workflow_api.json
+REST_ENDPOINT ./rest_endpoint.json
