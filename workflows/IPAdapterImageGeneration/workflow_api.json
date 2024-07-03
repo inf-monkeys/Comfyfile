@@ -1,7 +1,7 @@
 {
   "3": {
     "inputs": {
-      "seed": 329646962520059,
+      "seed": 918039864773409,
       "steps": 20,
       "cfg": 8,
       "sampler_name": "euler",
@@ -91,19 +91,6 @@
       "title": "VAE Decode"
     }
   },
-  "9": {
-    "inputs": {
-      "filename_prefix": "ComfyUI",
-      "images": [
-        "8",
-        0
-      ]
-    },
-    "class_type": "SaveImage",
-    "_meta": {
-      "title": "Save Image"
-    }
-  },
   "13": {
     "inputs": {
       "ipadapter_file": "ip-adapter-plus_sd15.safetensors"
@@ -134,7 +121,7 @@
   },
   "17": {
     "inputs": {
-      "image": "",
+      "image": "3bfc2da4e1feadaf1d97c3fa07ad2ec2.jpg",
       "upload": "image"
     },
     "class_type": "LoadImage",
@@ -144,7 +131,7 @@
   },
   "19": {
     "inputs": {
-      "image": "",
+      "image": "50a6e9b70ad550822a430274da68345d.jpg",
       "upload": "image"
     },
     "class_type": "LoadImage",
@@ -154,7 +141,7 @@
   },
   "26": {
     "inputs": {
-      "seed": 113440885622295,
+      "seed": 370741812931968,
       "steps": 20,
       "cfg": 8,
       "sampler_name": "euler",
@@ -184,7 +171,7 @@
   },
   "27": {
     "inputs": {
-      "seed": 163280660367854,
+      "seed": 312073175204004,
       "steps": 20,
       "cfg": 8,
       "sampler_name": "euler",
@@ -251,32 +238,6 @@
     "class_type": "VAEDecode",
     "_meta": {
       "title": "VAE Decode"
-    }
-  },
-  "34": {
-    "inputs": {
-      "filename_prefix": "ComfyUI",
-      "images": [
-        "32",
-        0
-      ]
-    },
-    "class_type": "SaveImage",
-    "_meta": {
-      "title": "Save Image"
-    }
-  },
-  "35": {
-    "inputs": {
-      "filename_prefix": "ComfyUI",
-      "images": [
-        "33",
-        0
-      ]
-    },
-    "class_type": "SaveImage",
-    "_meta": {
-      "title": "Save Image"
     }
   },
   "36": {
@@ -520,6 +481,42 @@
     "class_type": "AV_IPAdapter",
     "_meta": {
       "title": "IP Adapter Apply"
+    }
+  },
+  "61": {
+    "inputs": {
+      "images": [
+        "8",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "62": {
+    "inputs": {
+      "images": [
+        "32",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
+    }
+  },
+  "63": {
+    "inputs": {
+      "images": [
+        "33",
+        0
+      ]
+    },
+    "class_type": "PreviewImage",
+    "_meta": {
+      "title": "Preview Image"
     }
   }
 }
