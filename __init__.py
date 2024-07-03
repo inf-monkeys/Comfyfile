@@ -255,9 +255,9 @@ async def run_comfyui_workflow(request):
         input_config = app.restEndpoint["parameters"]
         output_config = app.restEndpoint.get('output')
 
-    comfyfile_repo = body.get("comfyfile_repo")
-    if comfyfile_repo:
-        await import_from_remote_comfyfile_repo(comfyfile_repo)
+    # comfyfile_repo = body.get("comfyfile_repo")
+    # if comfyfile_repo:
+    #     await import_from_remote_comfyfile_repo(comfyfile_repo)
     runner = ComfyRunner()
     logger.info(
         f"Received a request: workflow_json={workflow_json}, workflow_api_json={workflow_api_json} input_data={input_data} input_config={input_config} output_config={output_config}"
