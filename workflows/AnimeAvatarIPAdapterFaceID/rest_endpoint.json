@@ -1,0 +1,61 @@
+{
+  "parameters": [
+    {
+      "displayName": "输入图片",
+      "name": "input_image",
+      "type": "file",
+      "default": "https://static.infmonkeys.com/comfyui/workflows/AnimeAvatarIPAdapterFaceID/images/input.jpg",
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "accept": ".jpg,.jpeg,.png,.webp",
+        "comfyOptions": [
+          {
+            "node": 12,
+            "key": "image"
+          },
+          {
+            "node": 24,
+            "key": "image"
+          },
+          {
+            "node": 25,
+            "key": "image"
+          },
+          {
+            "node": 26,
+            "key": "image"
+          }
+        ]
+      }
+    },
+    {
+      "displayName": "正向提示词",
+      "name": "positive_prompt",
+      "type": "string",
+      "default": "Ghibli Style, 1boy, sunglasses, portrait",
+      "required": false,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 6,
+          "key": "text"
+        }
+      }
+    },
+    {
+      "displayName": "负向提示词",
+      "name": "negative_prompt",
+      "type": "string",
+      "default": "embedding:sd_1.5_easynegative, bad anatomy, text, watermark",
+      "required": false,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 7,
+          "key": "text"
+        }
+      }
+    }
+  ]
+}
