@@ -1,0 +1,61 @@
+{
+  "parameters": [
+    {
+      "displayName": "输入图片",
+      "name": "input_image",
+      "type": "file",
+      "default": "https://static.infmonkeys.com/comfyui/workflows/AnimeAvatarByIntantID/images/input.jpg",
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "accept": ".jpg,.jpeg,.png,.webp",
+        "comfyOptions": [
+          {
+            "node": 13,
+            "key": "image"
+          },
+          {
+            "node": 68,
+            "key": "image"
+          },
+          {
+            "node": 69,
+            "key": "image"
+          },
+          {
+            "node": 70,
+            "key": "image"
+          }
+        ]
+      }
+    },
+    {
+      "displayName": "正向提示词",
+      "name": "positive_prompt",
+      "type": "string",
+      "default": "Ghibli Style,1 boy portrait wearing sunglasses",
+      "required": false,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 39,
+          "key": "text"
+        }
+      }
+    },
+    {
+      "displayName": "负向提示词",
+      "name": "negative_prompt",
+      "type": "string",
+      "default": "photograph, deformed, glitch, noisy, realistic, stock photo, text",
+      "required": false,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 40,
+          "key": "text"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+STAGE build
+
+PLUGIN AUTO_INFER_FROM_WORKFLOW_JSON
+
+MODEL models/controlnet/InstantID/control_instant_id_sdxl.safetensors https://huggingface.co/Aitrepreneur/InstantiDA1111/resolve/main/control_instant_id_sdxl.safetensors
+MODEL models/instantid/ip-adapter_instant_id_sdxl.bin https://huggingface.co/Aitrepreneur/InstantiDA1111/resolve/main/ip-adapter_instant_id_sdxl.bin
+MODEL models/checkpoints/SDXL/animagine-xl-3.0.safetensors https://huggingface.co/cagliostrolab/animagine-xl-3.0/resolve/main/animagine-xl-3.0.safetensors
+
+
+COPY input.jpg input/
+
+STAGE serve
+
+APP_NAME AnimeAvatarByIntantID
+MANIFEST ./manifest.json
+WORKFLOW ./workflow.json
+WORKFLOW_API ./workflow_api.json
+REST_ENDPOINT ./rest_endpoint.json
