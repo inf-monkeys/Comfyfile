@@ -1,0 +1,16 @@
+STAGE build
+
+PLUGIN AUTO_INFER_FROM_WORKFLOW_JSON
+
+MODEL models/upscale_models/4x-UltraSharp.pth https://huggingface.co/lokCX/4x-Ultrasharp/resolve/main/4x-UltraSharp.pth
+MODEL models/SDXL/copaxTimelessxlSDXL_v11Lightning.safetensors https://static.infmonkeys.com/comfyui/models/checkpoints/SDXL/copaxTimelessxlSDXL_v11Lightning.safetensors
+
+COPY input.jpg input/
+
+STAGE serve
+
+APP_NAME LineArt
+MANIFEST ./manifest.json
+WORKFLOW ./workflow.json
+WORKFLOW_API ./workflow_api.json
+REST_ENDPOINT ./rest_endpoint.json

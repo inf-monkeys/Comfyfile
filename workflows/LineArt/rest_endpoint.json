@@ -1,0 +1,47 @@
+{
+  "parameters": [
+    {
+      "displayName": "输入图片",
+      "name": "input_image",
+      "type": "file",
+      "default": "https://static.infmonkeys.com/comfyui/workflows/LineArt/images/input.jpg",
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "accept": ".jpg,.jpeg,.png,.webp",
+        "comfyOptions": {
+          "node": 15,
+          "key": "image"
+        }
+      }
+    },
+    {
+      "displayName": "正向提示词",
+      "name": "positive_prompt",
+      "type": "string",
+      "default": "ColoringBookAF, lineart, sketching lines,Smooth lines, elegant lines\nmonochrome,Simple background,",
+      "required": false,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 6,
+          "key": "text"
+        }
+      }
+    },
+    {
+      "displayName": "负向提示词",
+      "name": "negative_prompt",
+      "type": "string",
+      "default": "embedding:SDXL/negativeXL_D, ",
+      "required": false,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 7,
+          "key": "text"
+        }
+      }
+    }
+  ]
+}
