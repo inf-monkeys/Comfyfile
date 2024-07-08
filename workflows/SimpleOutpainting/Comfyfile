@@ -1,0 +1,19 @@
+STAGE build
+
+PLUGIN AUTO_INFER_FROM_WORKFLOW_JSON
+
+MODEL models/checkpoints/SDXL/dreamshaperXL_v21TurboDPMSDE.safetensors https://civitai.com/api/download/models/351306
+MODEL models/ipadapter/ip-adapter-plus_sdxl_vit-h.bin https://huggingface.co/h94/IP-Adapter/resolve/main/sdxl_models/ip-adapter-plus_sdxl_vit-h.bin
+MODEL models/inpaint/big-lama.pt https://huggingface.co/spaces/aryadytm/remove-photo-object/resolve/f00f2d12ada635f5f30f18ed74200ea89dd26631/assets/big-lama.pt
+MODEL models/inpaint/fooocus/fooocus_inpaint_head.pth https://huggingface.co/lllyasviel/fooocus_inpaint/resolve/main/fooocus_inpaint_head.pth
+MODEL models/inpaint/fooocus/inpaint_v26.fooocus.patch https://huggingface.co/lllyasviel/fooocus_inpaint/resolve/main/inpaint_v26.fooocus.patch
+
+COPY input.jpeg input/
+
+STAGE serve
+
+APP_NAME SimpleOutpainting
+MANIFEST ./manifest.json
+WORKFLOW ./workflow.json
+WORKFLOW_API ./workflow_api.json
+REST_ENDPOINT ./rest_endpoint.json
