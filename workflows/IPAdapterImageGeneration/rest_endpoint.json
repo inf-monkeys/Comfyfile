@@ -15,7 +15,21 @@
       }
     },
     {
-      "displayName": "Latent 宽度",
+      "displayName": "图片描述",
+      "name": "positive_prompt",
+      "type": "string",
+      "default": "computer host,composed facets style,light strip, 3D product render,finely detailed,purism,ue 5,a computer rendering,minimalism,octane render,best quality,highres,8k,wlop,stunning,much detail,UHD,product design, exquisite, styling, 4K,",
+      "required": false,
+      "typeOptions": {
+        "multipleValues": false,
+        "comfyOptions": {
+          "node": 6,
+          "key": "text"
+        }
+      }
+    },
+    {
+      "displayName": "生成图片宽度",
       "name": "latent_image_width",
       "type": "number",
       "default": 512,
@@ -29,7 +43,7 @@
       }
     },
     {
-      "displayName": "Latent 高度",
+      "displayName": "生成图片高度",
       "name": "latent_image_height",
       "type": "number",
       "default": 1024,
@@ -39,6 +53,23 @@
         "comfyOptions": {
           "node": 5,
           "key": "height"
+        }
+      }
+    },
+    {
+      "displayName": "ControlNet 强度",
+      "name": "controlnet_strength",
+      "type": "number",
+      "default": 0.4,
+      "required": true,
+      "typeOptions": {
+        "multipleValues": false,
+        "minValue": 0,
+        "maxValue": 1,
+        "numberPrecision": 0.01,
+        "comfyOptions": {
+          "node": 38,
+          "key": "strength"
         }
       }
     },
@@ -57,34 +88,6 @@
       }
     },
     {
-      "displayName": "ControlNet 强度",
-      "name": "controlnet_strength",
-      "type": "number",
-      "default": 0.4,
-      "required": true,
-      "typeOptions": {
-        "multipleValues": false,
-        "comfyOptions": {
-          "node": 38,
-          "key": "strength"
-        }
-      }
-    },
-    {
-      "displayName": "正向提示词",
-      "name": "positive_prompt",
-      "type": "string",
-      "default": "computer host,composed facets style,light strip, 3D product render,finely detailed,purism,ue 5,a computer rendering,minimalism,octane render,best quality,highres,8k,wlop,stunning,much detail,UHD,product design, exquisite, styling, 4K,",
-      "required": false,
-      "typeOptions": {
-        "multipleValues": false,
-        "comfyOptions": {
-          "node": 6,
-          "key": "text"
-        }
-      }
-    },
-    {
       "displayName": "负向提示词",
       "name": "negative_prompt",
       "type": "string",
@@ -99,8 +102,8 @@
       }
     },
     {
-      "displayName": "风格图片 1",
-      "name": "style_image_1",
+      "displayName": "风格图片",
+      "name": "style_image",
       "type": "file",
       "default": "https://static.infmonkeys.com/comfyui/workflows/IPAdapterImageGeneration/images/2.jpg",
       "required": true,
@@ -113,71 +116,18 @@
       }
     },
     {
-      "displayName": "IPAdapter 权重 1",
+      "displayName": "IPAdapter 权重",
       "name": "ipadapter_weight_1",
       "type": "number",
       "default": 0.55,
       "required": true,
       "typeOptions": {
+        "minValue": 0,
+        "maxValue": 1,
+        "numberPrecision": 0.01,
         "multipleValues": false,
         "comfyOptions": {
           "node": 56,
-          "key": "weight"
-        }
-      }
-    },
-    {
-      "displayName": "风格图片 2",
-      "name": "style_image_2",
-      "type": "file",
-      "default": "",
-      "required": false,
-      "typeOptions": {
-        "multipleValues": false,
-        "comfyOptions": {
-          "node": 17,
-          "key": "image"
-        }
-      }
-    },
-    {
-      "displayName": "IPAdapter 权重 2",
-      "name": "ipadapter_weight_2",
-      "type": "number",
-      "default": 0.55,
-      "required": false,
-      "typeOptions": {
-        "multipleValues": false,
-        "comfyOptions": {
-          "node": 59,
-          "key": "weight"
-        }
-      }
-    },
-    {
-      "displayName": "风格图片 3",
-      "name": "style_image_3",
-      "type": "file",
-      "default": "",
-      "required": false,
-      "typeOptions": {
-        "multipleValues": false,
-        "comfyOptions": {
-          "node": 19,
-          "key": "image"
-        }
-      }
-    },
-    {
-      "displayName": "IPAdapter 权重 3",
-      "name": "ipadapter_weight_3",
-      "type": "number",
-      "default": 0.55,
-      "required": false,
-      "typeOptions": {
-        "multipleValues": false,
-        "comfyOptions": {
-          "node": 60,
           "key": "weight"
         }
       }

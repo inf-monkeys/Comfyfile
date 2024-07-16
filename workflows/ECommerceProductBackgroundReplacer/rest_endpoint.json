@@ -16,8 +16,21 @@
       }
     },
     {
-      "displayName": "提示词",
-      "name": "prompt",
+      "displayName": "商品主题",
+      "name": "image_prompt",
+      "type": "string",
+      "default": "toiletries",
+      "required": true,
+      "typeOptions": {
+        "comfyOptions": {
+          "node": 28,
+          "key": "prompt"
+        }
+      }
+    },
+    {
+      "displayName": "背景主题",
+      "name": "background_prompt",
       "type": "string",
       "default": "Lovely sunny day",
       "required": true,
@@ -25,6 +38,22 @@
         "comfyOptions": {
           "node": 48,
           "key": "text"
+        }
+      }
+    },
+    {
+      "displayName": "ControlNet 强度",
+      "name": "controlnet_strength",
+      "type": "number",
+      "default": 0.58,
+      "required": true,
+      "typeOptions": {
+        "minValue": 0,
+        "maxValue": 1,
+        "numberPrecision": 0.01,
+        "comfyOptions": {
+          "node": 51,
+          "key": "strength"
         }
       }
     }

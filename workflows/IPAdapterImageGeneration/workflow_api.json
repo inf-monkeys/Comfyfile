@@ -1,7 +1,7 @@
 {
   "3": {
     "inputs": {
-      "seed": 918039864773409,
+      "seed": 690541158470932,
       "steps": 20,
       "cfg": 8,
       "sampler_name": "euler",
@@ -26,7 +26,7 @@
     },
     "class_type": "KSampler",
     "_meta": {
-      "title": "KSampler"
+      "title": "K采样器"
     }
   },
   "4": {
@@ -35,7 +35,7 @@
     },
     "class_type": "CheckpointLoaderSimple",
     "_meta": {
-      "title": "Load Checkpoint"
+      "title": "Checkpoint加载器(简易)"
     }
   },
   "5": {
@@ -46,7 +46,7 @@
     },
     "class_type": "EmptyLatentImage",
     "_meta": {
-      "title": "Empty Latent Image"
+      "title": "空Latent"
     }
   },
   "6": {
@@ -59,7 +59,7 @@
     },
     "class_type": "CLIPTextEncode",
     "_meta": {
-      "title": "CLIP Text Encode (Prompt)"
+      "title": "CLIP文本编码器"
     }
   },
   "7": {
@@ -72,7 +72,7 @@
     },
     "class_type": "CLIPTextEncode",
     "_meta": {
-      "title": "CLIP Text Encode (Prompt)"
+      "title": "CLIP文本编码器"
     }
   },
   "8": {
@@ -88,7 +88,7 @@
     },
     "class_type": "VAEDecode",
     "_meta": {
-      "title": "VAE Decode"
+      "title": "VAE解码"
     }
   },
   "13": {
@@ -97,7 +97,7 @@
     },
     "class_type": "IPAdapterModelLoader",
     "_meta": {
-      "title": "IPAdapter Model Loader"
+      "title": "IPAdapter模型加载器"
     }
   },
   "15": {
@@ -106,97 +106,17 @@
     },
     "class_type": "CLIPVisionLoader",
     "_meta": {
-      "title": "Load CLIP Vision"
+      "title": "CLIP视觉加载器"
     }
   },
   "16": {
     "inputs": {
-      "image": "微信图片_20240402202036.jpg",
+      "image": "Snipaste_2024-07-12_09-49-04.png",
       "upload": "image"
     },
     "class_type": "LoadImage",
     "_meta": {
-      "title": "Load Image"
-    }
-  },
-  "17": {
-    "inputs": {
-      "image": "3bfc2da4e1feadaf1d97c3fa07ad2ec2.jpg",
-      "upload": "image"
-    },
-    "class_type": "LoadImage",
-    "_meta": {
-      "title": "Load Image"
-    }
-  },
-  "19": {
-    "inputs": {
-      "image": "50a6e9b70ad550822a430274da68345d.jpg",
-      "upload": "image"
-    },
-    "class_type": "LoadImage",
-    "_meta": {
-      "title": "Load Image"
-    }
-  },
-  "26": {
-    "inputs": {
-      "seed": 370741812931968,
-      "steps": 20,
-      "cfg": 8,
-      "sampler_name": "euler",
-      "scheduler": "normal",
-      "denoise": 1,
-      "model": [
-        "56",
-        0
-      ],
-      "positive": [
-        "38",
-        0
-      ],
-      "negative": [
-        "7",
-        0
-      ],
-      "latent_image": [
-        "5",
-        0
-      ]
-    },
-    "class_type": "KSampler",
-    "_meta": {
-      "title": "KSampler"
-    }
-  },
-  "27": {
-    "inputs": {
-      "seed": 312073175204004,
-      "steps": 20,
-      "cfg": 8,
-      "sampler_name": "euler",
-      "scheduler": "normal",
-      "denoise": 1,
-      "model": [
-        "59",
-        0
-      ],
-      "positive": [
-        "38",
-        0
-      ],
-      "negative": [
-        "7",
-        0
-      ],
-      "latent_image": [
-        "5",
-        0
-      ]
-    },
-    "class_type": "KSampler",
-    "_meta": {
-      "title": "KSampler"
+      "title": "加载图像"
     }
   },
   "31": {
@@ -205,49 +125,17 @@
     },
     "class_type": "VAELoader",
     "_meta": {
-      "title": "Load VAE"
-    }
-  },
-  "32": {
-    "inputs": {
-      "samples": [
-        "27",
-        0
-      ],
-      "vae": [
-        "31",
-        0
-      ]
-    },
-    "class_type": "VAEDecode",
-    "_meta": {
-      "title": "VAE Decode"
-    }
-  },
-  "33": {
-    "inputs": {
-      "samples": [
-        "26",
-        0
-      ],
-      "vae": [
-        "31",
-        0
-      ]
-    },
-    "class_type": "VAEDecode",
-    "_meta": {
-      "title": "VAE Decode"
+      "title": "VAE加载器"
     }
   },
   "36": {
     "inputs": {
-      "image": "123 (3).jpg",
+      "image": "电脑主机.png",
       "upload": "image"
     },
     "class_type": "LoadImage",
     "_meta": {
-      "title": "Load Image"
+      "title": "加载图像"
     }
   },
   "37": {
@@ -256,7 +144,7 @@
     },
     "class_type": "ControlNetLoader",
     "_meta": {
-      "title": "Load ControlNet Model"
+      "title": "ControlNet加载器"
     }
   },
   "38": {
@@ -277,7 +165,7 @@
     },
     "class_type": "ControlNetApply",
     "_meta": {
-      "title": "Apply ControlNet"
+      "title": "ControlNet应用"
     }
   },
   "39": {
@@ -289,7 +177,7 @@
     },
     "class_type": "PreviewImage",
     "_meta": {
-      "title": "Preview Image"
+      "title": "预览图像"
     }
   },
   "40": {
@@ -303,7 +191,7 @@
     },
     "class_type": "LineArtPreprocessor",
     "_meta": {
-      "title": "Realistic Lineart"
+      "title": "LineArt艺术线预处理器"
     }
   },
   "41": {
@@ -318,7 +206,7 @@
     },
     "class_type": "LineartStandardPreprocessor",
     "_meta": {
-      "title": "Standard Lineart"
+      "title": "LineArtStandard艺术线预处理器"
     }
   },
   "42": {
@@ -331,7 +219,7 @@
     },
     "class_type": "Manga2Anime_LineArt_Preprocessor",
     "_meta": {
-      "title": "Manga Lineart (aka lineart_anime_denoise)"
+      "title": "MangaAnime漫画艺术线预处理器"
     }
   },
   "43": {
@@ -343,7 +231,7 @@
     },
     "class_type": "PreviewImage",
     "_meta": {
-      "title": "Preview Image"
+      "title": "预览图像"
     }
   },
   "44": {
@@ -355,7 +243,7 @@
     },
     "class_type": "PreviewImage",
     "_meta": {
-      "title": "Preview Image"
+      "title": "预览图像"
     }
   },
   "45": {
@@ -384,71 +272,7 @@
     },
     "class_type": "LoraLoader",
     "_meta": {
-      "title": "Load LoRA"
-    }
-  },
-  "56": {
-    "inputs": {
-      "ip_adapter_name": "None",
-      "clip_name": "None",
-      "weight": 0.55,
-      "noise": 0.17,
-      "start_at": 0.2,
-      "end_at": 1,
-      "weight_type": "standard",
-      "enabled": true,
-      "model": [
-        "50",
-        0
-      ],
-      "image": [
-        "17",
-        0
-      ],
-      "ip_adapter_opt": [
-        "13",
-        0
-      ],
-      "clip_vision_opt": [
-        "15",
-        0
-      ]
-    },
-    "class_type": "AV_IPAdapter",
-    "_meta": {
-      "title": "IP Adapter Apply"
-    }
-  },
-  "59": {
-    "inputs": {
-      "ip_adapter_name": "None",
-      "clip_name": "None",
-      "weight": 0.55,
-      "noise": 0.17,
-      "start_at": 0.2,
-      "end_at": 1,
-      "weight_type": "standard",
-      "enabled": true,
-      "model": [
-        "50",
-        0
-      ],
-      "image": [
-        "19",
-        0
-      ],
-      "ip_adapter_opt": [
-        "13",
-        0
-      ],
-      "clip_vision_opt": [
-        "15",
-        0
-      ]
-    },
-    "class_type": "AV_IPAdapter",
-    "_meta": {
-      "title": "IP Adapter Apply"
+      "title": "LoRA加载器"
     }
   },
   "60": {
@@ -492,31 +316,7 @@
     },
     "class_type": "PreviewImage",
     "_meta": {
-      "title": "Preview Image"
-    }
-  },
-  "62": {
-    "inputs": {
-      "images": [
-        "32",
-        0
-      ]
-    },
-    "class_type": "PreviewImage",
-    "_meta": {
-      "title": "Preview Image"
-    }
-  },
-  "63": {
-    "inputs": {
-      "images": [
-        "33",
-        0
-      ]
-    },
-    "class_type": "PreviewImage",
-    "_meta": {
-      "title": "Preview Image"
+      "title": "预览图像"
     }
   }
 }
