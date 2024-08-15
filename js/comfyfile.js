@@ -891,7 +891,7 @@ export class ComfyfileExplorerMenuDislog extends ComfyDialog {
     });
     let install_button = document.createElement("button");
     install_button.className = "cm-small-button";
-    install_button.innerHTML = "Installl";
+    install_button.innerHTML = "Install";
     install_button.onclick = () => {
       if (!self.comfyfile_upload_value) {
         alert("Please upload a valid comfyfile zip")

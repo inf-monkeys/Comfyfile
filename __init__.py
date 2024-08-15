@@ -286,6 +286,16 @@ async def check_dependencies(request):
 async def get_manifest_json(request):
     return web.json_response({"success": True})
 
+@server.PromptServer.instance.routes.get('/comfyfile/model-list')
+async def get_model_list(request):
+    result = []
+    for root, _, files in os.walk('./models'):
+        for file in files:
+            if file.endswith(tuple(['.ckpt', '.pt', '.pth', '.bin', '.safetensors'])):
+                relative_path = os.path.relpath(os.path.join(root, file), './models')
+                result.append(relative_path)
+    return web.json_response(result)
+
 
 async def test_s3_connection(json_data):
     endpoint_url = json_data.get("endpoint_url")
