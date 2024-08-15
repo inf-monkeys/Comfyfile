@@ -293,14 +293,27 @@ async def get_model_list(request):
     for root, _, files in os.walk('./models'):
         for file in files:
             if file.endswith(tuple(['.ckpt', '.pt', '.pth', '.bin', '.safetensors'])):
+                file_path = os.path.join(root, file)
                 relative_path = os.path.relpath(os.path.join(root, file), './models')
-                hash_md5 = hashlib.md5()
-                with open(os.path.join(root, file), "rb") as f:
-                    for chunk in iter(lambda: f.read(4096), b""):
-                        hash_md5.update(chunk)
+                hash_sha256 = hashlib.sha256()
+                chunk_size = 4096
+                file_size = os.path.getsize(file_path)
+                with open(file_path, "rb") as f:
+                    # 读取文件开头
+                    f.seek(0)
+                    hash_sha256.update(f.read(chunk_size))
+                    
+                    # 读取文件中间部分
+                    if file_size > 2 * chunk_size:
+                        f.seek(file_size // 2)
+                        hash_sha256.update(f.read(chunk_size))
+                    
+                    # 读取文件末尾
+                    f.seek(-chunk_size, os.SEEK_END)
+                    hash_sha256.update(f.read(chunk_size))
                 result.append({
                     "path": relative_path,
-                    "md5": hash_md5.hexdigest()
+                    "sha256": hash_sha256.hexdigest()
                 })
     return web.json_response(result)
 
