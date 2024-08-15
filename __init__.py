@@ -1,4 +1,5 @@
 import asyncio
+import hashlib
 import os.path
 import shutil
 import traceback
@@ -293,7 +294,14 @@ async def get_model_list(request):
         for file in files:
             if file.endswith(tuple(['.ckpt', '.pt', '.pth', '.bin', '.safetensors'])):
                 relative_path = os.path.relpath(os.path.join(root, file), './models')
-                result.append(relative_path)
+                hash_md5 = hashlib.md5()
+                with open(os.path.join(root, file), "rb") as f:
+                    for chunk in iter(lambda: f.read(4096), b""):
+                        hash_md5.update(chunk)
+                result.append({
+                    "path": relative_path,
+                    "md5": hash_md5.hexdigest()
+                })
     return web.json_response(result)
 
 
