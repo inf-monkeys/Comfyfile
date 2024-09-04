@@ -99,4 +99,10 @@ upgrade_comfyfile() {
 upgrade_comfyfile
 
 
-exec python3 main.py --listen 0.0.0.0
+cmd="python3 main.py --listen 0.0.0.0"
+
+if [ -n "$EXTRA_ARGS" ]; then
+  cmd="$cmd $EXTRA_ARGS"
+fi
+
+exec $cmd
