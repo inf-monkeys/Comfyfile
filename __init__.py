@@ -171,7 +171,7 @@ def extract_comfyfile_zip(zip_path, extract_path):
         raise ValueError("The extracted content is not a single directory.")
     
     # 返回解压后的目录路径
-    return os.path.join(extract_path, extracted_items[0])
+    return os.path.join(extract_path, extracted_items[0], extracted_items[0])
 
 
 @server.PromptServer.instance.routes.post("/comfyfile/apps/zip")
