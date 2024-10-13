@@ -298,23 +298,26 @@ async def get_model_list(request):
                 hash_sha256 = hashlib.sha256()
                 chunk_size = 4096
                 file_size = os.path.getsize(file_path)
-                with open(file_path, "rb") as f:
-                    # 读取文件开头
-                    f.seek(0)
-                    hash_sha256.update(f.read(chunk_size))
-                    
-                    # 读取文件中间部分
-                    if file_size > 2 * chunk_size:
-                        f.seek(file_size // 2)
+                try:
+                    with open(file_path, "rb") as f:
+                        # 读取文件开头
+                        f.seek(0)
                         hash_sha256.update(f.read(chunk_size))
-                    
-                    # 读取文件末尾
-                    f.seek(-chunk_size, os.SEEK_END)
-                    hash_sha256.update(f.read(chunk_size))
-                result.append({
-                    "path": relative_path,
-                    "sha256": hash_sha256.hexdigest()
-                })
+                        
+                        # 读取文件中间部分
+                        if file_size > 2 * chunk_size:
+                            f.seek(file_size // 2)
+                            hash_sha256.update(f.read(chunk_size))
+                        
+                        # 读取文件末尾
+                        f.seek(-chunk_size, os.SEEK_END)
+                        hash_sha256.update(f.read(chunk_size))
+                    result.append({
+                        "path": relative_path,
+                        "sha256": hash_sha256.hexdigest()
+                    })
+                except Exception as e:
+                    print(f"Error reading file {file_path}: {e}")
     return web.json_response(result)
 
 
