@@ -1,5 +1,6 @@
 import json
 import os
+import random
 import subprocess
 import re
 import websockets
@@ -377,6 +378,9 @@ class ComfyRunner:
             return file_path
         else:
             return file_filename
+        
+    def generate_seed():
+        return random.randint(0, 2**32 - 1)  # 生成32位正整数的随机 seed
 
     async def predict(
         self,
@@ -396,6 +400,11 @@ class ComfyRunner:
         if node_installed or model_downloaded:
             logger.info("Restarting the server")
             await self.comfy_api.reboot()
+
+        for node_id, node_data in workflow_api_json.items():
+            for input_key in node_data['inputs'].items():
+                if input_key == "seed":
+                    workflow_api_json[str(node_id)]["inputs"][input_key] = self.generate_seed()
 
         if input_config:
             for key, value in input_data.items():
