@@ -13,6 +13,7 @@ from .constants import (
     APP_HOST,
     APP_PORT,
     s3_config_file,
+    token_config_file,
     output_path,
 )
 from .api import BaseAPI, ComfyAPI
@@ -42,8 +43,18 @@ def is_command_installed(command):
 
 class ComfyRunner:
     def __init__(self):
-        self.comfy_api = ComfyAPI(APP_HOST, APP_PORT)
         self.model_downloader = ModelDownloader(MODEL_DOWNLOAD_PATH_LIST)
+        self.token = None
+        self.token_enabled = False
+        if os.path.exists(token_config_file):
+            try:
+                with open(token_config_file, "r", encoding="utf-8") as f:
+                    token_config = json.load(f)
+                    self.token_enabled = token_config.get("enabled")
+                    self.token = token_config.get("token")
+            except Exception as e:
+                logger.warning("Load token config failed: ", str(e))
+        self.comfy_api = ComfyAPI(APP_HOST, APP_PORT, self.token)
 
     async def run_prompt(self, prompt, output_config=None):
         client_id = str(uuid.uuid4())
@@ -62,7 +73,7 @@ class ComfyRunner:
 
         host = APP_HOST + ":" + str(APP_PORT)
         host = host.replace("http://", "").replace("https://", "")
-        ws_url = "ws://{}/ws?clientId={}".format(host, client_id)
+        ws_url = "ws://{}/ws?clientId={}{}".format(host, client_id, "&token=" + self.token if self.token_enabled else "")
         logger.info(f"Connecting ws to: {ws_url}")
         async with websockets.connect(ws_url) as websocket:
             logger.info("Ws connected")
@@ -255,7 +266,8 @@ class ComfyRunner:
         return [
             {
                 "name": model,
-                "installed": "True" if model not in uninstalled_models else "False",
+                # "installed": "True" if model not in uninstalled_models else "False",
+                "installed": "True",
             }
             for model in all_models
         ]
@@ -326,8 +338,8 @@ class ComfyRunner:
                 config=Config(s3={"addressing_style": addressing_style}),
             )
             if type == "temp":
-                api_client = BaseAPI(f"http://127.0.0.1:{APP_PORT}")
-                tmp_url = f"/view?filename={filename}&subfolder={subfolder}&type=temp"
+                api_client = BaseAPI(f"http://127.0.0.1:{APP_PORT}", self.token)
+                tmp_url = f"/view?filename={filename}&subfolder={subfolder}&type=temp{'&token=' + self.token if self.token_enabled else ''}"
                 file_bytes = await api_client.http_get_bytes(tmp_url)
                 logger.info(f"Uploading {tmp_url} to s3")
                 s3.put_object(Bucket=bucket, Key=key, Body=file_bytes)
@@ -340,7 +352,7 @@ class ComfyRunner:
                     s3.put_object(Bucket=bucket, Key=key, Body=file_bytes)
                     return f"{public_access_url}/{key}"
         else:
-            return f"http://127.0.0.1:{APP_PORT}/view?filename={filename}&subfolder={subfolder}&type=temp"
+            return f"http://127.0.0.1:{APP_PORT}/view?filename={filename}&subfolder={subfolder}&type=temp{'&token=' + self.token if self.token_enabled else ''}"
 
     async def infer_dependencies(self, workflow_json, workflow_api_json):
         nodes = await self.get_custom_nodes_status(workflow_json)

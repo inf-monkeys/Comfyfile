@@ -5,20 +5,25 @@ from urllib.parse import urljoin
 
 
 class BaseAPI:
-    def __init__(self, base_url):
+    def __init__(self, base_url, auth_token=None):
         self.base_url = base_url
+        self.auth_token = auth_token
 
     def _get_headers(self, content_type="application/json"):
         headers = {}
-        # headers["Authorization"] = f"Bearer {auth_token}"
+        if self.auth_token:
+            headers["Authorization"] = f"Bearer {self.auth_token}"  # 添加 Authorization header
         if content_type:
             headers["Content-Type"] = content_type
+            
+        print("Request Headers:", headers)
+        print("Token:", self.auth_token)
 
         return headers
 
     async def http_get_bytes(self, url):
         async with aiohttp.ClientSession() as session:
-            async with session.get(urljoin(self.base_url, url)) as response:
+            async with session.get(urljoin(self.base_url, url), headers=self._get_headers()) as response:
                 if response.status == 200:
                     image_bytes = await response.read()
                     return image_bytes
@@ -30,8 +35,9 @@ class BaseAPI:
 
     async def http_get(self, url, params=None):
         async with aiohttp.ClientSession() as session:
+            headers = self._get_headers()
             async with session.get(
-                url=urljoin(self.base_url, url), params=params
+                url=urljoin(self.base_url, url), params=params, headers=headers
             ) as response:
                 data = await response.json()
                 return data
@@ -39,7 +45,7 @@ class BaseAPI:
     async def http_get_noresult(self, url, params=None):
         async with aiohttp.ClientSession() as session:
             async with session.get(
-                url=urljoin(self.base_url, url), params=params
+                url=urljoin(self.base_url, url), params=params, headers=self._get_headers()
             ) as response:
                 pass
 
@@ -84,8 +90,8 @@ class BaseAPI:
 
 
 class ComfyAPI(BaseAPI):
-    def __init__(self, server_addr, port):
-        super().__init__(base_url=f"{server_addr}:{port}")
+    def __init__(self, server_addr, port, auth_token=None):
+        super().__init__(base_url=f"{server_addr}:{port}", auth_token=auth_token)
         self.server_addr = server_addr
         self.port = port
 
@@ -98,7 +104,7 @@ class ComfyAPI(BaseAPI):
         self.HISTORY_URL = "/history"
         self.CUSTOM_NODE_LIST_URL = "/customnode/getlist"
         self.CUSTOM_NODE_URL = (
-            "/customnode/"  # mode can be added infront {install, uninstall, update}
+            "/customnode/"  # mode can be added in front {install, uninstall, update}
         )
         self.CUSTOM_NODE_GIT_URL = (
             "/customnode/install/git_url"

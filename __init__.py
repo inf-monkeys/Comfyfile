@@ -411,23 +411,23 @@ def setup_js():
         shutil.copy(js_src_path, js_dest_path)
 
 
-def setup_webapp():
-    subprocess.Popen(
-        [
-            "streamlit",
-            "run",
-            "custom_nodes/Comfyfile/webapp.py",
-            "--server.headless",
-            "true",
-        ],
-        cwd=comfy_path,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.PIPE,
-    )
+#def setup_webapp():
+#    subprocess.Popen(
+#        [
+#            "streamlit",
+#            "run",
+#            "custom_nodes/Comfyfile/webapp.py",
+#            "--server.headless",
+#            "true",
+#        ],
+#        cwd=comfy_path,
+#        stdout=subprocess.PIPE,
+#        stderr=subprocess.PIPE,
+#    )
 
 
 WEB_DIRECTORY = "js"
 setup_js()
-setup_webapp()
+#setup_webapp()
 
 NODE_CLASS_MAPPINGS = {}
