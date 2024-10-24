@@ -1,3 +1,4 @@
+import asyncio
 import json
 import os
 import random
@@ -25,6 +26,8 @@ from .model_downloader import FileStatus, ModelDownloader
 from loguru import logger
 import boto3
 from botocore.client import Config
+from PIL import Image
+from io import BytesIO
 
 
 def is_command_installed(command):
@@ -82,7 +85,7 @@ class ComfyRunner:
                     out = await websocket.recv()
                     if isinstance(out, str):
                         message = json.loads(out)
-                        logger.info(f"Ws received: {out[0:100]}...")
+                        logger.info(f"Ws received: {out}")
                         if message["type"] == "executing":
                             data = message["data"]
                             if data["node"] is None and data["prompt_id"] == prompt_id:
@@ -328,7 +331,9 @@ class ComfyRunner:
             addressing_style = s3_config.get("addressing_style", "auto")
             bucket = s3_config.get("bucket")
             public_access_url = s3_config.get("public_access_url")
-            key = f'artworks/comfyui/{uuid.uuid1().hex}.{filename.split(".")[-1]}'
+            final_filename = f'{uuid.uuid1().hex}.{filename.split(".")[-1]}'
+            key = f'artworks/comfyui/{final_filename}'
+            thumb_key = f'artworks/comfyui_thumb/{final_filename}'
             s3 = boto3.client(
                 "s3",
                 endpoint_url=endpoint_url,
@@ -343,6 +348,10 @@ class ComfyRunner:
                 file_bytes = await api_client.http_get_bytes(tmp_url)
                 logger.info(f"Uploading {tmp_url} to s3")
                 s3.put_object(Bucket=bucket, Key=key, Body=file_bytes)
+
+                processed_image_bytes = await self.process_image_bytes(file_bytes, max_size=1080)
+                s3.put_object(Bucket=bucket, Key=thumb_key, Body=processed_image_bytes)
+
                 return f"{public_access_url}/{key}"
             else:
                 local_path = os.path.join(output_path, subfolder, filename)
@@ -350,6 +359,10 @@ class ComfyRunner:
                 with open(local_path, "rb") as file:
                     file_bytes = file.read()
                     s3.put_object(Bucket=bucket, Key=key, Body=file_bytes)
+
+                    processed_image_bytes = await self.process_image_bytes(file_bytes, max_size=1080)
+                    s3.put_object(Bucket=bucket, Key=thumb_key, Body=processed_image_bytes)
+
                     return f"{public_access_url}/{key}"
         else:
             return f"http://127.0.0.1:{APP_PORT}/view?filename={filename}&subfolder={subfolder}&type=temp{'&token=' + self.token if self.token_enabled else ''}"
@@ -458,3 +471,33 @@ class ComfyRunner:
         output = await self.run_prompt(workflow_api_json, output_config)
         logger.info(f"Output: {output}")
         return output
+    
+    async def process_image_bytes(self, image_bytes, max_size=1080):
+        loop = asyncio.get_event_loop()
+        processed_bytes = await loop.run_in_executor(None, self.resize_image, image_bytes, max_size)
+        return processed_bytes
+    
+    def resize_image(self, image_bytes, max_size):
+        # 从字节流中打开图片
+        image = Image.open(BytesIO(image_bytes))
+        width, height = image.size
+
+        # 如果图片尺寸已经小于或等于 max_size，则无需调整
+        if max(width, height) <= max_size:
+            output_buffer = BytesIO()
+            image.save(output_buffer, format=image.format)
+            return output_buffer.getvalue()
+
+        # 计算缩放比例
+        scaling_factor = max_size / float(max(width, height))
+        new_width = int(width * scaling_factor)
+        new_height = int(height * scaling_factor)
+
+        # 调整图片尺寸
+        # resized_image = image.resize((new_width, new_height), Image.LANCZOS)
+        image.thumbnail((new_width, new_height), Image.Resampling.LANCZOS)
+
+        # 将调整后的图片保存到字节流中
+        output_buffer = BytesIO()
+        image.save(output_buffer, format=image.format)
+        return output_buffer.getvalue()
