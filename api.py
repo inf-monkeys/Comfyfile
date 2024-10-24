@@ -15,9 +15,6 @@ class BaseAPI:
             headers["Authorization"] = f"Bearer {self.auth_token}"  # 添加 Authorization header
         if content_type:
             headers["Content-Type"] = content_type
-            
-        print("Request Headers:", headers)
-        print("Token:", self.auth_token)
 
         return headers
 
