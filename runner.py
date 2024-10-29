@@ -322,7 +322,8 @@ class ComfyRunner:
                     s3_enabled = s3_config.get("enabled")
             except Exception as e:
                 logger.warning("Load s3 config failed: ", str(e))
-        filename, subfolder, type = file["filename"], file["subfolder"], file["type"]
+        filename, type = file["filename"], file["type"]
+        subfolder = file.get("subfolder", "")
         if s3_enabled:
             endpoint_url = s3_config.get("endpoint_url")
             aws_access_key_id = s3_config.get("aws_access_key_id")
@@ -472,20 +473,28 @@ class ComfyRunner:
         logger.info(f"Output: {output}")
         return output
     
-    async def process_image_bytes(self, image_bytes, max_size=1080):
+    async def process_image_bytes(self, image_bytes, max_size=540):
         loop = asyncio.get_event_loop()
         processed_bytes = await loop.run_in_executor(None, self.resize_image, image_bytes, max_size)
         return processed_bytes
     
-    def resize_image(self, image_bytes, max_size):
+    def resize_image(self, image_bytes, max_size, quality=0.85):
         # 从字节流中打开图片
         image = Image.open(BytesIO(image_bytes))
         width, height = image.size
 
-        # 如果图片尺寸已经小于或等于 max_size，则无需调整
+        # 如果图片尺寸已经小于或等于 max_size，则无需调整大小
         if max(width, height) <= max_size:
             output_buffer = BytesIO()
-            image.save(output_buffer, format=image.format)
+            # 仍然应用质量压缩
+            if image.format == 'JPEG':
+                image.save(output_buffer, format=image.format, quality=int(quality * 100))
+            elif image.format == 'PNG':
+                # PNG使用optimize和压缩级别来优化大小
+                image.save(output_buffer, format=image.format, optimize=True, 
+                         compression_level=int((1 - quality) * 9))  # 将quality转换为0-9的压缩级别
+            else:
+                image.save(output_buffer, format=image.format)
             return output_buffer.getvalue()
 
         # 计算缩放比例
@@ -494,10 +503,16 @@ class ComfyRunner:
         new_height = int(height * scaling_factor)
 
         # 调整图片尺寸
-        # resized_image = image.resize((new_width, new_height), Image.LANCZOS)
         image.thumbnail((new_width, new_height), Image.Resampling.LANCZOS)
 
-        # 将调整后的图片保存到字节流中
+        # 将调整后的图片保存到字节流中，并应用质量压缩
         output_buffer = BytesIO()
-        image.save(output_buffer, format=image.format)
+        if image.format == 'JPEG':
+            image.save(output_buffer, format=image.format, quality=int(quality * 100))
+        elif image.format == 'PNG':
+            # PNG使用optimize和压缩级别来优化大小
+            image.save(output_buffer, format=image.format, optimize=True,
+                     compression_level=int((1 - quality) * 9))  # 将quality转换为0-9的压缩级别
+        else:
+            image.save(output_buffer, format=image.format)
         return output_buffer.getvalue()
