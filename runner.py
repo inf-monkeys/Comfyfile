@@ -26,7 +26,7 @@ from .model_downloader import FileStatus, ModelDownloader
 from loguru import logger
 import boto3
 from botocore.client import Config
-from PIL import Image
+from PIL import Image, PngImagePlugin
 from io import BytesIO
 
 
@@ -59,7 +59,7 @@ class ComfyRunner:
                 logger.warning("Load token config failed: ", str(e))
         self.comfy_api = ComfyAPI(APP_HOST, APP_PORT, self.token)
 
-    async def run_prompt(self, prompt, output_config=None):
+    async def run_prompt(self, prompt, output_config=None, extra_options={}):
         client_id = str(uuid.uuid4())
         logger.info(
             f"Start to run comfyui workflow: client_id={client_id}, workflow={prompt}"
@@ -121,7 +121,7 @@ class ComfyRunner:
 
                 if "images" in node_output:
                     for img in node_output["images"]:
-                        url = await self.get_output_item_url(img)
+                        url = await self.get_output_item_url(img, extra_options)
                         result["file_list"].append(url)
                 if 'audio' in node_output:
                     audio = node_output['audio'][0]
@@ -165,7 +165,7 @@ class ComfyRunner:
                             result[name] = txt
                 if "images" in node_output_data:
                     for img in node_output_data["images"]:
-                        url = await self.get_output_item_url(img)
+                        url = await self.get_output_item_url(img, extra_options)
                         if is_array:
                             if not result.get(name):
                                 result[name] = []
@@ -313,7 +313,7 @@ class ComfyRunner:
 
         return nodes_installed
 
-    async def get_output_item_url(self, file):
+    async def get_output_item_url(self, file, extra_options={}):
         s3_enabled = False
         if os.path.exists(s3_config_file):
             try:
@@ -343,10 +343,16 @@ class ComfyRunner:
                 region_name=region_name,
                 config=Config(s3={"addressing_style": addressing_style}),
             )
+            logger.info(extra_options)
             if type == "temp":
                 api_client = BaseAPI(f"http://127.0.0.1:{APP_PORT}", self.token)
                 tmp_url = f"/view?filename={filename}&subfolder={subfolder}&type=temp{'&token=' + self.token if self.token_enabled else ''}"
                 file_bytes = await api_client.http_get_bytes(tmp_url)
+                if extra_options.get('remove_prompt') == True or extra_options.get('add_monkey_input') == True:
+                    remove_prompt = extra_options.get('remove_prompt')
+                    add_monkey_input = extra_options.get('add_monkey_input')
+                    monkey_info = extra_options.get('monkey_info')
+                    file_bytes = self.modify_png_metadata(file_bytes, ['prompt', 'workflow'] if remove_prompt == True else [], monkey_info if add_monkey_input == True else {})
                 logger.info(f"Uploading {tmp_url} to s3")
                 s3.put_object(Bucket=bucket, Key=key, Body=file_bytes)
 
@@ -359,6 +365,11 @@ class ComfyRunner:
                 logger.info(f"Uploading {local_path} to s3")
                 with open(local_path, "rb") as file:
                     file_bytes = file.read()
+                    if extra_options.get('remove_prompt') == True or extra_options.get('add_monkey_input') == True:
+                        remove_prompt = extra_options.get('remove_prompt')
+                        add_monkey_input = extra_options.get('add_monkey_input')
+                        monkey_info = extra_options.get('monkey_info')
+                        file_bytes = self.modify_png_metadata(file_bytes, ['prompt', 'workflow'] if remove_prompt == True else [], monkey_info if add_monkey_input == True else {})
                     s3.put_object(Bucket=bucket, Key=key, Body=file_bytes)
 
                     processed_image_bytes = await self.process_image_bytes(file_bytes, max_size=1080)
@@ -415,6 +426,7 @@ class ComfyRunner:
         input_data={},
         input_config={},
         output_config=None,
+        extra_options={},
     ):
         # download custom nodes
         node_installed = await self.download_custom_nodes(workflow_json)
@@ -469,7 +481,7 @@ class ComfyRunner:
 
         # get the result
         logger.info("Generating output please wait ...")
-        output = await self.run_prompt(workflow_api_json, output_config)
+        output = await self.run_prompt(workflow_api_json, output_config, extra_options)
         logger.info(f"Output: {output}")
         return output
     
@@ -516,3 +528,27 @@ class ComfyRunner:
         else:
             image.save(output_buffer, format=image.format)
         return output_buffer.getvalue()
+    
+    def modify_png_metadata(self, image_bytes: bytes, keys_to_remove: list, new_metadata: dict) -> bytes:
+        # 读取图像字节流
+        with BytesIO(image_bytes) as input_buffer:
+            img = Image.open(input_buffer)
+            
+            # 创建新的 PngInfo 对象以保存修改后的元数据
+            meta = PngImagePlugin.PngInfo()
+            
+            # 添加现有元数据，除去需要删除的键
+            for key, value in img.info.items():
+                if key not in keys_to_remove:
+                    meta.add_text(key, value)
+            
+            # 添加新的元数据
+            for key, value in new_metadata.items():
+                meta.add_text(key, value)
+            
+            # 将修改后的图像保存为字节流
+            with BytesIO() as output_buffer:
+                img.save(output_buffer, format="PNG", pnginfo=meta)
+                updated_image_bytes = output_buffer.getvalue()
+        
+        return updated_image_bytes

@@ -232,6 +232,7 @@ async def run_comfyui_workflow(request):
     workflow_api_json = body.get("workflow_api_json")
     input_data = body.get("input_data")
     app_name = body.get("app_name")
+    extra_options = body.get("extra_options")
 
     input_config = body.get("input_config")
     output_config = body.get("output_config")
@@ -268,7 +269,8 @@ async def run_comfyui_workflow(request):
         workflow_api_json=workflow_api_json,
         input_data=input_data,
         input_config=input_config,
-        output_config=output_config
+        output_config=output_config,
+        extra_options=extra_options
     )
     return web.json_response(output)
 

@@ -20,7 +20,7 @@ class BaseAPI:
 
     async def http_get_bytes(self, url):
         async with aiohttp.ClientSession() as session:
-            async with session.get(urljoin(self.base_url, url), headers=self._get_headers()) as response:
+            async with session.get(urljoin(self.base_url, url), headers=self._get_headers(), proxy=None) as response:
                 if response.status == 200:
                     image_bytes = await response.read()
                     return image_bytes
@@ -34,7 +34,7 @@ class BaseAPI:
         async with aiohttp.ClientSession() as session:
             headers = self._get_headers()
             async with session.get(
-                url=urljoin(self.base_url, url), params=params, headers=headers
+                url=urljoin(self.base_url, url), params=params, headers=headers, proxy=None
             ) as response:
                 data = await response.json()
                 return data
@@ -42,7 +42,7 @@ class BaseAPI:
     async def http_get_noresult(self, url, params=None):
         async with aiohttp.ClientSession() as session:
             async with session.get(
-                url=urljoin(self.base_url, url), params=params, headers=self._get_headers()
+                url=urljoin(self.base_url, url), params=params, headers=self._get_headers(), proxy=None
             ) as response:
                 pass
 
@@ -54,6 +54,7 @@ class BaseAPI:
                     data=data,
                     files=file_content,
                     headers=self._get_headers(None),
+                    proxy=None
                 ) as response:
                     data = await response.json()
                     return data
@@ -62,6 +63,7 @@ class BaseAPI:
                     url=urljoin(self.base_url, url),
                     json=data,
                     headers=self._get_headers(None),
+                    proxy=None
                 ) as response:
                     data = await response.json()
                     return data
@@ -72,16 +74,17 @@ class BaseAPI:
                 url=urljoin(self.base_url, url),
                 data=text,
                 headers=self._get_headers("text/plain"),
+                proxy=None
             ) as response:
                 pass
 
     def http_put(self, url, data=None):
-        res = requests.put(self.base_url + url, json=data, headers=self._get_headers())
+        res = requests.put(self.base_url + url, json=data, headers=self._get_headers(), proxy=None)
         return res.json()
 
     def http_delete(self, url, params=None):
         res = requests.delete(
-            self.base_url + url, params=params, headers=self._get_headers()
+            self.base_url + url, params=params, headers=self._get_headers(), proxy=None
         )
         return res.json()
 
