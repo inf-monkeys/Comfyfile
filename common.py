@@ -207,3 +207,11 @@ def download_file_to(file_url, to):
         for chunk in response.iter_content(chunk_size=8192):
             f.write(chunk)
     return to
+
+def is_download_link(url):
+    try:
+        response = requests.head(url, allow_redirects=True)
+        content_type = response.headers.get('content-type', '')
+        return content_type.startswith('application/') or content_type.startswith('image/') or content_type.startswith('audio/') or content_type.startswith('video/')
+    except:
+        return False

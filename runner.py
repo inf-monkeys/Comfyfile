@@ -21,6 +21,7 @@ from .api import BaseAPI, ComfyAPI
 from .common import (
     download_file_to,
     search_model,
+    is_download_link,
 )
 from .model_downloader import FileStatus, ModelDownloader
 from loguru import logger
@@ -402,6 +403,9 @@ class ComfyRunner:
         if not isinstance(value, str) or not (
             value.startswith("http://") or value.startswith("https://")
         ):
+            return value
+        
+        if is_download_link(value) is False:
             return value
 
         file_extension = value.split("?")[0].split(".")[-1]

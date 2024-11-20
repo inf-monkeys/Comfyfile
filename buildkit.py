@@ -5,6 +5,8 @@ import zipfile
 from loguru import logger
 import tarfile
 import json
+
+from .model_manager import ComfyfileModelManager
 from .api import ComfyAPI
 from .runner import ComfyRunner
 import json
@@ -190,6 +192,12 @@ class ComfyfileExecutor:
             self.execute_command(script_content)
 
     def handle_model(self, model_path, model_url):
+        model_manager = ComfyfileModelManager()
+        model_base_path = model_manager.get_model_download_path()
+        model_path_arr = model_path.split("/")
+        if model_path_arr[0] == "models":
+            model_path_arr[0] = model_base_path
+        model_path = model_path_arr.join("/")
         model_path = os.path.join(comfy_path, model_path)
         if os.path.exists(model_path):
             logger.info(f"Model {model_path} exists, skipping")
