@@ -212,6 +212,6 @@ def is_download_link(url):
     try:
         response = requests.head(url, allow_redirects=True)
         content_type = response.headers.get('content-type', '')
-        return content_type.startswith('application/') or content_type.startswith('image/') or content_type.startswith('audio/') or content_type.startswith('video/')
+        return content_type.startswith('application/') or content_type.startswith('image/') or content_type.startswith('audio/') or content_type.startswith('video/') or content_type.startswith('binary/')
     except:
         return False
