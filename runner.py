@@ -191,12 +191,11 @@ class ComfyRunner:
     async def get_custom_nodes_status(self, workflow_json):
         mappings = await self.comfy_api.get_node_mapping_list()
         custom_node_list = await self.comfy_api.get_all_custom_node_list()
-        data = custom_node_list["custom_nodes"]
 
         # Build regex->url map
         regex_to_url = [
             {"regex": re.compile(item["nodename_pattern"]), "url": item["files"][0]}
-            for item in data
+            for item in custom_node_list
             if item.get("nodename_pattern")
         ]
 
@@ -238,12 +237,12 @@ class ComfyRunner:
             url = name_to_url.get(node_type)
             if url:
                 return next(
-                    (node for node in data if url in node.get("files", [])), None
+                    (node for node in custom_node_list if url in node.get("files", [])), None
                 )
 
         uninstalled_nodes = [
             node
-            for node in data
+            for node in custom_node_list
             if any(file in missing_nodes for file in node.get("files", []))
         ]
         installed_nodes = [get_node_info(node_type) for node_type in installed_nodes]
@@ -432,24 +431,28 @@ class ComfyRunner:
         output_config=None,
         extra_options={},
     ):
-        # download custom nodes
+        # 下载自定义节点
         node_installed = await self.download_custom_nodes(workflow_json)
 
-        # download models if not already present
+        # 下载模型（如果尚未存在）
         model_downloaded = await self.download_models(workflow_api_json)
 
-        # restart the server if custom nodes or models are installed
+        # 如果安装了自定义节点或模型，则重启服务器
         if node_installed or model_downloaded:
             logger.info("Restarting the server")
             await self.comfy_api.reboot()
 
+        # 为每个节点的seed输入设置随机种子
         for node_id, node_data in workflow_api_json.items():
             for input_key in node_data['inputs'].items():
                 if input_key == "seed":
                     workflow_api_json[str(node_id)]["inputs"][input_key] = self.generate_seed()
 
+        # 处理输入配置
         if input_config:
+            # 使用结构化输入配置处理输入数据
             for key, value in input_data.items():
+                # 查找匹配的输入项
                 input_items = [item for item in input_config if item["name"] == key]
                 if len(input_items) == 0:
                     continue
@@ -457,33 +460,39 @@ class ComfyRunner:
                 type_options = input_item.get("typeOptions", {})
                 comfy_options = type_options.get("comfyOptions", {})
                 
+                # 处理列表形式的comfy选项
                 if isinstance(comfy_options, list):
                     for comfy_options_item in comfy_options:
                         node_id, key = comfy_options_item.get("node"), comfy_options_item.get("key")
                         if node_id and key:
+                            # 下载并替换URL值
                             value = self.download_and_replace_value(
                                 workflow_api_json, node_id, value
                             )
                             if str(node_id) in workflow_api_json:
                                 workflow_api_json[str(node_id)]["inputs"][key] = value
+                # 处理字典形式的comfy选项
                 else:
                     node_id, key = comfy_options.get("node"), comfy_options.get("key")
                     if node_id and key:
+                        # 下载并替换URL值
                         value = self.download_and_replace_value(
                             workflow_api_json, node_id, value
                         )
                         if str(node_id) in workflow_api_json:
                             workflow_api_json[str(node_id)]["inputs"][key] = value
         else:
+            # 直接处理输入数据（无结构化配置）
             for node_id, values in input_data.items():
                 if node_id in workflow_api_json:
                     for key, value in values.items():
+                        # 下载并替换URL值
                         value = self.download_and_replace_value(
                             workflow_api_json, node_id, value
                         )
                         workflow_api_json[node_id]["inputs"][key] = value
 
-        # get the result
+        # 获取结果
         logger.info("Generating output please wait ...")
         output = await self.run_prompt(workflow_api_json, output_config, extra_options)
         logger.info(f"Output: {output}")

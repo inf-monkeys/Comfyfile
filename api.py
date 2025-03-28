@@ -116,7 +116,23 @@ class ComfyAPI(BaseAPI):
         self.REBOOT_URL = "/reboot"
 
     async def get_all_custom_node_list(self):
-        return await self.http_get(self.CUSTOM_NODE_LIST_URL + "?mode=local")
+        res = await self.http_get(self.CUSTOM_NODE_LIST_URL + "?mode=local")
+        if "custom_nodes" in res:
+            return res["custom_nodes"]
+        elif "node_packs" in res:
+            # 将 node_packs 对象转换为数组格式以兼容 custom_nodes 的格式
+            node_packs = res["node_packs"]
+            result = []
+            for node_id, node_data in node_packs.items():
+                # 创建新对象并添加 id 字段
+                node_obj = {"id": node_id}
+                # 复制其他属性
+                for key, value in node_data.items():
+                    node_obj[key] = value
+                result.append(node_obj)
+            return result
+        else:
+            return []
 
     async def get_all_model_list(self):
         res = await self.http_get(self.MODEL_LIST_URL + "?mode=local")
