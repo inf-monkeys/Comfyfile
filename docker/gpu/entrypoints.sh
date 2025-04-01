@@ -63,6 +63,9 @@ cd /app/ComfyUI
 
 source /app/ComfyUI/venv/bin/activate
 
+# 确保ComfyUI前端包已安装
+echo "Checking ComfyUI frontend package..."
+pip install -r requirements.txt
 
 upgrade_comfyfile() {
     local max_retries=3
