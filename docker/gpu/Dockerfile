@@ -13,7 +13,7 @@ RUN python3 -m venv /venv
 
 # Install Python dependencies
 RUN /venv/bin/pip install --upgrade pip && \
-    /venv/bin/pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
+    /venv/bin/pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 
 # Install ComfyUI
 # Note that we clone ComfyUI-Manager to /tmp and mv it from /tmp to /app/ComfyUI/custom_nodes in entrypoint-gpu.sh
