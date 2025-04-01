@@ -314,7 +314,6 @@ async def test_s3_connection(json_data):
             s3={
                 "addressing_style": addressing_style,
             },
-            signature_version='s3v4'
             ),
     )
     s3.head_bucket(Bucket=bucket)
