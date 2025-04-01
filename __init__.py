@@ -310,7 +310,12 @@ async def test_s3_connection(json_data):
         aws_access_key_id=aws_access_key_id,
         aws_secret_access_key=aws_secret_access_key,
         region_name=region_name,
-        config=Config(s3={"addressing_style": addressing_style}),
+        config=Config(
+            s3={
+                "addressing_style": addressing_style,
+                "payload_signing_enabled": False
+            }
+            ),
     )
     s3.head_bucket(Bucket=bucket)
 
