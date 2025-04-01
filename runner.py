@@ -341,7 +341,10 @@ class ComfyRunner:
                 aws_access_key_id=aws_access_key_id,
                 aws_secret_access_key=aws_secret_access_key,
                 region_name=region_name,
-                config=Config(s3={"addressing_style": addressing_style, "payload_signing_enabled": False}),
+                config=Config(
+                    s3={"addressing_style": addressing_style, "payload_signing_enabled": False},
+                    signature_version='s3v4'
+                ),
             )
             logger.info(extra_options)
             if type == "temp":
