@@ -343,7 +343,7 @@ class ComfyRunner:
                 region_name=region_name,
                 config=Config(
                     s3={"addressing_style": addressing_style},
-                    signature_version='v4'
+                    signature_version='s3v4'
                 ),
             )
             logger.info(extra_options)
