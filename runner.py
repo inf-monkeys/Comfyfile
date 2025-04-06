@@ -107,39 +107,11 @@ class ComfyRunner:
         # fetching results
         history_result = await self.comfy_api.get_history(prompt_id)
         history = history_result[prompt_id]
-        # 初始化基本结果结构
-        result = {"file_list": [], "text_output": []}
+        # 初始化结果
+        result = {}
         
-        # 处理所有节点输出，收集文件和文本
-        for node_id in history["outputs"]:
-            node_output = history["outputs"][node_id]
-            if "gifs" in node_output:
-                for gif in node_output["gifs"]:
-                    url = await self.get_output_item_url(gif)
-                    result["file_list"].append(url)
-
-            if "text" in node_output:
-                for txt in node_output["text"]:
-                    result["text_output"].append(txt)
-
-            if "images" in node_output:
-                for img in node_output["images"]:
-                    url = await self.get_output_item_url(img, extra_options)
-                    result["file_list"].append(url)
-            if 'audio' in node_output:
-                audio = node_output['audio'][0]
-                url = await self.get_output_item_url({
-                    "filename": audio,
-                    "subfolder": "",
-                    "type": "output"
-                })
-                result["file_list"].append(audio)
-        
-        # 如果没有输出配置，直接返回基本结果
-        if not output_config:
-            return result
-        else:
-            # 如果有输出配置，在基本结果的基础上添加特定输出
+        # 处理 output_config 中指定的输出项
+        if output_config:
             for output_item in output_config:
                 name = output_item["name"]
                 type_options = output_item.get("typeOptions")
@@ -191,7 +163,57 @@ class ComfyRunner:
                         result[name].append(url)
                     else:
                         result[name] = url
-            return result
+        
+        # 收集已处理的节点ID
+        processed_nodes = set()
+        if output_config:
+            for item in output_config:
+                type_options = item.get("typeOptions", {})
+                comfyOptions = type_options.get("comfyOptions", {})
+                node = comfyOptions.get("node")
+                if node:
+                    processed_nodes.add(str(node))
+        
+        # 处理未在 output_config 中指定的节点
+        file_list = []
+        text_output = []
+        
+        for node_id in history["outputs"]:
+            # 跳过已处理的节点
+            if node_id in processed_nodes:
+                continue
+                
+            node_output = history["outputs"][node_id]
+            if "gifs" in node_output:
+                for gif in node_output["gifs"]:
+                    url = await self.get_output_item_url(gif)
+                    file_list.append(url)
+
+            if "text" in node_output:
+                for txt in node_output["text"]:
+                    text_output.append(txt)
+
+            if "images" in node_output:
+                for img in node_output["images"]:
+                    url = await self.get_output_item_url(img, extra_options)
+                    file_list.append(url)
+                    
+            if 'audio' in node_output:
+                audio = node_output['audio'][0]
+                url = await self.get_output_item_url({
+                    "filename": audio,
+                    "subfolder": "",
+                    "type": "output"
+                })
+                file_list.append(url)
+        
+        # 将未指定节点的输出添加到结果中
+        if file_list:
+            result["file_list"] = file_list
+        if text_output:
+            result["text_output"] = text_output
+            
+        return result
 
     async def get_custom_nodes_status(self, workflow_json):
         mappings = await self.comfy_api.get_node_mapping_list()
