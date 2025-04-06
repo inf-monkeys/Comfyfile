@@ -107,33 +107,39 @@ class ComfyRunner:
         # fetching results
         history_result = await self.comfy_api.get_history(prompt_id)
         history = history_result[prompt_id]
+        # 初始化基本结果结构
+        result = {"file_list": [], "text_output": []}
+        
+        # 处理所有节点输出，收集文件和文本
+        for node_id in history["outputs"]:
+            node_output = history["outputs"][node_id]
+            if "gifs" in node_output:
+                for gif in node_output["gifs"]:
+                    url = await self.get_output_item_url(gif)
+                    result["file_list"].append(url)
+
+            if "text" in node_output:
+                for txt in node_output["text"]:
+                    result["text_output"].append(txt)
+
+            if "images" in node_output:
+                for img in node_output["images"]:
+                    url = await self.get_output_item_url(img, extra_options)
+                    result["file_list"].append(url)
+            if 'audio' in node_output:
+                audio = node_output['audio'][0]
+                url = await self.get_output_item_url({
+                    "filename": audio,
+                    "subfolder": "",
+                    "type": "output"
+                })
+                result["file_list"].append(audio)
+        
+        # 如果没有输出配置，直接返回基本结果
         if not output_config:
-            result = {"file_list": [], "text_output": []}
-            for node_id in history["outputs"]:
-                node_output = history["outputs"][node_id]
-                if "gifs" in node_output:
-                    for gif in node_output["gifs"]:
-                        url = await self.get_output_item_url(gif)
-                        result["file_list"].append(url)
-
-                if "text" in node_output:
-                    for txt in node_output["text"]:
-                        result["text_output"].append(txt)
-
-                if "images" in node_output:
-                    for img in node_output["images"]:
-                        url = await self.get_output_item_url(img, extra_options)
-                        result["file_list"].append(url)
-                if 'audio' in node_output:
-                    audio = node_output['audio'][0]
-                    url = await self.get_output_item_url({
-                        "filename": audio,
-                        "subfolder": "",
-                        "type": "output"
-                    })
-                    result["file_list"].append(audio)
             return result
         else:
+            # 如果有输出配置，在基本结果的基础上添加特定输出
             result = {}
             for output_item in output_config:
                 name = output_item["name"]
