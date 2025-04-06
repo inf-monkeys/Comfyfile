@@ -140,7 +140,6 @@ class ComfyRunner:
             return result
         else:
             # 如果有输出配置，在基本结果的基础上添加特定输出
-            result = {}
             for output_item in output_config:
                 name = output_item["name"]
                 type_options = output_item.get("typeOptions")
