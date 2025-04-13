@@ -378,10 +378,18 @@ class ComfyRunner:
                 tmp_url = f"/view?filename={filename}&subfolder={subfolder}&type=temp{'&token=' + self.token if self.token_enabled else ''}"
                 file_bytes = await api_client.http_get_bytes(tmp_url)
                 if extra_options.get('remove_prompt') == True or extra_options.get('add_monkey_input') == True:
-                    remove_prompt = extra_options.get('remove_prompt')
-                    add_monkey_input = extra_options.get('add_monkey_input')
-                    monkey_info = extra_options.get('monkey_info')
-                    file_bytes = self.modify_png_metadata(file_bytes, ['prompt', 'workflow'] if remove_prompt == True else [], monkey_info if add_monkey_input == True else {})
+                    try:
+                        remove_prompt = extra_options.get('remove_prompt')
+                        add_monkey_input = extra_options.get('add_monkey_input')
+                        monkey_info = extra_options.get('monkey_info')
+                        file_bytes = self.modify_png_metadata(
+                            file_bytes, 
+                            ['prompt', 'workflow'] if remove_prompt == True else [], 
+                            monkey_info if add_monkey_input == True else {}
+                        )
+                    except Exception as e:
+                        logger.warning(f"修改 PNG 元数据时出错: {str(e)}，继续使用原始图像")
+                        # 继续使用原始图像
                 logger.info(f"Uploading {tmp_url} to s3")
                 s3.put_object(Bucket=bucket, Key=key, Body=file_bytes)
 
@@ -395,10 +403,18 @@ class ComfyRunner:
                 with open(local_path, "rb") as file:
                     file_bytes = file.read()
                     if extra_options.get('remove_prompt') == True or extra_options.get('add_monkey_input') == True:
-                        remove_prompt = extra_options.get('remove_prompt')
-                        add_monkey_input = extra_options.get('add_monkey_input')
-                        monkey_info = extra_options.get('monkey_info')
-                        file_bytes = self.modify_png_metadata(file_bytes, ['prompt', 'workflow'] if remove_prompt == True else [], monkey_info if add_monkey_input == True else {})
+                        try:
+                            remove_prompt = extra_options.get('remove_prompt')
+                            add_monkey_input = extra_options.get('add_monkey_input')
+                            monkey_info = extra_options.get('monkey_info')
+                            file_bytes = self.modify_png_metadata(
+                                file_bytes, 
+                                ['prompt', 'workflow'] if remove_prompt == True else [], 
+                                monkey_info if add_monkey_input == True else {}
+                            )
+                        except Exception as e:
+                            logger.warning(f"修改 PNG 元数据时出错: {str(e)}，继续使用原始图像")
+                            # 继续使用原始图像
                     s3.put_object(Bucket=bucket, Key=key, Body=file_bytes)
 
                     processed_image_bytes = await self.process_image_bytes(file_bytes, max_size=1080)
@@ -581,12 +597,30 @@ class ComfyRunner:
             
             # 添加现有元数据，除去需要删除的键
             for key, value in img.info.items():
-                if key not in keys_to_remove:
+                if key not in keys_to_remove and key != "parameters":
                     meta.add_text(key, value)
+            
+            # 处理 parameters 字段，确保它是有效的 JSON 格式
+            if "parameters" in img.info and "parameters" not in keys_to_remove:
+                try:
+                    params = json.loads(img.info["parameters"])
+                    # 确保 extra_pnginfo 是一个包含 workflow 键的字典
+                    if "extra_pnginfo" in params:
+                        if not isinstance(params["extra_pnginfo"], dict):
+                            params["extra_pnginfo"] = {"workflow": {}}
+                        elif "workflow" not in params["extra_pnginfo"]:
+                            params["extra_pnginfo"]["workflow"] = {}
+                    meta.add_text("parameters", json.dumps(params))
+                except:
+                    # 如果解析失败，跳过这个字段
+                    pass
             
             # 添加新的元数据
             for key, value in new_metadata.items():
-                meta.add_text(key, value)
+                if isinstance(value, (dict, list)):
+                    meta.add_text(key, json.dumps(value))
+                else:
+                    meta.add_text(key, str(value))
             
             # 将修改后的图像保存为字节流
             with BytesIO() as output_buffer:
