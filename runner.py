@@ -477,15 +477,15 @@ class ComfyRunner:
         extra_options={},
     ):
         # 下载自定义节点
-        node_installed = await self.download_custom_nodes(workflow_json)
+        # node_installed = await self.download_custom_nodes(workflow_json)
 
         # 下载模型（如果尚未存在）
-        model_downloaded = await self.download_models(workflow_api_json)
+        # model_downloaded = await self.download_models(workflow_api_json)
 
         # 如果安装了自定义节点或模型，则重启服务器
-        if node_installed or model_downloaded:
-            logger.info("Restarting the server")
-            await self.comfy_api.reboot()
+        # if node_installed or model_downloaded:
+        #     logger.info("Restarting the server")
+        #     await self.comfy_api.reboot()
 
         # 为每个节点的seed输入设置随机种子
         for node_id, node_data in workflow_api_json.items():

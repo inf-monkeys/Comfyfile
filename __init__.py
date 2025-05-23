@@ -63,11 +63,13 @@ if (
         )
 
 
-logging.basicConfig(
-    format="[%(name)s] %(asctime)s - %(levelname)s - %(message)s", level=logging.INFO
-)
-# 创建日志记录器
-logger = logging.getLogger("Comfyfile")
+# logging.basicConfig(
+#     format="[%(name)s] %(asctime)s - %(levelname)s - %(message)s", level=logging.INFO
+# )
+# # 创建日志记录器
+# logger = logging.getLogger("Comfyfile")
+
+from loguru import logger
 
 home_directory = os.path.expanduser("~")
 comfyfile_home_dir = os.path.join(home_directory, ".cache/Comfyfile")
