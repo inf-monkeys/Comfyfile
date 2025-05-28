@@ -6,6 +6,7 @@ import subprocess
 import re
 import websockets
 import uuid
+import requests
 from loguru import logger
 from .constants import (
     MODEL_DOWNLOAD_PATH_LIST,
@@ -452,12 +453,47 @@ class ComfyRunner:
         if is_download_link(value) is False:
             return value
 
-        file_extension = value.split("?")[0].split(".")[-1]
-        if not file_extension:
-            return value
+        # 尝试从 URL 中获取文件名和后缀
+        url_path = value.split("?")[0]
+        file_name = os.path.basename(url_path)
+        file_extension = None
+        valid_filename = False
+        
+        if "." in file_name:
+            file_extension = file_name.split(".")[-1]
+            # 验证文件名和后缀是否合法
+            file_name_without_ext = file_name[:-(len(file_extension)+1)]
+            if file_extension.isalnum() and all(c.isalnum() or c in '-_' for c in file_name_without_ext):
+                valid_filename = True
+        
+        # 如果从 URL 无法获取有效文件名和后缀,尝试从 content-disposition 获取
+        if not valid_filename:
+            try:
+                headers = requests.head(value).headers
+                content_disposition = headers.get('content-disposition')
+                if content_disposition:
+                    import re
+                    matches = re.findall("filename=(.+)", content_disposition)
+                    if matches:
+                        file_name = matches[0].strip('"')
+                        if "." in file_name:
+                            file_extension = file_name.split(".")[-1]
+                            # 再次验证文件名和后缀的合法性
+                            file_name_without_ext = file_name[:-(len(file_extension)+1)]
+                            if file_extension.isalnum() and all(c.isalnum() or c in '-_' for c in file_name_without_ext):
+                                valid_filename = True
+            except:
+                pass
+        
+        # 如果文件名不合法，使用随机文件名
+        if not valid_filename:
+            file_extension = "png"  # 默认使用png作为后缀
+            file_name = str(uuid.uuid4())
+            
         file_filename = str(uuid.uuid4()) + "." + file_extension
         file_path = os.path.join("./input/", file_filename)
         download_file_to(value, file_path)
+        
         node_detail = workflow_api_json.get(node_id, {})
         if node_detail.get("class_type") == "VHS_LoadAudio":
             return file_path
