@@ -445,12 +445,9 @@ class ComfyRunner:
             await self.comfy_api.reboot()
 
     def download_and_replace_value(self, workflow_api_json, node_id, value):
-        logger.info(f"Downloading and replacing value: {value}")
         if not isinstance(value, str):
-            logger.info(f"Not a string: {value}")
             return value
         if not value.startswith(("http://", "https://")):
-            logger.info(f"Not a download link: {value}")
             return value
         if not is_download_link(value):
             logger.info(f"Not a download link: {value}")
