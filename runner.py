@@ -445,12 +445,15 @@ class ComfyRunner:
             await self.comfy_api.reboot()
 
     def download_and_replace_value(self, workflow_api_json, node_id, value):
-        if not isinstance(value, str) or not (
-            value.startswith("http://") or value.startswith("https://")
-        ):
+        logger.info(f"Downloading and replacing value: {value}")
+        if not isinstance(value, str):
+            logger.info(f"Not a string: {value}")
             return value
-        
-        if is_download_link(value) is False:
+        if not value.startswith(("http://", "https://")):
+            logger.info(f"Not a download link: {value}")
+            return value
+        if not is_download_link(value):
+            logger.info(f"Not a download link: {value}")
             return value
 
         # 尝试从 URL 中获取文件名和后缀
@@ -493,6 +496,8 @@ class ComfyRunner:
         file_filename = str(uuid.uuid4()) + "." + file_extension
         file_path = os.path.join("./input/", file_filename)
         download_file_to(value, file_path)
+
+        logger.info(f"Downloaded file: {file_path}")
         
         node_detail = workflow_api_json.get(node_id, {})
         if node_detail.get("class_type") == "VHS_LoadAudio":
