@@ -210,9 +210,16 @@ def download_file_to(file_url, to):
 
 def is_download_link(url):
     try:
-        response = requests.head(url, allow_redirects=True)
+        # 使用 GET 请求但设置 stream=True
+        response = requests.get(url, stream=True, allow_redirects=True)
         content_type = response.headers.get('content-type', '')
         logger.info(f"Content type: {content_type}")
-        return content_type.startswith('application/') or content_type.startswith('image/') or content_type.startswith('audio/') or content_type.startswith('video/') or content_type.startswith('binary/')
-    except:
+        
+        # 立即关闭连接，避免继续下载
+        response.close()
+        
+        return (content_type.startswith(('application/', 'image/', 
+                'audio/', 'video/', 'binary/')))
+    except Exception as e:
+        logger.error(f"Download link check failed: {str(e)}")
         return False
