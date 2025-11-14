@@ -4,6 +4,7 @@ import os
 import random
 import subprocess
 import re
+import mimetypes
 import websockets
 import uuid
 import requests
@@ -360,6 +361,12 @@ class ComfyRunner:
             addressing_style = s3_config.get("addressing_style", "auto")
             bucket = s3_config.get("bucket")
             public_access_url = s3_config.get("public_access_url")
+
+            # Guess MIME type from filename
+            mime_type, _ = mimetypes.guess_type(filename)
+            if not mime_type:
+                mime_type = "application/octet-stream"  # Default fallback
+
             final_filename = f'{uuid.uuid1().hex}.{filename.split(".")[-1]}'
             key = f'artworks/comfyui/{final_filename}'
             thumb_key = f'artworks/comfyui_thumb/{final_filename}'
@@ -392,10 +399,14 @@ class ComfyRunner:
                         logger.warning(f"修改 PNG 元数据时出错: {str(e)}，继续使用原始图像")
                         # 继续使用原始图像
                 logger.info(f"Uploading {tmp_url} to s3")
-                s3.put_object(Bucket=bucket, Key=key, Body=file_bytes)
+
+                # Add ContentType
+                s3.put_object(Bucket=bucket, Key=key, Body=file_bytes, ContentType=mime_type)
 
                 processed_image_bytes = await self.process_image_bytes(file_bytes, max_size=1080)
-                s3.put_object(Bucket=bucket, Key=thumb_key, Body=processed_image_bytes)
+
+                # Add ContentType (thumbnail has same MIME type)
+                s3.put_object(Bucket=bucket, Key=thumb_key, Body=processed_image_bytes, ContentType=mime_type)
 
                 return f"{public_access_url}/{key}"
             else:
@@ -416,10 +427,14 @@ class ComfyRunner:
                         except Exception as e:
                             logger.warning(f"修改 PNG 元数据时出错: {str(e)}，继续使用原始图像")
                             # 继续使用原始图像
-                    s3.put_object(Bucket=bucket, Key=key, Body=file_bytes)
+
+                    # Add ContentType
+                    s3.put_object(Bucket=bucket, Key=key, Body=file_bytes, ContentType=mime_type)
 
                     processed_image_bytes = await self.process_image_bytes(file_bytes, max_size=1080)
-                    s3.put_object(Bucket=bucket, Key=thumb_key, Body=processed_image_bytes)
+
+                    # Add ContentType (thumbnail has same MIME type)
+                    s3.put_object(Bucket=bucket, Key=thumb_key, Body=processed_image_bytes, ContentType=mime_type)
 
                     return f"{public_access_url}/{key}"
         else:
