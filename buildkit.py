@@ -197,7 +197,7 @@ class ComfyfileExecutor:
         model_path_arr = model_path.split("/")
         if model_path_arr[0] == "models":
             model_path_arr[0] = model_base_path
-        model_path = model_path_arr.join("/")
+        model_path = "/".join(model_path_arr)
         model_path = os.path.join(comfy_path, model_path)
         if os.path.exists(model_path):
             logger.info(f"Model {model_path} exists, skipping")
